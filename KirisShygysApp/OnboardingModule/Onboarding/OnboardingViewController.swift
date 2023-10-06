@@ -54,7 +54,7 @@ class OnboardingViewController: UIViewController {
         button.layer.cornerRadius = 16
         button.clipsToBounds = true
         button.setTitle("Sign In", for: .normal)
-        button.backgroundColor = UIColor.shared.darkBrown
+        button.backgroundColor = UIColor.shared.Brown
         return button
     }()
     
@@ -72,7 +72,7 @@ class OnboardingViewController: UIViewController {
     }
     
     @objc func signUp() {
-        
+        self.navigationController?.pushViewController(RegistrationViewController(), animated: true)
     }
     
     private func setupUI() {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F430CF32AD0538500CC712A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF22AD0538500CC712A /* UserModel.swift */; };
+		6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */; };
 		6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */; };
 		6F658BBF2ACEA9A3004ECACB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */; };
 		6F658BC12ACEA9A3004ECACB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F658BC02ACEA9A3004ECACB /* ViewController.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F430CF22AD0538500CC712A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KirisShygysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F430CED2AD0525800CC712A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				6F86B3312ACECC560092BC00 /* OnboardingModel.swift */,
+				6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */,
+				6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		6F430CEE2AD0526A00CC712A /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				6F430CEF2AD052B300CC712A /* Model */,
+				6F430CF02AD052BA00CC712A /* View */,
+				6F430CF12AD052BF00CC712A /* Presenter */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		6F430CEF2AD052B300CC712A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F430CF22AD0538500CC712A /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6F430CF02AD052BA00CC712A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F430CF12AD052BF00CC712A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		6F658BB02ACEA9A3004ECACB = {
 			isa = PBXGroup;
 			children = (
@@ -83,9 +130,8 @@
 		6F86B3302ACEC9430092BC00 /* OnboardingModule */ = {
 			isa = PBXGroup;
 			children = (
-				6F86B3312ACECC560092BC00 /* OnboardingModel.swift */,
-				6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */,
-				6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */,
+				6F430CEE2AD0526A00CC712A /* Registration */,
+				6F430CED2AD0525800CC712A /* Onboarding */,
 			);
 			path = OnboardingModule;
 			sourceTree = "<group>";
@@ -185,6 +231,8 @@
 			files = (
 				6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */,
 				6F658BC12ACEA9A3004ECACB /* ViewController.swift in Sources */,
+				6F430CF32AD0538500CC712A /* UserModel.swift in Sources */,
+				6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */,
 				6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */,
 				6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */,
 				6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */,

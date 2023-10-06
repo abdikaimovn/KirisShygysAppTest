@@ -30,7 +30,7 @@ extension UIColor {
         }
     }
     
-    var darkBrown: UIColor {
+    var Brown: UIColor {
         UIColor(hex: "#C7B08E")!
     }
 }
