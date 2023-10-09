@@ -60,10 +60,9 @@ class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
-        
         setupUI()
     }
     
@@ -72,6 +71,9 @@ class OnboardingViewController: UIViewController {
     }
     
     @objc func signUp() {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        backBarButtonItem.tintColor = .black
+        navigationItem.backBarButtonItem = backBarButtonItem
         self.navigationController?.pushViewController(RegistrationViewController(), animated: true)
     }
     
