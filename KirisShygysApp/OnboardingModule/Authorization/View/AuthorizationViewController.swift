@@ -1,14 +1,14 @@
 //
-//  RegistrationViewController.swift
+//  AuthorizationViewController.swift
 //  KirisShygysApp
 //
-//  Created by Нурдаулет on 06.10.2023.
+//  Created by Нурдаулет on 09.10.2023.
 //
 
 import UIKit
 import SnapKit
 
-class RegistrationViewController: UIViewController {
+class AuthorizationViewController: UIViewController {
     private var nameTextField: UITextField = {
         var textField = UITextField()
         textField.backgroundColor = .white
@@ -17,18 +17,6 @@ class RegistrationViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
         textField.placeholder = "Name"
-        textField.font = UIFont.systemFont(ofSize: 16)
-        return textField
-    }()
-    
-    private var emailTextField: UITextField = {
-        var textField = UITextField()
-        textField.backgroundColor = .white
-        textField.borderStyle = .line
-        textField.layer.cornerRadius = 12
-        textField.layer.borderWidth = 1.0
-        textField.layer.masksToBounds = true
-        textField.placeholder = "Email"
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
     }()
@@ -54,10 +42,10 @@ class RegistrationViewController: UIViewController {
         return button
     }()
     
-    private var signUpButton: UIButton = {
+    private var signInButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor.shared.Brown
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle("Sign In", for: .normal)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.tintColor = .black
@@ -72,17 +60,17 @@ class RegistrationViewController: UIViewController {
         
         setupView()
     }
-    
+
     @objc func hideTextField(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry.toggle()
         let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
         hidePasswordFieldButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
-    private func setupView() {
-        self.title = "Registration"
+    func setupView() {
+        self.title = "Authorization"
         view.backgroundColor = .white
-
+        
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
@@ -90,22 +78,15 @@ class RegistrationViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        view.addSubview(emailTextField)
-        emailTextField.snp.makeConstraints { make in
+        view.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
             make.top.equalTo(nameTextField.snp.bottom).offset(20)
             make.height.equalTo(50)
         }
         
-        view.addSubview(passwordTextField)
-        passwordTextField.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
-            make.height.equalTo(50)
-        }
-        
-        view.addSubview(signUpButton)
-        signUpButton.snp.makeConstraints { make in
+        view.addSubview(signInButton)
+        signInButton.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
             make.top.equalTo(passwordTextField.snp.bottom).offset(20)
             make.height.equalTo(55)
@@ -114,10 +95,6 @@ class RegistrationViewController: UIViewController {
         let leftPaddingViewName = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
         nameTextField.leftView = leftPaddingViewName
         nameTextField.leftViewMode = .always
-        
-        let leftPaddingViewEmail = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
-        emailTextField.leftView = leftPaddingViewEmail
-        emailTextField.leftViewMode = .always
         
         let leftPaddingViewPassword = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
         passwordTextField.leftView = leftPaddingViewPassword
@@ -132,5 +109,4 @@ class RegistrationViewController: UIViewController {
         passwordTextField.rightView = rightPaddingButton
         passwordTextField.rightViewMode = .always
     }
-    
 }
