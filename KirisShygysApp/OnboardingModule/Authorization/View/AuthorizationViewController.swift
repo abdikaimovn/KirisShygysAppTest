@@ -9,14 +9,24 @@ import UIKit
 import SnapKit
 
 class AuthorizationViewController: UIViewController {
-    private var nameTextField: UITextField = {
+    private var imageLogo: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "logo")
+        imageView.layer.cornerCurve = .continuous
+        imageView.layer.cornerRadius = 50
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private var emailTextField: UITextField = {
         var textField = UITextField()
         textField.backgroundColor = .white
         textField.borderStyle = .line
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
-        textField.placeholder = "Name"
+        textField.placeholder = "Email"
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
     }()
@@ -68,20 +78,26 @@ class AuthorizationViewController: UIViewController {
     }
     
     func setupView() {
-        self.title = "Authorization"
         view.backgroundColor = .white
         
-        view.addSubview(nameTextField)
-        nameTextField.snp.makeConstraints { make in
+        view.addSubview(imageLogo)
+        imageLogo.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
+            make.size.equalTo(view.bounds.width * 0.25)
+        }
+        
+        view.addSubview(emailTextField)
+        emailTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
+            make.top.equalTo(imageLogo.snp.bottom).offset(50)
             make.height.equalTo(50)
         }
         
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(nameTextField.snp.bottom).offset(20)
+            make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.height.equalTo(50)
         }
         
@@ -93,8 +109,8 @@ class AuthorizationViewController: UIViewController {
         }
         
         let leftPaddingViewName = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
-        nameTextField.leftView = leftPaddingViewName
-        nameTextField.leftViewMode = .always
+        emailTextField.leftView = leftPaddingViewName
+        emailTextField.leftViewMode = .always
         
         let leftPaddingViewPassword = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
         passwordTextField.leftView = leftPaddingViewPassword

@@ -9,6 +9,16 @@ import UIKit
 import SnapKit
 
 class RegistrationViewController: UIViewController {
+    private var imageLogo: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "logo")
+        imageView.layer.cornerCurve = .continuous
+        imageView.layer.cornerRadius = 50
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     private var nameTextField: UITextField = {
         var textField = UITextField()
         textField.backgroundColor = .white
@@ -80,13 +90,19 @@ class RegistrationViewController: UIViewController {
     }
     
     private func setupView() {
-        self.title = "Registration"
         view.backgroundColor = .white
 
+        view.addSubview(imageLogo)
+        imageLogo.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
+            make.size.equalTo(view.bounds.width * 0.25)
+        }
+        
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
+            make.top.equalTo(imageLogo.snp.bottom).offset(50)
             make.height.equalTo(50)
         }
         
