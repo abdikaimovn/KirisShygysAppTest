@@ -82,7 +82,6 @@ class OnboardingViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        
         view.addSubview(sliderCollView)
         sliderCollView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -91,7 +90,6 @@ class OnboardingViewController: UIViewController {
         }
         
         view.addSubview(pageControl)
-        
         pageControl.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(sliderCollView.snp.bottom).offset(20)
@@ -100,7 +98,6 @@ class OnboardingViewController: UIViewController {
         }
         
         view.addSubview(signUpButton)
-        
         signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(pageControl.snp.bottom).offset(20)

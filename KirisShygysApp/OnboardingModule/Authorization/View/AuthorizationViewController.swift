@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class AuthorizationViewController: UIViewController {
     private var nameTextField: UITextField = {

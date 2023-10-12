@@ -19,6 +19,7 @@
 		6F658BD92ACEBAF6004ECACB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BD82ACEBAF6004ECACB /* FirebaseDatabase */; };
 		6F658BDB2ACEBAF6004ECACB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDA2ACEBAF6004ECACB /* FirebaseFirestore */; };
 		6F658BDD2ACEBAF6004ECACB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDC2ACEBAF6004ECACB /* FirebaseStorage */; };
+		6F7342CF2AD85AE1000EA57D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */; };
 		6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3312ACECC560092BC00 /* OnboardingModel.swift */; };
 		6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */; };
 		6F86B3372ACED6F90092BC00 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */; };
@@ -39,6 +40,7 @@
 		6F658BC52ACEA9A4004ECACB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F658BC82ACEA9A4004ECACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F658BCA2ACEA9A4004ECACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6F86B3312ACECC560092BC00 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		6F86B3352ACED6E10092BC00 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */,
 				6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */,
 				6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */,
 				6F658BC52ACEA9A4004ECACB /* Assets.xcassets */,
@@ -279,6 +282,7 @@
 			files = (
 				6F658BC92ACEA9A4004ECACB /* LaunchScreen.storyboard in Resources */,
 				6F658BC62ACEA9A4004ECACB /* Assets.xcassets in Resources */,
+				6F7342CF2AD85AE1000EA57D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -423,7 +427,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

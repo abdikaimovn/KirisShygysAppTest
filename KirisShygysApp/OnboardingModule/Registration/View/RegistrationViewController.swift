@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class RegistrationViewController: UIViewController {
     private var nameTextField: UITextField = {
