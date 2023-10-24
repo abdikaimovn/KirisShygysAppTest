@@ -12,7 +12,10 @@ import Foundation
 
 
 class RegistrationPresenter {
-    
+    var delegate: RegistrationPresenterDelegate?
+    init(delegate: RegistrationPresenterDelegate? = nil) {
+        self.delegate = delegate
+    }
 }
 
 extension RegistrationPresenter: RegistrationViewControllerDelegate {
@@ -23,12 +26,12 @@ extension RegistrationPresenter: RegistrationViewControllerDelegate {
                 return
             }
             
-            Network.shared.signIn(with: AuthorizationModel(email: data.name, password: data.password)) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
+            if wasRegistered {
+                self.delegate?.didCheckAuthorization(answer: true)
+            } else {
+                self.delegate?.didCheckAuthorization(answer: false)
             }
         }
+
     }
 }
