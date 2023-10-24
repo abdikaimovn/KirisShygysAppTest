@@ -57,6 +57,7 @@ class AuthorizationViewController: UIViewController {
         button.backgroundColor = UIColor.shared.Brown
         button.setTitle("Sign In", for: .normal)
         button.layer.cornerRadius = 12
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.clipsToBounds = true
         button.tintColor = .black
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -68,7 +69,14 @@ class AuthorizationViewController: UIViewController {
         
         hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
         
+        
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        emailTextField.becomeFirstResponder()
     }
 
     @objc func hideTextField(_ sender: UIButton) {

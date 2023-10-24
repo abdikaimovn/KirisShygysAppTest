@@ -8,6 +8,6 @@
 import Foundation
 
 struct AuthorizationModel {
-    var name: String
+    var email: String
     var password: String
 }

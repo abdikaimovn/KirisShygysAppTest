@@ -8,7 +8,17 @@
 import UIKit
 import SnapKit
 
+protocol RegistrationViewControllerDelegate {
+    func didRegister(with data: RegistrationModel)
+}
+
+protocol RegistrationPresenterDelegate {
+    
+}
+
 class RegistrationViewController: UIViewController {
+    var delegate: RegistrationViewControllerDelegate?
+    
     private var imageLogo: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
@@ -68,6 +78,7 @@ class RegistrationViewController: UIViewController {
         var button = UIButton()
         button.backgroundColor = UIColor.shared.Brown
         button.setTitle("Sign Up", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.tintColor = .black
@@ -78,15 +89,43 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
-        
+        var registrationPresenter = RegistrationPresenter()
+        delegate = registrationPresenter
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        nameTextField.becomeFirstResponder()
     }
     
     @objc func hideTextField(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry.toggle()
         let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
         hidePasswordFieldButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
+    @objc func signUpPressed(_ sender: UIButton) {
+        //Username check
+        if !Validator.isValidUsername(for: nameTextField.text ?? "") {
+            AlertManager.showInvalidUsernameAlert(on: self)
+            return
+        }
+        //Email check
+        if !Validator.isValidEmail(for: emailTextField.text ?? "") {
+            AlertManager.showInvalidEmailAlert(on: self)
+            return
+        }
+        //Password check
+        if !Validator.isValidPassword(for: passwordTextField.text ?? "") {
+            AlertManager.showInvalidPasswordAlert(on: self)
+            return
+        }
+        
+        self.delegate?.didRegister(with: RegistrationModel(name: nameTextField.text!,
+                                                           email: emailTextField.text!,
+                                                           password: passwordTextField.text!))
     }
     
     private func setupView() {
@@ -147,6 +186,9 @@ class RegistrationViewController: UIViewController {
         }
         passwordTextField.rightView = rightPaddingButton
         passwordTextField.rightViewMode = .always
+        
+        hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpPressed(_:)), for: .touchUpInside)
     }
     
 }
