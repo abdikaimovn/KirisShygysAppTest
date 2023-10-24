@@ -8,7 +8,27 @@
 import UIKit
 import SnapKit
 
+protocol RegistrationViewControllerDelegate {
+    func didRegister(with data: RegistrationModel)
+}
+
+protocol RegistrationPresenterDelegate {
+    
+}
+
 class RegistrationViewController: UIViewController {
+    var delegate: RegistrationViewControllerDelegate?
+    
+    private var imageLogo: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "logo")
+        imageView.layer.cornerCurve = .continuous
+        imageView.layer.cornerRadius = 50
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     private var nameTextField: UITextField = {
         var textField = UITextField()
         textField.backgroundColor = .white
@@ -58,6 +78,7 @@ class RegistrationViewController: UIViewController {
         var button = UIButton()
         button.backgroundColor = UIColor.shared.Brown
         button.setTitle("Sign Up", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.tintColor = .black
@@ -68,9 +89,15 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
-        
+        var registrationPresenter = RegistrationPresenter()
+        delegate = registrationPresenter
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        nameTextField.becomeFirstResponder()
     }
     
     @objc func hideTextField(_ sender: UIButton) {
@@ -79,14 +106,42 @@ class RegistrationViewController: UIViewController {
         hidePasswordFieldButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
+    @objc func signUpPressed(_ sender: UIButton) {
+        //Username check
+        if !Validator.isValidUsername(for: nameTextField.text ?? "") {
+            AlertManager.showInvalidUsernameAlert(on: self)
+            return
+        }
+        //Email check
+        if !Validator.isValidEmail(for: emailTextField.text ?? "") {
+            AlertManager.showInvalidEmailAlert(on: self)
+            return
+        }
+        //Password check
+        if !Validator.isValidPassword(for: passwordTextField.text ?? "") {
+            AlertManager.showInvalidPasswordAlert(on: self)
+            return
+        }
+        
+        self.delegate?.didRegister(with: RegistrationModel(name: nameTextField.text!,
+                                                           email: emailTextField.text!,
+                                                           password: passwordTextField.text!))
+    }
+    
     private func setupView() {
-        self.title = "Registration"
         view.backgroundColor = .white
 
+        view.addSubview(imageLogo)
+        imageLogo.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
+            make.size.equalTo(view.bounds.width * 0.25)
+        }
+        
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
+            make.top.equalTo(imageLogo.snp.bottom).offset(50)
             make.height.equalTo(50)
         }
         
@@ -131,6 +186,9 @@ class RegistrationViewController: UIViewController {
         }
         passwordTextField.rightView = rightPaddingButton
         passwordTextField.rightViewMode = .always
+        
+        hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpPressed(_:)), for: .touchUpInside)
     }
     
 }

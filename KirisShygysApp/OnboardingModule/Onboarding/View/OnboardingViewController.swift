@@ -44,6 +44,7 @@ class OnboardingViewController: UIViewController {
         var button = UIButton()
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = UIColor(hex: "#B88E4E")
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.layer.cornerRadius = 16
         button.clipsToBounds = true
         return button
@@ -55,6 +56,7 @@ class OnboardingViewController: UIViewController {
         button.clipsToBounds = true
         button.setTitle("Sign In", for: .normal)
         button.backgroundColor = UIColor.shared.Brown
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
     
