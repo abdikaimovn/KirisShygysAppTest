@@ -193,7 +193,7 @@ class RegistrationViewController: UIViewController {
     
 }
 
-// Presenter's methods {
+// Presenter's methods 
 extension RegistrationViewController: RegistrationPresenterDelegate {
     func didCheckAuthorization(answer: Bool) {
         if answer {

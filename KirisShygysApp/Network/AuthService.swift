@@ -8,8 +8,9 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
-class Network {
-    static let shared = Network()
+
+class AuthService {
+    static let shared = AuthService()
     
     public func registerUser(with user: RegistrationModel, completion: @escaping (Bool, Error?) -> ()) {
         let username = user.name

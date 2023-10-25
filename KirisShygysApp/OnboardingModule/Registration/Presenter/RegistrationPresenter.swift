@@ -20,7 +20,7 @@ class RegistrationPresenter {
 
 extension RegistrationPresenter: RegistrationViewControllerDelegate {
     func didRegister(with data: RegistrationModel) {
-        Network.shared.registerUser(with: data) { wasRegistered, error in
+        AuthService.shared.registerUser(with: data) { wasRegistered, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
