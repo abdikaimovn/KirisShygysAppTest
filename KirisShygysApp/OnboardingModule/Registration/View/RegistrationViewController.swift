@@ -13,7 +13,7 @@ protocol RegistrationViewControllerDelegate {
 }
 
 protocol RegistrationPresenterDelegate {
-    
+    func didCheckAuthorization(answer: Bool)
 }
 
 class RegistrationViewController: UIViewController {
@@ -89,7 +89,7 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var registrationPresenter = RegistrationPresenter()
+        var registrationPresenter = RegistrationPresenter(delegate: self)
         delegate = registrationPresenter
         setupView()
     }
@@ -130,7 +130,7 @@ class RegistrationViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-
+        
         view.addSubview(imageLogo)
         imageLogo.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -191,4 +191,17 @@ class RegistrationViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector(signUpPressed(_:)), for: .touchUpInside)
     }
     
+}
+
+// Presenter's methods 
+extension RegistrationViewController: RegistrationPresenterDelegate {
+    func didCheckAuthorization(answer: Bool) {
+        if answer {
+            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+                sceneDelegate.checkAuthentication()
+            }
+        } else {
+            AlertManager.showRegistrationErrorAlert(on: self)
+        }
+    }
 }

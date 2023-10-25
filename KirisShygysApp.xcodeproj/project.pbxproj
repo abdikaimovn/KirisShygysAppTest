@@ -20,7 +20,7 @@
 		6F658BDB2ACEBAF6004ECACB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDA2ACEBAF6004ECACB /* FirebaseFirestore */; };
 		6F658BDD2ACEBAF6004ECACB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDC2ACEBAF6004ECACB /* FirebaseStorage */; };
 		6F7342CF2AD85AE1000EA57D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */; };
-		6F7342D22AD85DB3000EA57D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* Network.swift */; };
+		6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* AuthService.swift */; };
 		6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3312ACECC560092BC00 /* OnboardingModel.swift */; };
 		6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */; };
 		6F86B3372ACED6F90092BC00 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */; };
@@ -44,7 +44,7 @@
 		6F658BC82ACEA9A4004ECACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F658BCA2ACEA9A4004ECACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6F7342D12AD85DB3000EA57D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		6F7342D12AD85DB3000EA57D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6F86B3312ACECC560092BC00 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 		6F7342D02AD85D32000EA57D /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				6F7342D12AD85DB3000EA57D /* Network.swift */,
+				6F7342D12AD85DB3000EA57D /* AuthService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -356,7 +356,7 @@
 				6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */,
 				6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */,
 				6F658BBF2ACEA9A3004ECACB /* SceneDelegate.swift in Sources */,
-				6F7342D22AD85DB3000EA57D /* Network.swift in Sources */,
+				6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */,
 				6F86B3372ACED6F90092BC00 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,7 +561,7 @@
 				6F658BCC2ACEA9A4004ECACB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		6F658BCD2ACEA9A4004ECACB /* Build configuration list for PBXNativeTarget "KirisShygysApp" */ = {
 			isa = XCConfigurationList;
@@ -570,7 +570,7 @@
 				6F658BCF2ACEA9A4004ECACB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
