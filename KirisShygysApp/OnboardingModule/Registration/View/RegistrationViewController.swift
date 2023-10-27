@@ -60,7 +60,7 @@ class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
-        textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = true 
         textField.placeholder = "Password"
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
