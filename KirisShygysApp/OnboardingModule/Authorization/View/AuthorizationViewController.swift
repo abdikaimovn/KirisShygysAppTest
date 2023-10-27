@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class AuthorizationViewController: UIViewController {
+    var delegate: AuthVCDelegate?
+    
     private var imageLogo: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
@@ -67,10 +69,30 @@ class AuthorizationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let presenter = AuthorizationPresenter(delegate: self)
+        self.delegate = presenter
+        
+        signInButton.addTarget(self, action: #selector(signInPressed), for: .touchUpInside)
         hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
         
         
         setupView()
+    }
+    
+    @objc func signInPressed() {
+        if !Validator.isValidEmail(for: emailTextField.text ?? "") {
+            AlertManager.showInvalidEmailAlert(on: self)
+            return
+        }
+        
+        if !Validator.isValidPassword(for: passwordTextField.text ?? "") {
+            AlertManager.showInvalidPasswordAlert(on: self)
+            return
+        }
+        
+        let data = AuthorizationModel(email: emailTextField.text!, password: passwordTextField.text!)
+        
+        delegate?.didSignIn(with: data)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -132,5 +154,17 @@ class AuthorizationViewController: UIViewController {
         }
         passwordTextField.rightView = rightPaddingButton
         passwordTextField.rightViewMode = .always
+    }
+}
+
+extension AuthorizationViewController: AuthPresenterDelegate {
+    func didFail(with error: Error) {
+        AlertManager.showAuthorizationErrorAlert(on: self)
+    }
+    
+    func didSuccess() {
+        if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+            sceneDelegate.checkAuthentication()
+        }
     }
 }
