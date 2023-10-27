@@ -39,6 +39,7 @@ class AuthorizationViewController: UIViewController {
         textField.borderStyle = .line
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
+        textField.isSecureTextEntry = true
         textField.layer.masksToBounds = true
         textField.placeholder = "Password"
         textField.font = UIFont.systemFont(ofSize: 16)
