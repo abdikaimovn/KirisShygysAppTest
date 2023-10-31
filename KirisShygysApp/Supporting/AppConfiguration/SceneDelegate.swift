@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             nav.modalPresentationStyle = .fullScreen
             self.window?.rootViewController = nav
         } else {
-            let vc = HomeController()
+            let vc = TabViewController()
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
             self.window?.rootViewController = nav

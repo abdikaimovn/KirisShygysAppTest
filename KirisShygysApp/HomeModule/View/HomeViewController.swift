@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeController: UIViewController {
+class HomeViewController: UIViewController {
     private var subView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(hex: "#FFF9E5")
@@ -42,7 +42,7 @@ class HomeController: UIViewController {
     private var total: UILabel = {
         var label = UILabel()
         label.text = "Total Balance:"
-        label.font = .systemFont(ofSize: 25, weight: .semibold)
+        label.font = UIFont(name: "HelveticaNeue", size: 20)
         label.textColor = .white
         return label
     }()
@@ -50,7 +50,7 @@ class HomeController: UIViewController {
     private var totalBalance: UILabel = {
         var label = UILabel()
         label.text = "$ 15,000"
-        label.font = .systemFont(ofSize: 34, weight: .bold)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
         label.textColor = .white
         return label
     }()
@@ -132,12 +132,12 @@ class HomeController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = UIColor(hex: "#FCEED4")
+        view.backgroundColor = .white
         
         view.addSubview(welcomeLabel)
         welcomeLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(25)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-60)
         }
         
         view.addSubview(userNameLabel)
@@ -157,8 +157,8 @@ class HomeController: UIViewController {
         chipImage.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-15)
             make.centerY.equalToSuperview()
-            make.height.equalTo(43)
-            make.width.equalTo(50)
+            make.height.equalToSuperview().multipliedBy(0.2)
+            make.width.equalToSuperview().multipliedBy(0.14)
         }
         
         card.addSubview(total)
@@ -227,25 +227,25 @@ class HomeController: UIViewController {
             make.top.equalTo(expenseImage.snp.bottom).offset(5)
         }
         
-        //D0E5E4
-        let logOutBtn = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(logOut))
-        logOutBtn.title = "Log Out"
-        self.navigationItem.rightBarButtonItem = logOutBtn
+        //        //D0E5E4
+        //        let logOutBtn = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(logOut))
+        //        logOutBtn.title = "Log Out"
+        //        self.navigationItem.rightBarButtonItem = logOutBtn
     }
     
-    @objc private func logOut() {
-        AuthService.shared.signOut { [weak self] error in
-            guard let self = self else {return}
-            
-            if let error = error {
-                AlertManager.showLogOutErrorAlert(on: self, with: error)
-                return
-            }
-            
-            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-                sceneDelegate.checkAuthentication()
-            }
-        }
-    }
+    //    @objc private func logOut() {
+    //        AuthService.shared.signOut { [weak self] error in
+    //            guard let self = self else {return}
+    //
+    //            if let error = error {
+    //                AlertManager.showLogOutErrorAlert(on: self, with: error)
+    //                return
+    //            }
+    //
+    //            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+    //                sceneDelegate.checkAuthentication()
+    //            }
+    //        }
+    //    }
 }
 
