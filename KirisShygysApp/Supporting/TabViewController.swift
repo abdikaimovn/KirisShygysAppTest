@@ -29,7 +29,7 @@ class TabViewController: UITabBarController {
         let navViewController = UINavigationController(rootViewController: rootViewController)
         navViewController.tabBarItem.title = title
         navViewController.tabBarItem.image = icon
-        let titleFont = UIFont.systemFont(ofSize: 16, weight: .bold)
+        let titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         rootViewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: titleFont]
         return navViewController
     }

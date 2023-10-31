@@ -9,12 +9,6 @@ import UIKit
 import SnapKit
 
 class HomeViewController: UIViewController {
-    private var subView: UIView = {
-        var view = UIView()
-        view.backgroundColor = UIColor(hex: "#FFF9E5")
-        return view
-    }()
-    
     private var welcomeLabel: UILabel = {
         var label = UILabel()
         label.text = "Welcome Back,"
@@ -64,7 +58,6 @@ class HomeViewController: UIViewController {
     //Income view
     private var incomeView: UIView = {
         var view = UIView()
-        view.backgroundColor = UIColor(hex: "#b39e80")
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         return view
@@ -73,22 +66,22 @@ class HomeViewController: UIViewController {
     private var income: UILabel = {
         var label = UILabel()
         label.text = "Income"
-        label.textColor = .white
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        label.textColor = UIColor(hex: "#1AFB1A")
+        label.font = UIFont(name: "HelveticaNeue", size: 18)
         return label
     }()
     
     private var incomeImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(systemName: "square.and.arrow.down")
-        image.tintColor = .white
+        image.tintColor = UIColor(hex: "#1AFB1A")
         return image
     }()
     
     private var incomeLabel: UILabel = {
         var label = UILabel()
         label.text = "$ 12,239"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        label.font = UIFont(name: "HelveticaNeue", size: 22)
         label.textColor = .white
         return label
     }()
@@ -96,7 +89,7 @@ class HomeViewController: UIViewController {
     //Expense view
     private var expenseView: UIView = {
         var view = UIView()
-        view.backgroundColor = UIColor(hex: "#b39e80")
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         return view
@@ -105,29 +98,40 @@ class HomeViewController: UIViewController {
     private var expense: UILabel = {
         var label = UILabel()
         label.text = "Expenses"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
-        label.textColor = .white
+        label.font = UIFont(name: "HelveticaNeue", size: 18)
+        label.textColor = UIColor(hex: "#EF0A0A")
         return label
     }()
     
     private var expenseImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(systemName: "square.and.arrow.up")
-        image.tintColor = .white
+        image.tintColor = UIColor(hex: "#EF0A0A")
         return image
     }()
     
     private var expenseLabel: UILabel = {
         var label = UILabel()
         label.text = "$ 2423"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        label.font = UIFont(name: "HelveticaNeue", size: 22)
         label.textColor = .white
         return label
     }()
     
+    private lazy var transactionsTableView: UITableView = {
+        var tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        UIFont.familyNames.forEach({ familyName in
+//                   let fontNames = UIFont.fontNames(forFamilyName: familyName)
+//                   print(familyName, fontNames)
+//               })
         setupView()
     }
     
@@ -227,6 +231,12 @@ class HomeViewController: UIViewController {
             make.top.equalTo(expenseImage.snp.bottom).offset(5)
         }
         
+        view.addSubview(transactionsTableView)
+        transactionsTableView.snp.makeConstraints { make in
+            make.top.equalTo(card.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(20)
+            make.height.equalTo(300)
+        }
         //        //D0E5E4
         //        let logOutBtn = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(logOut))
         //        logOutBtn.title = "Log Out"
@@ -249,3 +259,21 @@ class HomeViewController: UIViewController {
     //    }
 }
 
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        70
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as! TransactionTableViewCell
+        return cell
+    }
+}
