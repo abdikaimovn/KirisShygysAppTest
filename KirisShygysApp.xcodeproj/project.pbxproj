@@ -11,7 +11,7 @@
 		6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */; };
 		6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */; };
 		6F658BBF2ACEA9A3004ECACB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */; };
-		6F658BC12ACEA9A3004ECACB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F658BC02ACEA9A3004ECACB /* HomeController.swift */; };
+		6F658BC12ACEA9A3004ECACB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F658BC02ACEA9A3004ECACB /* HomeViewController.swift */; };
 		6F658BC62ACEA9A4004ECACB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F658BC52ACEA9A4004ECACB /* Assets.xcassets */; };
 		6F658BC92ACEA9A4004ECACB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F658BC72ACEA9A4004ECACB /* LaunchScreen.storyboard */; };
 		6F658BD32ACEB105004ECACB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BD22ACEB105004ECACB /* SnapKit */; };
@@ -28,6 +28,7 @@
 		6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */; };
 		6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */; };
 		6FB40F822AE7EAE6009B7863 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F812AE7EAE6009B7863 /* Validator.swift */; };
+		6FCF294F2AF131BF00CEA307 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCF294E2AF131BF00CEA307 /* TabViewController.swift */; };
 		6FF3A2CD2AD4222500D51E3A /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2CC2AD4222500D51E3A /* AuthorizationModel.swift */; };
 		6FF3A2CF2AD4225000D51E3A /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2CE2AD4225000D51E3A /* AuthorizationViewController.swift */; };
 		6FF3A2D12AD4228400D51E3A /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2D02AD4228400D51E3A /* AuthorizationPresenter.swift */; };
@@ -40,7 +41,7 @@
 		6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KirisShygysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6F658BC02ACEA9A3004ECACB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		6F658BC02ACEA9A3004ECACB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6F658BC52ACEA9A4004ECACB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F658BC82ACEA9A4004ECACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F658BCA2ACEA9A4004ECACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCVCell.swift; sourceTree = "<group>"; };
 		6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		6FB40F812AE7EAE6009B7863 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		6FCF294E2AF131BF00CEA307 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		6FF3A2CC2AD4222500D51E3A /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		6FF3A2CE2AD4225000D51E3A /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		6FF3A2D02AD4228400D51E3A /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 		6F4A7BE82AE552E400CE8892 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6F658BC02ACEA9A3004ECACB /* HomeController.swift */,
+				6F658BC02ACEA9A3004ECACB /* HomeViewController.swift */,
 				6F7A078C2AEA98F300E524F7 /* CustomNavigationBar.swift */,
 			);
 			path = View;
@@ -200,16 +202,25 @@
 		6F86B3352ACED6E10092BC00 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				6FCF294D2AF1307B00CEA307 /* AppConfiguration */,
+				6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */,
+				6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */,
+				6FB40F812AE7EAE6009B7863 /* Validator.swift */,
+				6FCF294E2AF131BF00CEA307 /* TabViewController.swift */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		6FCF294D2AF1307B00CEA307 /* AppConfiguration */ = {
+			isa = PBXGroup;
+			children = (
 				6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */,
 				6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */,
 				6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */,
 				6F658BC52ACEA9A4004ECACB /* Assets.xcassets */,
 				6F658BC72ACEA9A4004ECACB /* LaunchScreen.storyboard */,
-				6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */,
-				6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */,
-				6FB40F812AE7EAE6009B7863 /* Validator.swift */,
 			);
-			path = Supporting;
+			path = AppConfiguration;
 			sourceTree = "<group>";
 		};
 		6FF3A2C82AD421CF00D51E3A /* Authorization */ = {
@@ -350,7 +361,8 @@
 				6FF3A2CF2AD4225000D51E3A /* AuthorizationViewController.swift in Sources */,
 				6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */,
 				6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */,
-				6F658BC12ACEA9A3004ECACB /* HomeController.swift in Sources */,
+				6F658BC12ACEA9A3004ECACB /* HomeViewController.swift in Sources */,
+				6FCF294F2AF131BF00CEA307 /* TabViewController.swift in Sources */,
 				6F430CF32AD0538500CC712A /* RegistrationModel.swift in Sources */,
 				6FF3A2CD2AD4222500D51E3A /* AuthorizationModel.swift in Sources */,
 				6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */,
