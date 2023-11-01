@@ -9,11 +9,19 @@ import UIKit
 import SnapKit
 
 class HomeViewController: UIViewController {
+    private var headerView: UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor(hex: "#ddd0bb")
+        view.layer.cornerRadius = 30
+        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        return view
+    }()
+    
     private var welcomeLabel: UILabel = {
         var label = UILabel()
         label.text = "Welcome Back,"
-        label.font = UIFont(name: "HelveticaNeue-Light", size: 16)
-        label.textColor = .black
+        label.font = UIFont(name: "HelveticaNeue", size: 16)
+        label.textColor = .darkGray
         return label
     }()
     
@@ -21,14 +29,15 @@ class HomeViewController: UIViewController {
         var label = UILabel()
         label.text = "Nurdaulet"
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
-        label.textColor = .black
+        label.textColor = .darkGray
         return label
     }()
     
     private var card: UIView = {
         var card = UIView()
         card.backgroundColor = UIColor.shared.Brown
-        card.layer.cornerRadius = 10
+        card.layer.cornerRadius = 16
+        card.layer.cornerCurve = .continuous
         card.clipsToBounds = true
         return card
     }()
@@ -60,13 +69,14 @@ class HomeViewController: UIViewController {
         var view = UIView()
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
+        view.backgroundColor = UIColor.shared.IncomeColor
         return view
     }()
     
     private var income: UILabel = {
         var label = UILabel()
         label.text = "Income"
-        label.textColor = UIColor(hex: "#1AFB1A")
+        label.textColor = .white
         label.font = UIFont(name: "HelveticaNeue", size: 18)
         return label
     }()
@@ -74,14 +84,14 @@ class HomeViewController: UIViewController {
     private var incomeImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(systemName: "square.and.arrow.down")
-        image.tintColor = UIColor(hex: "#1AFB1A")
+        image.tintColor = .white
         return image
     }()
     
     private var incomeLabel: UILabel = {
         var label = UILabel()
         label.text = "$ 12,239"
-        label.font = UIFont(name: "HelveticaNeue", size: 22)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
         label.textColor = .white
         return label
     }()
@@ -89,7 +99,7 @@ class HomeViewController: UIViewController {
     //Expense view
     private var expenseView: UIView = {
         var view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor.shared.ExpenseColor
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         return view
@@ -99,21 +109,21 @@ class HomeViewController: UIViewController {
         var label = UILabel()
         label.text = "Expenses"
         label.font = UIFont(name: "HelveticaNeue", size: 18)
-        label.textColor = UIColor(hex: "#EF0A0A")
+        label.textColor = .white
         return label
     }()
     
     private var expenseImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(systemName: "square.and.arrow.up")
-        image.tintColor = UIColor(hex: "#EF0A0A")
+        image.tintColor = .white
         return image
     }()
     
     private var expenseLabel: UILabel = {
         var label = UILabel()
         label.text = "$ 2423"
-        label.font = UIFont(name: "HelveticaNeue", size: 22)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
         label.textColor = .white
         return label
     }()
@@ -123,7 +133,24 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        tableView.isScrollEnabled = false
         return tableView
+    }()
+    
+    private var transactionsLabel: UILabel = {
+        var label = UILabel()
+        label.text = "Transactions"
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        label.textColor = .black
+        return label
+    }()
+    
+    private var seeAllButton: UILabel = {
+        var btn = UILabel()
+        btn.text = "See All"
+        btn.font = UIFont(name: "HelveticaNeue-Light", size: 17)
+        btn.textColor = .black
+        return btn
     }()
     
     override func viewDidLoad() {
@@ -137,23 +164,28 @@ class HomeViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        
-        view.addSubview(welcomeLabel)
-        welcomeLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(25)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-60)
+        view.addSubview(headerView)
+        headerView.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(view.snp.height).multipliedBy(0.35)
         }
         
-        view.addSubview(userNameLabel)
+        headerView.addSubview(welcomeLabel)
+        welcomeLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(25)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-20)
+        }
+        
+        headerView.addSubview(userNameLabel)
         userNameLabel.snp.makeConstraints { make in
             make.top.equalTo(welcomeLabel.snp.bottom).offset(2)
             make.left.equalTo(welcomeLabel.snp.left)
         }
         
-        view.addSubview(card)
+        headerView.addSubview(card)
         card.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(userNameLabel.snp.bottom).offset(20)
+            make.top.equalTo(userNameLabel.snp.bottom).offset(30)
             make.height.equalTo(view.snp.height).multipliedBy(0.25)
         }
         
@@ -182,7 +214,7 @@ class HomeViewController: UIViewController {
             make.left.equalTo(totalBalance.snp.left)
             make.bottom.equalToSuperview().offset(-15)
             make.height.equalTo(60)
-            make.width.equalTo(140)
+            make.width.equalTo(card.snp.width).multipliedBy(0.4)
         }
         
         incomeView.addSubview(incomeImage)
@@ -209,7 +241,7 @@ class HomeViewController: UIViewController {
             make.right.equalToSuperview().offset(-15)
             make.bottom.equalToSuperview().offset(-15)
             make.height.equalTo(60)
-            make.width.equalTo(140)
+            make.width.equalTo(card.snp.width).multipliedBy(0.4)
         }
         
         expenseView.addSubview(expenseImage)
@@ -231,9 +263,21 @@ class HomeViewController: UIViewController {
             make.top.equalTo(expenseImage.snp.bottom).offset(5)
         }
         
+        view.addSubview(transactionsLabel)
+        transactionsLabel.snp.makeConstraints { make in
+            make.left.equalTo(card.snp.left)
+            make.top.equalTo(card.snp.bottom).offset(30)
+        }
+        
+        view.addSubview(seeAllButton)
+        seeAllButton.snp.makeConstraints { make in
+            make.right.equalTo(card.snp.right)
+            make.top.equalTo(transactionsLabel.snp.top)
+        }
+        
         view.addSubview(transactionsTableView)
         transactionsTableView.snp.makeConstraints { make in
-            make.top.equalTo(card.snp.bottom).offset(20)
+            make.top.equalTo(transactionsLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(20)
             make.height.equalTo(300)
         }

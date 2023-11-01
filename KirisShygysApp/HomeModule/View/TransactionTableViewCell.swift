@@ -39,9 +39,9 @@ class TransactionTableViewCell: UITableViewCell {
     
     private var priceLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue", size: 16)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
         label.text = "+ $ 12.00"
-        label.textColor = .green
+        label.textColor = UIColor.shared.IncomeColor
         return label
     }()
     
