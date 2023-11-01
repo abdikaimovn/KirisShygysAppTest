@@ -33,4 +33,12 @@ extension UIColor {
     var Brown: UIColor {
         UIColor(hex: "#C7B08E")!
     }
+    
+    var ExpenseColor: UIColor {
+        UIColor(hex: "#E94D58")!
+    }
+    
+    var IncomeColor: UIColor {
+        UIColor(hex: "#2BA478")!
+    }
 }
