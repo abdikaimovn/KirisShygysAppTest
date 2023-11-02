@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     private var headerView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(hex: "#ddd0bb")
@@ -173,7 +173,7 @@ class HomeViewController: UIViewController {
         headerView.addSubview(welcomeLabel)
         welcomeLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(25)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
         }
         
         headerView.addSubview(userNameLabel)
@@ -185,7 +185,7 @@ class HomeViewController: UIViewController {
         headerView.addSubview(card)
         card.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(userNameLabel.snp.bottom).offset(30)
+            make.top.equalTo(userNameLabel.snp.bottom).offset(30 )
             make.height.equalTo(view.snp.height).multipliedBy(0.25)
         }
         
