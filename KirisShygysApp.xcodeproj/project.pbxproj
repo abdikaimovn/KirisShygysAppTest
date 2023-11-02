@@ -30,6 +30,8 @@
 		6FB40F822AE7EAE6009B7863 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F812AE7EAE6009B7863 /* Validator.swift */; };
 		6FCF294F2AF131BF00CEA307 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCF294E2AF131BF00CEA307 /* TabViewController.swift */; };
 		6FCF29512AF189F000CEA307 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCF29502AF189F000CEA307 /* TransactionTableViewCell.swift */; };
+		6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */; };
+		6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */; };
 		6FF3A2CD2AD4222500D51E3A /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2CC2AD4222500D51E3A /* AuthorizationModel.swift */; };
 		6FF3A2CF2AD4225000D51E3A /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2CE2AD4225000D51E3A /* AuthorizationViewController.swift */; };
 		6FF3A2D12AD4228400D51E3A /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2D02AD4228400D51E3A /* AuthorizationPresenter.swift */; };
@@ -57,6 +59,8 @@
 		6FB40F812AE7EAE6009B7863 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		6FCF294E2AF131BF00CEA307 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		6FCF29502AF189F000CEA307 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		6FF3A2CC2AD4222500D51E3A /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		6FF3A2CE2AD4225000D51E3A /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		6FF3A2D02AD4228400D51E3A /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
@@ -205,11 +209,11 @@
 		6F86B3352ACED6E10092BC00 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				6FEE5D772AF3B6A500DAE263 /* TabBarController */,
 				6FCF294D2AF1307B00CEA307 /* AppConfiguration */,
 				6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */,
 				6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */,
 				6FB40F812AE7EAE6009B7863 /* Validator.swift */,
-				6FCF294E2AF131BF00CEA307 /* TabViewController.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -224,6 +228,16 @@
 				6F658BC72ACEA9A4004ECACB /* LaunchScreen.storyboard */,
 			);
 			path = AppConfiguration;
+			sourceTree = "<group>";
+		};
+		6FEE5D772AF3B6A500DAE263 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				6FCF294E2AF131BF00CEA307 /* TabViewController.swift */,
+				6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */,
+				6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		6FF3A2C82AD421CF00D51E3A /* Authorization */ = {
@@ -363,6 +377,7 @@
 				6FF3A2D12AD4228400D51E3A /* AuthorizationPresenter.swift in Sources */,
 				6FF3A2CF2AD4225000D51E3A /* AuthorizationViewController.swift in Sources */,
 				6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */,
+				6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */,
 				6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */,
 				6F658BC12ACEA9A3004ECACB /* HomeViewController.swift in Sources */,
 				6FCF294F2AF131BF00CEA307 /* TabViewController.swift in Sources */,
@@ -374,6 +389,7 @@
 				6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */,
 				6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */,
 				6F7A078D2AEA98F300E524F7 /* CustomNavigationBar.swift in Sources */,
+				6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */,
 				6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */,
 				6F658BBF2ACEA9A3004ECACB /* SceneDelegate.swift in Sources */,
 				6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */,
