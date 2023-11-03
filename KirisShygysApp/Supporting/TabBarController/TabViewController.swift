@@ -49,7 +49,6 @@ class TabViewController: UITabBarController {
     @objc private func addTransactionPressed() {
         if #available(iOS 16.0, *) {
             self.present(TransactionViewController(), animated: true)
-            print("tapped")
         } else {
             print("iOS version should be greater or equal to 16.0")
         }

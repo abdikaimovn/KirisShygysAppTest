@@ -21,7 +21,7 @@ final class HomeViewController: UIViewController {
     private var welcomeLabel: UILabel = {
         var label = UILabel()
         label.text = "Welcome Back,"
-        label.font = UIFont(name: "HelveticaNeue", size: 16)
+        label.font = UIFont(name: "Futura", size: 16)
         label.textColor = .darkGray
         return label
     }()
@@ -29,7 +29,7 @@ final class HomeViewController: UIViewController {
     private var userNameLabel: UILabel = {
         var label = UILabel()
         label.text = "Nurdaulet"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        label.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
         label.textColor = .darkGray
         return label
     }()
@@ -46,7 +46,7 @@ final class HomeViewController: UIViewController {
     private var total: UILabel = {
         var label = UILabel()
         label.text = "Total Balance:"
-        label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.font = UIFont(name: "Futura", size: 20)
         label.textColor = .white
         return label
     }()
@@ -54,15 +54,9 @@ final class HomeViewController: UIViewController {
     private var totalBalance: UILabel = {
         var label = UILabel()
         label.text = "$ 15,000"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
+        label.font = UIFont(name: "Futura-Bold", size: 35)
         label.textColor = .white
         return label
-    }()
-    
-    private var chipImage: UIImageView = {
-        var image = UIImageView()
-        image.image = UIImage(named: "chip")
-        return image
     }()
     
     //Income view
@@ -78,7 +72,7 @@ final class HomeViewController: UIViewController {
         var label = UILabel()
         label.text = "Income"
         label.textColor = .white
-        label.font = UIFont(name: "HelveticaNeue", size: 18)
+        label.font = UIFont(name: "Futura", size: 18)
         return label
     }()
     
@@ -92,7 +86,7 @@ final class HomeViewController: UIViewController {
     private var incomeLabel: UILabel = {
         var label = UILabel()
         label.text = "$ 12,239"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        label.font = UIFont(name: "Futura-Bold", size: 22)
         label.textColor = .white
         return label
     }()
@@ -109,7 +103,7 @@ final class HomeViewController: UIViewController {
     private var expense: UILabel = {
         var label = UILabel()
         label.text = "Expenses"
-        label.font = UIFont(name: "HelveticaNeue", size: 18)
+        label.font = UIFont(name: "Futura", size: 18)
         label.textColor = .white
         return label
     }()
@@ -124,7 +118,7 @@ final class HomeViewController: UIViewController {
     private var expenseLabel: UILabel = {
         var label = UILabel()
         label.text = "$ 2423"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        label.font = UIFont(name: "Futura-Bold", size: 22)
         label.textColor = .white
         return label
     }()
@@ -142,7 +136,7 @@ final class HomeViewController: UIViewController {
     private var transactionsLabel: UILabel = {
         var label = UILabel()
         label.text = "Transactions"
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        label.font = UIFont(name: "Futura-Bold", size: 18)
         label.textColor = .black
         return label
     }()
@@ -150,17 +144,17 @@ final class HomeViewController: UIViewController {
     private var seeAllButton: UILabel = {
         var btn = UILabel()
         btn.text = "See All"
-        btn.font = UIFont(name: "HelveticaNeue-Light", size: 17)
+        btn.font = UIFont(name: "Futura", size: 17)
         btn.textColor = .black
         return btn
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        UIFont.familyNames.forEach({ familyName in
-//                   let fontNames = UIFont.fontNames(forFamilyName: familyName)
-//                   print(familyName, fontNames)
-//               })
+        UIFont.familyNames.forEach({ familyName in
+                   let fontNames = UIFont.fontNames(forFamilyName: familyName)
+                   print(familyName, fontNames)
+               })
         setupView()
     }
     
@@ -187,16 +181,8 @@ final class HomeViewController: UIViewController {
         headerView.addSubview(card)
         card.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(userNameLabel.snp.bottom).offset(30 )
+            make.top.equalTo(userNameLabel.snp.bottom).offset(20)
             make.height.equalTo(view.snp.height).multipliedBy(0.25)
-        }
-        
-        card.addSubview(chipImage)
-        chipImage.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-15)
-            make.centerY.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
-            make.width.equalToSuperview().multipliedBy(0.14)
         }
         
         card.addSubview(total)

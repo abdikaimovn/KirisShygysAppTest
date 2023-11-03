@@ -13,8 +13,6 @@ class TransactionViewController: UIViewController {
     private var headView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.shared.IncomeColor
-        view.layer.cornerRadius = 30
-        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return view
     }()
     
@@ -43,7 +41,7 @@ class TransactionViewController: UIViewController {
     
     private var transNameTextField: UITextField = {
         var field = UITextField()
-        field.font = UIFont(name: "HelveticaNeue-Bold", size: 23)
+        field.font = UIFont(name: "HelveticaNeue", size: 20)
         field.backgroundColor = UIColor(hex: "#eeeeef")
         field.layer.cornerRadius = 10
         field.layer.cornerCurve = .continuous
@@ -105,8 +103,7 @@ class TransactionViewController: UIViewController {
         
         view.addSubview(headView)
         headView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(view.snp.height).multipliedBy(0.5)
+            make.top.left.right.bottom.equalToSuperview()
         }
         
         headView.addSubview(amountLabel)
@@ -161,7 +158,9 @@ class TransactionViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        
+        let transNameLeftView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: transNameTextField.bounds.height)))
+        transNameTextField.leftView = transNameLeftView
+        transNameTextField.leftViewMode = .always
     }
 
 }
