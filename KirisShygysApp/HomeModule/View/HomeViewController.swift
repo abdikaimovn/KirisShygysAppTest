@@ -13,6 +13,7 @@ final class HomeViewController: UIViewController {
         var view = UIView()
         view.backgroundColor = UIColor(hex: "#ddd0bb")
         view.layer.cornerRadius = 30
+        view.layer.cornerCurve = .continuous
         view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return view
     }()
@@ -133,6 +134,7 @@ final class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        tableView.backgroundColor = .white
         tableView.isScrollEnabled = false
         return tableView
     }()

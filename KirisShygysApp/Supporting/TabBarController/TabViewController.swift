@@ -11,6 +11,7 @@ class TabViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupVC()
     }
     
@@ -41,8 +42,17 @@ class TabViewController: UITabBarController {
         let tabBarWidth = tabBar.frame.width
         
         plusButton.frame = CGRect(x: (tabBarWidth - buttonSize) / 2, y: tabBarHeight - buttonSize - 60, width: buttonSize, height: buttonSize)
-        
+        plusButton.addTarget(self, action: #selector(addTransactionPressed), for: .touchUpInside)
         tabBar.addSubview(plusButton)
+    }
+    
+    @objc private func addTransactionPressed() {
+        if #available(iOS 16.0, *) {
+            self.present(TransactionViewController(), animated: true)
+            print("tapped")
+        } else {
+            print("iOS version should be greater or equal to 16.0")
+        }
     }
     
     private func createVC(for rootViewController: UIViewController, title: String, icon: UIImage) -> UIViewController{
