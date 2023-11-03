@@ -54,6 +54,7 @@ class TransactionTableViewCell: UITableViewCell {
     }
 
     override func layoutSubviews() {
+        contentView.backgroundColor = .white
         contentView.addSubview(transImage)
         transImage.snp.makeConstraints { make in
             make.width.height.equalTo(50)
