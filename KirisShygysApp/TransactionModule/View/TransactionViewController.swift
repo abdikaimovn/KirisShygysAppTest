@@ -94,7 +94,26 @@ class TransactionViewController: UIViewController {
         return label
     }()
     
-    
+    private var saveButton: UIButton = {
+        var button = UIButton()
+        var label = UILabel()
+        label.font = UIFont(name: "Futura-Bold", size: 22)
+        label.textColor = .white
+        button.titleLabel?.font = label.font
+        button.setTitle("Save", for: .normal)
+        button.backgroundColor = UIColor.shared.IncomeColor
+        button.layer.cornerRadius = 10
+        button.layer.cornerCurve = .continuous
+        
+        // Set shadow properties
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.4
+        
+        return button
+    }()
+
     
     private lazy var datePicker: UIDatePicker = {
         var calendar = UIDatePicker()
@@ -126,6 +145,7 @@ class TransactionViewController: UIViewController {
         }
         segmentedControl.selectedSegmentTintColor = segmentedControl.selectedSegmentIndex == 0 ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
         datePicker.tintColor = segmentedControl.selectedSegmentTintColor
+        saveButton.backgroundColor = segmentedControl.selectedSegmentTintColor
     }
 
     
@@ -166,7 +186,6 @@ class TransactionViewController: UIViewController {
         surfaceView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(amountTextField.snp.bottom).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
         
         surfaceView.addSubview(segmentedControl)
@@ -204,7 +223,7 @@ class TransactionViewController: UIViewController {
             make.left.equalTo(segmentedControl.snp.left)
             make.right.equalTo(segmentedControl.snp.right)
             make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
-            make.height.equalTo(100)
+            make.height.equalTo(150)
         }
         
         surfaceView.addSubview(datePicker)
@@ -217,6 +236,14 @@ class TransactionViewController: UIViewController {
         calendarLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.centerY.equalTo(datePicker.snp.centerY)
+        }
+        
+        surfaceView.addSubview(saveButton)
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(datePicker.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(10)
+            make.height.equalTo(55)
+            make.bottom.equalTo(surfaceView.snp.bottom).offset(-20)
         }
     }
 
