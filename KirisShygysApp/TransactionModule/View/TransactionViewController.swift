@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 
-@available(iOS 16.0, *)
 class TransactionViewController: UIViewController {
     private var headView: UIView = {
         var view = UIView()
@@ -28,6 +27,7 @@ class TransactionViewController: UIViewController {
         var sControl = UISegmentedControl()
         sControl.insertSegment(withTitle: "Income", at: 0, animated: true)
         sControl.insertSegment(withTitle: "Expenses", at: 1, animated: true)
+        sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
         return sControl
     }()
     
@@ -35,30 +35,49 @@ class TransactionViewController: UIViewController {
         var label = UILabel()
         label.text = "Name"
         label.textColor = .black
-        label.font = UIFont(name: "HelveticaNeue", size: 18)
+        label.font = UIFont(name: "Futura", size: 18)
         return label
     }()
     
     private var transNameTextField: UITextField = {
         var field = UITextField()
-        field.font = UIFont(name: "HelveticaNeue", size: 20)
+        field.font = UIFont(name: "Futura", size: 18)
         field.backgroundColor = UIColor(hex: "#eeeeef")
         field.layer.cornerRadius = 10
         field.layer.cornerCurve = .continuous
+        field.textColor = .black
         return field
+    }()
+    
+    private var descriptionLabel: UILabel = {
+        var label = UILabel()
+        label.text = "Description"
+        label.textColor = .black
+        label.font = UIFont(name: "Futura", size: 18)
+        return label
+    }()
+    
+    private var descriptionTextField: UITextView = {
+        var description = UITextView()
+        description.backgroundColor = UIColor(hex: "#eeeeef")
+        description.textColor = .black
+        description.layer.cornerRadius = 10
+        description.layer.cornerCurve = .continuous
+        description.font = UIFont(name: "Futura", size: 18)
+        return description
     }()
     
     private var amountLabel: UILabel = {
         var label = UILabel()
         label.text = "How much ?"
         label.textColor = .white
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        label.font = UIFont(name: "Futura-Bold", size: 25)
         return label
     }()
     
     private var amountTextField: UITextField = {
         var field = UITextField()
-        field.font = UIFont(name: "HelveticaNeue-Bold", size: 40)
+        field.font = UIFont(name: "Futura-Bold", size: 40)
         field.backgroundColor = .clear
         field.placeholder = "0.0"
         field.textColor = .white
@@ -67,14 +86,24 @@ class TransactionViewController: UIViewController {
         return field
     }()
     
-    private lazy var calendar: UICalendarView = {
-        var calendar = UICalendarView()
-        calendar.delegate = self
+    private var calendarLabel: UILabel = {
+        var label = UILabel()
+        label.text = "Transaction date"
+        label.textColor = .black
+        label.font = UIFont(name: "Futura", size: 18)
+        return label
+    }()
+    
+    
+    
+    private lazy var datePicker: UIDatePicker = {
+        var calendar = UIDatePicker()
         calendar.locale = .current
-        calendar.fontDesign = .rounded
+        calendar.datePickerMode = .date
         calendar.timeZone = .current
         calendar.backgroundColor = .white
-        calendar.tintColor = UIColor.shared.Brown
+        calendar.preferredDatePickerStyle = .automatic
+        calendar.tintColor = UIColor.shared.IncomeColor
         return calendar
     }()
     
@@ -95,6 +124,8 @@ class TransactionViewController: UIViewController {
         } else {
             headView.backgroundColor = UIColor.shared.ExpenseColor
         }
+        segmentedControl.selectedSegmentTintColor = segmentedControl.selectedSegmentIndex == 0 ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
+        datePicker.tintColor = segmentedControl.selectedSegmentTintColor
     }
 
     
@@ -161,11 +192,32 @@ class TransactionViewController: UIViewController {
         let transNameLeftView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: transNameTextField.bounds.height)))
         transNameTextField.leftView = transNameLeftView
         transNameTextField.leftViewMode = .always
+        
+        surfaceView.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(15)
+            make.top.equalTo(transNameTextField.snp.bottom).offset(20)
+        }
+        
+        surfaceView.addSubview(descriptionTextField)
+        descriptionTextField.snp.makeConstraints { make in
+            make.left.equalTo(segmentedControl.snp.left)
+            make.right.equalTo(segmentedControl.snp.right)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
+            make.height.equalTo(100)
+        }
+        
+        surfaceView.addSubview(datePicker)
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(descriptionTextField.snp.bottom).offset(20)
+            make.right.equalTo(segmentedControl.snp.right)
+        }
+        
+        surfaceView.addSubview(calendarLabel)
+        calendarLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(15)
+            make.centerY.equalTo(datePicker.snp.centerY)
+        }
     }
 
-}
-
-@available(iOS 16.0, *)
-extension TransactionViewController: UICalendarViewDelegate {
-    
 }

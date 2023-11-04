@@ -47,11 +47,7 @@ class TabViewController: UITabBarController {
     }
     
     @objc private func addTransactionPressed() {
-        if #available(iOS 16.0, *) {
-            self.present(TransactionViewController(), animated: true)
-        } else {
-            print("iOS version should be greater or equal to 16.0")
-        }
+        self.present(TransactionViewController(), animated: true)
     }
     
     private func createVC(for rootViewController: UIViewController, title: String, icon: UIImage) -> UIViewController{
