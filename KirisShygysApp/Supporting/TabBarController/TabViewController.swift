@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabViewController: UITabBarController {
+final class TabViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class TabViewController: UITabBarController {
         
         viewControllers = [
             createVC(for: HomeViewController(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "house")!),
-            createVC(for: HomeViewController(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "person.crop.circle")!)
+            createVC(for: ProfileViewController(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "person.crop.circle")!)
         ]
         
         let buttonSize: CGFloat = 60

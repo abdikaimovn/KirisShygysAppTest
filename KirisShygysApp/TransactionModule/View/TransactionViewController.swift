@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TransactionViewController: UIViewController {
+final class TransactionViewController: UIViewController {
     private var headView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.shared.IncomeColor
@@ -186,6 +186,7 @@ class TransactionViewController: UIViewController {
         surfaceView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(amountTextField.snp.bottom).offset(20)
+            make.centerY.equalToSuperview()
         }
         
         surfaceView.addSubview(segmentedControl)
@@ -240,11 +241,10 @@ class TransactionViewController: UIViewController {
         
         surfaceView.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
-            make.top.equalTo(datePicker.snp.bottom).offset(20)
+            make.top.equalTo(datePicker.snp.bottom).offset(30)
             make.left.right.equalToSuperview().inset(10)
             make.height.equalTo(55)
             make.bottom.equalTo(surfaceView.snp.bottom).offset(-20)
         }
     }
-
 }
