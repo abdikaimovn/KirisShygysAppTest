@@ -10,10 +10,13 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private var userImage: UIImageView = {
         var image = UIImageView()
-        image.layer.cornerRadius = 20
         image.clipsToBounds = true
+        image.layer.cornerRadius = 20
+        image.layer.cornerCurve = .continuous
         image.image = UIImage(systemName: "person.crop.circle")
         image.contentMode = .scaleAspectFit
+        image.backgroundColor = UIColor(hex: "#eeeeef")
+        image.tintColor = UIColor.shared.Brown
         return image
     }()
     
@@ -35,6 +38,7 @@ final class ProfileViewController: UIViewController {
     
     private var editButton: UIButton = {
         var btn = UIButton()
+        btn.tintColor = .black
         btn.setImage(UIImage(systemName: "pencil"), for: .normal)
         btn.contentMode = .scaleAspectFit
         btn.backgroundColor = .clear
@@ -48,15 +52,19 @@ final class ProfileViewController: UIViewController {
         view.layer.cornerRadius = 16
         return view
     }()
+    private var viewForLofOutImage: UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor(hex: "#ffe2e4")
+        view.layer.cornerRadius = 15
+        view.layer.cornerCurve = .continuous
+        return view
+    }()
     
     private var logOutImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(systemName: "rectangle.portrait.and.arrow.right")
-        image.backgroundColor = UIColor(hex: "#ffe2e4")
         image.tintColor = UIColor(hex: "#fd3c4a")
         image.contentMode = .scaleAspectFit
-        image.layer.cornerRadius = 15
-        image.layer.cornerCurve = .continuous
         return image
     }()
     
@@ -87,7 +95,6 @@ final class ProfileViewController: UIViewController {
                 sceneDelegate.checkAuthentication()
             }
         }
-        print("Tapped logout")
     }
     
     private func setupView() {
@@ -103,38 +110,43 @@ final class ProfileViewController: UIViewController {
         view.addSubview(userNameLabel)
         userNameLabel.snp.makeConstraints { make in
             make.left.equalTo(userImage.snp.right).offset(20)
-            make.top.equalTo(userImage.snp.top).offset(10)
+            make.top.equalTo(userImage.snp.top).offset(5)
         }
         
         view.addSubview(userName)
         userName.snp.makeConstraints { make in
             make.left.equalTo(userImage.snp.right).offset(20)
-            make.top.equalTo(userImage.snp.bottom).offset(-10)
+            make.bottom.equalTo(userImage.snp.bottom).offset(-5)
         }
         
         view.addSubview(editButton)
         editButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-15)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
+            make.centerY.equalTo(userImage.snp.centerY)
+            make.size.equalTo(40)
         }
         
         view.addSubview(logOutView)
         logOutView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(userImage.snp.bottom).offset(30)
-            make.height.equalTo(70)
         }
         
-        logOutView.addSubview(logOutImage)
-        logOutImage.snp.makeConstraints { make in
+        logOutView.addSubview(viewForLofOutImage)
+        viewForLofOutImage.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview().inset(10)
             make.size.equalTo(50)
         }
         
+        viewForLofOutImage.addSubview(logOutImage)
+        logOutImage.snp.makeConstraints { make in
+            make.left.right.top.bottom.equalToSuperview().inset(10)
+        }
+        
         logOutView.addSubview(logOutLabel)
         logOutLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.left.equalTo(viewForLofOutImage.snp.right).offset(20)
             make.centerY.equalTo(logOutImage.snp.centerY)
         }
     }
