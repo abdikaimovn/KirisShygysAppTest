@@ -189,7 +189,6 @@
 				6F4A7BE72AE552B900CE8892 /* HomeModule */,
 				6FAB99A02AF7EA2E00CFD105 /* ProfileModule */,
 				6FEE5D7C2AF3E78B00DAE263 /* TransactionModule */,
-				6F658BCA2ACEA9A4004ECACB /* Info.plist */,
 			);
 			path = KirisShygysApp;
 			sourceTree = "<group>";
@@ -259,6 +258,7 @@
 		6FCF294D2AF1307B00CEA307 /* AppConfiguration */ = {
 			isa = PBXGroup;
 			children = (
+				6F658BCA2ACEA9A4004ECACB /* Info.plist */,
 				6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */,
 				6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */,
 				6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */,
@@ -606,7 +606,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FDQK3FFVD6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KirisShygysApp/Info.plist;
+				INFOPLIST_FILE = KirisShygysApp/Supporting/AppConfiguration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -637,7 +637,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FDQK3FFVD6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KirisShygysApp/Info.plist;
+				INFOPLIST_FILE = KirisShygysApp/Supporting/AppConfiguration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
