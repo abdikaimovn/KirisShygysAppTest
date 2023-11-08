@@ -29,6 +29,7 @@ class AuthorizationViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
         textField.placeholder = "Email"
+        textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
     }()
@@ -42,6 +43,7 @@ class AuthorizationViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.layer.masksToBounds = true
         textField.placeholder = "Password"
+        textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
     }()

@@ -24,6 +24,7 @@ class OnboardingViewController: UIViewController {
         layout.itemSize = CGSize(width: view.bounds.width, height: view.bounds.height * 0.6)
         var cView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cView.dataSource = self
+        cView.backgroundColor = .white
         cView.isPagingEnabled = true
         cView.delegate = self
         cView.showsHorizontalScrollIndicator = false

@@ -37,6 +37,7 @@ class RegistrationViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
         textField.placeholder = "Name"
+        textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
     }()
@@ -49,6 +50,7 @@ class RegistrationViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
         textField.placeholder = "Email"
+        textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
     }()
@@ -62,6 +64,7 @@ class RegistrationViewController: UIViewController {
         textField.layer.masksToBounds = true
         textField.isSecureTextEntry = true 
         textField.placeholder = "Password"
+        textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
     }()

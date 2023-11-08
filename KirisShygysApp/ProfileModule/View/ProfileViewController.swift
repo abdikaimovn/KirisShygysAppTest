@@ -19,7 +19,8 @@ final class ProfileViewController: UIViewController {
         image.tintColor = UIColor.shared.Brown
         return image
     }()
-    
+    //"rectangle.portrait.and.arrow.right"
+    //chart.bar.xaxis.ascending
     private var userNameLabel: UILabel = {
         var label = UILabel()
         label.text = "Username"
@@ -45,35 +46,19 @@ final class ProfileViewController: UIViewController {
         return btn
     }()
     
-    private var logOutView: UIView = {
-        var view = UIView()
-        view.isUserInteractionEnabled = true
-        view.backgroundColor = UIColor(hex: "#eeeeef")
-        view.layer.cornerRadius = 16
-        return view
-    }()
-    private var viewForLofOutImage: UIView = {
-        var view = UIView()
-        view.backgroundColor = UIColor(hex: "#ffe2e4")
-        view.layer.cornerRadius = 15
-        view.layer.cornerCurve = .continuous
+    private lazy var settingsView: UIView = {
+        var view = configureCustomButtonView(viewImage: "gear", viewTitle: "Settings")
         return view
     }()
     
-    private var logOutImage: UIImageView = {
-        var image = UIImageView()
-        image.image = UIImage(systemName: "rectangle.portrait.and.arrow.right")
-        image.tintColor = UIColor(hex: "#fd3c4a")
-        image.contentMode = .scaleAspectFit
-        return image
+    private lazy var logOutView: UIView = {
+        var view = configureCustomButtonView(viewImage: "rectangle.portrait.and.arrow.right", viewTitle: "Logout")
+        return view
     }()
     
-    private var logOutLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Logout"
-        label.textColor = .black
-        label.font = UIFont(name: "Futura", size: 20)
-        return label
+    private lazy var statisticsView: UIView = {
+        var view = configureCustomButtonView(viewImage: "chart.bar.xaxis", viewTitle: "Statistics")
+        return view
     }()
     
     override func viewDidLoad() {
@@ -95,6 +80,60 @@ final class ProfileViewController: UIViewController {
                 sceneDelegate.checkAuthentication()
             }
         }
+    }
+    
+    private func configureCustomButtonView(viewImage: String, viewTitle: String) -> UIView {
+        let mainView: UIView = {
+            let view = UIView()
+            view.isUserInteractionEnabled = true
+            view.backgroundColor = UIColor(hex: "#eeeeef")
+            view.layer.cornerRadius = 10
+            return view
+        }()
+        
+        let subView: UIView = {
+            let view = UIView()
+            view.backgroundColor = .white
+            view.layer.cornerRadius = 15
+            view.layer.cornerCurve = .continuous
+            return view
+        }()
+        
+        let image: UIImageView = {
+            let image = UIImageView()
+            image.image = UIImage(systemName: viewImage)
+            image.tintColor = .black
+            image.contentMode = .scaleAspectFit
+            return image
+        }()
+        
+        let label: UILabel = {
+            let label = UILabel()
+            label.text = viewTitle
+            label.textColor = .black
+            label.font = UIFont(name: "Futura", size: 20)
+            return label
+        }()
+        
+        mainView.addSubview(subView)
+        subView.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(10)
+            make.top.bottom.equalToSuperview().inset(10)
+            make.size.equalTo(50)
+        }
+        
+        subView.addSubview(image)
+        image.snp.makeConstraints { make in
+            make.left.right.top.bottom.equalToSuperview().inset(10)
+        }
+        
+        mainView.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.equalTo(subView.snp.right).offset(20)
+            make.centerY.equalTo(image.snp.centerY)
+        }
+        
+        return mainView
     }
     
     private func setupView() {
@@ -125,29 +164,22 @@ final class ProfileViewController: UIViewController {
             make.centerY.equalTo(userImage.snp.centerY)
             make.size.equalTo(40)
         }
-        
-        view.addSubview(logOutView)
-        logOutView.snp.makeConstraints { make in
+        view.addSubview(settingsView)
+        settingsView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(userImage.snp.bottom).offset(30)
         }
         
-        logOutView.addSubview(viewForLofOutImage)
-        viewForLofOutImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(10)
-            make.top.bottom.equalToSuperview().inset(10)
-            make.size.equalTo(50)
+        view.addSubview(statisticsView)
+        statisticsView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(15)
+            make.top.equalTo(settingsView.snp.bottom).offset(10)
         }
         
-        viewForLofOutImage.addSubview(logOutImage)
-        logOutImage.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview().inset(10)
-        }
-        
-        logOutView.addSubview(logOutLabel)
-        logOutLabel.snp.makeConstraints { make in
-            make.left.equalTo(viewForLofOutImage.snp.right).offset(20)
-            make.centerY.equalTo(logOutImage.snp.centerY)
+        view.addSubview(logOutView)
+        logOutView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(15)
+            make.top.equalTo(statisticsView.snp.bottom).offset(10)
         }
     }
     
