@@ -19,7 +19,6 @@
 		6F658BD92ACEBAF6004ECACB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BD82ACEBAF6004ECACB /* FirebaseDatabase */; };
 		6F658BDB2ACEBAF6004ECACB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDA2ACEBAF6004ECACB /* FirebaseFirestore */; };
 		6F658BDD2ACEBAF6004ECACB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDC2ACEBAF6004ECACB /* FirebaseStorage */; };
-		6F7342CF2AD85AE1000EA57D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */; };
 		6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* AuthService.swift */; };
 		6F7A078D2AEA98F300E524F7 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A078C2AEA98F300E524F7 /* CustomNavigationBar.swift */; };
 		6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3312ACECC560092BC00 /* OnboardingModel.swift */; };
@@ -31,6 +30,8 @@
 		6FB40F822AE7EAE6009B7863 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F812AE7EAE6009B7863 /* Validator.swift */; };
 		6FCF294F2AF131BF00CEA307 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCF294E2AF131BF00CEA307 /* TabViewController.swift */; };
 		6FCF29512AF189F000CEA307 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCF29502AF189F000CEA307 /* TransactionTableViewCell.swift */; };
+		6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */; };
+		6FD2CC512AFD027500580DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CC502AFD027400580DDB /* GoogleService-Info.plist */; };
 		6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */; };
 		6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */; };
 		6FEE5D812AF3E7DE00DAE263 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D802AF3E7DE00DAE263 /* TransactionViewController.swift */; };
@@ -50,7 +51,6 @@
 		6F658BC52ACEA9A4004ECACB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F658BC82ACEA9A4004ECACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F658BCA2ACEA9A4004ECACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6F7342D12AD85DB3000EA57D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6F7A078C2AEA98F300E524F7 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		6F86B3312ACECC560092BC00 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
@@ -62,6 +62,8 @@
 		6FB40F812AE7EAE6009B7863 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		6FCF294E2AF131BF00CEA307 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		6FCF29502AF189F000CEA307 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		6FD2CC502AFD027400580DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		6FEE5D802AF3E7DE00DAE263 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		6F4A7BEA2AE552F800CE8892 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -258,8 +261,8 @@
 		6FCF294D2AF1307B00CEA307 /* AppConfiguration */ = {
 			isa = PBXGroup;
 			children = (
+				6FD2CC502AFD027400580DDB /* GoogleService-Info.plist */,
 				6F658BCA2ACEA9A4004ECACB /* Info.plist */,
-				6F7342CE2AD85AE1000EA57D /* GoogleService-Info.plist */,
 				6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */,
 				6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */,
 				6F658BC52ACEA9A4004ECACB /* Assets.xcassets */,
@@ -432,7 +435,7 @@
 			files = (
 				6F658BC92ACEA9A4004ECACB /* LaunchScreen.storyboard in Resources */,
 				6F658BC62ACEA9A4004ECACB /* Assets.xcassets in Resources */,
-				6F7342CF2AD85AE1000EA57D /* GoogleService-Info.plist in Resources */,
+				6FD2CC512AFD027500580DDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +461,7 @@
 				6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */,
 				6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */,
 				6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */,
+				6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */,
 				6FAB99A52AF7EABA00CFD105 /* ProfileViewController.swift in Sources */,
 				6F7A078D2AEA98F300E524F7 /* CustomNavigationBar.swift in Sources */,
 				6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */,

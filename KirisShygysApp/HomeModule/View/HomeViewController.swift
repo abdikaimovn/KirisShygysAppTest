@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 final class HomeViewController: UIViewController {
     private var headerView: UIView = {
@@ -28,7 +29,7 @@ final class HomeViewController: UIViewController {
     
     private var userNameLabel: UILabel = {
         var label = UILabel()
-        label.text = "Nurdaulet"
+        label.text = "Loading..."
         label.font = UIFont(name: "Futura-CondensedExtraBold", size: 25)
         label.textColor = .darkGray
         return label
@@ -151,9 +152,21 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUsername()
         setupView()
     }
     
+    private func setupUsername() {
+        var homePresenter = HomePresenter()
+        homePresenter.getNameForUser(uid: Auth.auth().currentUser!.uid) { username in
+            if let username = username {
+                self.userNameLabel.text = username
+            } else {
+                self.userNameLabel.text = "Fail"
+            }
+        }
+    }
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(headerView)
