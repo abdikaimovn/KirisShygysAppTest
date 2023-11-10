@@ -1,19 +1,29 @@
 import Foundation
 import FirebaseFirestore
 
-protocol HomePresenterDelegate {
-    func didGetUserData()
+protocol HomePresenterDelegate: AnyObject {
+    func didReceiveUsername(name: String?)
 }
 
 class HomePresenter {
-    func getNameForUser(uid: String, completion: @escaping (String?) -> Void) {
+    weak var delegate: HomePresenterDelegate?
+    
+    init(delegate: HomePresenterDelegate? = nil) {
+        self.delegate = delegate
+    }
+    
+    deinit {
+        print("HomePresenter was deinited")
+    }
+    
+    func getNameForUser(uid: String) {
         let ref = Firestore.firestore().collection("users").document(uid)
         ref.addSnapshotListener { snapshot, error in
             if let snapshot = snapshot, let userData = snapshot.data(),
                let name = userData["username"] as? String {
-                completion(name)
+                self.delegate?.didReceiveUsername(name: name)
             } else {
-                completion(nil)
+                self.delegate?.didReceiveUsername(name: nil)
             }
         }
     }

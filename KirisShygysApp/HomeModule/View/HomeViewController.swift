@@ -153,20 +153,15 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUsername()
+        var homePresenter = HomePresenter(delegate: self)
+        homePresenter.getNameForUser(uid: Auth.auth().currentUser!.uid)
         setupView()
     }
     
-    private func setupUsername() {
-        var homePresenter = HomePresenter()
-        homePresenter.getNameForUser(uid: Auth.auth().currentUser!.uid) { username in
-            if let username = username {
-                self.userNameLabel.text = username
-            } else {
-                self.userNameLabel.text = "Fail"
-            }
-        }
+    deinit {
+        print("HomeViewController was deinited")
     }
+    
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(headerView)
@@ -302,5 +297,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as! TransactionTableViewCell
         return cell
+    }
+}
+
+extension HomeViewController: HomePresenterDelegate {
+    func didReceiveUsername(name: String?) {
+        self.userNameLabel.text = name ?? "Couldn't receive username"
     }
 }
