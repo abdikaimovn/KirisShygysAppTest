@@ -69,3 +69,13 @@ extension AlertManager {
     }
 }
 
+// MARK: - Transaction page alerts
+extension AlertManager {
+    public static func emptyAmountField(on vc: UIViewController) {
+        self.showBasicAlert(on: vc, title: "Empty Amount Field", message: "Please specify the amount")
+    }
+    
+    public static func emptyNameField(on vc: UIViewController) {
+        self.showBasicAlert(on: vc, title: "Empty Name Field", message: "Please specify the name")
+    }
+}
