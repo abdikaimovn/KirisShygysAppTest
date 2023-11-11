@@ -135,7 +135,7 @@
 		6F4A7BE72AE552B900CE8892 /* HomeModule */ = {
 			isa = PBXGroup;
 			children = (
-				6F4A7BE92AE552F100CE8892 /* Model */,
+				6F57F2712AFF88A3008712AE /* Model */,
 				6F4A7BE82AE552E400CE8892 /* View */,
 				6F4A7BEA2AE552F800CE8892 /* Presenter */,
 			);
@@ -152,19 +152,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		6F4A7BE92AE552F100CE8892 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		6F4A7BEA2AE552F800CE8892 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6F57F2712AFF88A3008712AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6F658BB02ACEA9A3004ECACB = {
