@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 final class TransactionViewController: UIViewController {
+    var delegate: TransactionViewControllerDelegate?
+    var presenter: TransactionPresenter?
+    
     private var headView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.shared.IncomeColor
@@ -113,7 +116,6 @@ final class TransactionViewController: UIViewController {
         
         return button
     }()
-
     
     private lazy var datePicker: UIDatePicker = {
         var calendar = UIDatePicker()
@@ -128,8 +130,52 @@ final class TransactionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
         setupSegmentedControl()
+        setupDelegate()
+        setupSaveButton()
+    }
+    
+    deinit{
+        print("transaction VC was deinited")
+    }
+    
+    //Connection with the presenter using delegation pattern
+    private func setupDelegate() {
+        presenter = TransactionPresenter(delegate: self)  // Assign to the property
+        self.delegate = presenter
+    }
+    
+    private func setupSaveButton() {
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func saveButtonTapped() {
+        guard let amount = Int(amountTextField.text!) else {
+            AlertManager.emptyAmountField(on: self)
+            return
+        }
+        
+        guard let transName = transNameTextField.text, !transName.isEmpty else {
+            AlertManager.emptyNameField(on: self)
+            return
+        }
+        
+        let transType = segmentedControl.selectedSegmentIndex == 0 ? TransactionType.income : .expense
+        
+        let date = String(datePicker.date.formatted().prefix(10))
+
+        let transactionModel = TransactionModel(
+            transactionAmount: amount,
+            transactionType: transType,
+            transactionName: transName,
+            transactionDescription: descriptionTextField.text ?? "",
+            transactionDate: date
+        )
+        
+        self.delegate?.didReceiveTransactionData(transactionData: transactionModel)
+        self.dismiss(animated: true)
     }
     
     private func setupSegmentedControl() {
@@ -247,4 +293,8 @@ final class TransactionViewController: UIViewController {
             make.bottom.equalTo(surfaceView.snp.bottom).offset(-20)
         }
     }
+}
+
+extension TransactionViewController: TransactionPresenterDelegate {
+    
 }

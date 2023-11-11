@@ -153,8 +153,9 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var homePresenter = HomePresenter(delegate: self)
+        let homePresenter = HomePresenter(delegate: self)
         homePresenter.getNameForUser(uid: Auth.auth().currentUser!.uid)
+        
         setupView()
     }
     
