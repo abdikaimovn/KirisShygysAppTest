@@ -57,8 +57,16 @@ extension TransactionPresenter: TransactionViewControllerDelegate {
                     print("ERROR: \(error.localizedDescription)")
                     return
                 }
-                
-                print("Successfully saved")
+            }
+        
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection("Transactions")
+            .addDocument(data: transactionData) { error in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                    return
+                }
             }
     }
 }

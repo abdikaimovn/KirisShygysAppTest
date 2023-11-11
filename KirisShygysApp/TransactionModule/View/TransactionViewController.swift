@@ -167,11 +167,11 @@ final class TransactionViewController: UIViewController {
         let date = String(datePicker.date.formatted().prefix(10))
 
         let transactionModel = TransactionModel(
-            transactionAmount: amount,
-            transactionType: transType,
-            transactionName: transName,
-            transactionDescription: descriptionTextField.text ?? "",
-            transactionDate: date
+            amount: amount,
+            type: transType,
+            name: transName,
+            description: descriptionTextField.text ?? "",
+            date: date
         )
         
         self.delegate?.didReceiveTransactionData(transactionData: transactionModel)
