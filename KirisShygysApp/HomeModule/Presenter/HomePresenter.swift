@@ -3,6 +3,11 @@ import FirebaseFirestore
 
 protocol HomePresenterDelegate: AnyObject {
     func didReceiveUsername(name: String?)
+    func didReceiveTransactionData(data: [TransactionModel]?)
+}
+
+protocol HomeViewControllerDelegate: AnyObject {
+    
 }
 
 class HomePresenter {
@@ -16,15 +21,21 @@ class HomePresenter {
         print("HomePresenter was deinited")
     }
     
-    func getNameForUser(uid: String) {
-        let ref = Firestore.firestore().collection("users").document(uid)
-        ref.addSnapshotListener { snapshot, error in
-            if let snapshot = snapshot, let userData = snapshot.data(),
-               let name = userData["username"] as? String {
-                self.delegate?.didReceiveUsername(name: name)
-            } else {
-                self.delegate?.didReceiveUsername(name: nil)
+    func getUsername() {
+        UserDataManager.shared.getCurrentUserName { username in
+            self.delegate?.didReceiveUsername(name: username)
+        }
+    }
+    
+    func receiveTransactionData() {
+        UserDataManager.shared.fetchTransactionData { transactionData in
+            if let transactionData = transactionData {
+                self.delegate?.didReceiveTransactionData(data: transactionData)
             }
         }
     }
+}
+
+extension HomePresenter: HomeViewControllerDelegate {
+    
 }
