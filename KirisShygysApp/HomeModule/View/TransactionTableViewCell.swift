@@ -53,6 +53,16 @@ class TransactionTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configure(transactionData: TransactionModel) {
+        let currentData = Date.now.formatted().prefix(10)
+        
+        self.priceLabel.textColor = transactionData.transactionType == .income ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
+        
+        self.transName.text = transactionData.transactionName
+        self.priceLabel.text = "$ \(transactionData.transactionAmount)"
+        self.purchasedData.text = transactionData.transactionDate == currentData ? "Today" : transactionData.transactionDate
+    }
+    
     override func layoutSubviews() {
         contentView.backgroundColor = .white
         contentView.addSubview(transImage)

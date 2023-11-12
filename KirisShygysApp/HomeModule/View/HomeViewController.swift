@@ -7,9 +7,13 @@
 
 import UIKit
 import SnapKit
-import FirebaseAuth
+import Firebase
 
 final class HomeViewController: UIViewController {
+    var delegate: HomeViewControllerDelegate?
+    var presenter: HomePresenter?
+    var transactionDataArray: [TransactionModel]?
+    
     private var headerView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(hex: "#ddd0bb")
@@ -153,14 +157,31 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let homePresenter = HomePresenter(delegate: self)
-        homePresenter.getNameForUser(uid: Auth.auth().currentUser!.uid)
-        
         setupView()
+        setupDelegate()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateAfterTransaction),
+            name: Notification.Name("UpdateAfterTransaction"),
+            object: nil
+        )
+    }
+    
+    @objc private func updateAfterTransaction() {
+        presenter?.receiveTransactionData()
+    }
+    
+    private func setupDelegate() {
+        presenter = HomePresenter(delegate: self)
+        presenter?.getUsername()
+        presenter?.receiveTransactionData()
+        self.delegate = presenter
     }
     
     deinit {
         print("HomeViewController was deinited")
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupView() {
@@ -272,19 +293,15 @@ final class HomeViewController: UIViewController {
         transactionsTableView.snp.makeConstraints { make in
             make.top.equalTo(transactionsLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(300)
+            make.height.equalTo(280)
         }
-        //        //D0E5E4
-        //        let logOutBtn = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(logOut))
-        //        logOutBtn.title = "Log Out"
-        //        self.navigationItem.rightBarButtonItem = logOutBtn
     }
     
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        transactionDataArray?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -297,12 +314,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as! TransactionTableViewCell
+        cell.configure(transactionData: transactionDataArray![indexPath.row])
         return cell
     }
 }
 
 extension HomeViewController: HomePresenterDelegate {
     func didReceiveUsername(name: String?) {
-        self.userNameLabel.text = name ?? "Couldn't receive username"
+        DispatchQueue.main.async {
+            self.userNameLabel.text = name ?? "Couldn't receive username"
+        }
+    }
+    
+    func didReceiveTransactionData(data: [TransactionModel]?) {
+        if let transactionData = data {
+            DispatchQueue.main.async {
+                self.transactionDataArray = transactionData
+                self.transactionsTableView.reloadData()
+            }
+        } else {
+            print("Something went wrong")
+        }
     }
 }
+

@@ -17,7 +17,7 @@ struct TransactionModel {
     // Инициализатор для преобразования данных из Firebase
     init(data: [String: Any]) {
         self.transactionAmount = data["amount"] as? Int ?? 0
-        self.transactionType = TransactionType(rawValue: data["type"] as? String ?? "") ?? .income
+        self.transactionType = TransactionType(rawValue: data["type"] as? String ?? "") ?? .expense
         self.transactionName = data["name"] as? String ?? ""
         self.transactionDescription = data["description"] as? String ?? ""
         self.transactionDate = data["date"] as? String ?? ""
@@ -34,7 +34,7 @@ struct TransactionModel {
 }
 
 enum TransactionType: String {
-    case income = "income"
-    case expense = "expense"
+    case income = "Incomes"
+    case expense = "Expenses"
 }
 

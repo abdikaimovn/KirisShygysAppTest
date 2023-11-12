@@ -175,6 +175,7 @@ final class TransactionViewController: UIViewController {
         )
         
         self.delegate?.didReceiveTransactionData(transactionData: transactionModel)
+        NotificationCenter.default.post(name: Notification.Name("UpdateAfterTransaction"), object: nil)
         self.dismiss(animated: true)
     }
     
@@ -193,7 +194,6 @@ final class TransactionViewController: UIViewController {
         datePicker.tintColor = segmentedControl.selectedSegmentTintColor
         saveButton.backgroundColor = segmentedControl.selectedSegmentTintColor
     }
-
     
     private func setupView() {
         view.backgroundColor = UIColor(hex: "#eeeeef")
@@ -296,5 +296,5 @@ final class TransactionViewController: UIViewController {
 }
 
 extension TransactionViewController: TransactionPresenterDelegate {
-    
+
 }
