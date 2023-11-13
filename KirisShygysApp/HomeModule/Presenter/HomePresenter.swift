@@ -35,19 +35,40 @@ class HomePresenter {
         }
     }
     
-    func calculateIncomeAndExpense(data: [TransactionModel]?) -> (incomes: Int, expenses: Int) {
-        var incomes = 0
-        var expenses = 0
-        if let data = data {
-            for i in data {
-                if i.transactionType == .income {
-                    incomes += i.transactionAmount
-                } else {
-                    expenses += i.transactionAmount
+    func calculateAmount(data: [TransactionModel]?, trasnsactionType: TransactionType?) -> Int {
+        if trasnsactionType == .income {
+            var incomes = 0
+            if let data = data {
+                for i in data {
+                    if i.transactionType == .income {
+                        incomes += i.transactionAmount
+                    }
                 }
             }
+            return incomes
+        } else if trasnsactionType == .expense {
+            var expenses = 0
+            if let data = data {
+                for i in data {
+                    if i.transactionType == .expense {
+                        expenses += i.transactionAmount
+                    }
+                }
+            }
+            return expenses
+        } else {
+            var totalAmount = 0
+            if let data = data {
+                for i in data {
+                    if i.transactionType == .expense {
+                        totalAmount -= i.transactionAmount
+                    } else {
+                        totalAmount += i.transactionAmount
+                    }
+                }
+            }
+            return totalAmount
         }
-        return (incomes, expenses)
     }
 }
 

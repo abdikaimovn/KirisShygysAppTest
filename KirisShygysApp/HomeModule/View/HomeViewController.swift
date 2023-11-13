@@ -90,7 +90,6 @@ final class HomeViewController: UIViewController {
     
     private var incomeLabel: UILabel = {
         var label = UILabel()
-        label.text = "$ 12,239"
         label.font = UIFont(name: "Futura-Bold", size: 22)
         label.textColor = .white
         return label
@@ -122,7 +121,6 @@ final class HomeViewController: UIViewController {
     
     private var expenseLabel: UILabel = {
         var label = UILabel()
-        label.text = "$ 2423"
         label.font = UIFont(name: "Futura-Bold", size: 22)
         label.textColor = .white
         return label
@@ -171,6 +169,10 @@ final class HomeViewController: UIViewController {
     
     @objc private func updateAfterTransaction() {
         presenter?.receiveTransactionData()
+        
+        self.incomeLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .income))"
+        self.expenseLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .expense))"
+        self.totalBalance.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: nil))"
     }
     
     private func setupDelegate() {
@@ -178,6 +180,12 @@ final class HomeViewController: UIViewController {
         presenter?.getUsername()
         presenter?.receiveTransactionData()
         self.delegate = presenter
+    }
+    
+    private func setupIncomeAndExpenses() {
+        self.incomeLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .income))"
+        self.expenseLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .expense))"
+        self.totalBalance.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: nil))"
     }
     
     deinit {
@@ -332,6 +340,7 @@ extension HomeViewController: HomePresenterDelegate {
             DispatchQueue.main.async {
                 self.transactionDataArray = transactionData
                 self.transactionsTableView.reloadData()
+                self.setupIncomeAndExpenses()
             }
         } else {
             print("Something went wrong")
