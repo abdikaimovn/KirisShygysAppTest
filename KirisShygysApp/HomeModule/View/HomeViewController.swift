@@ -135,6 +135,7 @@ final class HomeViewController: UIViewController {
         tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
         tableView.backgroundColor = .white
         tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
         return tableView
     }()
     

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class TransactionViewController: UIViewController {
+final class TransactionViewController: UIViewController, UITextViewDelegate {
     var delegate: TransactionViewControllerDelegate?
     var presenter: TransactionPresenter?
     
@@ -49,6 +49,7 @@ final class TransactionViewController: UIViewController {
         field.layer.cornerRadius = 10
         field.layer.cornerCurve = .continuous
         field.textColor = .black
+        field.returnKeyType = .done
         return field
     }()
     
@@ -67,8 +68,14 @@ final class TransactionViewController: UIViewController {
         description.layer.cornerRadius = 10
         description.layer.cornerCurve = .continuous
         description.font = UIFont(name: "Futura", size: 18)
+        description.returnKeyType = .done
         return description
     }()
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     private var amountLabel: UILabel = {
         var label = UILabel()
@@ -86,6 +93,7 @@ final class TransactionViewController: UIViewController {
         field.textColor = .white
         field.layer.cornerRadius = 16
         field.keyboardType = .numberPad
+        field.returnKeyType = .done
         return field
     }()
     
@@ -135,6 +143,9 @@ final class TransactionViewController: UIViewController {
         setupSegmentedControl()
         setupDelegate()
         setupSaveButton()
+        
+        transNameTextField.delegate = self
+        descriptionTextField.delegate = self
     }
     
     deinit{
@@ -165,7 +176,7 @@ final class TransactionViewController: UIViewController {
         let transType = segmentedControl.selectedSegmentIndex == 0 ? TransactionType.income : .expense
         
         let date = String(datePicker.date.formatted().prefix(10))
-
+        
         let transactionModel = TransactionModel(
             amount: amount,
             type: transType,
@@ -227,7 +238,7 @@ final class TransactionViewController: UIViewController {
         }
         amountTextField.leftView = leftView
         amountTextField.leftViewMode = .always
-
+        
         headView.addSubview(surfaceView)
         surfaceView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
@@ -296,5 +307,9 @@ final class TransactionViewController: UIViewController {
 }
 
 extension TransactionViewController: TransactionPresenterDelegate {
+    
+}
 
+extension TransactionViewController: UITextFieldDelegate {
+    
 }
