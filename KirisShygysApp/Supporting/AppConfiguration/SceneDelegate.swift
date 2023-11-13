@@ -25,15 +25,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     public func checkAuthentication() {
         if Auth.auth().currentUser == nil {
-            let vc = OnboardingViewController()
-            let nav = UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            self.window?.rootViewController = nav
+            let onboardingVC = OnboardingViewController()
+            let navController = UINavigationController(rootViewController: onboardingVC)
+            navController.modalPresentationStyle = .fullScreen
+            self.goToController(with: navController)
         } else {
-            let vc = TabViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self.window?.rootViewController = vc
+            let tabVC = TabViewController()
+            tabVC.modalPresentationStyle = .fullScreen
+            self.goToController(with: tabVC)
         }
     }
+
+    
+    private func goToController(with viewController: UIViewController) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.25) {
+                self.window?.layer.opacity = 0
+            } completion: { [weak self] _ in
+                let nav = viewController
+                nav.modalPresentationStyle = .fullScreen
+                self?.window?.rootViewController = nav
+                
+                UIView.animate(withDuration: 0.25) { [weak self] in
+                    self?.window?.layer.opacity = 1
+                }
+            }
+        }
+    }
+
 }
 
