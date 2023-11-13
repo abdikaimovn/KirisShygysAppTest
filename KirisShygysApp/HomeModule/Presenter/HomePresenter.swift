@@ -34,6 +34,21 @@ class HomePresenter {
             }
         }
     }
+    
+    func calculateIncomeAndExpense(data: [TransactionModel]?) -> (incomes: Int, expenses: Int) {
+        var incomes = 0
+        var expenses = 0
+        if let data = data {
+            for i in data {
+                if i.transactionType == .income {
+                    incomes += i.transactionAmount
+                } else {
+                    expenses += i.transactionAmount
+                }
+            }
+        }
+        return (incomes, expenses)
+    }
 }
 
 extension HomePresenter: HomeViewControllerDelegate {
