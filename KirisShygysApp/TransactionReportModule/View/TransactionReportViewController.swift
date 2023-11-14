@@ -18,13 +18,22 @@ class TransactionReportViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    private var headerView: UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor.shared.Brown
+        view.layer.cornerRadius = 30
+        view.layer.cornerCurve = .continuous
+        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        return view
+    }()
     
     private var periodView: UIView = {
         var view = UIView()
         view.backgroundColor = .clear
         view.layer.cornerRadius = 15
         view.layer.cornerCurve = .continuous
-        view.layer.borderColor = UIColor.shared.Brown.cgColor
+        view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -34,7 +43,7 @@ class TransactionReportViewController: UIViewController {
         btn.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         btn.contentMode = .scaleAspectFit
         btn.backgroundColor = .clear
-        btn.tintColor = UIColor.shared.Brown
+        btn.tintColor = .white
         return btn
     }()
     
@@ -42,7 +51,7 @@ class TransactionReportViewController: UIViewController {
         var label = UILabel()
         label.text = "Month"
         label.font = UIFont(name: "Futura", size: 17)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()
@@ -95,18 +104,22 @@ class TransactionReportViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
+        view.addSubview(headerView)
+        headerView.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+        }
         
-        view.addSubview(periodView)
+        headerView.addSubview(periodView)
         periodView.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(20)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
         }
         
-        view.addSubview(backButton)
+        headerView.addSubview(backButton)
         backButton.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(20)
             make.centerY.equalTo(periodView.snp.centerY)
-            make.size.equalTo(30)
+            make.size.equalTo(20)
         }
         
         periodView.addSubview(periodLabel)
@@ -114,10 +127,11 @@ class TransactionReportViewController: UIViewController {
             make.top.bottom.left.right.equalToSuperview().inset(10)
         }
         
-        view.addSubview(reportView)
+        headerView.addSubview(reportView)
         reportView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(periodView.snp.bottom).offset(15)
+            make.bottom.equalToSuperview().offset(-20)
         }
         
         reportView.addSubview(reportLabel)
@@ -136,7 +150,7 @@ class TransactionReportViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
-            make.top.equalTo(reportView.snp.bottom).offset(20)
+            make.top.equalTo(headerView.snp.bottom).offset(20)
         }
     }
 }
