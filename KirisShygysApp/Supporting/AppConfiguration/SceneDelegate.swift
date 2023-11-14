@@ -31,8 +31,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.goToController(with: navController)
         } else {
             let tabVC = TabViewController()
-            tabVC.modalPresentationStyle = .fullScreen
-            self.goToController(with: tabVC)
+            let navController = UINavigationController(rootViewController: tabVC)
+            navController.modalPresentationStyle = .fullScreen
+            self.goToController(with: navController)
         }
     }
 

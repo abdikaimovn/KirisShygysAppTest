@@ -150,6 +150,7 @@ final class HomeViewController: UIViewController {
         btn.text = "See All"
         btn.font = UIFont(name: "Futura", size: 17)
         btn.textColor = .black
+        btn.isUserInteractionEnabled = true
         return btn
     }()
     
@@ -158,6 +159,7 @@ final class HomeViewController: UIViewController {
         
         setupView()
         setupDelegate()
+        setupSeeAllButton()
         
         NotificationCenter.default.addObserver(
             self,
@@ -165,6 +167,11 @@ final class HomeViewController: UIViewController {
             name: Notification.Name("UpdateAfterTransaction"),
             object: nil
         )
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     @objc private func updateAfterTransaction() {
@@ -182,7 +189,16 @@ final class HomeViewController: UIViewController {
         self.delegate = presenter
     }
     
-    private func setupIncomeAndExpenses() {
+    private func setupSeeAllButton() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showAllTransactions))
+        self.seeAllButton.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func showAllTransactions() {
+        self.navigationController?.pushViewController(TransactionReportViewController(transactionData: self.transactionDataArray!), animated: true)
+    }
+    
+    private func setupAmounts() {
         self.incomeLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .income))"
         self.expenseLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .expense))"
         self.totalBalance.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: nil))"
@@ -340,7 +356,7 @@ extension HomeViewController: HomePresenterDelegate {
             DispatchQueue.main.async {
                 self.transactionDataArray = transactionData
                 self.transactionsTableView.reloadData()
-                self.setupIncomeAndExpenses()
+                self.setupAmounts()
             }
         } else {
             print("Something went wrong")
