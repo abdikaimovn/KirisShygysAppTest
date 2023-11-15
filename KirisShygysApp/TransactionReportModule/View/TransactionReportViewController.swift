@@ -9,16 +9,9 @@ import UIKit
 
 class TransactionReportViewController: UIViewController {
     var transactionData: [TransactionModel]?
+    var groupedTransactions: [String: [TransactionModel]] = [:]
+    var sectionTitles: [String] = []
     
-    init(transactionData: [TransactionModel]) {
-        self.transactionData = transactionData
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     private var headerView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.shared.Brown
@@ -94,10 +87,27 @@ class TransactionReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { $0.transactionDate })
+        sectionTitles = groupedTransactions.keys.sorted(by: >)
+        
         setupView()
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
-
+    
+    init(transactionData: [TransactionModel]) {
+        self.transactionData = transactionData
+        print(transactionData.prefix(10))
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("Transaction REPORT View Controler deinited")
+    }
+    
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -156,9 +166,28 @@ class TransactionReportViewController: UIViewController {
 }
 
 extension TransactionReportViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.transactionData!.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitles.count
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionTitle = sectionTitles[section]
+        return groupedTransactions[sectionTitle]?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionTitle = sectionTitles[section]
+        
+        switch sectionTitle {
+        case Date.now.formatted().prefix(10):
+            return "Today"
+        case Date().yesterday.formatted().prefix(10):
+            return "Yesterday"
+        default:
+            return sectionTitle
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         70
@@ -166,11 +195,23 @@ extension TransactionReportViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as! TransactionTableViewCell
-        cell.configure(transactionData: transactionData![indexPath.row])
+        
+        let sectionTitle = sectionTitles[indexPath.section]
+        if let transactions = groupedTransactions[sectionTitle] {
+            let transaction = transactions[indexPath.row]
+            cell.configure(transactionData: transaction, isHiddenPeriod: true)
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension Date {
+    var yesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self) ?? self
     }
 }

@@ -30,6 +30,7 @@ final class TransactionTableViewCell: UITableViewCell {
         var label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
         label.textColor = .black
+        label.isHidden = false
         return label
     }()
     
@@ -54,8 +55,12 @@ final class TransactionTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(transactionData: TransactionModel) {
+    func configure(transactionData: TransactionModel, isHiddenPeriod: Bool) {
         let currentData = Date.now.formatted().prefix(10)
+        
+        if isHiddenPeriod {
+            self.purchasedData.isHidden = true
+        }
         
         self.transName.text = transactionData.transactionName
         self.priceLabel.text = "$ \(transactionData.transactionAmount)"
@@ -90,6 +95,9 @@ final class TransactionTableViewCell: UITableViewCell {
         mainView.addSubview(transName)
         transName.snp.makeConstraints { make in
             make.left.equalTo(viewImage.snp.right).offset(15)
+            if self.purchasedData.isHidden {
+                make.centerY.equalToSuperview()
+            }
             make.top.equalTo(viewImage.snp.top)
         }
         
