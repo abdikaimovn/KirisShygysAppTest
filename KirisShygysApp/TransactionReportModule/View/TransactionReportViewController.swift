@@ -1,50 +1,25 @@
-//
-//  TransactionReportViewController.swift
-//  KirisShygysApp
-//
-//  Created by Нурдаулет on 14.11.2023.
-//
-
 import UIKit
 
-class TransactionReportViewController: UIViewController {
+final class TransactionReportViewController: UIViewController {
     var transactionData: [TransactionModel]?
     var groupedTransactions: [String: [TransactionModel]] = [:]
     var sectionTitles: [String] = []
-    
-    private var headerView: UIView = {
-        var view = UIView()
-        view.backgroundColor = UIColor.shared.Brown
-        view.layer.cornerRadius = 30
-        view.layer.cornerCurve = .continuous
-        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        return view
-    }()
     
     private var periodView: UIView = {
         var view = UIView()
         view.backgroundColor = .clear
         view.layer.cornerRadius = 15
         view.layer.cornerCurve = .continuous
-        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderColor = UIColor.shared.Brown.cgColor
         view.layer.borderWidth = 1
         return view
-    }()
-    
-    private var backButton: UIButton = {
-        var btn = UIButton()
-        btn.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        btn.contentMode = .scaleAspectFit
-        btn.backgroundColor = .clear
-        btn.tintColor = .white
-        return btn
     }()
     
     private var periodLabel: UILabel = {
         var label = UILabel()
         label.text = "Month"
         label.font = UIFont(name: "Futura", size: 17)
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         return label
     }()
@@ -91,12 +66,22 @@ class TransactionReportViewController: UIViewController {
         sectionTitles = groupedTransactions.keys.sorted(by: >)
         
         setupView()
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set up custom back button
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        backBarButtonItem.tintColor = UIColor.shared.Brown
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backBarButtonItem
+        self.title = "Transaction Report"
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     
     init(transactionData: [TransactionModel]) {
         self.transactionData = transactionData
-        print(transactionData.prefix(10))
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -108,28 +93,13 @@ class TransactionReportViewController: UIViewController {
         print("Transaction REPORT View Controler deinited")
     }
     
-    @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     private func setupView() {
         view.backgroundColor = .white
-        view.addSubview(headerView)
-        headerView.snp.makeConstraints { make in
-            make.left.right.top.equalToSuperview()
-        }
         
-        headerView.addSubview(periodView)
+        view.addSubview(periodView)
         periodView.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(20)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-        }
-        
-        headerView.addSubview(backButton)
-        backButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(20)
-            make.centerY.equalTo(periodView.snp.centerY)
-            make.size.equalTo(20)
         }
         
         periodView.addSubview(periodLabel)
@@ -137,11 +107,10 @@ class TransactionReportViewController: UIViewController {
             make.top.bottom.left.right.equalToSuperview().inset(10)
         }
         
-        headerView.addSubview(reportView)
+        view.addSubview(reportView)
         reportView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(periodView.snp.bottom).offset(15)
-            make.bottom.equalToSuperview().offset(-20)
         }
         
         reportView.addSubview(reportLabel)
@@ -160,7 +129,7 @@ class TransactionReportViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
-            make.top.equalTo(headerView.snp.bottom).offset(20)
+            make.top.equalTo(reportView.snp.bottom).offset(10)
         }
     }
 }
@@ -207,11 +176,5 @@ extension TransactionReportViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-    }
-}
-
-extension Date {
-    var yesterday: Date {
-        return Calendar.current.date(byAdding: .day, value: -1, to: self) ?? self
     }
 }
