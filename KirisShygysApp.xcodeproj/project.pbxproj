@@ -25,8 +25,9 @@
 		6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* AuthService.swift */; };
 		6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3312ACECC560092BC00 /* OnboardingModel.swift */; };
 		6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */; };
-		6F86B3372ACED6F90092BC00 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */; };
+		6F86B3372ACED6F90092BC00 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */; };
 		6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */; };
+		6F8D467C2B04E35B00F012AC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D467B2B04E35B00F012AC /* Date+Extension.swift */; };
 		6FAB99A52AF7EABA00CFD105 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB99A42AF7EABA00CFD105 /* ProfileViewController.swift */; };
 		6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */; };
 		6FB40F822AE7EAE6009B7863 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F812AE7EAE6009B7863 /* Validator.swift */; };
@@ -60,8 +61,9 @@
 		6F7342D12AD85DB3000EA57D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6F86B3312ACECC560092BC00 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCVCell.swift; sourceTree = "<group>"; };
+		6F8D467B2B04E35B00F012AC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		6FAB99A42AF7EABA00CFD105 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		6FB40F812AE7EAE6009B7863 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
@@ -242,8 +244,9 @@
 			children = (
 				6FEE5D772AF3B6A500DAE263 /* TabBarController */,
 				6FCF294D2AF1307B00CEA307 /* AppConfiguration */,
-				6F86B3362ACED6F90092BC00 /* UIColorExtension.swift */,
+				6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */,
 				6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */,
+				6F8D467B2B04E35B00F012AC /* Date+Extension.swift */,
 				6FB40F812AE7EAE6009B7863 /* Validator.swift */,
 			);
 			path = Supporting;
@@ -512,8 +515,9 @@
 				6F57F2792AFFBB2E008712AE /* TransactionModel.swift in Sources */,
 				6F658BBF2ACEA9A3004ECACB /* SceneDelegate.swift in Sources */,
 				6FEE5D812AF3E7DE00DAE263 /* TransactionViewController.swift in Sources */,
+				6F8D467C2B04E35B00F012AC /* Date+Extension.swift in Sources */,
 				6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */,
-				6F86B3372ACED6F90092BC00 /* UIColorExtension.swift in Sources */,
+				6F86B3372ACED6F90092BC00 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,14 +11,14 @@ import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-  var window: UIWindow?
-
-  func application(_ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions:
-                   [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    FirebaseApp.configure()
     
-    return true
-  }
+    var window: UIWindow?
+    
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions:
+                     [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        self.window?.overrideUserInterfaceStyle = .light
+        return true
+    }
 }

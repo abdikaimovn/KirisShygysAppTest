@@ -90,7 +90,7 @@ final class HomeViewController: UIViewController {
     
     private var incomeLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "Futura-Bold", size: 22)
+        label.font = UIFont(name: "Futura", size: 22)
         label.textColor = .white
         return label
     }()
@@ -121,7 +121,7 @@ final class HomeViewController: UIViewController {
     
     private var expenseLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "Futura-Bold", size: 22)
+        label.font = UIFont(name: "Futura", size: 22)
         label.textColor = .white
         return label
     }()
