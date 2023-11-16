@@ -47,7 +47,7 @@ final class TabViewController: UITabBarController {
     }
     
     @objc private func addTransactionPressed() {
-        var transactionViewController = TransactionViewController()
+        let transactionViewController = TransactionViewController()
         self.present(transactionViewController, animated: true)
     }
     

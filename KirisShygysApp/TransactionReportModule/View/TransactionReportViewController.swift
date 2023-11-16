@@ -8,20 +8,20 @@ final class TransactionReportViewController: UIViewController {
     private var periodView: UIView = {
         var view = UIView()
         view.backgroundColor = .clear
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 5
         view.layer.cornerCurve = .continuous
         view.layer.borderColor = UIColor.shared.Brown.cgColor
         view.layer.borderWidth = 1
         return view
     }()
     
-    private var periodLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Month"
-        label.font = UIFont(name: "Futura", size: 17)
-        label.textColor = .black
-        label.textAlignment = .center
-        return label
+    private var filterImage: UIImageView = {
+        var image = UIImageView()
+        image.image = UIImage(systemName: "slider.horizontal.2.square")
+        image.tintColor = UIColor.shared.Brown
+        image.backgroundColor = .clear
+        image.contentMode = .scaleAspectFit
+        return image
     }()
     
     private var reportView: UIView = {
@@ -96,21 +96,10 @@ final class TransactionReportViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         
-        view.addSubview(periodView)
-        periodView.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-        }
-        
-        periodView.addSubview(periodLabel)
-        periodLabel.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview().inset(10)
-        }
-        
         view.addSubview(reportView)
         reportView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(periodView.snp.bottom).offset(15)
+            make.right.equalToSuperview().inset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
         }
         
         reportView.addSubview(reportLabel)
@@ -123,6 +112,14 @@ final class TransactionReportViewController: UIViewController {
             make.right.equalToSuperview().inset(15)
             make.centerY.equalToSuperview()
             make.size.equalTo(30)
+        }
+        
+        view.addSubview(filterImage)
+        filterImage.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(20)
+            make.right.equalTo(reportView.snp.left).offset(-20)
+            make.centerY.equalTo(reportView.snp.centerY)
+            make.size.equalTo(40)
         }
         
         view.addSubview(tableView)
