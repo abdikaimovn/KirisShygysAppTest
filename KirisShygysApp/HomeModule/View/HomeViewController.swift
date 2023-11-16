@@ -69,7 +69,7 @@ final class HomeViewController: UIViewController {
         var view = UIView()
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
-        view.backgroundColor = UIColor.shared.IncomeColor
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -98,7 +98,7 @@ final class HomeViewController: UIViewController {
     //Expense view
     private var expenseView: UIView = {
         var view = UIView()
-        view.backgroundColor = UIColor.shared.ExpenseColor
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         return view
