@@ -1,6 +1,6 @@
 import UIKit
 
-final class TransactionReportViewController: UIViewController {
+final class FullTransactionViewController: UIViewController {
     var transactionData: [TransactionModel]?
     var groupedTransactions: [String: [TransactionModel]] = [:]
     var sectionTitles: [String] = []
@@ -109,7 +109,7 @@ final class TransactionReportViewController: UIViewController {
     }
 }
 
-extension TransactionReportViewController: UITableViewDelegate, UITableViewDataSource {
+extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
     }

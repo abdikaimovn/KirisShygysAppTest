@@ -194,7 +194,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc private func showAllTransactions() {
-        self.navigationController?.pushViewController(TransactionReportViewController(transactionData: self.transactionDataArray!), animated: true)
+        self.navigationController?.pushViewController(FullTransactionViewController(transactionData: self.transactionDataArray!), animated: true)
     }
     
     private func setupAmounts() {
