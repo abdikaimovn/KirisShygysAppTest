@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F3D94B42B06721F00BCA624 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D94B32B06721F00BCA624 /* FilterViewController.swift */; };
 		6F430CF32AD0538500CC712A /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF22AD0538500CC712A /* RegistrationModel.swift */; };
 		6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */; };
 		6F57F2792AFFBB2E008712AE /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F57F2782AFFBB2E008712AE /* TransactionModel.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F3D94B32B06721F00BCA624 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		6F430CF22AD0538500CC712A /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		6F57F2782AFFBB2E008712AE /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
@@ -97,6 +99,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F3D94AF2B0671C400BCA624 /* FilterModule */ = {
+			isa = PBXGroup;
+			children = (
+				6F3D94B22B0671FA00BCA624 /* Model */,
+				6F3D94B12B0671F300BCA624 /* View */,
+				6F3D94B02B0671DB00BCA624 /* Presenter */,
+			);
+			path = FilterModule;
+			sourceTree = "<group>";
+		};
+		6F3D94B02B0671DB00BCA624 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6F3D94B12B0671F300BCA624 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F3D94B32B06721F00BCA624 /* FilterViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F3D94B22B0671FA00BCA624 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6F430CED2AD0525800CC712A /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +334,7 @@
 		6FE389892B03457400E8844D /* TransactionReportModule */ = {
 			isa = PBXGroup;
 			children = (
+				6F3D94AF2B0671C400BCA624 /* FilterModule */,
 				6FE3898C2B03459E00E8844D /* Model */,
 				6FE3898B2B03459700E8844D /* View */,
 				6FE3898A2B03458E00E8844D /* Presenter */,
@@ -506,6 +541,7 @@
 				6FCF29512AF189F000CEA307 /* TransactionTableViewCell.swift in Sources */,
 				6FE3898E2B0345E900E8844D /* TransactionReportViewController.swift in Sources */,
 				6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */,
+				6F3D94B42B06721F00BCA624 /* FilterViewController.swift in Sources */,
 				6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */,
 				6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */,
 				6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */,
