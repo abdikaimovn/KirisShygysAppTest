@@ -58,7 +58,6 @@ final class HomeViewController: UIViewController {
     
     private var totalBalance: UILabel = {
         var label = UILabel()
-        label.text = "$ 15,000"
         label.font = UIFont(name: "Futura-Bold", size: 35)
         label.textColor = .white
         return label
