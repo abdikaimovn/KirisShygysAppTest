@@ -17,7 +17,7 @@ final class TransactionReportViewController: UIViewController {
     
     private var filterImage: UIImageView = {
         var image = UIImageView()
-        image.image = UIImage(systemName: "slider.horizontal.2.square")
+        image.image = UIImage(systemName: "slider.vertical.3")
         image.tintColor = UIColor.shared.Brown
         image.backgroundColor = .clear
         image.contentMode = .scaleAspectFit
@@ -64,8 +64,21 @@ final class TransactionReportViewController: UIViewController {
         
         groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { $0.transactionDate })
         sectionTitles = groupedTransactions.keys.sorted(by: >)
+
+        filterImage.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterGestureRecognizer))
+        filterImage.addGestureRecognizer(tapGestureRecognizer)
+
         
         setupView()
+    }
+    
+    @objc func filterGestureRecognizer() {
+        let transactionFilterVC = FilterViewController()
+        if let sheet = transactionFilterVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        self.present(transactionFilterVC, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,10 +109,18 @@ final class TransactionReportViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         
+        view.addSubview(filterImage)
+        filterImage.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            make.left.equalToSuperview().inset(20)
+            make.size.equalTo(30)
+        }
+        
         view.addSubview(reportView)
         reportView.snp.makeConstraints { make in
+            make.left.equalTo(filterImage.snp.right).offset(20)
             make.right.equalToSuperview().inset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            make.centerY.equalTo(filterImage.snp.centerY)
         }
         
         reportView.addSubview(reportLabel)
@@ -112,14 +133,6 @@ final class TransactionReportViewController: UIViewController {
             make.right.equalToSuperview().inset(15)
             make.centerY.equalToSuperview()
             make.size.equalTo(30)
-        }
-        
-        view.addSubview(filterImage)
-        filterImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(20)
-            make.right.equalTo(reportView.snp.left).offset(-20)
-            make.centerY.equalTo(reportView.snp.centerY)
-            make.size.equalTo(40)
         }
         
         view.addSubview(tableView)
