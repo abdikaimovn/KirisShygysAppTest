@@ -36,7 +36,7 @@
 		6FCF29512AF189F000CEA307 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCF29502AF189F000CEA307 /* TransactionTableViewCell.swift */; };
 		6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */; };
 		6FD2CC512AFD027500580DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CC502AFD027400580DDB /* GoogleService-Info.plist */; };
-		6FE3898E2B0345E900E8844D /* TransactionReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3898D2B0345E900E8844D /* TransactionReportViewController.swift */; };
+		6FE3898E2B0345E900E8844D /* FullTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */; };
 		6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */; };
 		6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */; };
 		6FEE5D812AF3E7DE00DAE263 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D802AF3E7DE00DAE263 /* TransactionViewController.swift */; };
@@ -73,7 +73,7 @@
 		6FCF29502AF189F000CEA307 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		6FD2CC502AFD027400580DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6FE3898D2B0345E900E8844D /* TransactionReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionReportViewController.swift; sourceTree = "<group>"; };
+		6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionViewController.swift; sourceTree = "<group>"; };
 		6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		6FEE5D802AF3E7DE00DAE263 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
@@ -243,11 +243,11 @@
 		6F658BBB2ACEA9A3004ECACB /* KirisShygysApp */ = {
 			isa = PBXGroup;
 			children = (
-				6FE389892B03457400E8844D /* TransactionReportModule */,
 				6F86B3352ACED6E10092BC00 /* Supporting */,
 				6F7342D02AD85D32000EA57D /* Network */,
 				6F86B3302ACEC9430092BC00 /* OnboardingModule */,
 				6F4A7BE72AE552B900CE8892 /* HomeModule */,
+				6FE389892B03457400E8844D /* FullTransactionModule */,
 				6FAB99A02AF7EA2E00CFD105 /* ProfileModule */,
 				6FEE5D7C2AF3E78B00DAE263 /* TransactionModule */,
 			);
@@ -331,7 +331,7 @@
 			path = AppConfiguration;
 			sourceTree = "<group>";
 		};
-		6FE389892B03457400E8844D /* TransactionReportModule */ = {
+		6FE389892B03457400E8844D /* FullTransactionModule */ = {
 			isa = PBXGroup;
 			children = (
 				6F3D94AF2B0671C400BCA624 /* FilterModule */,
@@ -339,7 +339,7 @@
 				6FE3898B2B03459700E8844D /* View */,
 				6FE3898A2B03458E00E8844D /* Presenter */,
 			);
-			path = TransactionReportModule;
+			path = FullTransactionModule;
 			sourceTree = "<group>";
 		};
 		6FE3898A2B03458E00E8844D /* Presenter */ = {
@@ -352,7 +352,7 @@
 		6FE3898B2B03459700E8844D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6FE3898D2B0345E900E8844D /* TransactionReportViewController.swift */,
+				6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -539,7 +539,7 @@
 				6FF3A2CD2AD4222500D51E3A /* AuthorizationModel.swift in Sources */,
 				6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */,
 				6FCF29512AF189F000CEA307 /* TransactionTableViewCell.swift in Sources */,
-				6FE3898E2B0345E900E8844D /* TransactionReportViewController.swift in Sources */,
+				6FE3898E2B0345E900E8844D /* FullTransactionViewController.swift in Sources */,
 				6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */,
 				6F3D94B42B06721F00BCA624 /* FilterViewController.swift in Sources */,
 				6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */,

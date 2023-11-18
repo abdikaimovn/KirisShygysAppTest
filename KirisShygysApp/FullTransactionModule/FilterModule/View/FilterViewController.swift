@@ -8,6 +8,66 @@
 import UIKit
 
 class FilterViewController: UIViewController {
+    private lazy var filterByExpenseButton: UIButton = {
+        var button = generateButton("Expense")
+        return button
+    }()
+    
+    private lazy var filterByIncomeButton: UIButton = {
+        var button = generateButton("Income")
+        return button
+    }()
+    
+    private lazy var sortByHighestButton: UIButton = {
+        var button = generateButton("Highest")
+        return button
+    }()
+    
+    private lazy var sortByLowestButton: UIButton = {
+        var button = generateButton("Lowest")
+        return button
+    }()
+    
+    private lazy var sortByNewestButton: UIButton = {
+        var button = generateButton("Newest")
+        return button
+    }()
+    
+    private lazy var sortByOldestButton: UIButton = {
+        var button = generateButton("Oldest")
+        return button
+    }()
+    
+    private lazy var weekPeriodButton: UIButton = {
+        var button = generateButton("Week")
+        return button
+    }()
+    
+    private lazy var monthPeriodButton: UIButton = {
+        var button = generateButton("Month")
+        return button
+    }()
+    
+    private lazy var halfyearPeriodButton: UIButton = {
+        var button = generateButton("6 Months")
+        return button
+    }()
+    
+    private lazy var yearPeriodButton: UIButton = {
+        var button = generateButton("Year")
+        return button
+    }()
+    
+    private lazy var resetButton: UIButton = {
+        var button = generateButton("Reset")
+        return button
+    }()
+    
+    private lazy var applyButton: UIButton = {
+        var button = generateButton("Apply")
+        return button
+    }()
+    
     private var closeLine: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.shared.Brown
@@ -18,10 +78,28 @@ class FilterViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
+        activateButtons()
     }
     
     deinit {
         print("Filter vc deinited")
+    }
+    
+    private func activateButtons() {
+        self.resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+        
+        self.filterByIncomeButton.addTarget(self, action: #selector(incomeButtonTapped), for: .touchUpInside)
+        self.filterByExpenseButton.addTarget(self, action: #selector(expenseButtonTapped), for: .touchUpInside)
+        
+        self.sortByHighestButton.addTarget(self, action: #selector(sortByHighestButtonTapped), for: .touchUpInside)
+        self.sortByLowestButton.addTarget(self, action: #selector(sortByLowestButtonTapped), for: .touchUpInside)
+        self.sortByNewestButton.addTarget(self, action: #selector(sortByNewestButtonTapped), for: .touchUpInside)
+        self.sortByOldestButton.addTarget(self, action: #selector(sortByOldestButtonTapped), for: .touchUpInside)
+        
+        self.weekPeriodButton.addTarget(self, action: #selector(weekPeriodButtonTapped), for: .touchUpInside)
+        self.monthPeriodButton.addTarget(self, action: #selector(monthPeriodButtonTapped), for: .touchUpInside)
+        self.halfyearPeriodButton.addTarget(self, action: #selector(halfyearPeriodButtonTapped), for: .touchUpInside)
+        self.yearPeriodButton.addTarget(self, action: #selector(yearPeriodButtonTapped), for: .touchUpInside)
     }
     
     private func setupView() {
@@ -47,25 +125,10 @@ class FilterViewController: UIViewController {
         let periodStack = generateStackView()
         
         //Reset button
-        let resetButton = generateButton("Reset")
         resetButton.backgroundColor = UIColor.shared.Brown
         resetButton.setTitleColor(.white, for: .normal)
         resetButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
 
-        let filterByExpenseButton = generateButton("Expense")
-        let filterByIncomeButton = generateButton("Income")
-        
-        let sortByHighestButton = generateButton("Highest")
-        let sortByLowestButton = generateButton("Lowest")
-        let sortByNewestButton = generateButton("Newest")
-        let sortByOldestButton = generateButton("Oldest")
-        
-        let weekPeriodButton = generateButton("Week")
-        let monthPeriodButton = generateButton("Month")
-        let halfyearPeriodButton = generateButton("6 Months")
-        let yearPeriodButton = generateButton("Year")
-        
-        let applyButton = generateButton("Apply")
         applyButton.backgroundColor = UIColor.shared.Brown
         applyButton.setTitleColor(.white, for: .normal)
         
@@ -169,4 +232,67 @@ class FilterViewController: UIViewController {
         return stack
     }
 
+}
+
+//MARK: - Functionality of buttons in stackViews
+extension FilterViewController {
+    private func updateButtons(_ selectedButton: UIButton, _ buttons: [UIButton]) {
+        selectedButton.backgroundColor = UIColor.shared.Brown
+        selectedButton.setTitleColor(.white, for: .normal)
+
+        for button in buttons {
+            if button != selectedButton {
+                button.backgroundColor = .clear
+                button.setTitleColor(.black, for: .normal)
+            }
+        }
+    }
+    
+    @objc private func resetButtonTapped() {
+        updateButtons(resetButton, [filterByExpenseButton, filterByIncomeButton,
+                                    sortByLowestButton, sortByNewestButton, sortByOldestButton, sortByHighestButton,
+                                    monthPeriodButton, halfyearPeriodButton, yearPeriodButton, weekPeriodButton])
+        resetButton.backgroundColor = UIColor.shared.Brown
+        resetButton.setTitleColor(.white, for: .normal)
+    }
+    
+    @objc private func expenseButtonTapped() {
+        updateButtons(filterByExpenseButton, [filterByIncomeButton])
+    }
+    
+    @objc private func incomeButtonTapped() {
+        updateButtons(filterByIncomeButton, [filterByExpenseButton])
+    }
+    
+    @objc private func sortByHighestButtonTapped() {
+        updateButtons(sortByHighestButton, [sortByLowestButton, sortByNewestButton, sortByOldestButton])
+    }
+    
+    @objc private func sortByLowestButtonTapped() {
+        updateButtons(sortByLowestButton, [sortByHighestButton, sortByNewestButton, sortByOldestButton])
+    }
+    
+    @objc private func sortByNewestButtonTapped() {
+        updateButtons(sortByNewestButton, [sortByHighestButton, sortByLowestButton, sortByOldestButton])
+    }
+    
+    @objc private func sortByOldestButtonTapped() {
+        updateButtons(sortByOldestButton, [sortByHighestButton, sortByNewestButton, sortByLowestButton])
+    }
+    
+    @objc private func weekPeriodButtonTapped() {
+        updateButtons(weekPeriodButton, [monthPeriodButton, halfyearPeriodButton, yearPeriodButton])
+    }
+    
+    @objc private func monthPeriodButtonTapped() {
+        updateButtons(monthPeriodButton, [weekPeriodButton, halfyearPeriodButton, yearPeriodButton])
+    }
+    
+    @objc private func halfyearPeriodButtonTapped() {
+        updateButtons(halfyearPeriodButton, [monthPeriodButton, weekPeriodButton, yearPeriodButton])
+    }
+    
+    @objc private func yearPeriodButtonTapped() {
+        updateButtons(yearPeriodButton, [monthPeriodButton, halfyearPeriodButton, weekPeriodButton])
+    }
 }
