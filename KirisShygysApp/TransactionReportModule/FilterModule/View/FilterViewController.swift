@@ -20,6 +20,10 @@ class FilterViewController: UIViewController {
         setupView()
     }
     
+    deinit {
+        print("Filter vc deinited")
+    }
+    
     private func setupView() {
         view.backgroundColor = .white
         

@@ -72,11 +72,6 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         return description
     }()
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
     private var amountLabel: UILabel = {
         var label = UILabel()
         label.text = "How much ?"
@@ -93,7 +88,7 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         field.textColor = .white
         field.layer.cornerRadius = 16
         field.keyboardType = .numberPad
-        field.returnKeyType = .done
+        field.returnKeyType = .default
         return field
     }()
     
@@ -311,5 +306,18 @@ extension TransactionViewController: TransactionPresenterDelegate {
 }
 
 extension TransactionViewController: UITextFieldDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            // Dismiss the keyboard when return is tapped
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Dismiss the keyboard when return is tapped
+        textField.resignFirstResponder()
+        return true
+    }
 }

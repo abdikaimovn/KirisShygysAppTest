@@ -5,14 +5,12 @@ final class TransactionReportViewController: UIViewController {
     var groupedTransactions: [String: [TransactionModel]] = [:]
     var sectionTitles: [String] = []
     
-    private var periodView: UIView = {
-        var view = UIView()
-        view.backgroundColor = .clear
-        view.layer.cornerRadius = 5
-        view.layer.cornerCurve = .continuous
-        view.layer.borderColor = UIColor.shared.Brown.cgColor
-        view.layer.borderWidth = 1
-        return view
+    private var filterTransactionLabel: UILabel = {
+        var label = UILabel()
+        label.text = "Filter Transactions"
+        label.font = UIFont(name: "Futura", size: 18)
+        label.textColor = .black
+        return label
     }()
     
     private var filterImage: UIImageView = {
@@ -21,31 +19,6 @@ final class TransactionReportViewController: UIViewController {
         image.tintColor = UIColor.shared.Brown
         image.backgroundColor = .clear
         image.contentMode = .scaleAspectFit
-        return image
-    }()
-    
-    private var reportView: UIView = {
-        var view = UIView()
-        view.backgroundColor = UIColor(hex: "#f9f7f4")
-        view.layer.cornerRadius = 5
-        view.layer.cornerCurve = .continuous
-        return view
-    }()
-    
-    private var reportLabel: UILabel = {
-        var label = UILabel()
-        label.textColor = UIColor.shared.Brown
-        label.text = "See your financial report"
-        label.font = UIFont(name: "Futura", size: 17)
-        return label
-    }()
-    
-    private var rightArrow: UIImageView = {
-        var image = UIImageView()
-        image.image = UIImage(systemName: "arrow.right.square")
-        image.backgroundColor = .clear
-        image.contentMode = .scaleAspectFit
-        image.tintColor = UIColor.shared.Brown
         return image
     }()
     
@@ -61,16 +34,21 @@ final class TransactionReportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { $0.transactionDate })
-        sectionTitles = groupedTransactions.keys.sorted(by: >)
 
+        setupSections()
+        setupView()
+        activateFilterButton()
+    }
+    
+    private func activateFilterButton() {
         filterImage.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterGestureRecognizer))
         filterImage.addGestureRecognizer(tapGestureRecognizer)
-
-        
-        setupView()
+    }
+    
+    private func setupSections() {
+        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { $0.transactionDate })
+        sectionTitles = groupedTransactions.keys.sorted(by: >)
     }
     
     @objc func filterGestureRecognizer() {
@@ -109,37 +87,24 @@ final class TransactionReportViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         
+        view.addSubview(filterTransactionLabel)
+        filterTransactionLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
+            make.left.equalToSuperview().inset(20)
+        }
+        
         view.addSubview(filterImage)
         filterImage.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-            make.left.equalToSuperview().inset(20)
-            make.size.equalTo(30)
-        }
-        
-        view.addSubview(reportView)
-        reportView.snp.makeConstraints { make in
-            make.left.equalTo(filterImage.snp.right).offset(20)
+            make.centerY.equalTo(filterTransactionLabel.snp.centerY)
             make.right.equalToSuperview().inset(20)
-            make.centerY.equalTo(filterImage.snp.centerY)
-        }
-        
-        reportView.addSubview(reportLabel)
-        reportLabel.snp.makeConstraints { make in
-            make.top.bottom.left.equalToSuperview().inset(15)
-        }
-        
-        reportView.addSubview(rightArrow)
-        rightArrow.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(15)
-            make.centerY.equalToSuperview()
             make.size.equalTo(30)
         }
-        
+
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
-            make.top.equalTo(reportView.snp.bottom).offset(10)
+            make.top.equalTo(filterImage.snp.bottom).offset(10)
         }
     }
 }

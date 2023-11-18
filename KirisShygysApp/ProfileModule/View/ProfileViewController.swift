@@ -46,6 +46,11 @@ final class ProfileViewController: UIViewController {
         return btn
     }()
     
+    private lazy var transactionReport: UIView = {
+        var view = configureCustomButtonView(viewImage: "doc", viewTitle: "Transaction Report")
+        return view
+    }()
+    
     private lazy var settingsView: UIView = {
         var view = configureCustomButtonView(viewImage: "gear", viewTitle: "Settings")
         return view
@@ -111,7 +116,7 @@ final class ProfileViewController: UIViewController {
             let label = UILabel()
             label.text = viewTitle
             label.textColor = .black
-            label.font = UIFont(name: "Futura", size: 20)
+            label.font = UIFont(name: "Futura", size: 18)
             return label
         }()
         
@@ -119,7 +124,7 @@ final class ProfileViewController: UIViewController {
         subView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview().inset(10)
-            make.size.equalTo(50)
+            make.size.equalTo(45)
         }
         
         subView.addSubview(image)
@@ -138,7 +143,6 @@ final class ProfileViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        
         view.addSubview(userImage)
         userImage.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
@@ -164,10 +168,17 @@ final class ProfileViewController: UIViewController {
             make.centerY.equalTo(userImage.snp.centerY)
             make.size.equalTo(40)
         }
+        
+        view.addSubview(transactionReport)
+        transactionReport.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(15)
+            make.top.equalTo(userImage.snp.bottom).offset(30)
+        }
+        
         view.addSubview(settingsView)
         settingsView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
-            make.top.equalTo(userImage.snp.bottom).offset(30)
+            make.top.equalTo(transactionReport.snp.bottom).offset(10)
         }
         
         view.addSubview(statisticsView)
