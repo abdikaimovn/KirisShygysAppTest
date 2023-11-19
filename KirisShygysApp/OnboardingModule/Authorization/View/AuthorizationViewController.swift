@@ -78,7 +78,8 @@ class AuthorizationViewController: UIViewController {
         signInButton.addTarget(self, action: #selector(signInPressed), for: .touchUpInside)
         hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
         
-        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         setupView()
     }
     
@@ -169,5 +170,22 @@ extension AuthorizationViewController: AuthPresenterDelegate {
         if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
             sceneDelegate.checkAuthentication()
         }
+    }
+}
+
+extension AuthorizationViewController: UITextFieldDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            // Dismiss the keyboard when return is tapped
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Dismiss the keyboard when return is tapped
+        textField.resignFirstResponder()
+        return true
     }
 }
