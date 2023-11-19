@@ -1,9 +1,10 @@
 import UIKit
 
 final class FullTransactionViewController: UIViewController {
-    var transactionData: [TransactionModel]?
-    var groupedTransactions: [String: [TransactionModel]] = [:]
-    var sectionTitles: [String] = []
+    private var transactionData: [TransactionModel]?
+    private var groupedTransactions: [String: [TransactionModel]] = [:]
+    private var sectionTitles: [String] = []
+    private var filterSettings: FilterModel?
     
     private var filterTransactionLabel: UILabel = {
         var label = UILabel()
@@ -29,6 +30,7 @@ final class FullTransactionViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -52,7 +54,7 @@ final class FullTransactionViewController: UIViewController {
     }
     
     @objc func filterGestureRecognizer() {
-        let transactionFilterVC = FilterViewController()
+        let transactionFilterVC = FilterViewController(delegate: self)
         if let sheet = transactionFilterVC.sheetPresentationController {
             sheet.detents = [.medium()]
         }
@@ -132,7 +134,6 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         70
     }
@@ -151,5 +152,11 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension FullTransactionViewController: FilterViewControllerDelegate {
+    func didGetFilterSettings(filterData: FilterModel) {
+        self.filterSettings = filterData
     }
 }

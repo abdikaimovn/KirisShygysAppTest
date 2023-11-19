@@ -102,6 +102,9 @@ class RegistrationViewController: UIViewController {
         super.viewDidAppear(animated)
         
         nameTextField.becomeFirstResponder()
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     @objc func hideTextField(_ sender: UIButton) {
@@ -207,5 +210,22 @@ extension RegistrationViewController: RegistrationPresenterDelegate {
         } else {
             AlertManager.showRegistrationErrorAlert(on: self)
         }
+    }
+}
+
+extension RegistrationViewController: UITextFieldDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            // Dismiss the keyboard when return is tapped
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Dismiss the keyboard when return is tapped
+        textField.resignFirstResponder()
+        return true
     }
 }

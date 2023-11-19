@@ -7,7 +7,24 @@
 
 import UIKit
 
+protocol FilterViewControllerDelegate: AnyObject {
+    func didGetFilterSettings(filterData: FilterModel)
+}
+
 class FilterViewController: UIViewController {
+    weak var delegate: FilterViewControllerDelegate?
+    
+    init(delegate: FilterViewControllerDelegate? = nil) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private var filterModel: FilterModel? = FilterModel(filterBy: nil, sortBy: nil, period: nil)
+    
     private lazy var filterByExpenseButton: UIButton = {
         var button = generateButton("Expense")
         return button
@@ -59,12 +76,21 @@ class FilterViewController: UIViewController {
     }()
     
     private lazy var resetButton: UIButton = {
-        var button = generateButton("Reset")
+        var button = UIButton()
+        button.setTitle("Reset", for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.cornerCurve = .continuous
+        button.backgroundColor = UIColor.shared.ExpenseColor
+        button.setTitleColor(.white, for: .normal)
+        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         return button
     }()
     
     private lazy var applyButton: UIButton = {
         var button = generateButton("Apply")
+        button.backgroundColor = UIColor.shared.Brown
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Futura-Bold", size: 18)
         return button
     }()
     
@@ -100,6 +126,12 @@ class FilterViewController: UIViewController {
         self.monthPeriodButton.addTarget(self, action: #selector(monthPeriodButtonTapped), for: .touchUpInside)
         self.halfyearPeriodButton.addTarget(self, action: #selector(halfyearPeriodButtonTapped), for: .touchUpInside)
         self.yearPeriodButton.addTarget(self, action: #selector(yearPeriodButtonTapped), for: .touchUpInside)
+        
+        self.applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func applyButtonTapped() {
+        delegate!.didGetFilterSettings(filterData: self.filterModel!)
     }
     
     private func setupView() {
@@ -123,14 +155,6 @@ class FilterViewController: UIViewController {
         let filterByStack = generateStackView()
         let sortByStack = generateStackView()
         let periodStack = generateStackView()
-        
-        //Reset button
-        resetButton.backgroundColor = UIColor.shared.Brown
-        resetButton.setTitleColor(.white, for: .normal)
-        resetButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-
-        applyButton.backgroundColor = UIColor.shared.Brown
-        applyButton.setTitleColor(.white, for: .normal)
         
         view.addSubview(filterTransactionLabel)
         filterTransactionLabel.snp.makeConstraints { make in
@@ -237,13 +261,15 @@ class FilterViewController: UIViewController {
 //MARK: - Functionality of buttons in stackViews
 extension FilterViewController {
     private func updateButtons(_ selectedButton: UIButton, _ buttons: [UIButton]) {
-        selectedButton.backgroundColor = UIColor.shared.Brown
-        selectedButton.setTitleColor(.white, for: .normal)
+        UIView.animate(withDuration: 0.2) {
+            selectedButton.backgroundColor = UIColor.shared.Brown
+            selectedButton.setTitleColor(.white, for: .normal)
 
-        for button in buttons {
-            if button != selectedButton {
-                button.backgroundColor = .clear
-                button.setTitleColor(.black, for: .normal)
+            for button in buttons {
+                if button != selectedButton {
+                    button.backgroundColor = .clear
+                    button.setTitleColor(.black, for: .normal)
+                }
             }
         }
     }
@@ -252,47 +278,58 @@ extension FilterViewController {
         updateButtons(resetButton, [filterByExpenseButton, filterByIncomeButton,
                                     sortByLowestButton, sortByNewestButton, sortByOldestButton, sortByHighestButton,
                                     monthPeriodButton, halfyearPeriodButton, yearPeriodButton, weekPeriodButton])
-        resetButton.backgroundColor = UIColor.shared.Brown
+        resetButton.backgroundColor = UIColor.shared.ExpenseColor
         resetButton.setTitleColor(.white, for: .normal)
+        self.filterModel = FilterModel(filterBy: nil, sortBy: nil, period: nil)
     }
     
     @objc private func expenseButtonTapped() {
         updateButtons(filterByExpenseButton, [filterByIncomeButton])
+        self.filterModel?.filterBy = .expense
     }
     
     @objc private func incomeButtonTapped() {
         updateButtons(filterByIncomeButton, [filterByExpenseButton])
+        self.filterModel?.filterBy = .income
     }
     
     @objc private func sortByHighestButtonTapped() {
         updateButtons(sortByHighestButton, [sortByLowestButton, sortByNewestButton, sortByOldestButton])
+        self.filterModel?.sortBy = .highest
     }
     
     @objc private func sortByLowestButtonTapped() {
         updateButtons(sortByLowestButton, [sortByHighestButton, sortByNewestButton, sortByOldestButton])
+        self.filterModel?.sortBy = .lowest
     }
     
     @objc private func sortByNewestButtonTapped() {
         updateButtons(sortByNewestButton, [sortByHighestButton, sortByLowestButton, sortByOldestButton])
+        self.filterModel?.sortBy = .newest
     }
     
     @objc private func sortByOldestButtonTapped() {
         updateButtons(sortByOldestButton, [sortByHighestButton, sortByNewestButton, sortByLowestButton])
+        self.filterModel?.sortBy = .oldest
     }
     
     @objc private func weekPeriodButtonTapped() {
         updateButtons(weekPeriodButton, [monthPeriodButton, halfyearPeriodButton, yearPeriodButton])
+        self.filterModel?.period = .week
     }
     
     @objc private func monthPeriodButtonTapped() {
         updateButtons(monthPeriodButton, [weekPeriodButton, halfyearPeriodButton, yearPeriodButton])
+        self.filterModel?.period = .month
     }
     
     @objc private func halfyearPeriodButtonTapped() {
         updateButtons(halfyearPeriodButton, [monthPeriodButton, weekPeriodButton, yearPeriodButton])
+        self.filterModel?.period = .halfyear
     }
     
     @objc private func yearPeriodButtonTapped() {
         updateButtons(yearPeriodButton, [monthPeriodButton, halfyearPeriodButton, weekPeriodButton])
+        self.filterModel?.period = .year
     }
 }
