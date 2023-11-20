@@ -132,6 +132,7 @@ class FilterViewController: UIViewController {
     
     @objc private func applyButtonTapped() {
         delegate!.didGetFilterSettings(filterData: self.filterModel!)
+        self.dismiss(animated: true)
     }
     
     private func setupView() {

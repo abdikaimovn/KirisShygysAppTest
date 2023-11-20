@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1EC75D2B0A16FD0036CD9C /* FullTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */; };
 		6F3D94B42B06721F00BCA624 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D94B32B06721F00BCA624 /* FilterViewController.swift */; };
 		6F430CF32AD0538500CC712A /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF22AD0538500CC712A /* RegistrationModel.swift */; };
 		6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionPresenter.swift; sourceTree = "<group>"; };
 		6F3D94B32B06721F00BCA624 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		6F430CF22AD0538500CC712A /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 		6FE3898A2B03458E00E8844D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 			files = (
 				6FB40F822AE7EAE6009B7863 /* Validator.swift in Sources */,
 				6FF3A2D12AD4228400D51E3A /* AuthorizationPresenter.swift in Sources */,
+				6F1EC75D2B0A16FD0036CD9C /* FullTransactionPresenter.swift in Sources */,
 				6F57F27F2B0011F9008712AE /* UserDataManager.swift in Sources */,
 				6FF3A2CF2AD4225000D51E3A /* AuthorizationViewController.swift in Sources */,
 				6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */,
