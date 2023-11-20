@@ -4,7 +4,8 @@ final class FullTransactionViewController: UIViewController {
     private var transactionData: [TransactionModel]?
     private var groupedTransactions: [String: [TransactionModel]] = [:]
     private var sectionTitles: [String] = []
-    private var filterSettings: FilterModel?
+    var presenter: FullTransactionViewControllerDelegate?
+    private var changedTransactionData: [TransactionModel]?
     
     private var filterTransactionLabel: UILabel = {
         var label = UILabel()
@@ -40,6 +41,9 @@ final class FullTransactionViewController: UIViewController {
         setupSections()
         setupView()
         activateFilterButton()
+
+        //Connecting with the presenter
+        self.presenter = FullTransactionPresenter(delegate: self)
     }
     
     private func activateFilterButton() {
@@ -51,6 +55,12 @@ final class FullTransactionViewController: UIViewController {
     private func setupSections() {
         groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { $0.transactionDate })
         sectionTitles = groupedTransactions.keys.sorted(by: >)
+    }
+    
+    private func resetupSections() {
+        groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { $0.transactionDate })
+        sectionTitles = groupedTransactions.keys.sorted(by: >)
+        print(sectionTitles)
     }
     
     @objc func filterGestureRecognizer() {
@@ -71,7 +81,6 @@ final class FullTransactionViewController: UIViewController {
         self.title = "Transaction Report"
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
     
     init(transactionData: [TransactionModel]) {
         self.transactionData = transactionData
@@ -157,6 +166,19 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
 
 extension FullTransactionViewController: FilterViewControllerDelegate {
     func didGetFilterSettings(filterData: FilterModel) {
-        self.filterSettings = filterData
+        if filterData.period == nil && filterData.sortBy == nil && filterData.filterBy == nil {
+            resetupSections()
+        } else {
+            presenter?.didReceiveFilterSettings(filterData, transactionData: self.transactionData!)
+        }
+    }
+}
+
+extension FullTransactionViewController: FullTransactionPresenterDelegate {
+    func didFilteredTransactionData(filteredData: [TransactionModel]) {
+        self.changedTransactionData = filteredData
+        print(changedTransactionData)
+        resetupSections()
+        tableView.reloadData()
     }
 }

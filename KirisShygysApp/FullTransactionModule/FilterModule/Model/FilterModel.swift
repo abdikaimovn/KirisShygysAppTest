@@ -8,13 +8,9 @@
 import Foundation
 
 struct FilterModel {
-    var filterBy: FilterByEnum?
+    var filterBy: TransactionType?
     var sortBy: SortByEnum?
     var period: PeriodEnum?
-}
-
-enum FilterByEnum {
-    case income, expense
 }
 
 enum SortByEnum {
