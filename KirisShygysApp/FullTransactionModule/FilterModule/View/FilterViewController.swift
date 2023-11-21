@@ -282,6 +282,7 @@ extension FilterViewController {
         resetButton.backgroundColor = UIColor.shared.ExpenseColor
         resetButton.setTitleColor(.white, for: .normal)
         self.filterModel = FilterModel(filterBy: nil, sortBy: nil, period: nil)
+        applyButtonTapped()
     }
     
     @objc private func expenseButtonTapped() {
