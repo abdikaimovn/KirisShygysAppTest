@@ -57,9 +57,17 @@ final class FullTransactionViewController: UIViewController {
         sectionTitles = groupedTransactions.keys.sorted(by: >)
     }
     
-    private func resetupSections(changedTransactionData: [TransactionModel]?) {
+    private func resetupSections(changedTransactionData: [TransactionModel]?, _ sortByNewest: Bool?) {
         groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { $0.transactionDate })
+        
+        //By default it sorts in descending order
         sectionTitles = groupedTransactions.keys.sorted(by: >)
+        
+        if let safeSortByNewest = sortByNewest {
+            if !safeSortByNewest {
+                sectionTitles = groupedTransactions.keys.sorted(by: <)
+            }
+        }
     }
     
     @objc func filterGestureRecognizer() {
@@ -175,8 +183,8 @@ extension FullTransactionViewController: FilterViewControllerDelegate {
 }
 
 extension FullTransactionViewController: FullTransactionPresenterDelegate {
-    func didFilteredTransactionData(filteredData: [TransactionModel]) {
-        resetupSections(changedTransactionData: filteredData)
+    func didFilterTransactionData(filteredData: [TransactionModel], _ sortByNewest: Bool?) {
+        resetupSections(changedTransactionData: filteredData, sortByNewest)
         tableView.reloadData()
     }
 }

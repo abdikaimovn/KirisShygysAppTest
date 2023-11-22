@@ -12,7 +12,7 @@ protocol FullTransactionViewControllerDelegate: AnyObject {
 }
 
 protocol FullTransactionPresenterDelegate: AnyObject {
-    func didFilteredTransactionData(filteredData: [TransactionModel])
+    func didFilterTransactionData(filteredData: [TransactionModel], _ sortByNewest: Bool?)
 }
 
 class FullTransactionPresenter {
@@ -24,12 +24,15 @@ class FullTransactionPresenter {
     
     private func didApplyFilter(filterSettings: FilterModel, transactionData: [TransactionModel]) {
         var resultOfFilteredData = transactionData
+        var sortByNewest: Bool? = nil
         
         if let filterBy = filterSettings.filterBy {
             resultOfFilteredData = applyFilterBy(filterBy: filterBy, transactionData: resultOfFilteredData)
         }
         
         if let sortBy = filterSettings.sortBy {
+            sortByNewest = sortBy == .newest ? true : false
+            
             resultOfFilteredData = applySortBy(sortBy: sortBy, transactionData: resultOfFilteredData)
         }
         
@@ -37,7 +40,7 @@ class FullTransactionPresenter {
             resultOfFilteredData = applyTransactionsByPeriod(period: period, transactionData: resultOfFilteredData)
         }
         
-        self.delegate?.didFilteredTransactionData(filteredData: resultOfFilteredData)
+        self.delegate?.didFilterTransactionData(filteredData: resultOfFilteredData, sortByNewest)
     }
     
     private func applySortBy(sortBy: SortByEnum, transactionData: [TransactionModel]) -> [TransactionModel] {
