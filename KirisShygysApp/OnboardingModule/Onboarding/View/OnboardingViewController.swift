@@ -14,7 +14,7 @@ class OnboardingViewController: UIViewController {
                         description: "Become your own money manager\nand make every cent count",
                         image: UIImage(named: "onbng1")!),
         OnboardingModel(title: "Know where your\nmoney goes",
-                        description: "Track your transaction easily,\nwith categories and financial report ",
+                        description: "Track your transaction easily,\nwith a financial report ",
                         image: UIImage(named: "onbng2")!)
     ]
     
