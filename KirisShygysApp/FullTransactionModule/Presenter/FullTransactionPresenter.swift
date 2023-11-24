@@ -31,7 +31,11 @@ class FullTransactionPresenter {
         }
         
         if let sortBy = filterSettings.sortBy {
-            sortByNewest = sortBy == .newest ? true : false
+            if sortBy == .newest {
+                sortByNewest = true
+            } else if sortBy == .oldest {
+                sortByNewest = false
+            }
             
             resultOfFilteredData = applySortBy(sortBy: sortBy, transactionData: resultOfFilteredData)
         }
@@ -54,30 +58,14 @@ class FullTransactionPresenter {
             sortedTransactionData = transactionData.sorted(by: { $0.transactionAmount > $1.transactionAmount })
         case .lowest:
             sortedTransactionData = transactionData.sorted(by: { $0.transactionAmount < $1.transactionAmount })
-        case .newest:
-            sortedTransactionData = transactionData.sorted(by: {
-                guard let date1 = dateFormatter.date(from: $0.transactionDate),
-                      let date2 = dateFormatter.date(from: $1.transactionDate) else {
-                    return false
-                }
-                return date1 > date2
-            })
-        case .oldest:
-            sortedTransactionData = transactionData.sorted(by: {
-                guard let date1 = dateFormatter.date(from: $0.transactionDate),
-                      let date2 = dateFormatter.date(from: $1.transactionDate) else {
-                    return false
-                }
-                return date1 < date2
-            })
+        default:
+            return transactionData
         }
         
         return sortedTransactionData
     }
 
     private func applyTransactionsByPeriod(period: PeriodEnum?, transactionData: [TransactionModel]) -> [TransactionModel] {
-        var sortedTransactionData = [TransactionModel]()
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         
@@ -120,7 +108,6 @@ class FullTransactionPresenter {
         return filteredTransactions
     }
 
-    
     private func applyFilterBy(filterBy: TransactionType, transactionData: [TransactionModel]) -> [TransactionModel] {
         var filteredTransactionData = [TransactionModel]()
         
