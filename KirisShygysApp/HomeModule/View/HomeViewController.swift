@@ -338,7 +338,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as! TransactionTableViewCell
-        cell.configure(transactionData: transactionDataArray![indexPath.row], isHiddenPeriod: false)
+        cell.configure(transactionData: transactionDataArray![indexPath.row], isHiddenData: false)
         return cell
     }
 }

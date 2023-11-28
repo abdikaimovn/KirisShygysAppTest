@@ -25,6 +25,7 @@
 		6F658BDB2ACEBAF6004ECACB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDA2ACEBAF6004ECACB /* FirebaseFirestore */; };
 		6F658BDD2ACEBAF6004ECACB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDC2ACEBAF6004ECACB /* FirebaseStorage */; };
 		6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* AuthService.swift */; };
+		6F7CD26D2B16091E005BFAFF /* DetailTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD26C2B16091E005BFAFF /* DetailTransactionViewController.swift */; };
 		6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3312ACECC560092BC00 /* OnboardingModel.swift */; };
 		6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */; };
 		6F86B3372ACED6F90092BC00 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */; };
@@ -64,6 +65,7 @@
 		6F658BC82ACEA9A4004ECACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F658BCA2ACEA9A4004ECACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F7342D12AD85DB3000EA57D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		6F7CD26C2B16091E005BFAFF /* DetailTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionViewController.swift; sourceTree = "<group>"; };
 		6F86B3312ACECC560092BC00 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */,
+				6F7CD26C2B16091E005BFAFF /* DetailTransactionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -476,7 +479,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					6F658BB82ACEA9A3004ECACB = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -547,6 +550,7 @@
 				6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */,
 				6FAB99A52AF7EABA00CFD105 /* ProfileViewController.swift in Sources */,
 				6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */,
+				6F7CD26D2B16091E005BFAFF /* DetailTransactionViewController.swift in Sources */,
 				6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */,
 				6F57F2792AFFBB2E008712AE /* TransactionModel.swift in Sources */,
 				6F658BBF2ACEA9A3004ECACB /* SceneDelegate.swift in Sources */,
@@ -607,6 +611,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -621,7 +626,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -667,6 +672,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -675,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
