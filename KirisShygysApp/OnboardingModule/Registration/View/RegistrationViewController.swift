@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-protocol RegistrationViewControllerDelegate {
+protocol RegistrationViewControllerDelegate: AnyObject {
     func didRegister(with data: RegistrationModel)
 }
 
-protocol RegistrationPresenterDelegate {
+protocol RegistrationPresenterDelegate: AnyObject {
     func didCheckAuthorization(answer: Bool)
 }
 
@@ -93,7 +93,7 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var registrationPresenter = RegistrationPresenter(delegate: self)
+        let registrationPresenter = RegistrationPresenter(delegate: self)
         delegate = registrationPresenter
         setupView()
     }

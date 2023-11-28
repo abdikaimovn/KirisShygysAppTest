@@ -10,7 +10,7 @@ final class FullTransactionViewController: UIViewController {
     private var filterTransactionLabel: UILabel = {
         var label = UILabel()
         label.text = "Filter Transactions"
-        label.font = UIFont(name: "Futura", size: 18)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         label.textColor = .black
         return label
     }()
@@ -160,14 +160,24 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
         let sectionTitle = sectionTitles[indexPath.section]
         if let transactions = groupedTransactions[sectionTitle] {
             let transaction = transactions[indexPath.row]
-            cell.configure(transactionData: transaction, isHiddenPeriod: true)
+            cell.configure(transactionData: transaction, isHiddenData: true)
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailTransactionVC = DetailTransactionViewController()
         
+        if let transactions = groupedTransactions[sectionTitles[indexPath.section]] {
+            let transaction = transactions[indexPath.row]
+            detailTransactionVC.configure(transactionInfo: transaction)
+        }
+        
+        if let sheet = detailTransactionVC.sheetPresentationController {
+            sheet.detents = [.medium(),.large()]
+        }
+        self.present(detailTransactionVC, animated: true, completion: nil)
     }
 }
 

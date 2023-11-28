@@ -1,18 +1,7 @@
-//
-//  RegistrationPresenter.swift
-//  KirisShygysApp
-//
-//  Created by Нурдаулет on 09.10.2023.
-//
-
 import Foundation
-//enum SignUpErrorType {
-//    case
-//}
-
 
 class RegistrationPresenter {
-    var delegate: RegistrationPresenterDelegate?
+    weak var delegate: RegistrationPresenterDelegate?
     init(delegate: RegistrationPresenterDelegate? = nil) {
         self.delegate = delegate
     }

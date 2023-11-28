@@ -55,18 +55,19 @@ final class TransactionTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(transactionData: TransactionModel, isHiddenPeriod: Bool) {
+    func configure(transactionData: TransactionModel, isHiddenData: Bool) {
         let currentData = Date.now.formatted().prefix(10)
-        
-        if isHiddenPeriod {
-            self.purchasedData.isHidden = true
-        }
-        
         self.transName.text = transactionData.transactionName
         self.priceLabel.text = "$ \(transactionData.transactionAmount)"
         self.priceLabel.textColor = transactionData.transactionType == .income ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
-        self.purchasedData.text = transactionData.transactionDate == currentData ? "Today" : transactionData.transactionDate
+        if isHiddenData {
+            self.purchasedData.isHidden = true
+        }else {
+            self.purchasedData.isHidden = false
+        }
         
+        self.purchasedData.text = transactionData.transactionDate == currentData ? "Today" : transactionData.transactionDate
+    
         viewImage.backgroundColor = priceLabel.textColor
         image.image = transactionData.transactionType == .income ? UIImage(systemName: "square.and.arrow.down") : UIImage(systemName: "square.and.arrow.up")
     }
@@ -97,8 +98,9 @@ final class TransactionTableViewCell: UITableViewCell {
             make.left.equalTo(viewImage.snp.right).offset(15)
             if self.purchasedData.isHidden {
                 make.centerY.equalToSuperview()
+            } else {
+                make.top.equalTo(viewImage.snp.top)
             }
-            make.top.equalTo(viewImage.snp.top)
         }
         
         mainView.addSubview(purchasedData)
