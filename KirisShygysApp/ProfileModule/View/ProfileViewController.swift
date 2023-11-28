@@ -8,6 +8,8 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    var profilePresenter: ProfilePresenter?
+    
     private var userImage: UIImageView = {
         var image = UIImageView()
         image.clipsToBounds = true
@@ -19,8 +21,7 @@ final class ProfileViewController: UIViewController {
         image.tintColor = UIColor.shared.Brown
         return image
     }()
-    //"rectangle.portrait.and.arrow.right"
-    //chart.bar.xaxis.ascending
+   
     private var userNameLabel: UILabel = {
         var label = UILabel()
         label.text = "Username"
@@ -31,7 +32,7 @@ final class ProfileViewController: UIViewController {
     
     private var userName: UILabel = {
         var label = UILabel()
-        label.text = "Nurdaulet"
+        label.text = "Loading..."
         label.textColor = .black
         label.font = UIFont(name: "Futura-Bold", size: 22)
         return label
@@ -69,7 +70,15 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         logOutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logOut)))
+        
+        setupPresenter()
+        self.profilePresenter?.getUsername()
+        
         setupView()
+    }
+    
+    private func setupPresenter() {
+        self.profilePresenter = ProfilePresenter(delegate: self)
     }
     
     @objc private func logOut() {
@@ -144,6 +153,7 @@ final class ProfileViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(userImage)
+        
         userImage.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
@@ -194,4 +204,10 @@ final class ProfileViewController: UIViewController {
         }
     }
     
+}
+
+extension ProfileViewController: ProfilePresenterDelegate {
+    func didReceiveUsername(name: String) {
+        self.userName.text = name
+    }
 }
