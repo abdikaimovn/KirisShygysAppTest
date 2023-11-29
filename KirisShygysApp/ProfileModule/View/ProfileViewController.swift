@@ -70,6 +70,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         logOutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logOut)))
+        transactionReport.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reportTransactionTapped)))
         
         setupPresenter()
         self.profilePresenter?.getUsername()
@@ -94,6 +95,10 @@ final class ProfileViewController: UIViewController {
                 sceneDelegate.checkAuthentication()
             }
         }
+    }
+    
+    @objc private func reportTransactionTapped() {
+        self.navigationController?.pushViewController(ReportViewController(), animated: true)
     }
     
     private func configureCustomButtonView(viewImage: String, viewTitle: String) -> UIView {
