@@ -14,3 +14,8 @@ struct ReportModel {
     var biggestTransactionName: String
     var biggestTransactionAmount: String
 }
+
+struct QuoteModel {
+    var quote: String
+    var author: String
+}
