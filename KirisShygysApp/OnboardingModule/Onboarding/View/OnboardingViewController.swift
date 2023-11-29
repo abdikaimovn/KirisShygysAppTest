@@ -21,12 +21,13 @@ class OnboardingViewController: UIViewController {
     private lazy var sliderCollView: UICollectionView = {
         var layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
         layout.itemSize = CGSize(width: view.bounds.width, height: view.bounds.height * 0.6)
         var cView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cView.dataSource = self
+        cView.delegate = self
         cView.backgroundColor = .white
         cView.isPagingEnabled = true
-        cView.delegate = self
         cView.showsHorizontalScrollIndicator = false
         cView.register(OnboardingCVCell.self, forCellWithReuseIdentifier: "OnboardingCVCell")
         return cView
@@ -118,7 +119,7 @@ class OnboardingViewController: UIViewController {
     }
 }
 
-extension OnboardingViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+extension OnboardingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         onboardingData.count
     }
