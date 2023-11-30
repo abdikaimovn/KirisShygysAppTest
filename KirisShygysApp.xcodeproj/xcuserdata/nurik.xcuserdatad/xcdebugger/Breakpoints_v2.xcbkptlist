@@ -3,4 +3,54 @@
    uuid = "926625C1-2D40-45AE-A726-C03426B6F41B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D002F4F-B17B-4930-B3A0-5A208EA643F1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KirisShygysApp/OnboardingModule/Registration/View/RegistrationViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "didCheckAuthorization(answer:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5D002F4F-B17B-4930-B3A0-5A208EA643F1 - 7a70d1a6830171a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KirisShygysApp.RegistrationViewController.didCheckAuthorization(answer: Swift.Bool) -&gt; ()"
+                  moduleName = "KirisShygysApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurik/Desktop/KirisShygysApp/KirisShygysApp/OnboardingModule/Registration/View/RegistrationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "211"
+                  endingLineNumber = "211"
+                  offsetFromSymbolStart = "752">
+               </Location>
+               <Location
+                  uuid = "5D002F4F-B17B-4930-B3A0-5A208EA643F1 - 7a70d1a683017204"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KirisShygysApp.RegistrationViewController.didCheckAuthorization(answer: Swift.Bool) -&gt; ()"
+                  moduleName = "KirisShygysApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurik/Desktop/KirisShygysApp/KirisShygysApp/OnboardingModule/Registration/View/RegistrationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
+                  offsetFromSymbolStart = "752">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

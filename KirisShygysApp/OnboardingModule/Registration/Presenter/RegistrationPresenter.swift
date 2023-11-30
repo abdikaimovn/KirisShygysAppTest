@@ -11,7 +11,7 @@ extension RegistrationPresenter: RegistrationViewControllerDelegate {
     func didRegister(with data: RegistrationModel) {
         AuthService.shared.registerUser(with: data) { wasRegistered, error in
             if let error = error {
-                print(error.localizedDescription)
+                self.delegate?.didFail(with: error)
                 return
             }
             

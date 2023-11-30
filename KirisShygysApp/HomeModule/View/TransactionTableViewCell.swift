@@ -66,7 +66,7 @@ final class TransactionTableViewCell: UITableViewCell {
             self.purchasedData.isHidden = false
         }
         
-        self.purchasedData.text = transactionData.transactionDate == currentData ? "Today" : transactionData.transactionDate
+        self.purchasedData.text = transactionData.transactionDate == currentData ? "Today" : String(transactionData.transactionDate.prefix(10))
     
         viewImage.backgroundColor = priceLabel.textColor
         image.image = transactionData.transactionType == .income ? UIImage(systemName: "square.and.arrow.down") : UIImage(systemName: "square.and.arrow.up")

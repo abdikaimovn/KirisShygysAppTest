@@ -20,6 +20,14 @@ class ProfilePresenter {
             self.delegate?.didReceiveUsername(name: username ?? "Couldn't receive username")
         }
     }
+    
+    func receiveUserTransactionReport() {
+        
+    }
+    
+    deinit {
+        print("Profile Presenter deinit")
+    }
 }
 
 extension ProfilePresenter: ProfileViewControllerDelegate {

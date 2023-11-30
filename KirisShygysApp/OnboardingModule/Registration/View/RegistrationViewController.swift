@@ -14,6 +14,7 @@ protocol RegistrationViewControllerDelegate: AnyObject {
 
 protocol RegistrationPresenterDelegate: AnyObject {
     func didCheckAuthorization(answer: Bool)
+    func didFail(with error: Error)
 }
 
 class RegistrationViewController: UIViewController {
@@ -202,6 +203,10 @@ class RegistrationViewController: UIViewController {
 
 // Presenter's methods 
 extension RegistrationViewController: RegistrationPresenterDelegate {
+    func didFail(with error: Error) {
+        AlertManager.showRegistrationErrorAlert(on: self, with: error)
+    }
+    
     func didCheckAuthorization(answer: Bool) {
         if answer {
             if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
