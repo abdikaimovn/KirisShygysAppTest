@@ -78,6 +78,10 @@ final class ProfileViewController: UIViewController {
         setupView()
     }
     
+    deinit {
+        print("Profile VC deinit")
+    }
+    
     private func setupPresenter() {
         self.profilePresenter = ProfilePresenter(delegate: self)
     }

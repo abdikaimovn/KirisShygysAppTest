@@ -123,7 +123,7 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
     private lazy var datePicker: UIDatePicker = {
         var calendar = UIDatePicker()
         calendar.locale = .current
-        calendar.datePickerMode = .date
+        calendar.datePickerMode = .dateAndTime
         calendar.timeZone = .current
         calendar.backgroundColor = .white
         calendar.preferredDatePickerStyle = .automatic
@@ -170,7 +170,7 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         
         let transType = segmentedControl.selectedSegmentIndex == 0 ? TransactionType.income : .expense
         
-        let date = String(datePicker.date.formatted().prefix(10))
+        let date = datePicker.date.formatted()
         
         let transactionModel = TransactionModel(
             amount: amount,

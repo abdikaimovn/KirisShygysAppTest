@@ -71,7 +71,7 @@ class FullTransactionPresenter {
         
         // Function to check if a transaction falls within the specified period
         func isTransactionInPeriod(_ transaction: TransactionModel, periodStartDate: Date, periodEndDate: Date) -> Bool {
-            guard let transactionDate = dateFormatter.date(from: transaction.transactionDate) else {
+            guard let transactionDate = dateFormatter.date(from: String(transaction.transactionDate.prefix(10))) else {
                 return false
             }
             return transactionDate >= periodStartDate && transactionDate <= periodEndDate
@@ -99,11 +99,8 @@ class FullTransactionPresenter {
             
             filteredTransactions = transactionData.filter { isTransactionInPeriod($0, periodStartDate: periodStartDate, periodEndDate: periodEndDate) }
         } else {
-            // If no specific period is specified, include all transactions
             filteredTransactions = transactionData
         }
-        
-        // Include any additional logic needed for sorting or processing the filtered transactions
         
         return filteredTransactions
     }

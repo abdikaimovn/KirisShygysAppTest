@@ -53,12 +53,12 @@ final class FullTransactionViewController: UIViewController {
     }
     
     private func setupDefaultSections(transactionData: [TransactionModel]?) {
-        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { $0.transactionDate })
+        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { String($0.transactionDate.prefix(10))})
         sectionTitles = groupedTransactions.keys.sorted(by: >)
     }
     
     private func resetupSections(changedTransactionData: [TransactionModel]?, _ sortByNewest: Bool?) {
-        groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { $0.transactionDate })
+        groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { String($0.transactionDate.prefix(10))})
         
         //By default it sorts in descending order
         sectionTitles = groupedTransactions.keys.sorted(by: >)
@@ -138,7 +138,7 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sectionTitle = sectionTitles[section]
+        let sectionTitle = String(sectionTitles[section].prefix(10))
         
         switch sectionTitle {
         case Date.now.formatted().prefix(10):
