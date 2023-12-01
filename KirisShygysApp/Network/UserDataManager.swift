@@ -34,7 +34,7 @@ class UserDataManager {
     }
     
     func fetchTransactionData(completion: @escaping ([TransactionModel]?) -> Void) {
-        var transactionData: [TransactionModel]?
+        var transactionData: [TransactionModel] = []
         
         let db = Firestore.firestore()
         guard let currentUserUID = Auth.auth().currentUser?.uid else {
@@ -44,20 +44,31 @@ class UserDataManager {
         }
         
         // Example query to retrieve data from the "Incomes" collection
-        db.collection("users").document(currentUserUID).collection(transactions).order(by: "date", descending: true).getDocuments { [weak self] (querySnapshot, error) in
+        db.collection("users").document(currentUserUID).collection(transactions).order(by: "date").getDocuments { [weak self] (querySnapshot, error) in
             guard self != nil else { return }
             
             if let error = error {
                 print("Error getting documents: \(error)")
                 completion(nil)
             } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+                
                 let transactions = querySnapshot?.documents.compactMap { document in
                     return TransactionModel(data: document.data())
                 } ?? []
-                transactionData = transactions
+                
+                transactionData = transactions.sorted{ (transaction1: TransactionModel, transaction2: TransactionModel) -> Bool in
+                    if let date1 = dateFormatter.date(from: transaction1.transactionDate), let date2 = dateFormatter.date(from: transaction2.transactionDate) {
+                        return date1 > date2
+                    }
+                    return false
+                }
+                
                 completion(transactionData)
             }
         }
     }
+    
     
 }
