@@ -2,9 +2,9 @@ import UIKit
 
 final class FullTransactionViewController: UIViewController {
     private let transactionData: [TransactionModel]?
-    private var groupedTransactions: [String: [TransactionModel]] = [:]
-    private var sectionTitles: [String] = []
-    var presenter: FullTransactionViewControllerDelegate?
+    private var groupedTransactions: [Date: [TransactionModel]] = [:]
+    private var sectionTitles: [Date] = []
+    private var presenter: FullTransactionViewControllerDelegate?
     private var changedTransactionData: [TransactionModel]?
     
     private var filterTransactionLabel: UILabel = {
@@ -41,7 +41,7 @@ final class FullTransactionViewController: UIViewController {
         setupDefaultSections(transactionData: self.transactionData)
         setupView()
         activateFilterButton()
-
+    
         //Connecting with the presenter
         self.presenter = FullTransactionPresenter(delegate: self)
     }
@@ -53,12 +53,21 @@ final class FullTransactionViewController: UIViewController {
     }
     
     private func setupDefaultSections(transactionData: [TransactionModel]?) {
-        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { String($0.transactionDate.prefix(10))})
+        let dataFormatter = DateFormatter()
+        dataFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+        
+        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { dataFormatter.date(from: $0.transactionDate)!})
+        
         sectionTitles = groupedTransactions.keys.sorted(by: >)
+        
+        print(groupedTransactions.keys)
     }
-    
+
     private func resetupSections(changedTransactionData: [TransactionModel]?, _ sortByNewest: Bool?) {
-        groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { String($0.transactionDate.prefix(10))})
+        let dataFormatter = DateFormatter()
+        dataFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+        
+        groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { dataFormatter.date(from: $0.transactionDate)!})
         
         //By default it sorts in descending order
         sectionTitles = groupedTransactions.keys.sorted(by: >)
@@ -138,7 +147,7 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sectionTitle = String(sectionTitles[section].prefix(10))
+        let sectionTitle = String(sectionTitles[section].formatted().prefix(10))
         
         switch sectionTitle {
         case Date.now.formatted().prefix(10):

@@ -30,6 +30,9 @@ class HomePresenter {
     func receiveTransactionData() {
         UserDataManager.shared.fetchTransactionData { transactionData in
             if let transactionData = transactionData {
+                for i in transactionData {
+                    print("transaction date is = \(i.transactionDate)")
+                }
                 self.delegate?.didReceiveTransactionData(data: transactionData)
             }
         }
