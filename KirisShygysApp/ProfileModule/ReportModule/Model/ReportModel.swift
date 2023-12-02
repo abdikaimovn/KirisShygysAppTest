@@ -19,3 +19,9 @@ struct QuoteModel {
     var quote: String
     var author: String
 }
+
+struct ReportInfo {
+    var summa: Int
+    var maxValue: Int
+    var maxValueTitle: String
+}

@@ -102,7 +102,7 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc private func reportTransactionTapped() {
-        self.navigationController?.pushViewController(ReportViewController(), animated: true)
+        self.profilePresenter?.receiveUserTransactionReport()
     }
     
     private func configureCustomButtonView(viewImage: String, viewTitle: String) -> UIView {
@@ -218,5 +218,13 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController: ProfilePresenterDelegate {
     func didReceiveUsername(name: String) {
         self.userName.text = name
+    }
+    
+    func didReceiveUserTransactionReport(_ transactionData: [TransactionModel]?) {
+        if let safeData = transactionData, !safeData.isEmpty {
+            self.navigationController?.pushViewController(ReportViewController(transactionData: safeData), animated: true)
+        } else {
+            AlertManager.absenceTransactionData(on: self)
+        }
     }
 }

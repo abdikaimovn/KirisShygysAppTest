@@ -7,10 +7,13 @@
 
 import UIKit
 
-class ReportViewController: UIViewController{
-    private let reportData = [
-        ReportModel(transactionType: "You Spend 💸", amount: "$ 2000", biggestTransactionLabel: "and your biggest spending is from", biggestTransactionName: "Salary", biggestTransactionAmount: "$ 1000"),
-        ReportModel(transactionType: "You Earned 💰", amount: "$ 200", biggestTransactionLabel: "your biggest Income is from", biggestTransactionName: "Shopping", biggestTransactionAmount: "$ 120")
+class ReportViewController: UIViewController {
+    var presenter: ReportPresenter?
+    var transactionData: [TransactionModel]!
+    
+    private var reportData = [
+        ReportModel(transactionType: "You Spend 💸", amount: "$ 0", biggestTransactionLabel: "and your biggest spending is from", biggestTransactionName: "None", biggestTransactionAmount: "$ 0"),
+        ReportModel(transactionType: "You Earned 💰", amount: "$ 0", biggestTransactionLabel: "your biggest Income is from", biggestTransactionName: "None", biggestTransactionAmount: "$ 0")
     ]
     
     private var pageControl: UIPageControl = {
@@ -38,10 +41,24 @@ class ReportViewController: UIViewController{
         return collView
     }()
     
+    init(transactionData: [TransactionModel]) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.transactionData = transactionData
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         setupView()
+        setupDelegate()
+        
+        self.presenter?.calculateData(transactionData: self.transactionData)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,10 +81,13 @@ class ReportViewController: UIViewController{
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func setupDelegate() {
+        self.presenter = ReportPresenter(delegate: self)
     }
     
     private func setupView() {
@@ -124,4 +144,16 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         updatePageControlColor()
     }
 
+}
+
+extension ReportViewController: ReportPresenterDelegate {
+    func didCalculateTransactionData(_ incomeInfo: ReportInfo, _ expenseInfo: ReportInfo) {
+        reportData[0].amount = "$ \(expenseInfo.summa)"
+        reportData[0].biggestTransactionAmount = "$ \(expenseInfo.maxValue)"
+        reportData[0].biggestTransactionName = expenseInfo.maxValueTitle
+        
+        reportData[1].amount = "$ \(incomeInfo.summa)"
+        reportData[1].biggestTransactionAmount = "$ \(incomeInfo.maxValue)"
+        reportData[1].biggestTransactionName = incomeInfo.maxValueTitle
+    }
 }

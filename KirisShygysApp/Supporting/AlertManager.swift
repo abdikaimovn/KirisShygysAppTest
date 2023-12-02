@@ -79,3 +79,10 @@ extension AlertManager {
         self.showBasicAlert(on: vc, title: "Empty Name Field", message: "Please specify the name")
     }
 }
+
+//MARK: - Absence of transaction data
+extension AlertManager {
+    public static func absenceTransactionData(on vc: UIViewController) {
+        self.showBasicAlert(on: vc, title: "Absence of Data", message: "You haven't made any transactions yet")
+    }
+}
