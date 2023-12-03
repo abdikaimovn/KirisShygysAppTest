@@ -41,7 +41,7 @@ final class FullTransactionViewController: UIViewController {
         setupDefaultSections(transactionData: self.transactionData)
         setupView()
         activateFilterButton()
-    
+        
         //Connecting with the presenter
         self.presenter = FullTransactionPresenter(delegate: self)
     }

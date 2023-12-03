@@ -2,6 +2,7 @@ import Foundation
 
 protocol ProfilePresenterDelegate: AnyObject {
     func didReceiveUsername(name: String)
+    func didReceiveUserTransactionReport(_ transactionData: [TransactionModel]?)
 }
 
 protocol ProfileViewControllerDelegate: AnyObject {
@@ -22,7 +23,9 @@ class ProfilePresenter {
     }
     
     func receiveUserTransactionReport() {
-        
+        UserDataManager.shared.fetchLastMonthTransactionData { transactionData in
+            self.delegate?.didReceiveUserTransactionReport(transactionData)
+        }
     }
     
     deinit {
