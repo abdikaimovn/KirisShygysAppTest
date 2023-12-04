@@ -49,6 +49,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var transactionReport: UIView = {
         var view = configureCustomButtonView(viewImage: "doc", viewTitle: "Transaction Report")
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reportTransactionTapped)))
         return view
     }()
     
@@ -59,6 +60,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var logOutView: UIView = {
         var view = configureCustomButtonView(viewImage: "rectangle.portrait.and.arrow.right", viewTitle: "Logout")
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logOut)))
         return view
     }()
     
@@ -69,13 +71,11 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logOutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logOut)))
-        transactionReport.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reportTransactionTapped)))
+        
+        setupView()
         
         setupPresenter()
         self.profilePresenter?.getUsername()
-        
-        setupView()
     }
     
     deinit {

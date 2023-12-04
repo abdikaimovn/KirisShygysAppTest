@@ -54,20 +54,18 @@ final class FullTransactionViewController: UIViewController {
     
     private func setupDefaultSections(transactionData: [TransactionModel]?) {
         let dataFormatter = DateFormatter()
-        dataFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+        dataFormatter.dateFormat = "dd.MM.yyyy"
         
-        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { dataFormatter.date(from: $0.transactionDate)!})
+        groupedTransactions = Dictionary(grouping: transactionData ?? [], by: { dataFormatter.date(from: String($0.transactionDate.prefix(10)))!})
         
         sectionTitles = groupedTransactions.keys.sorted(by: >)
-        
-        print(groupedTransactions.keys)
     }
 
     private func resetupSections(changedTransactionData: [TransactionModel]?, _ sortByNewest: Bool?) {
         let dataFormatter = DateFormatter()
-        dataFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
+        dataFormatter.dateFormat = "dd.MM.yyyy"
         
-        groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { dataFormatter.date(from: $0.transactionDate)!})
+        groupedTransactions = Dictionary(grouping: changedTransactionData ?? [], by: { dataFormatter.date(from: String($0.transactionDate.prefix(10)))!})
         
         //By default it sorts in descending order
         sectionTitles = groupedTransactions.keys.sorted(by: >)
