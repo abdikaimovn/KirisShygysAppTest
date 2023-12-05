@@ -9,7 +9,13 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class AuthService {
+protocol AuthServiceProfileProtocol {
+    func signOut(completion: @escaping (Error?) -> ())
+    func signIn(with user: AuthorizationModel, completion: @escaping (Error?) -> ())
+    func registerUser(with user: RegistrationModel, completion: @escaping (Bool, Error?) -> ())
+}
+
+class AuthService: AuthServiceProfileProtocol {
     static let shared = AuthService()
     
     public func registerUser(with user: RegistrationModel, completion: @escaping (Bool, Error?) -> ()) {

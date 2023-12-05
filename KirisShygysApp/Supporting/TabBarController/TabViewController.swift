@@ -24,7 +24,7 @@ final class TabViewController: UITabBarController {
         
         viewControllers = [
             createVC(for: HomeViewController(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "house")!),
-            createVC(for: ProfileViewController(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "person.crop.circle")!)
+            createVC(for: createProfileModule(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "person.crop.circle")!)
         ]
         
         let buttonSize: CGFloat = 60
@@ -58,6 +58,14 @@ final class TabViewController: UITabBarController {
         let titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         rootViewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: titleFont]
         return navViewController
+    }
+    
+    private func createProfileModule() -> UIViewController {
+        let presenter = ProfilePresenter(service: AuthService.shared, userManager: UserDataManager.shared)
+        let view = ProfileViewController(profilePresenter: presenter)
+        presenter.view = view
+        
+        return view
     }
 }
 

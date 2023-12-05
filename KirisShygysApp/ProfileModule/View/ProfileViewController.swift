@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    var profilePresenter: ProfilePresenter?
+    private let profilePresenter: ProfilePresenter
     
     private var userImage: UIImageView = {
         var image = UIImageView()
@@ -60,7 +60,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var logOutView: UIView = {
         var view = configureCustomButtonView(viewImage: "rectangle.portrait.and.arrow.right", viewTitle: "Logout")
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logOut)))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logOutDidTapped)))
         return view
     }()
     
@@ -69,40 +69,32 @@ final class ProfileViewController: UIViewController {
         return view
     }()
     
+    init(profilePresenter: ProfilePresenter) {
+        self.profilePresenter = profilePresenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        
-        setupPresenter()
-        self.profilePresenter?.getUsername()
+        profilePresenter.viewDidLoaded()
     }
     
     deinit {
         print("Profile VC deinit")
     }
-    
-    private func setupPresenter() {
-        self.profilePresenter = ProfilePresenter(delegate: self)
-    }
-    
-    @objc private func logOut() {
-        AuthService.shared.signOut { [weak self] error in
-            guard let self = self else {return}
 
-            if let error = error {
-                AlertManager.showLogOutErrorAlert(on: self, with: error)
-                return
-            }
-
-            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-                sceneDelegate.checkAuthentication()
-            }
-        }
+    @objc internal func logOutDidTapped() {
+        profilePresenter.logOutDidTapped()
     }
     
     @objc private func reportTransactionTapped() {
-        self.profilePresenter?.receiveUserTransactionReport()
+        self.profilePresenter.reportTransactionDidTapped()
     }
     
     private func configureCustomButtonView(viewImage: String, viewTitle: String) -> UIView {
@@ -215,16 +207,34 @@ final class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController: ProfilePresenterDelegate {
-    func didReceiveUsername(name: String) {
+extension ProfileViewController: ProfileViewProtocol {
+    func showReportError() {
+        AlertManager.absenceTransactionData(on: self)
+    }
+    
+    func showError(with model: ErrorModel) {
+        
+    }
+    
+    func setUsername(_ name: String) {
         self.userName.text = name
     }
     
     func didReceiveUserTransactionReport(_ transactionData: [TransactionModel]?) {
-        if let safeData = transactionData, !safeData.isEmpty {
-            self.navigationController?.pushViewController(ReportViewController(transactionData: safeData), animated: true)
-        } else {
-            AlertManager.absenceTransactionData(on: self)
+        self.navigationController?.pushViewController(ReportViewController(transactionData: transactionData!), animated: true)
+    }
+    
+    func showLoader() {
+        
+    }
+    
+    func hideLoader() {
+        
+    }
+    
+    func logOut() {
+        if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+            sceneDelegate.checkAuthentication()
         }
     }
 }
