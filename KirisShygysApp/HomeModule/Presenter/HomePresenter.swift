@@ -2,35 +2,47 @@ import Foundation
 import FirebaseFirestore
 
 protocol HomePresenterDelegate: AnyObject {
-    func didReceiveUsername(name: String?)
-    func didReceiveTransactionData(data: [TransactionModel]?)
-}
-
-protocol HomeViewControllerDelegate: AnyObject {
-    
+    func setUsername(username: String)
+    func didReceiveTransactionData(data: [TransactionModel])
+    func showLoader()
+    func hideLoader()
 }
 
 class HomePresenter {
-    weak var delegate: HomePresenterDelegate?
+    weak var view: HomePresenterDelegate?
+    private let userManager: UserInfoProtocol
     
-    init(delegate: HomePresenterDelegate? = nil) {
-        self.delegate = delegate
+    init(userManager: UserInfoProtocol) {
+        self.userManager = userManager
     }
     
     deinit {
         print("HomePresenter was deinited")
     }
     
-    func getUsername() {
-        UserDataManager.shared.getCurrentUserName { username in
-            self.delegate?.didReceiveUsername(name: username)
+    func setUsername() {
+        UserDataManager.shared.getCurrentUserName {[weak self] username in
+            self?.view?.setUsername(username: username ?? "Couldn't receive username")
         }
     }
     
-    func receiveTransactionData() {
-        UserDataManager.shared.fetchTransactionData { transactionData in
+    func updateView() {
+        view?.showLoader()
+        UserDataManager.shared.fetchTransactionData {[weak self] transactionData in
+            self?.view?.hideLoader()
             if let transactionData = transactionData {
-                self.delegate?.didReceiveTransactionData(data: transactionData)
+                self?.view?.didReceiveTransactionData(data: transactionData)
+            }
+        }
+    }
+    
+    func viewDidLoaded() {
+        view?.showLoader()
+        setUsername()
+        UserDataManager.shared.fetchTransactionData {[weak self] transactionData in
+            self?.view?.hideLoader()
+            if let transactionData = transactionData {
+                self?.view?.didReceiveTransactionData(data: transactionData)
             }
         }
     }
@@ -70,8 +82,4 @@ class HomePresenter {
             return totalAmount
         }
     }
-}
-
-extension HomePresenter: HomeViewControllerDelegate {
-    
 }
