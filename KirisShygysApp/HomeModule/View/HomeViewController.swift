@@ -10,9 +10,10 @@ import SnapKit
 import Firebase
 
 final class HomeViewController: UIViewController {
-    var delegate: HomeViewControllerDelegate?
-    var presenter: HomePresenter?
+    private let presenter: HomePresenter
     var transactionDataArray: [TransactionModel]?
+    private let loader = UIActivityIndicatorView()
+    private let loaderView = UIView()
     
     private var headerView: UIView = {
         var view = UIView()
@@ -144,25 +145,36 @@ final class HomeViewController: UIViewController {
         return label
     }()
     
-    private var seeAllButton: UILabel = {
+    private lazy var seeAllButton: UILabel = {
         var btn = UILabel()
         btn.text = "See All"
         btn.font = UIFont(name: "Futura", size: 17)
         btn.textColor = .black
         btn.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showAllTransactions))
+        btn.addGestureRecognizer(tapGesture)
         return btn
     }()
+    
+    init(presenter: HomePresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        setupDelegate()
-        setupSeeAllButton()
+        presenter.viewDidLoaded()
+        setupCardValues()
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateAfterTransaction),
+            selector: #selector(updateView),
             name: Notification.Name("UpdateAfterTransaction"),
             object: nil
         )
@@ -173,34 +185,26 @@ final class HomeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    @objc private func updateAfterTransaction() {
-        presenter?.receiveTransactionData()
+    @objc private func updateView() {
+        presenter.updateView()
         
-        self.incomeLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .income))"
-        self.expenseLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .expense))"
-        self.totalBalance.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: nil))"
-    }
-    
-    private func setupDelegate() {
-        presenter = HomePresenter(delegate: self)
-        presenter?.getUsername()
-        presenter?.receiveTransactionData()
-        self.delegate = presenter
-    }
-    
-    private func setupSeeAllButton() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showAllTransactions))
-        self.seeAllButton.addGestureRecognizer(tapGesture)
+        self.incomeLabel.text = "$ \(presenter.calculateAmount(data: self.transactionDataArray, trasnsactionType: .income))"
+        self.expenseLabel.text = "$ \(presenter.calculateAmount(data: self.transactionDataArray, trasnsactionType: .expense))"
+        self.totalBalance.text = "$ \(presenter.calculateAmount(data: self.transactionDataArray, trasnsactionType: nil))"
     }
     
     @objc private func showAllTransactions() {
-        self.navigationController?.pushViewController(FullTransactionViewController(transactionData: self.transactionDataArray!), animated: true)
+        if transactionDataArray!.isEmpty {
+            AlertManager.absenceTransactionData(on: self)
+        } else {
+            self.navigationController?.pushViewController(FullTransactionViewController(transactionData: self.transactionDataArray!), animated: true)
+        }
     }
     
-    private func setupAmounts() {
-        self.incomeLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .income))"
-        self.expenseLabel.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: .expense))"
-        self.totalBalance.text = "$ \(presenter!.calculateAmount(data: self.transactionDataArray, trasnsactionType: nil))"
+    private func setupCardValues() {
+        self.incomeLabel.text = "$ \(presenter.calculateAmount(data: self.transactionDataArray, trasnsactionType: .income))"
+        self.expenseLabel.text = "$ \(presenter.calculateAmount(data: self.transactionDataArray, trasnsactionType: .expense))"
+        self.totalBalance.text = "$ \(presenter.calculateAmount(data: self.transactionDataArray, trasnsactionType: nil))"
     }
     
     deinit {
@@ -344,22 +348,29 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeViewController: HomePresenterDelegate {
-    func didReceiveUsername(name: String?) {
-        DispatchQueue.main.async {
-            self.userNameLabel.text = name ?? "Couldn't receive username"
-        }
+    func setUsername(username: String) {
+        self.userNameLabel.text = username
     }
     
-    func didReceiveTransactionData(data: [TransactionModel]?) {
-        if let transactionData = data {
-            DispatchQueue.main.async {
-                self.transactionDataArray = transactionData
-                self.transactionsTableView.reloadData()
-                self.setupAmounts()
-            }
-        } else {
-            print("Something went wrong")
-        }
+    func didReceiveTransactionData(data: [TransactionModel]) {
+        self.transactionDataArray = data
+        self.transactionsTableView.reloadData()
+        self.setupCardValues()
+    }
+    
+    func showLoader() {
+        view.addSubview(loaderView)
+        loaderView.backgroundColor = .white
+        loaderView.frame = view.bounds
+        loaderView.addSubview(loader)
+        loader.startAnimating()
+        loader.center = loaderView.center
+    }
+    
+    func hideLoader() {
+        loader.stopAnimating()
+        loader.removeFromSuperview()
+        loaderView.removeFromSuperview()
     }
 }
 

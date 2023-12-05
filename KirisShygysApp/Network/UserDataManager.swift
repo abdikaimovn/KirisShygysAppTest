@@ -10,6 +10,7 @@ import Firebase
 
 protocol UserInfoProtocol {
     func getCurrentUserName(completion: @escaping (String?) -> Void)
+    func fetchTransactionData(completion: @escaping ([TransactionModel]?) -> Void)
 }
 
 protocol UserProfileProtocol {

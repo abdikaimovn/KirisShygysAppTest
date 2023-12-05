@@ -23,7 +23,7 @@ final class TabViewController: UITabBarController {
         tabBar.backgroundColor = UIColor(hex: "#FCFCFC")
         
         viewControllers = [
-            createVC(for: HomeViewController(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "house")!),
+            createVC(for: createHomeModule(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "house")!),
             createVC(for: createProfileModule(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "person.crop.circle")!)
         ]
         
@@ -58,6 +58,14 @@ final class TabViewController: UITabBarController {
         let titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         rootViewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: titleFont]
         return navViewController
+    }
+    
+    private func createHomeModule() -> UIViewController {
+        let presenter = HomePresenter(userManager: UserDataManager.shared)
+        let view = HomeViewController(presenter: presenter)
+        presenter.view = view
+        
+        return view
     }
     
     private func createProfileModule() -> UIViewController {

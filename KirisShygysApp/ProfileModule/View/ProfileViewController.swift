@@ -10,6 +10,9 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private let profilePresenter: ProfilePresenter
     
+    private let loader = UIActivityIndicatorView()
+    private let loaderView = UIView()
+    
     private var userImage: UIImageView = {
         var image = UIImageView()
         image.clipsToBounds = true
@@ -225,11 +228,18 @@ extension ProfileViewController: ProfileViewProtocol {
     }
     
     func showLoader() {
-        
+        view.addSubview(loaderView)
+        loaderView.backgroundColor = .white
+        loaderView.frame = view.bounds
+        loaderView.addSubview(loader)
+        loader.startAnimating()
+        loader.center = loaderView.center
     }
     
     func hideLoader() {
-        
+        loader.stopAnimating()
+        loader.removeFromSuperview()
+        loaderView.removeFromSuperview()
     }
     
     func logOut() {
