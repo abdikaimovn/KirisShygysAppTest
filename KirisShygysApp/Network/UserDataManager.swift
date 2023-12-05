@@ -8,7 +8,16 @@
 import Foundation
 import Firebase
 
-class UserDataManager {
+protocol UserInfoProtocol {
+    func getCurrentUserName(completion: @escaping (String?) -> Void)
+}
+
+protocol UserProfileProtocol {
+    func getCurrentUserName(completion: @escaping (String?) -> Void)
+    func fetchLastMonthTransactionData(completion: @escaping ([TransactionModel]?) -> Void)
+}
+
+class UserDataManager: UserProfileProtocol, UserInfoProtocol {
     static let shared = UserDataManager()
     private let transactions = "Transactions"
     private let incomes = "Incomes"
@@ -121,7 +130,4 @@ class UserDataManager {
                 }
             }
     }
-    
-    
-    
 }

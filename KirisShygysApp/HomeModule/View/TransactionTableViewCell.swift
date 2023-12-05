@@ -28,7 +28,7 @@ final class TransactionTableViewCell: UITableViewCell {
     
     private var transName: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        label.font = UIFont(name: "HelveticaNeue", size: 16)
         label.textColor = .black
         label.isHidden = false
         return label

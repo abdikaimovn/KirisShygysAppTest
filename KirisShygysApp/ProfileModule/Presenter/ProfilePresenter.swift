@@ -1,30 +1,58 @@
 import Foundation
 
-protocol ProfilePresenterDelegate: AnyObject {
-    func didReceiveUsername(name: String)
+protocol ProfileViewProtocol: AnyObject {
+    func setUsername(_ name: String)
     func didReceiveUserTransactionReport(_ transactionData: [TransactionModel]?)
-}
-
-protocol ProfileViewControllerDelegate: AnyObject {
-    
+    func showLoader()
+    func hideLoader()
+    func showError(with model: ErrorModel)
+    func showReportError()
+    func logOut()
 }
 
 class ProfilePresenter {
-    weak var delegate: ProfilePresenterDelegate?
+    weak var view: ProfileViewProtocol?
     
-    init(delegate: ProfilePresenterDelegate? = nil) {
-        self.delegate = delegate
+    private let service: AuthServiceProfileProtocol
+    private let userManager: UserProfileProtocol
+    
+    init(service: AuthServiceProfileProtocol, userManager: UserProfileProtocol) {
+        self.service = service
+        self.userManager = userManager
     }
     
-    func getUsername() {
-        UserDataManager.shared.getCurrentUserName { username in
-            self.delegate?.didReceiveUsername(name: username ?? "Couldn't receive username")
+    func viewDidLoaded() {
+        view?.showLoader()
+        userManager.getCurrentUserName { [weak self] username in
+            self?.view?.hideLoader()
+            self?.view?.setUsername(username ?? "Couldn't receive username")
         }
     }
     
-    func receiveUserTransactionReport() {
-        UserDataManager.shared.fetchLastMonthTransactionData { transactionData in
-            self.delegate?.didReceiveUserTransactionReport(transactionData)
+    func reportTransactionDidTapped() {
+        view?.showLoader()
+        UserDataManager.shared.fetchLastMonthTransactionData { [weak self] transactionData in
+            self?.view?.hideLoader()
+            if let safeTransactionData = transactionData, !safeTransactionData.isEmpty {
+                self?.view?.didReceiveUserTransactionReport(safeTransactionData)
+            } else {
+                self?.view?.showReportError()
+            }
+        }
+    }
+    
+    func logOutDidTapped() {
+        view?.showLoader()
+        
+        service.signOut { [weak self] error in
+            self?.view?.hideLoader()
+            if let error = error {
+                let model = ErrorModel(error: error)
+                self?.view?.showError(with: model)
+                return
+            }
+            
+            self?.view?.logOut()
         }
     }
     
@@ -33,6 +61,10 @@ class ProfilePresenter {
     }
 }
 
-extension ProfilePresenter: ProfileViewControllerDelegate {
-
+struct ErrorModel {
+    let error: Error
+    
+    var text: String {
+        error.localizedDescription
+    }
 }
