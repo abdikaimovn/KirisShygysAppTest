@@ -13,6 +13,7 @@ protocol FilterViewControllerDelegate: AnyObject {
 
 class FilterViewController: UIViewController {
     weak var delegate: FilterViewControllerDelegate?
+    private var filterModel: FilterModel? = FilterModel(filterBy: nil, sortBy: nil, period: nil)
     
     init(delegate: FilterViewControllerDelegate? = nil) {
         self.delegate = delegate
@@ -23,8 +24,6 @@ class FilterViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var filterModel: FilterModel? = FilterModel(filterBy: nil, sortBy: nil, period: nil)
-    
     private lazy var filterByExpenseButton: UIButton = {
         var button = generateButton("Expense")
         return button
@@ -32,16 +31,6 @@ class FilterViewController: UIViewController {
     
     private lazy var filterByIncomeButton: UIButton = {
         var button = generateButton("Income")
-        return button
-    }()
-    
-    private lazy var sortByHighestButton: UIButton = {
-        var button = generateButton("Highest")
-        return button
-    }()
-    
-    private lazy var sortByLowestButton: UIButton = {
-        var button = generateButton("Lowest")
         return button
     }()
     
@@ -116,9 +105,7 @@ class FilterViewController: UIViewController {
         
         self.filterByIncomeButton.addTarget(self, action: #selector(incomeButtonTapped), for: .touchUpInside)
         self.filterByExpenseButton.addTarget(self, action: #selector(expenseButtonTapped), for: .touchUpInside)
-        
-        self.sortByHighestButton.addTarget(self, action: #selector(sortByHighestButtonTapped), for: .touchUpInside)
-        self.sortByLowestButton.addTarget(self, action: #selector(sortByLowestButtonTapped), for: .touchUpInside)
+
         self.sortByNewestButton.addTarget(self, action: #selector(sortByNewestButtonTapped), for: .touchUpInside)
         self.sortByOldestButton.addTarget(self, action: #selector(sortByOldestButtonTapped), for: .touchUpInside)
         
@@ -152,7 +139,7 @@ class FilterViewController: UIViewController {
         let sortByLabel = generateTitleLabel("Sort By")
         let periodLabel = generateTitleLabel("Period")
         
-        //Filter horizontal stack those will contains buttons to identify
+        //Filter horizontal stack those will contain buttons to identify
         let filterByStack = generateStackView()
         let sortByStack = generateStackView()
         let periodStack = generateStackView()
@@ -195,9 +182,7 @@ class FilterViewController: UIViewController {
             make.top.equalTo(sortByLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(20)
         }
-    
-        sortByStack.addArrangedSubview(sortByHighestButton)
-        sortByStack.addArrangedSubview(sortByLowestButton)
+
         sortByStack.addArrangedSubview(sortByNewestButton)
         sortByStack.addArrangedSubview(sortByOldestButton)
         
@@ -277,7 +262,7 @@ extension FilterViewController {
     
     @objc private func resetButtonTapped() {
         updateButtons(resetButton, [filterByExpenseButton, filterByIncomeButton,
-                                    sortByLowestButton, sortByNewestButton, sortByOldestButton, sortByHighestButton,
+                                    sortByNewestButton, sortByOldestButton,
                                     monthPeriodButton, halfyearPeriodButton, yearPeriodButton, weekPeriodButton])
         resetButton.backgroundColor = UIColor.shared.ExpenseColor
         resetButton.setTitleColor(.white, for: .normal)
@@ -295,23 +280,13 @@ extension FilterViewController {
         self.filterModel?.filterBy = .income
     }
     
-    @objc private func sortByHighestButtonTapped() {
-        updateButtons(sortByHighestButton, [sortByLowestButton, sortByNewestButton, sortByOldestButton])
-        self.filterModel?.sortBy = .highest
-    }
-    
-    @objc private func sortByLowestButtonTapped() {
-        updateButtons(sortByLowestButton, [sortByHighestButton, sortByNewestButton, sortByOldestButton])
-        self.filterModel?.sortBy = .lowest
-    }
-    
     @objc private func sortByNewestButtonTapped() {
-        updateButtons(sortByNewestButton, [sortByHighestButton, sortByLowestButton, sortByOldestButton])
+        updateButtons(sortByNewestButton, [sortByOldestButton])
         self.filterModel?.sortBy = .newest
     }
     
     @objc private func sortByOldestButtonTapped() {
-        updateButtons(sortByOldestButton, [sortByHighestButton, sortByNewestButton, sortByLowestButton])
+        updateButtons(sortByOldestButton, [sortByNewestButton])
         self.filterModel?.sortBy = .oldest
     }
     

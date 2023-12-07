@@ -14,7 +14,7 @@ struct FilterModel {
 }
 
 enum SortByEnum {
-    case highest, lowest, newest, oldest
+    case newest, oldest
 }
 
 enum PeriodEnum {
