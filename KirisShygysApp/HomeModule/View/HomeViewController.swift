@@ -197,8 +197,15 @@ final class HomeViewController: UIViewController {
         if transactionDataArray!.isEmpty {
             AlertManager.absenceTransactionData(on: self)
         } else {
-            self.navigationController?.pushViewController(FullTransactionViewController(transactionData: self.transactionDataArray!), animated: true)
+            self.navigationController?.pushViewController(createFullTransactionViewController(), animated: true)
         }
+    }
+    
+    private func createFullTransactionViewController() -> UIViewController {
+        let presenter = FullTransactionPresenter()
+        let view = FullTransactionViewController(transactionData: self.transactionDataArray!, presenter: presenter)
+        presenter.view = view
+        return view
     }
     
     private func setupCardValues() {

@@ -7,59 +7,33 @@
 
 import Foundation
 
-protocol FullTransactionViewControllerDelegate: AnyObject {
-    func didReceiveFilterSettings(_ filterSettings: FilterModel, transactionData: [TransactionModel])
+protocol FullTransactionPresenterProtocol: AnyObject {
+    func setSectionsByDefault(_ transactionData: [TransactionModel])
+    func setFilteredSections(_ transactionData: [TransactionModel], _ filterModel: FilterModel)
 }
 
-protocol FullTransactionPresenterDelegate: AnyObject {
-    func didFilterTransactionData(filteredData: [TransactionModel], _ sortByNewest: Bool?)
+protocol FullTransactionViewProtocol: AnyObject {
+    func setupSectionsByDefault(_ groupedTransactions: [String: [TransactionModel]], _ sectionTitles: [SectionTitleModel])
+    func setupFilteredSections(_ groupedSections: [String: [TransactionModel]], sectionTitles: [SectionTitleModel])
+    func showLoader()
+    func hideLoader()
 }
 
 class FullTransactionPresenter {
-    weak var delegate: FullTransactionPresenterDelegate?
+    weak var view: FullTransactionViewProtocol?
     
-    init(delegate: FullTransactionPresenterDelegate? = nil) {
-        self.delegate = delegate
-    }
-    
-    private func didApplyFilter(filterSettings: FilterModel, transactionData: [TransactionModel]) {
-        var resultOfFilteredData = transactionData
-        var sortByNewest: Bool? = nil
-        
-        if let filterBy = filterSettings.filterBy {
-            resultOfFilteredData = applyFilterBy(filterBy: filterBy, transactionData: resultOfFilteredData)
-        }
-        
-        if let sortBy = filterSettings.sortBy {
-            if sortBy == .newest {
-                sortByNewest = true
-            } else if sortBy == .oldest {
-                sortByNewest = false
-            }
-            
-            resultOfFilteredData = applySortBy(sortBy: sortBy, transactionData: resultOfFilteredData)
-        }
-        
-        if let period = filterSettings.period {
-            resultOfFilteredData = applyTransactionsByPeriod(period: period, transactionData: resultOfFilteredData)
-        }
-        
-        self.delegate?.didFilterTransactionData(filteredData: resultOfFilteredData, sortByNewest)
+    init(view: FullTransactionViewProtocol? = nil) {
+        self.view = view
     }
     
     private func applySortBy(sortBy: SortByEnum, transactionData: [TransactionModel]) -> [TransactionModel] {
         var sortedTransactionData = [TransactionModel]()
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        
         switch sortBy {
-        case .highest:
-            sortedTransactionData = transactionData.sorted(by: { $0.transactionAmount > $1.transactionAmount })
-        case .lowest:
-            sortedTransactionData = transactionData.sorted(by: { $0.transactionAmount < $1.transactionAmount })
-        default:
-            return transactionData
+        case .newest:
+            sortedTransactionData = transactionData
+        case .oldest:
+            sortedTransactionData = transactionData.reversed()
         }
         
         return sortedTransactionData
@@ -127,8 +101,56 @@ class FullTransactionPresenter {
     }
 }
 
-extension FullTransactionPresenter: FullTransactionViewControllerDelegate {
-    func didReceiveFilterSettings(_ filterSettings: FilterModel, transactionData: [TransactionModel]) {
-        didApplyFilter(filterSettings: filterSettings , transactionData: transactionData)
+extension FullTransactionPresenter: FullTransactionPresenterProtocol {
+    
+    func setFilteredSections(_ transactionData: [TransactionModel], _ filterModel: FilterModel) {
+        view?.showLoader()
+        
+        var filteredTransactionData = transactionData
+        
+        if let filterBy = filterModel.filterBy {
+            filteredTransactionData = applyFilterBy(filterBy: filterBy, transactionData: filteredTransactionData)
+        }
+        
+        if let sortBy = filterModel.sortBy {
+            filteredTransactionData = applySortBy(sortBy: sortBy, transactionData: filteredTransactionData)
+        }
+        
+        if let period = filterModel.period {
+            filteredTransactionData = applyTransactionsByPeriod(period: period, transactionData: filteredTransactionData)
+        }
+        
+        let groupedTransactions: [String : [TransactionModel]] = Dictionary(
+            grouping: filteredTransactionData,
+            by: { String($0.transactionDate.prefix(10))})
+        var sectionTitles = [SectionTitleModel]()
+        var uniqueElementDate = Set<String>()
+        for element in filteredTransactionData {
+            if !uniqueElementDate.contains(String(element.transactionDate.prefix(10))) {
+                sectionTitles.append(SectionTitleModel(fullDate: element.transactionDate))
+            }
+            uniqueElementDate.insert(String(element.transactionDate.prefix(10)))
+        }
+        
+        view?.hideLoader()
+        view?.setupFilteredSections(groupedTransactions, sectionTitles: sectionTitles)
+    }
+    
+    func setSectionsByDefault(_ transactionData: [TransactionModel]) {
+        view?.showLoader()
+        let groupedTransactions: [String : [TransactionModel]] = Dictionary(
+            grouping: transactionData,
+            by: { String($0.transactionDate.prefix(10))})
+        var sectionTitles = [SectionTitleModel]()
+        var uniqueElementDate = Set<String>()
+        for element in transactionData {
+            if !uniqueElementDate.contains(String(element.transactionDate.prefix(10))) {
+                sectionTitles.append(SectionTitleModel(fullDate: element.transactionDate))
+            }
+            uniqueElementDate.insert(String(element.transactionDate.prefix(10)))
+        }
+        
+        view?.hideLoader()
+        view?.setupSectionsByDefault(groupedTransactions, sectionTitles)
     }
 }
