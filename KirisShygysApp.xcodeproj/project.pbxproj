@@ -25,7 +25,7 @@
 		6F658BDB2ACEBAF6004ECACB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDA2ACEBAF6004ECACB /* FirebaseFirestore */; };
 		6F658BDD2ACEBAF6004ECACB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDC2ACEBAF6004ECACB /* FirebaseStorage */; };
 		6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* AuthService.swift */; };
-		6F7CD26D2B16091E005BFAFF /* DetailTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD26C2B16091E005BFAFF /* DetailTransactionViewController.swift */; };
+		6F7CD26D2B16091E005BFAFF /* DetailTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD26C2B16091E005BFAFF /* DetailTransactionView.swift */; };
 		6F7CD2732B163A2A005BFAFF /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD2722B163A2A005BFAFF /* ProfilePresenter.swift */; };
 		6F7CD2792B166425005BFAFF /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD2782B166425005BFAFF /* ReportViewController.swift */; };
 		6F7CD27B2B166805005BFAFF /* StoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD27A2B166805005BFAFF /* StoryCollectionViewCell.swift */; };
@@ -39,6 +39,7 @@
 		6FAB99A52AF7EABA00CFD105 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB99A42AF7EABA00CFD105 /* ProfileViewController.swift */; };
 		6FADAA6B2B2043A70001CCC6 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FADAA6A2B2043A70001CCC6 /* UIFont+Extension.swift */; };
 		6FADAA6E2B21E0BB0001CCC6 /* SectionTitleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FADAA6D2B21E0BB0001CCC6 /* SectionTitleModel.swift */; };
+		6FADAA702B2218B80001CCC6 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FADAA6F2B2218B80001CCC6 /* DetailTableViewCell.swift */; };
 		6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */; };
 		6FB40F822AE7EAE6009B7863 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB40F812AE7EAE6009B7863 /* Validator.swift */; };
 		6FBEB0B82B17B15F00BD1D50 /* QuoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBEB0B72B17B15F00BD1D50 /* QuoteCollectionViewCell.swift */; };
@@ -73,7 +74,7 @@
 		6F658BC82ACEA9A4004ECACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F658BCA2ACEA9A4004ECACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F7342D12AD85DB3000EA57D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		6F7CD26C2B16091E005BFAFF /* DetailTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionViewController.swift; sourceTree = "<group>"; };
+		6F7CD26C2B16091E005BFAFF /* DetailTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionView.swift; sourceTree = "<group>"; };
 		6F7CD2722B163A2A005BFAFF /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		6F7CD2782B166425005BFAFF /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		6F7CD27A2B166805005BFAFF /* StoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		6FAB99A42AF7EABA00CFD105 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6FADAA6A2B2043A70001CCC6 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		6FADAA6D2B21E0BB0001CCC6 /* SectionTitleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleModel.swift; sourceTree = "<group>"; };
+		6FADAA6F2B2218B80001CCC6 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		6FB40F812AE7EAE6009B7863 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		6FBEB0B72B17B15F00BD1D50 /* QuoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -416,7 +418,8 @@
 			isa = PBXGroup;
 			children = (
 				6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */,
-				6F7CD26C2B16091E005BFAFF /* DetailTransactionViewController.swift */,
+				6F7CD26C2B16091E005BFAFF /* DetailTransactionView.swift */,
+				6FADAA6F2B2218B80001CCC6 /* DetailTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -605,12 +608,13 @@
 				6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */,
 				6F3D94B42B06721F00BCA624 /* FilterViewController.swift in Sources */,
 				6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */,
+				6FADAA702B2218B80001CCC6 /* DetailTableViewCell.swift in Sources */,
 				6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */,
 				6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */,
 				6FAB99A52AF7EABA00CFD105 /* ProfileViewController.swift in Sources */,
 				6F7CD2792B166425005BFAFF /* ReportViewController.swift in Sources */,
 				6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */,
-				6F7CD26D2B16091E005BFAFF /* DetailTransactionViewController.swift in Sources */,
+				6F7CD26D2B16091E005BFAFF /* DetailTransactionView.swift in Sources */,
 				6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */,
 				6F7CD27F2B167A29005BFAFF /* ReportModel.swift in Sources */,
 				6F57F2792AFFBB2E008712AE /* TransactionModel.swift in Sources */,

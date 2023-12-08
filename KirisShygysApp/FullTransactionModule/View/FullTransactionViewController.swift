@@ -146,18 +146,9 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailTransactionVC = DetailTransactionViewController()
+        let detailTransactionView = DetailTransactionView(frame: self.view.bounds, transactionInfo: transactionData[indexPath.row])
         
-        if let transactions = groupedTransactions[sectionTitles[indexPath.section].sectionTitleDate] {
-            let transaction = transactions[indexPath.row]
-            detailTransactionVC.configure(transactionInfo: transaction)
-        }
-        
-        if let sheet = detailTransactionVC.sheetPresentationController {
-            sheet.detents = [.medium(),.large()]
-        }
-        
-        self.present(detailTransactionVC, animated: true, completion: nil)
+        self.view.addSubview(detailTransactionView)
     }
 }
 
