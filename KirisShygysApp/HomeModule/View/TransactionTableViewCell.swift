@@ -31,6 +31,7 @@ final class TransactionTableViewCell: UITableViewCell {
         label.font = UIFont(name: "HelveticaNeue", size: 16)
         label.textColor = .black
         label.isHidden = false
+        label.numberOfLines = 1
         return label
     }()
     
@@ -103,6 +104,8 @@ final class TransactionTableViewCell: UITableViewCell {
             }
         }
         
+        transName.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        
         mainView.addSubview(purchasedData)
         purchasedData.snp.makeConstraints { make in
             make.left.equalTo(viewImage.snp.right).offset(15)
@@ -111,8 +114,11 @@ final class TransactionTableViewCell: UITableViewCell {
         
         mainView.addSubview(priceLabel)
         priceLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-10)
+            make.left.equalTo(transName.snp.right).offset(10)
+            make.right.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
         }
+        
+        priceLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
     }
 }

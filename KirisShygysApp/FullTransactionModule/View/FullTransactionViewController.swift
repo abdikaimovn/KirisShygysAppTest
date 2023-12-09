@@ -10,6 +10,9 @@ final class FullTransactionViewController: UIViewController {
     private let loader = UIActivityIndicatorView()
     private let loaderView = UIView()
     
+    private var transactionInfoView: UIView?
+    private var closeTransactionInfoButton: UIButton?
+    
     private var filterTransactionLabel: UILabel = {
         var label = UILabel()
         label.text = "Filter Transactions"
@@ -104,6 +107,11 @@ final class FullTransactionViewController: UIViewController {
             make.top.equalTo(filterImage.snp.bottom).offset(10)
         }
     }
+    
+    @objc private func closeButtonTapped() {
+        transactionInfoView?.removeFromSuperview()
+        navigationItem.hidesBackButton = false
+    }
 }
 
 extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSource {
@@ -146,9 +154,32 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailTransactionView = DetailTransactionView(frame: self.view.bounds, transactionInfo: transactionData[indexPath.row])
+        transactionInfoView = UIView()
+        transactionInfoView!.backgroundColor = .gray.withAlphaComponent(0.9)
+        transactionInfoView!.frame = view.bounds
+        view.addSubview(transactionInfoView!)
         
-        self.view.addSubview(detailTransactionView)
+        closeTransactionInfoButton = UIButton()
+        closeTransactionInfoButton!.setImage(UIImage(systemName: "xmark"), for: .normal)
+        closeTransactionInfoButton!.tintColor = .white
+        
+        transactionInfoView!.addSubview(closeTransactionInfoButton!)
+        closeTransactionInfoButton!.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            make.left.equalToSuperview().inset(20)
+        }
+        
+        closeTransactionInfoButton?.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        
+        let detailTransactionView = DetailTransactionView(frame: .zero, transactionInfo: groupedTransactions[sectionTitles[indexPath.section].sectionTitleDate]![indexPath.row])
+        
+        transactionInfoView!.addSubview(detailTransactionView)
+        detailTransactionView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(closeTransactionInfoButton!.snp.bottom).offset(20)
+        }
+        
+        navigationItem.hidesBackButton = true
     }
 }
 

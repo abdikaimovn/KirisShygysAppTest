@@ -31,7 +31,7 @@ class ProfilePresenter {
     
     func reportTransactionDidTapped() {
         view?.showLoader()
-        UserDataManager.shared.fetchLastMonthTransactionData { [weak self] transactionData in
+        userManager.fetchLastMonthTransactionData { [weak self] transactionData in
             self?.view?.hideLoader()
             if let safeTransactionData = transactionData, !safeTransactionData.isEmpty {
                 self?.view?.didReceiveUserTransactionReport(safeTransactionData)
@@ -58,13 +58,5 @@ class ProfilePresenter {
     
     deinit {
         print("Profile Presenter deinit")
-    }
-}
-
-struct ErrorModel {
-    let error: Error
-    
-    var text: String {
-        error.localizedDescription
     }
 }
