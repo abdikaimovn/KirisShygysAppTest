@@ -21,20 +21,6 @@ class DetailTransactionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var mainView: UIView = {
-        var view = UIView()
-        view.backgroundColor = UIColor(hex: "#c0c0c0")!.withAlphaComponent(0.5)
-        return view
-    }()
-    
-    private var closeButton: UIButton = {
-        var button = UIButton()
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.tintColor = .black
-        return button
-    }()
-    
     private var logoImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(named: "logo")
@@ -64,11 +50,13 @@ class DetailTransactionView: UIView {
         return label
     }()
     
-    private var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         var tableView = UITableView()
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailTableViewCell")
+        tableView.showsVerticalScrollIndicator = false
+        tableView.dataSource = self
         return tableView
     }()
     
@@ -77,22 +65,9 @@ class DetailTransactionView: UIView {
     }
     
     private func setupView() {
-        self.addSubview(mainView)
-        mainView.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview()
-        }
-
-        mainView.addSubview(closeButton)
-        closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(100)
-            make.left.equalToSuperview().inset(10)
-            make.size.equalTo(50)
-        }
-        
-        mainView.addSubview(infoView)
+        self.addSubview(infoView)
         infoView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
-            make.centerY.equalToSuperview()
         }
         
         infoView.addSubview(logoImage)
@@ -109,29 +84,23 @@ class DetailTransactionView: UIView {
         }
         
         infoView.addSubview(tableView)
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(logoImage.snp.bottom).offset(20)
+            make.height.equalTo(300)
             make.bottom.equalToSuperview().inset(20)
         }
-        
-        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
 }
 
-extension DetailTransactionView: UITableViewDelegate, UITableViewDataSource{
+extension DetailTransactionView: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
+        cell.selectionStyle = .none
         
         switch indexPath.row {
         case 0:
