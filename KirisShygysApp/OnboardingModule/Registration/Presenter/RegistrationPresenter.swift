@@ -1,6 +1,6 @@
 import Foundation
 
-class RegistrationPresenter {
+final class RegistrationPresenter {
     weak var delegate: RegistrationPresenterDelegate?
     init(delegate: RegistrationPresenterDelegate? = nil) {
         self.delegate = delegate

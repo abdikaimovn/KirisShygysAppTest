@@ -74,7 +74,10 @@ class OnboardingViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = .black
         navigationItem.backBarButtonItem = backBarButtonItem
-        self.navigationController?.pushViewController(AuthorizationViewController(), animated: true)
+        let authPresenter = AuthorizationPresenter()
+        let authController = AuthorizationViewController(presenter: authPresenter)
+        authPresenter.view = authController
+        self.navigationController?.pushViewController(authController, animated: true)
     }
     
     @objc func signUp() {

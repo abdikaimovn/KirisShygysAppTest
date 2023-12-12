@@ -15,7 +15,7 @@ protocol AuthServiceProfileProtocol {
     func registerUser(with user: RegistrationModel, completion: @escaping (Bool, Error?) -> ())
 }
 
-class AuthService: AuthServiceProfileProtocol {
+final class AuthService: AuthServiceProfileProtocol {
     static let shared = AuthService()
     
     public func registerUser(with user: RegistrationModel, completion: @escaping (Bool, Error?) -> ()) {

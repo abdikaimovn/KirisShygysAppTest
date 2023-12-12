@@ -170,13 +170,14 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
         }
         
         closeTransactionInfoButton?.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        
-        let detailTransactionView = DetailTransactionView(frame: .zero, transactionInfo: groupedTransactions[sectionTitles[indexPath.section].sectionTitleDate]![indexPath.row])
+        let transactionInfo = groupedTransactions[sectionTitles[indexPath.section].sectionTitleDate]![indexPath.row]
+        let detailTransactionView = DetailTransactionView(frame: .zero, transactionInfo: transactionInfo)
         
         transactionInfoView!.addSubview(detailTransactionView)
         detailTransactionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(closeTransactionInfoButton!.snp.bottom).offset(20)
+            make.height.equalTo(400)
         }
         
         navigationItem.hidesBackButton = true

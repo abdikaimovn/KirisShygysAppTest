@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailTableViewCell: UITableViewCell {
+final class DetailTableViewCell: UITableViewCell {
     private var transactionKeyLabel: UILabel = {
         var label = UILabel()
         label.textColor = .black
@@ -46,14 +46,16 @@ class DetailTableViewCell: UITableViewCell {
             make.top.equalToSuperview().inset(10)
             make.left.equalToSuperview().inset(10)
         }
+        
         transactionKeyLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        transactionKeyLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
         contentView.addSubview(transactionValueLabel)
         transactionValueLabel.snp.makeConstraints { make in
             make.left.equalTo(transactionKeyLabel.snp.right).offset(10)
             make.right.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview().inset(10)
         }
+        
         transactionValueLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         transactionValueLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }

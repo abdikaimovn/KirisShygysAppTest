@@ -18,7 +18,7 @@ protocol UserProfileProtocol {
     func fetchLastMonthTransactionData(completion: @escaping ([TransactionModel]?) -> Void)
 }
 
-class UserDataManager: UserProfileProtocol, UserInfoProtocol {
+final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
     static let shared = UserDataManager()
     private let transactions = "Transactions"
     private let incomes = "Incomes"

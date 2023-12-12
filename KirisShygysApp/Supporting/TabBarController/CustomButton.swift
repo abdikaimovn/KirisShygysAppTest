@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomButton: UIButton {
+final class CustomButton: UIButton {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let buttonSize: CGFloat = 60

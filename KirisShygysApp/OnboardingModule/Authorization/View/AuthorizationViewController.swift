@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 
-class AuthorizationViewController: UIViewController {
-    var delegate: AuthVCDelegate?
+final class AuthorizationViewController: UIViewController {
+    private let presenter: AuthorizationPresenter
     
     private var imageLogo: UIImageView = {
         var imageView = UIImageView()
@@ -48,16 +48,17 @@ class AuthorizationViewController: UIViewController {
         return textField
     }()
     
-    private var hidePasswordFieldButton: UIButton = {
+    private lazy var hidePasswordFieldButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = .clear
         button.tintColor = .black
         button.setImage(UIImage(systemName:"eye.slash"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        button.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
         return button
     }()
     
-    private var signInButton: UIButton = {
+    private lazy var signInButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor.shared.Brown
         button.setTitle("Sign In", for: .normal)
@@ -65,6 +66,7 @@ class AuthorizationViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.clipsToBounds = true
         button.tintColor = .black
+        button.addTarget(self, action: #selector(signInPressed), for: .touchUpInside)
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
         return button
     }()
@@ -72,15 +74,16 @@ class AuthorizationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let presenter = AuthorizationPresenter(delegate: self)
-        self.delegate = presenter
-        
-        signInButton.addTarget(self, action: #selector(signInPressed), for: .touchUpInside)
-        hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
-        
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
         setupView()
+    }
+    
+    init(presenter: AuthorizationPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func signInPressed() {
@@ -96,7 +99,7 @@ class AuthorizationViewController: UIViewController {
         
         let data = AuthorizationModel(email: emailTextField.text!, password: passwordTextField.text!)
         
-        delegate?.didSignIn(with: data)
+        presenter.didSignIn(with: data)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,6 +116,9 @@ class AuthorizationViewController: UIViewController {
     
     func setupView() {
         view.backgroundColor = .white
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
         view.addSubview(imageLogo)
         imageLogo.snp.makeConstraints { make in
@@ -161,7 +167,7 @@ class AuthorizationViewController: UIViewController {
     }
 }
 
-extension AuthorizationViewController: AuthPresenterDelegate {
+extension AuthorizationViewController: AuthViewProtocol {
     func didFail(with error: Error) {
         AlertManager.showAuthorizationErrorAlert(on: self)
     }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AlertManager {
+final class AlertManager {
     private static func showBasicAlert(on vc: UIViewController, title: String, message: String?) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
