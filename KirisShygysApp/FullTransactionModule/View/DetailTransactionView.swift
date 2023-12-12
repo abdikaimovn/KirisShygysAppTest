@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailTransactionView: UIView {
+final class DetailTransactionView: UIView {
     private var transactionInfo: TransactionModel!
     
     init(frame: CGRect, transactionInfo: TransactionModel) {
@@ -57,6 +57,7 @@ class DetailTransactionView: UIView {
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailTableViewCell")
         tableView.showsVerticalScrollIndicator = false
         tableView.dataSource = self
+        tableView.isScrollEnabled = true
         return tableView
     }()
     
@@ -68,6 +69,7 @@ class DetailTransactionView: UIView {
         self.addSubview(infoView)
         infoView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
+            make.height.equalToSuperview()
         }
         
         infoView.addSubview(logoImage)
@@ -87,7 +89,6 @@ class DetailTransactionView: UIView {
         tableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(logoImage.snp.bottom).offset(20)
-            make.height.equalTo(300)
             make.bottom.equalToSuperview().inset(20)
         }
     }

@@ -17,7 +17,7 @@ protocol RegistrationPresenterDelegate: AnyObject {
     func didFail(with error: Error)
 }
 
-class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
     var delegate: RegistrationViewControllerDelegate?
     
     private var imageLogo: UIImageView = {
