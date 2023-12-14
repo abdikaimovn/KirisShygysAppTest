@@ -41,14 +41,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func goToController(with viewController: UIViewController) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.1) {
                 self.window?.layer.opacity = 0
             } completion: { [weak self] _ in
                 let nav = viewController
                 nav.modalPresentationStyle = .fullScreen
                 self?.window?.rootViewController = nav
                 
-                UIView.animate(withDuration: 0.2) { [weak self] in
+                UIView.animate(withDuration: 0.1) { [weak self] in
                     self?.window?.layer.opacity = 1
                 }
             }

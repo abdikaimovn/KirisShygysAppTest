@@ -41,4 +41,8 @@ extension UIColor {
     var IncomeColor: UIColor {
         UIColor(hex: "#2BA478")!
     }
+    
+    var LigthGray: UIColor {
+        UIColor(hex: "#f9f9f9")!
+    }
 }

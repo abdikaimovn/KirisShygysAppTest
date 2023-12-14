@@ -8,17 +8,10 @@
 import UIKit
 import SnapKit
 
-protocol RegistrationViewControllerDelegate: AnyObject {
-    func didRegister(with data: RegistrationModel)
-}
-
-protocol RegistrationPresenterDelegate: AnyObject {
-    func didCheckAuthorization(answer: Bool)
-    func didFail(with error: Error)
-}
-
 final class RegistrationViewController: UIViewController {
-    var delegate: RegistrationViewControllerDelegate?
+    private let presenter: RegistrationPresenter
+    private let loader = UIActivityIndicatorView()
+    private let loaderView = UIView()
     
     private var imageLogo: UIImageView = {
         var imageView = UIImageView()
@@ -39,7 +32,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.masksToBounds = true
         textField.placeholder = "Name"
         textField.textColor = .black
-        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.font = UIFont.defaultFont(16)
         return textField
     }()
     
@@ -52,7 +45,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.masksToBounds = true
         textField.placeholder = "Email"
         textField.textColor = .black
-        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.font = UIFont.defaultFont(16)
         return textField
     }()
     
@@ -66,36 +59,45 @@ final class RegistrationViewController: UIViewController {
         textField.isSecureTextEntry = true 
         textField.placeholder = "Password"
         textField.textColor = .black
-        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.font = UIFont.defaultFont(16)
         return textField
     }()
     
-    private var hidePasswordFieldButton: UIButton = {
+    private lazy var hidePasswordFieldButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = .clear
         button.tintColor = .black
-        button.setImage(UIImage(systemName:"eye.slash"), for: .normal)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        button.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
         return button
     }()
     
-    private var signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor.shared.Brown
         button.setTitle("Sign Up", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.titleLabel?.font = UIFont.defaultBoldFont(20)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.tintColor = .black
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.addTarget(self, action: #selector(signUpPressed(_:)), for: .touchUpInside)
         return button
     }()
+    
+    init(presenter: RegistrationPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let registrationPresenter = RegistrationPresenter(delegate: self)
-        delegate = registrationPresenter
         setupView()
     }
     
@@ -110,30 +112,18 @@ final class RegistrationViewController: UIViewController {
     
     @objc func hideTextField(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry.toggle()
-        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
-        hidePasswordFieldButton.setImage(UIImage(systemName: imageName), for: .normal)
+        let eyeImageCondition = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
+        hidePasswordFieldButton.setImage(UIImage(systemName: eyeImageCondition), for: .normal)
     }
     
     @objc func signUpPressed(_ sender: UIButton) {
-        //Username check
-        if !Validator.isValidUsername(for: nameTextField.text ?? "") {
-            AlertManager.showInvalidUsernameAlert(on: self)
-            return
-        }
-        //Email check
-        if !Validator.isValidEmail(for: emailTextField.text ?? "") {
-            AlertManager.showInvalidEmailAlert(on: self)
-            return
-        }
-        //Password check
-        if !Validator.isValidPassword(for: passwordTextField.text ?? "") {
-            AlertManager.showInvalidPasswordAlert(on: self)
-            return
-        }
+        let registrationModel = RegistrationModel(
+            name: nameTextField.text ?? "",
+            email: emailTextField.text ?? "",
+            password: passwordTextField.text ?? ""
+        )
         
-        self.delegate?.didRegister(with: RegistrationModel(name: nameTextField.text!,
-                                                           email: emailTextField.text!,
-                                                           password: passwordTextField.text!))
+        presenter.signUpPressed(with: registrationModel)
     }
     
     private func setupView() {
@@ -148,28 +138,28 @@ final class RegistrationViewController: UIViewController {
         
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(imageLogo.snp.bottom).offset(50)
             make.height.equalTo(50)
         }
         
         view.addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(nameTextField.snp.bottom).offset(20)
             make.height.equalTo(50)
         }
         
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.height.equalTo(50)
         }
         
         view.addSubview(signUpButton)
         signUpButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(passwordTextField.snp.bottom).offset(20)
             make.height.equalTo(55)
         }
@@ -188,26 +178,66 @@ final class RegistrationViewController: UIViewController {
         
         let rightPaddingButton = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         rightPaddingButton.addSubview(hidePasswordFieldButton)
+        
         hidePasswordFieldButton.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
-            make.right.equalToSuperview().inset(10)
+            make.leading.top.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().inset(10)
         }
+        
         passwordTextField.rightView = rightPaddingButton
         passwordTextField.rightViewMode = .always
-        
-        hidePasswordFieldButton.addTarget(self, action: #selector(hideTextField(_:)), for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUpPressed(_:)), for: .touchUpInside)
     }
     
 }
 
 // Presenter's methods 
-extension RegistrationViewController: RegistrationPresenterDelegate {
-    func didFail(with error: Error) {
+extension RegistrationViewController: RegistrationViewProtocol {
+    func showLoader() {
+        view.addSubview(loaderView)
+        loaderView.backgroundColor = UIColor.shared.LigthGray
+        loaderView.layer.cornerRadius = 20
+        loaderView.layer.cornerCurve = .continuous
+        
+        loaderView.snp.makeConstraints { make in
+            make.center.equalTo(view.snp.center)
+            make.size.equalTo(100)
+        }
+        
+        loaderView.addSubview(loader)
+        loader.style = .large
+        loader.color = .black
+        
+        loader.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(30)
+        }
+        
+        loader.startAnimating()
+    }
+    
+    func hideLoader() {
+        loader.stopAnimating()
+        loader.removeFromSuperview()
+        loaderView.removeFromSuperview()
+    }
+    
+    func showInvalidEmailError() {
+        AlertManager.showInvalidEmailAlert(on: self)
+    }
+    
+    func showInvalidUsernameError() {
+        AlertManager.showInvalidUsernameAlert(on: self)
+    }
+    
+    func showInvalidPasswordError() {
+        AlertManager.showInvalidPasswordAlert(on: self)
+    }
+    
+    func showRegistrationError(with error: Error) {
         AlertManager.showRegistrationErrorAlert(on: self, with: error)
     }
     
-    func didCheckAuthorization(answer: Bool) {
+    func checkAuthentication(answer: Bool) {
         if answer {
             if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
                 sceneDelegate.checkAuthentication()

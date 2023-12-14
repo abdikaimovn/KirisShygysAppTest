@@ -37,86 +37,89 @@ class OnboardingViewController: UIViewController {
         var pageControl = UIPageControl()
         pageControl.numberOfPages = 2
         pageControl.currentPage = 0
-        pageControl.currentPageIndicatorTintColor = UIColor(hex: "#B88E4E")
+        pageControl.currentPageIndicatorTintColor = UIColor.shared.Brown
         pageControl.pageIndicatorTintColor = UIColor.gray
         return pageControl
     }()
     
-    private var signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         var button = UIButton()
         button.setTitle("Sign Up", for: .normal)
-        button.backgroundColor = UIColor(hex: "#B88E4E")
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.layer.cornerRadius = 16
+        button.backgroundColor = UIColor.shared.Brown
+        button.titleLabel?.font = UIFont.defaultBoldFont(20)
+        button.layer.cornerRadius = 15
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(signUp), for: .touchUpInside)
         return button
     }()
     
-    private var signInButton: UIButton = {
+    private lazy var signInButton: UIButton = {
         var button = UIButton()
-        button.layer.cornerRadius = 16
+        button.layer.cornerRadius = 15
         button.clipsToBounds = true
         button.setTitle("Sign In", for: .normal)
         button.backgroundColor = UIColor.shared.Brown
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.titleLabel?.font = UIFont.defaultBoldFont(20)
+        button.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
-        setupUI()
+    
+        setupView()
     }
     
     @objc func signIn() {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = .black
         navigationItem.backBarButtonItem = backBarButtonItem
+        
         let authPresenter = AuthorizationPresenter()
-        let authController = AuthorizationViewController(presenter: authPresenter)
-        authPresenter.view = authController
-        self.navigationController?.pushViewController(authController, animated: true)
+        let authView = AuthorizationViewController(presenter: authPresenter)
+        authPresenter.view = authView
+        
+        self.navigationController?.pushViewController(authView, animated: true)
     }
     
     @objc func signUp() {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = .black
         navigationItem.backBarButtonItem = backBarButtonItem
-        self.navigationController?.pushViewController(RegistrationViewController(), animated: true)
+        
+        let registrationPresenter = RegistrationPresenter()
+        let registrationView = RegistrationViewController(presenter: registrationPresenter)
+        registrationPresenter.view = registrationView
+        
+        self.navigationController?.pushViewController(registrationView, animated: true)
     }
     
-    private func setupUI() {
+    private func setupView() {
         view.backgroundColor = .white
         view.addSubview(sliderCollView)
         sliderCollView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.height.equalTo(view.bounds.height * 0.6)
         }
         
         view.addSubview(pageControl)
         pageControl.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(sliderCollView.snp.bottom).offset(20)
-            make.width.equalTo(50)
-            make.height.equalTo(30)
         }
         
         view.addSubview(signUpButton)
         signUpButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.equalTo(pageControl.snp.bottom).offset(20)
-            make.width.equalTo(340)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(55)
         }
         
         view.addSubview(signInButton)
         signInButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.equalTo(signUpButton.snp.bottom).offset(15)
-            make.width.equalTo(340)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(55)
         }
     }
