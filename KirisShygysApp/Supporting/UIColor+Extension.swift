@@ -42,7 +42,12 @@ extension UIColor {
         UIColor(hex: "#2BA478")!
     }
     
-    var LigthGray: UIColor {
+    var LightGray: UIColor {
         UIColor(hex: "#f9f9f9")!
     }
+    
+    var LightBrown: UIColor {
+        UIColor(hex: "#ddd0bb")!
+    }
+
 }

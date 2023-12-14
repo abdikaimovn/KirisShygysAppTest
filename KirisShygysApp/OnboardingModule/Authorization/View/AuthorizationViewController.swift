@@ -174,7 +174,7 @@ extension AuthorizationViewController: AuthorizationViewProtocol {
     
     func showLoader() {
         view.addSubview(loaderView)
-        loaderView.backgroundColor = UIColor.shared.LigthGray
+        loaderView.backgroundColor = UIColor.shared.LightGray
         loaderView.layer.cornerRadius = 20
         loaderView.layer.cornerCurve = .continuous
         
