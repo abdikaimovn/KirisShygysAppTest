@@ -1,15 +1,18 @@
 import Foundation
 import FirebaseFirestore
 
-protocol HomePresenterDelegate: AnyObject {
+protocol HomeViewProtocol: AnyObject {
     func setUsername(username: String)
-    func didReceiveTransactionData(data: [TransactionModel])
+    func updateTransactionsData(data: [TransactionModel])
     func showLoader()
     func hideLoader()
+    func pushAllTransactionsView()
+    func showAbsenseDataAlert()
+    func updateCardViewValues(cardViewModel: CardViewModel)
 }
 
 class HomePresenter {
-    weak var view: HomePresenterDelegate?
+    weak var view: HomeViewProtocol?
     private let userManager: UserInfoProtocol
     
     init(userManager: UserInfoProtocol) {
@@ -20,66 +23,63 @@ class HomePresenter {
         print("HomePresenter was deinited")
     }
     
-    func setUsername() {
-        UserDataManager.shared.getCurrentUserName {[weak self] username in
-            self?.view?.setUsername(username: username ?? "Couldn't receive username")
-        }
-    }
-    
     func updateView() {
         view?.showLoader()
-        UserDataManager.shared.fetchTransactionData {[weak self] transactionData in
+        userManager.fetchTransactionData {[weak self] transactionData in
             self?.view?.hideLoader()
             if let transactionData = transactionData {
-                self?.view?.didReceiveTransactionData(data: transactionData)
+                self?.view?.updateTransactionsData(data: transactionData)
             }
         }
     }
     
     func viewDidLoaded() {
         view?.showLoader()
-        setUsername()
-        UserDataManager.shared.fetchTransactionData {[weak self] transactionData in
+        
+        userManager.getCurrentUserName {[weak self] username in
+            self?.view?.setUsername(username: username ?? "Couldn't receive username")
+        }
+        
+        userManager.fetchTransactionData {[weak self] transactionData in
             self?.view?.hideLoader()
             if let transactionData = transactionData {
-                self?.view?.didReceiveTransactionData(data: transactionData)
+                self?.view?.updateTransactionsData(data: transactionData)
             }
         }
     }
     
-    func calculateAmount(data: [TransactionModel]?, trasnsactionType: TransactionType?) -> Int {
-        if trasnsactionType == .income {
-            var incomes = 0
-            if let data = data {
-                for i in data {
-                    if i.transactionType == .income {
-                        incomes += i.transactionAmount
-                    }
-                }
-            }
-            return incomes
-        } else if trasnsactionType == .expense {
-            var expenses = 0
-            if let data = data {
-                for i in data {
-                    if i.transactionType == .expense {
-                        expenses += i.transactionAmount
-                    }
-                }
-            }
-            return expenses
+    func showAllTrasactionsTapped(data: [TransactionModel]) {
+        if data.isEmpty {
+            view?.showAbsenseDataAlert()
         } else {
-            var totalAmount = 0
-            if let data = data {
-                for i in data {
-                    if i.transactionType == .expense {
-                        totalAmount -= i.transactionAmount
-                    } else {
-                        totalAmount += i.transactionAmount
-                    }
+            view?.pushAllTransactionsView()
+        }
+    }
+    
+    func calculateCardViewValues(data: [TransactionModel]?) {
+        if let data = data {
+            var incomes = 0
+            var expenses = 0
+            var total = 0
+            
+            for transaction in data {
+                let transactionType = transaction.transactionType
+                let transactionAmount = transaction.transactionAmount
+                
+                switch transactionType {
+                // Counting expenses and total
+                case .expense:
+                    expenses += transactionAmount
+                    total -= transactionAmount
+                // Counting incomes and total
+                case .income:
+                    incomes += transactionAmount
+                    total += transactionAmount
                 }
+                
             }
-            return totalAmount
+            
+            view?.updateCardViewValues(cardViewModel: CardViewModel(incomes: incomes, expenses: expenses, total: total))
         }
     }
 }

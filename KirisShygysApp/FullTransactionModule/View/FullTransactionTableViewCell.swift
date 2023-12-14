@@ -1,7 +1,13 @@
-import UIKit
-import SnapKit
+//
+//  FullTransactionTableViewCell.swift
+//  KirisShygysApp
+//
+//  Created by Нурдаулет on 14.12.2023.
+//
 
-final class TransactionTableViewCell: UITableViewCell {
+import UIKit
+
+class FullTransactionTableViewCell: UITableViewCell {
     private var mainView: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 6
@@ -35,13 +41,6 @@ final class TransactionTableViewCell: UITableViewCell {
         return label
     }()
     
-    private var purchasedData: UILabel = {
-        var label = UILabel()
-        label.font = UIFont.defaultFont(14)
-        label.textColor = .black
-        return label
-    }()
-    
     private var priceLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont.defaultBoldFont(16)
@@ -58,12 +57,9 @@ final class TransactionTableViewCell: UITableViewCell {
     }
     
     func configure(transactionData: TransactionModel) {
-        let currentData = Date.now.formatted().prefix(10)
-        
         self.transName.text = transactionData.transactionName
         self.priceLabel.text = "$ \(transactionData.transactionAmount)"
         self.priceLabel.textColor = transactionData.transactionType == .income ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
-        self.purchasedData.text = transactionData.transactionDate == currentData ? "Today" : String(transactionData.transactionDate.prefix(10))
     
         viewImage.backgroundColor = priceLabel.textColor
         image.image = transactionData.transactionType == .income ? UIImage(systemName: "square.and.arrow.down") : UIImage(systemName: "square.and.arrow.up")
@@ -93,17 +89,11 @@ final class TransactionTableViewCell: UITableViewCell {
         mainView.addSubview(transName)
         transName.snp.makeConstraints { make in
             make.left.equalTo(viewImage.snp.right).offset(15)
-            make.top.equalTo(viewImage.snp.top)
+            make.centerY.equalTo(viewImage.snp.centerY)
         }
-    
-        transName.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        transName.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
-        mainView.addSubview(purchasedData)
-        purchasedData.snp.makeConstraints { make in
-            make.left.equalTo(viewImage.snp.right).offset(15)
-            make.bottom.equalTo(viewImage.snp.bottom)
-        }
+        transName.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        transName.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         mainView.addSubview(priceLabel)
         priceLabel.snp.makeConstraints { make in
@@ -111,9 +101,8 @@ final class TransactionTableViewCell: UITableViewCell {
             make.right.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
         }
-
+    
         priceLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
         priceLabel.backgroundColor = .blue
     }
 }

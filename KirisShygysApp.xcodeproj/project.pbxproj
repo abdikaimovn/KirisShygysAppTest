@@ -57,6 +57,8 @@
 		6FF3A2CF2AD4225000D51E3A /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2CE2AD4225000D51E3A /* AuthorizationViewController.swift */; };
 		6FF3A2D12AD4228400D51E3A /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2D02AD4228400D51E3A /* AuthorizationPresenter.swift */; };
 		6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2D22AD424B800D51E3A /* RegistrationPresenter.swift */; };
+		6FF560A62B2B5C1C00CDC0F6 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF560A52B2B5C1C00CDC0F6 /* CardViewModel.swift */; };
+		6FF560A82B2B629100CDC0F6 /* FullTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF560A72B2B629100CDC0F6 /* FullTransactionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +109,8 @@
 		6FF3A2CE2AD4225000D51E3A /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		6FF3A2D02AD4228400D51E3A /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
 		6FF3A2D22AD424B800D51E3A /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
+		6FF560A52B2B5C1C00CDC0F6 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		6FF560A72B2B629100CDC0F6 /* FullTransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +200,7 @@
 		6F4A7BE72AE552B900CE8892 /* HomeModule */ = {
 			isa = PBXGroup;
 			children = (
-				6F57F2712AFF88A3008712AE /* Model */,
+				6FF560A42B2B534800CDC0F6 /* Model */,
 				6F4A7BE82AE552E400CE8892 /* View */,
 				6F4A7BEA2AE552F800CE8892 /* Presenter */,
 			);
@@ -218,13 +222,6 @@
 				6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		6F57F2712AFF88A3008712AE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		6F57F2742AFFBADE008712AE /* Model */ = {
@@ -423,6 +420,7 @@
 				6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */,
 				6F7CD26C2B16091E005BFAFF /* DetailTransactionView.swift */,
 				6FADAA6F2B2218B80001CCC6 /* DetailTableViewCell.swift */,
+				6FF560A72B2B629100CDC0F6 /* FullTransactionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -504,6 +502,14 @@
 				6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6FF560A42B2B534800CDC0F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6FF560A52B2B5C1C00CDC0F6 /* CardViewModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,6 +603,7 @@
 				6F7CD27B2B166805005BFAFF /* StoryCollectionViewCell.swift in Sources */,
 				6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */,
 				6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */,
+				6FF560A82B2B629100CDC0F6 /* FullTransactionTableViewCell.swift in Sources */,
 				6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */,
 				6F658BC12ACEA9A3004ECACB /* HomeViewController.swift in Sources */,
 				6FCF294F2AF131BF00CEA307 /* TabViewController.swift in Sources */,
@@ -628,6 +635,7 @@
 				6F7CD27D2B1677BC005BFAFF /* ReportPresenter.swift in Sources */,
 				6F8D467C2B04E35B00F012AC /* Date+Extension.swift in Sources */,
 				6FADAA6B2B2043A70001CCC6 /* UIFont+Extension.swift in Sources */,
+				6FF560A62B2B5C1C00CDC0F6 /* CardViewModel.swift in Sources */,
 				6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */,
 				6F86B3372ACED6F90092BC00 /* UIColor+Extension.swift in Sources */,
 			);

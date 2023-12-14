@@ -39,7 +39,7 @@ final class FullTransactionViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        tableView.register(FullTransactionTableViewCell.self, forCellReuseIdentifier: "FullTransactionTableViewCell")
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
@@ -142,12 +142,12 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath) as! TransactionTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FullTransactionTableViewCell", for: indexPath) as! FullTransactionTableViewCell
         
         let sectionTitle = sectionTitles[indexPath.section].sectionTitleDate
         if let transactions = groupedTransactions[sectionTitle] {
             let transaction = transactions[indexPath.row]
-            cell.configure(transactionData: transaction, isHiddenData: true)
+            cell.configure(transactionData: transaction)
         }
         
         return cell
