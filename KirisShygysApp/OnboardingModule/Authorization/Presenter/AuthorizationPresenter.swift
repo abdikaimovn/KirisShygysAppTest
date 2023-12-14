@@ -7,27 +7,41 @@
 
 import Foundation
 
-protocol AuthViewProtocol: AnyObject {
-    func didFail(with error: Error)
-    func didSuccess()
+protocol AuthorizationViewProtocol: AnyObject {
+    func showAuthorizationError(with error: Error)
+    func checkAuthentication()
+    func showLoader()
+    func hideLoader()
+    func showInvalidEmailError()
+    func showInvalidPasswordError()
 }
 
 final class AuthorizationPresenter {
-    weak var view: AuthViewProtocol?
+    weak var view: AuthorizationViewProtocol?
     
-    public func authorize(with data: AuthorizationModel) {
+    func signInButtonPressed(with data: AuthorizationModel) {
+        if !Validator.isValidEmail(for: data.email) {
+            view?.showInvalidEmailError()
+            return
+        }
+        
+        //Password check
+        if !Validator.isValidPassword(for: data.password) {
+            view?.showInvalidPasswordError()
+            return
+        }
+        
+        view?.showLoader()
         AuthService.shared.signIn(with: data) { error in
+            self.view?.hideLoader()
+            
             if let error = error {
-                self.view?.didFail(with: error)
+                self.view?.showAuthorizationError(with: error)
                 return
             }
             
-            self.view?.didSuccess()
+            self.view?.checkAuthentication()
         }
-    }
-    
-    func didSignIn(with data: AuthorizationModel) {
-        self.authorize(with: data)
     }
     
 }

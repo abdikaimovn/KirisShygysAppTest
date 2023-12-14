@@ -10,6 +10,8 @@ import SnapKit
 
 final class AuthorizationViewController: UIViewController {
     private let presenter: AuthorizationPresenter
+    private let loader = UIActivityIndicatorView()
+    private let loaderView = UIView()
     
     private var imageLogo: UIImageView = {
         var imageView = UIImageView()
@@ -87,24 +89,19 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @objc func signInPressed() {
-        if !Validator.isValidEmail(for: emailTextField.text ?? "") {
-            AlertManager.showInvalidEmailAlert(on: self)
-            return
-        }
+        let authorizationModel = AuthorizationModel(
+            email: emailTextField.text ?? "",
+            password: passwordTextField.text ?? ""
+        )
         
-        if !Validator.isValidPassword(for: passwordTextField.text ?? "") {
-            AlertManager.showInvalidPasswordAlert(on: self)
-            return
-        }
-        
-        let data = AuthorizationModel(email: emailTextField.text!, password: passwordTextField.text!)
-        
-        presenter.didSignIn(with: data)
+        presenter.signInButtonPressed(with: authorizationModel)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         emailTextField.becomeFirstResponder()
     }
 
@@ -117,9 +114,6 @@ final class AuthorizationViewController: UIViewController {
     func setupView() {
         view.backgroundColor = .white
         
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        
         view.addSubview(imageLogo)
         imageLogo.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -129,21 +123,21 @@ final class AuthorizationViewController: UIViewController {
         
         view.addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(imageLogo.snp.bottom).offset(50)
             make.height.equalTo(50)
         }
         
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.height.equalTo(50)
         }
         
         view.addSubview(signInButton)
         signInButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(passwordTextField.snp.bottom).offset(20)
             make.height.equalTo(55)
         }
@@ -158,21 +152,60 @@ final class AuthorizationViewController: UIViewController {
         
         let rightPaddingButton = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         rightPaddingButton.addSubview(hidePasswordFieldButton)
+        
         hidePasswordFieldButton.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
-            make.right.equalToSuperview().inset(10)
+            make.leading.top.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().inset(10)
         }
+        
         passwordTextField.rightView = rightPaddingButton
         passwordTextField.rightViewMode = .always
     }
 }
 
-extension AuthorizationViewController: AuthViewProtocol {
-    func didFail(with error: Error) {
+extension AuthorizationViewController: AuthorizationViewProtocol {
+    func showInvalidEmailError() {
+        AlertManager.showInvalidEmailAlert(on: self)
+    }
+    
+    func showInvalidPasswordError() {
+        AlertManager.showInvalidPasswordAlert(on: self)
+    }
+    
+    func showLoader() {
+        view.addSubview(loaderView)
+        loaderView.backgroundColor = UIColor.shared.LigthGray
+        loaderView.layer.cornerRadius = 20
+        loaderView.layer.cornerCurve = .continuous
+        
+        loaderView.snp.makeConstraints { make in
+            make.center.equalTo(view.snp.center)
+            make.size.equalTo(100)
+        }
+        
+        loaderView.addSubview(loader)
+        loader.style = .large
+        loader.color = .black
+        
+        loader.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(30)
+        }
+        
+        loader.startAnimating()
+    }
+    
+    func hideLoader() {
+        loader.stopAnimating()
+        loader.removeFromSuperview()
+        loaderView.removeFromSuperview()
+    }
+    
+    func showAuthorizationError(with error: Error) {
         AlertManager.showAuthorizationErrorAlert(on: self)
     }
     
-    func didSuccess() {
+    func checkAuthentication() {
         if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
             sceneDelegate.checkAuthentication()
         }
