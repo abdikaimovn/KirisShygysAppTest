@@ -92,17 +92,13 @@ class FullTransactionTableViewCell: UITableViewCell {
             make.centerY.equalTo(viewImage.snp.centerY)
         }
         
-        transName.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        transName.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
         mainView.addSubview(priceLabel)
         priceLabel.snp.makeConstraints { make in
-            make.left.equalTo(transName.snp.right).offset(10)
+            make.left.greaterThanOrEqualTo(transName.snp.right).offset(10)
             make.right.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
         }
-    
-        priceLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        priceLabel.backgroundColor = .blue
+        
+        priceLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }
