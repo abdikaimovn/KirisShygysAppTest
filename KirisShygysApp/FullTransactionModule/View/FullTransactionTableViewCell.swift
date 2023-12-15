@@ -71,31 +71,31 @@ class FullTransactionTableViewCell: UITableViewCell {
         contentView.addSubview(mainView)
         mainView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(5)
-            make.left.right.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
         
         mainView.addSubview(viewImage)
         viewImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview().inset(10)
             make.size.equalTo(50)
         }
         
         viewImage.addSubview(image)
         image.snp.makeConstraints { make in
-            make.left.top.bottom.right.equalToSuperview().inset(10)
+            make.leading.trailing.top.bottom.equalToSuperview().inset(10)
         }
         
         mainView.addSubview(transName)
         transName.snp.makeConstraints { make in
-            make.left.equalTo(viewImage.snp.right).offset(15)
+            make.leading.equalTo(viewImage.snp.trailing).offset(15)
             make.centerY.equalTo(viewImage.snp.centerY)
         }
         
         mainView.addSubview(priceLabel)
         priceLabel.snp.makeConstraints { make in
-            make.left.greaterThanOrEqualTo(transName.snp.right).offset(10)
-            make.right.equalToSuperview().inset(10)
+            make.leading.greaterThanOrEqualTo(transName.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
         }
         

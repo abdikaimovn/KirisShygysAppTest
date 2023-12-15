@@ -15,7 +15,7 @@ class FilterViewController: UIViewController {
     weak var delegate: FilterViewControllerDelegate?
     private var filterModel: FilterModel? = FilterModel(filterBy: nil, sortBy: nil, period: nil)
     
-    init(delegate: FilterViewControllerDelegate? = nil) {
+    init(delegate: FilterViewControllerDelegate?) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -68,6 +68,7 @@ class FilterViewController: UIViewController {
         var button = UIButton()
         button.setTitle("Reset", for: .normal)
         button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.defaultFont(18)
         button.layer.cornerCurve = .continuous
         button.backgroundColor = UIColor.shared.ExpenseColor
         button.setTitleColor(.white, for: .normal)
@@ -79,7 +80,7 @@ class FilterViewController: UIViewController {
         var button = generateButton("Apply")
         button.backgroundColor = UIColor.shared.Brown
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Futura-Bold", size: 18)
+        button.titleLabel?.font = UIFont.defaultBoldFont(18)
         return button
     }()
     
@@ -146,26 +147,27 @@ class FilterViewController: UIViewController {
         
         view.addSubview(filterTransactionLabel)
         filterTransactionLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(20)
-            make.top.equalTo(closeLine.snp.top).inset(20)
+            make.leading.equalToSuperview().inset(20)
+            make.top.equalTo(closeLine.snp.bottom).offset(20)
         }
         
         view.addSubview(resetButton)
         resetButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(20)
+            make.leading.equalTo(filterTransactionLabel.snp.trailing).offset(20)
             make.centerY.equalTo(filterTransactionLabel.snp.centerY)
         }
-        
+
         view.addSubview(filterByLabel)
         filterByLabel.snp.makeConstraints { make in
             make.top.equalTo(filterTransactionLabel.snp.bottom).offset(30)
-            make.left.equalTo(filterTransactionLabel.snp.left)
+            make.leading.equalTo(filterTransactionLabel.snp.leading)
         }
         
         view.addSubview(filterByStack)
         filterByStack.snp.makeConstraints { make in
             make.top.equalTo(filterByLabel.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
     
         filterByStack.addArrangedSubview(filterByExpenseButton)
@@ -174,13 +176,13 @@ class FilterViewController: UIViewController {
         view.addSubview(sortByLabel)
         sortByLabel.snp.makeConstraints { make in
             make.top.equalTo(filterByStack.snp.bottom).offset(30)
-            make.left.equalTo(filterTransactionLabel.snp.left)
+            make.leading.equalTo(filterTransactionLabel.snp.leading)
         }
         
         view.addSubview(sortByStack)
         sortByStack.snp.makeConstraints { make in
             make.top.equalTo(sortByLabel.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
 
         sortByStack.addArrangedSubview(sortByNewestButton)
@@ -189,13 +191,13 @@ class FilterViewController: UIViewController {
         view.addSubview(periodLabel)
         periodLabel.snp.makeConstraints { make in
             make.top.equalTo(sortByStack.snp.bottom).offset(30)
-            make.left.equalTo(filterTransactionLabel.snp.left)
+            make.leading.equalTo(filterTransactionLabel.snp.leading)
         }
         
         view.addSubview(periodStack)
         periodStack.snp.makeConstraints { make in
             make.top.equalTo(periodLabel.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
         periodStack.addArrangedSubview(weekPeriodButton)
@@ -205,7 +207,7 @@ class FilterViewController: UIViewController {
         
         view.addSubview(applyButton)
         applyButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(periodStack.snp.bottom).offset(20)
             make.height.equalTo(50)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
@@ -228,7 +230,7 @@ class FilterViewController: UIViewController {
     private func generateTitleLabel(_ title: String) -> UILabel {
         let label = UILabel()
         label.text = title
-        label.font = UIFont(name: "Futura", size: 18)
+        label.font = UIFont.defaultFont(18)
         label.textColor = .black
         return label
     }
