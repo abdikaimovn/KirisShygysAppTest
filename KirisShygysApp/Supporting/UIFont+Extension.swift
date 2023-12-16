@@ -15,4 +15,8 @@ extension UIFont {
     static func defaultBoldFont(_ sizeOf: CGFloat) -> UIFont {
         return UIFont(name: "Helvetica-Bold", size: sizeOf)!
     }
+    
+    static func defaultItalicFont(_ sizeOf: CGFloat) -> UIFont {
+        return UIFont(name: "Helvetica-Oblique", size: sizeOf)!
+    }
 }

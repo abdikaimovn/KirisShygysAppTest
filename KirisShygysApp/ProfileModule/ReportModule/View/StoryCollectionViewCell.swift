@@ -7,32 +7,32 @@
 
 import UIKit
 
-class StoryCollectionViewCell: UICollectionViewCell {
-    private var thisMonthLabel: UILabel = {
+final class StoryCollectionViewCell: UICollectionViewCell {
+    private let thisMonthLabel: UILabel = {
         var label = UILabel()
         label.text = "This Month"
-        label.textColor = UIColor(hex: "#F2F2F2")
-        label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.textColor = UIColor.shared.LightGray
+        label.font = UIFont.defaultFont(20)
         return label
     }()
     
-    private var transactionType: UILabel = {
+    private let transactionType: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
+        label.font = UIFont.defaultBoldFont(35)
         label.textColor = .white
         label.textAlignment = .center
         return label
     }()
     
-    private var amountLabel: UILabel = {
+    private let amountLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
+        label.font = UIFont.defaultBoldFont(35)
         label.textColor = .white
         label.textAlignment = .center
         return label
     }()
     
-    private var containerView: UIView = {
+    private let containerView: UIView = {
         var view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 10
@@ -41,35 +41,35 @@ class StoryCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private var biggestTransactionLabel: UILabel = {
+    private let biggestTransactionLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        label.font = UIFont.defaultFont(25)
         label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
     
-    private var biggestTransactionView: UIView = {
+    private let biggestTransactionView: UIView = {
         var view = UIView()
-        view.backgroundColor = UIColor(hex: "#CCCCCC")
+        view.backgroundColor = UIColor.shared.LightGray
         view.layer.cornerRadius = 15
         view.layer.cornerCurve = .continuous
         return view
     }()
     
-    private var biggestTransactionName: UILabel = {
+    private let biggestTransactionName: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue", size: 25)
+        label.font = UIFont.defaultFont(25)
         label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
     
-    private var biggestTransactionAmount: UILabel = {
+    private let biggestTransactionAmount: UILabel = {
         var label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue", size: 30)
+        label.font = UIFont.defaultFont(30)
         label.textColor = .black
         label.textAlignment = .center
         return label
@@ -105,18 +105,19 @@ class StoryCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(containerView)
         containerView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(30)
         }
         
         containerView.addSubview(biggestTransactionLabel)
         biggestTransactionLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(20)
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
         containerView.addSubview(biggestTransactionView)
         biggestTransactionView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(biggestTransactionLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
@@ -124,9 +125,9 @@ class StoryCollectionViewCell: UICollectionViewCell {
         biggestTransactionView.addSubview(biggestTransactionName)
         biggestTransactionName.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(10)
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
         }
-        
+   
         containerView.addSubview(biggestTransactionAmount)
         biggestTransactionAmount.snp.makeConstraints { make in
             make.top.equalTo(biggestTransactionView.snp.bottom).offset(20)

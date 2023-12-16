@@ -13,35 +13,35 @@ final class ProfileViewController: UIViewController {
     private let loader = UIActivityIndicatorView()
     private let loaderView = UIView()
     
-    private var userImage: UIImageView = {
+    private let userImage: UIImageView = {
         var image = UIImageView()
         image.clipsToBounds = true
         image.layer.cornerRadius = 20
         image.layer.cornerCurve = .continuous
         image.image = UIImage(systemName: "person.crop.circle")
         image.contentMode = .scaleAspectFit
-        image.backgroundColor = UIColor(hex: "#eeeeef")
+        image.backgroundColor = UIColor.shared.LightGray
         image.tintColor = UIColor.shared.Brown
         return image
     }()
    
-    private var userNameLabel: UILabel = {
+    private let userNameLabel: UILabel = {
         var label = UILabel()
         label.text = "Username"
         label.textColor = .black
-        label.font = UIFont(name: "Futura", size: 16)
+        label.font = UIFont.defaultFont(16)
         return label
     }()
     
-    private var userName: UILabel = {
+    private let userName: UILabel = {
         var label = UILabel()
         label.text = "Loading..."
         label.textColor = .black
-        label.font = UIFont(name: "Futura-Bold", size: 22)
+        label.font = UIFont.defaultBoldFont(22)
         return label
     }()
     
-    private var editButton: UIButton = {
+    private let editButton: UIButton = {
         var btn = UIButton()
         btn.tintColor = .black
         btn.setImage(UIImage(systemName: "pencil"), for: .normal)
@@ -100,11 +100,18 @@ final class ProfileViewController: UIViewController {
         self.profilePresenter.reportTransactionDidTapped()
     }
     
+    private func createTransactionReportModule(with data: [TransactionModel]?) -> UIViewController {
+        let presenter = ReportPresenter()
+        let view = ReportViewController(transactionData: data!, presenter: presenter)
+        presenter.view = view
+        return view
+    }
+    
     private func configureCustomButtonView(viewImage: String, viewTitle: String) -> UIView {
         let mainView: UIView = {
             let view = UIView()
             view.isUserInteractionEnabled = true
-            view.backgroundColor = UIColor(hex: "#eeeeef")
+            view.backgroundColor = UIColor.shared.LightGray
             view.layer.cornerRadius = 10
             return view
         }()
@@ -129,25 +136,25 @@ final class ProfileViewController: UIViewController {
             let label = UILabel()
             label.text = viewTitle
             label.textColor = .black
-            label.font = UIFont(name: "Futura", size: 18)
+            label.font = UIFont.defaultFont(18)
             return label
         }()
         
         mainView.addSubview(subView)
         subView.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview().inset(10)
             make.size.equalTo(45)
         }
         
         subView.addSubview(image)
         image.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview().inset(10)
+            make.leading.trailing.top.bottom.equalToSuperview().inset(10)
         }
         
         mainView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.left.equalTo(subView.snp.right).offset(20)
+            make.leading.equalTo(subView.snp.trailing).offset(20)
             make.centerY.equalTo(image.snp.centerY)
         }
         
@@ -159,51 +166,51 @@ final class ProfileViewController: UIViewController {
         view.addSubview(userImage)
         
         userImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             make.size.equalTo(60)
         }
         
         view.addSubview(userNameLabel)
         userNameLabel.snp.makeConstraints { make in
-            make.left.equalTo(userImage.snp.right).offset(20)
+            make.leading.equalTo(userImage.snp.trailing).offset(20)
             make.top.equalTo(userImage.snp.top).offset(5)
         }
         
         view.addSubview(userName)
         userName.snp.makeConstraints { make in
-            make.left.equalTo(userImage.snp.right).offset(20)
+            make.leading.equalTo(userImage.snp.trailing).offset(20)
             make.bottom.equalTo(userImage.snp.bottom).offset(-5)
         }
         
         view.addSubview(editButton)
         editButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-15)
+            make.trailing.equalToSuperview().offset(-15)
             make.centerY.equalTo(userImage.snp.centerY)
             make.size.equalTo(40)
         }
         
         view.addSubview(transactionReport)
         transactionReport.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(userImage.snp.bottom).offset(30)
         }
         
         view.addSubview(settingsView)
         settingsView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(transactionReport.snp.bottom).offset(10)
         }
         
         view.addSubview(statisticsView)
         statisticsView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(settingsView.snp.bottom).offset(10)
         }
         
         view.addSubview(logOutView)
         logOutView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(statisticsView.snp.bottom).offset(10)
         }
     }
@@ -224,7 +231,7 @@ extension ProfileViewController: ProfileViewProtocol {
     }
     
     func didReceiveUserTransactionReport(_ transactionData: [TransactionModel]?) {
-        self.navigationController?.pushViewController(ReportViewController(transactionData: transactionData!), animated: true)
+        self.navigationController?.pushViewController(createTransactionReportModule(with: transactionData), animated: true)
     }
     
     func showLoader() {

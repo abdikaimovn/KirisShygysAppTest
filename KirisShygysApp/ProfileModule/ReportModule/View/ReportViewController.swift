@@ -7,20 +7,20 @@
 
 import UIKit
 
-class ReportViewController: UIViewController {
-    var presenter: ReportPresenter?
-    var transactionData: [TransactionModel]!
+final class ReportViewController: UIViewController {
+    private let presenter: ReportPresenter
+    private let transactionData: [TransactionModel]!
     
     private var reportData = [
         ReportModel(transactionType: "You Spend 💸", amount: "$ 0", biggestTransactionLabel: "and your biggest spending is from", biggestTransactionName: "None", biggestTransactionAmount: "$ 0"),
         ReportModel(transactionType: "You Earned 💰", amount: "$ 0", biggestTransactionLabel: "your biggest Income is from", biggestTransactionName: "None", biggestTransactionAmount: "$ 0")
     ]
     
-    private var pageControl: UIPageControl = {
+    private let pageControl: UIPageControl = {
         var pageControl = UIPageControl()
         pageControl.numberOfPages = 3
         pageControl.currentPage = 0
-        pageControl.pageIndicatorTintColor = UIColor(hex: "#CCCCCC")
+        pageControl.pageIndicatorTintColor = UIColor.shared.LightGray
         pageControl.currentPageIndicatorTintColor = .white
         return pageControl
     }()
@@ -41,10 +41,10 @@ class ReportViewController: UIViewController {
         return collView
     }()
     
-    init(transactionData: [TransactionModel]) {
-        super.init(nibName: nil, bundle: nil)
-        
+    init(transactionData: [TransactionModel], presenter: ReportPresenter) {
+        self.presenter = presenter
         self.transactionData = transactionData
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -56,9 +56,8 @@ class ReportViewController: UIViewController {
         
         
         setupView()
-        setupDelegate()
         
-        self.presenter?.calculateData(transactionData: self.transactionData)
+        presenter.calculateData(transactionData: self.transactionData)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,30 +85,24 @@ class ReportViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    func setupDelegate() {
-        self.presenter = ReportPresenter(delegate: self)
-    }
-    
     private func setupView() {
         view.backgroundColor = UIColor.shared.ExpenseColor
         view.addSubview(pageControl)
         pageControl.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(5)
-            make.left.right.equalToSuperview().inset(20)
-            make.width.equalTo(50)
-            make.height.equalTo(30)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
         view.addSubview(storiesCollectionView)
         storiesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(pageControl.snp.bottom).offset(10)
-            make.left.right.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(20)
         }
     }
     
-    private func updatePageControlColor() {
-        pageControl.pageIndicatorTintColor = UIColor(hex: "#CCCCCC")
+    private func updatePageControlAndViewColor() {
+        pageControl.pageIndicatorTintColor = UIColor.shared.LightGray
         pageControl.currentPageIndicatorTintColor = .white
         
         if pageControl.currentPage == 0 {
@@ -128,7 +121,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == 0 || indexPath.row == 1{
+        if indexPath.row == 0 || indexPath.row == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as! StoryCollectionViewCell
             cell.configure(reportModel: reportData[indexPath.row])
             return cell
@@ -141,12 +134,12 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
         pageControl.currentPage = Int(scrollView.contentOffset.x / width)
-        updatePageControlColor()
+        updatePageControlAndViewColor()
     }
 
 }
 
-extension ReportViewController: ReportPresenterDelegate {
+extension ReportViewController: ReportViewProtocol {
     func didCalculateTransactionData(_ incomeInfo: ReportInfo, _ expenseInfo: ReportInfo) {
         reportData[0].amount = "$ \(expenseInfo.summa)"
         reportData[0].biggestTransactionAmount = "$ \(expenseInfo.maxValue)"

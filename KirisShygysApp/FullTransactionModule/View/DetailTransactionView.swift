@@ -21,7 +21,7 @@ final class DetailTransactionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var logoImage: UIImageView = {
+    private let logoImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(named: "logo")
         image.layer.cornerRadius = 20
@@ -61,20 +61,16 @@ final class DetailTransactionView: UIView {
         return tableView
     }()
     
-    @objc func closeButtonTapped() {
-        self.removeFromSuperview()
-    }
-    
     private func setupView() {
         self.addSubview(infoView)
         infoView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.height.equalToSuperview()
         }
         
         infoView.addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
             make.size.equalTo(50)
             make.top.equalToSuperview().inset(15)
         }
@@ -82,12 +78,12 @@ final class DetailTransactionView: UIView {
         infoView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalTo(logoImage.snp.centerY)
-            make.left.equalTo(logoImage.snp.right).offset(15)
+            make.leading.equalTo(logoImage.snp.trailing).offset(15)
         }
         
         infoView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(logoImage.snp.bottom).offset(20)
             make.bottom.equalToSuperview().inset(20)
         }

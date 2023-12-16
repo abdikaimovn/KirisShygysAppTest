@@ -5,7 +5,7 @@ final class FullTransactionViewController: UIViewController {
     private var groupedTransactions: [String: [TransactionModel]] = [:]
     private var changedTransactionData: [TransactionModel]?
     private var sectionTitles: [SectionTitleModel] = []
-    private let presenter: FullTransactionPresenterProtocol
+    private let presenter: FullTransactionPresenter
     
     private let loader = UIActivityIndicatorView()
     private let loaderView = UIView()
@@ -13,7 +13,7 @@ final class FullTransactionViewController: UIViewController {
     private var transactionInfoView: UIView?
     private var closeTransactionInfoButton: UIButton?
     
-    private var filterTransactionLabel: UILabel = {
+    private let filterTransactionLabel: UILabel = {
         var label = UILabel()
         label.text = "Filter Transactions"
         label.font = UIFont.defaultBoldFont(18)
@@ -28,8 +28,7 @@ final class FullTransactionViewController: UIViewController {
         image.backgroundColor = .clear
         image.contentMode = .scaleAspectFit
         image.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterGestureRecognizer))
-        image.addGestureRecognizer(tapGestureRecognizer)
+        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterGestureRecognizer)))
         return image
     }()
     
@@ -44,7 +43,7 @@ final class FullTransactionViewController: UIViewController {
         return tableView
     }()
     
-    init(transactionData: [TransactionModel], presenter: FullTransactionPresenterProtocol) {
+    init(transactionData: [TransactionModel], presenter: FullTransactionPresenter) {
         self.transactionData = transactionData
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -90,19 +89,19 @@ final class FullTransactionViewController: UIViewController {
         view.addSubview(filterTransactionLabel)
         filterTransactionLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
-            make.left.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(20)
         }
         
         view.addSubview(filterImage)
         filterImage.snp.makeConstraints { make in
             make.centerY.equalTo(filterTransactionLabel.snp.centerY)
-            make.right.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(20)
             make.size.equalTo(30)
         }
 
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
             make.top.equalTo(filterImage.snp.bottom).offset(10)
         }
@@ -127,14 +126,7 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sectionTitle = sectionTitles[section].sectionTitleDate
         
-        switch sectionTitle {
-        case Date.now.formatted().prefix(10):
-            return "Today"
-        case Date().yesterday.formatted().prefix(10):
-            return "Yesterday"
-        default:
-            return sectionTitle
-        }
+        return presenter.identifySectionTitle(sectionTitle)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -166,7 +158,7 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
         transactionInfoView!.addSubview(closeTransactionInfoButton!)
         closeTransactionInfoButton!.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
-            make.left.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(20)
         }
         
         closeTransactionInfoButton?.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
@@ -175,7 +167,7 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
         
         transactionInfoView!.addSubview(detailTransactionView)
         detailTransactionView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(closeTransactionInfoButton!.snp.bottom).offset(20)
             make.height.equalTo(400)
         }
@@ -184,6 +176,7 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     }
 }
 
+// Connection with FilteViewController to receive filter settings if they exists
 extension FullTransactionViewController: FilterViewControllerDelegate {
     func didGetFilterSettings(filterData: FilterModel) {
         if filterData.period == nil && filterData.sortBy == nil && filterData.filterBy == nil {

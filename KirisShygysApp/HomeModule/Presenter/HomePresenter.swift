@@ -11,7 +11,7 @@ protocol HomeViewProtocol: AnyObject {
     func updateCardViewValues(cardViewModel: CardViewModel)
 }
 
-class HomePresenter {
+final class HomePresenter {
     weak var view: HomeViewProtocol?
     private let userManager: UserInfoProtocol
     

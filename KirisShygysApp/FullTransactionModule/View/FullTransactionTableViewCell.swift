@@ -7,8 +7,8 @@
 
 import UIKit
 
-class FullTransactionTableViewCell: UITableViewCell {
-    private var mainView: UIView = {
+final class FullTransactionTableViewCell: UITableViewCell {
+    private let mainView: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 6
         view.layer.cornerCurve = .continuous
@@ -16,14 +16,14 @@ class FullTransactionTableViewCell: UITableViewCell {
         return view
     }()
     
-    private var viewImage: UIView = {
+    private let viewImage: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 6
         view.layer.cornerCurve = .continuous
         return view
     }()
     
-    private var image: UIImageView = {
+    private let image: UIImageView = {
         var image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.image = UIImage(systemName: "square.and.arrow.up")
@@ -32,7 +32,7 @@ class FullTransactionTableViewCell: UITableViewCell {
         return image
     }()
     
-    private var transName: UILabel = {
+    private let transName: UILabel = {
         var label = UILabel()
         label.font = UIFont.defaultFont(16)
         label.textColor = .black
@@ -41,7 +41,7 @@ class FullTransactionTableViewCell: UITableViewCell {
         return label
     }()
     
-    private var priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont.defaultBoldFont(16)
         return label
