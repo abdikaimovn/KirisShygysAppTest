@@ -9,27 +9,21 @@ import Foundation
 import UIKit
 import Firebase
 
-protocol TransactionViewControllerDelegate: AnyObject{
-    func didReceiveTransactionData(transactionData: TransactionModel)
+protocol TransactionViewProtocol: AnyObject {
+    func showError(with error: ErrorModel)
+    func updateViewColors(with color: UIColor)
 }
 
-protocol TransactionPresenterDelegate: AnyObject {
-    
-}
+final class TransactionPresenter {
+    weak var view: TransactionViewProtocol?
 
-class TransactionPresenter {
-    weak var delegate: TransactionPresenterDelegate?
-    
-    init(delegate: TransactionPresenterDelegate? = nil) {
-        self.delegate = delegate
-    }
-    
     deinit {
         print("TransactionPresenter was deinited")
     }
 }
 
-extension TransactionPresenter: TransactionViewControllerDelegate {
+// Implemating view's methods
+extension TransactionPresenter {
     func didReceiveTransactionData(transactionData: TransactionModel) {
         let db = Firestore.firestore()
         
@@ -52,9 +46,9 @@ extension TransactionPresenter: TransactionViewControllerDelegate {
         db.collection("users")
             .document(Auth.auth().currentUser!.uid)
             .collection(collectionName)
-            .addDocument(data: transactionData) { error in
+            .addDocument(data: transactionData) {[weak self] error in
                 if let error = error {
-                    print("ERROR: \(error.localizedDescription)")
+                    self?.view?.showError(with: ErrorModel(error: error))
                     return
                 }
             }
@@ -62,12 +56,20 @@ extension TransactionPresenter: TransactionViewControllerDelegate {
         db.collection("users")
             .document(Auth.auth().currentUser!.uid)
             .collection("Transactions")
-            .addDocument(data: transactionData) { error in
+            .addDocument(data: transactionData) { [weak self] error in
                 if let error = error {
-                    print("ERROR: \(error.localizedDescription)")
+                    self?.view?.showError(with: ErrorModel(error: error))
                     return
                 }
             }
+    }
+    
+    func segmentedControlChosen(index: Int) {
+        if index == 0 {
+            view?.updateViewColors(with: UIColor.shared.IncomeColor)
+        } else {
+            view?.updateViewColors(with: UIColor.shared.ExpenseColor)
+        }
     }
 }
 

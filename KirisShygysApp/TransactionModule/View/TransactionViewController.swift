@@ -8,17 +8,16 @@
 import UIKit
 import SnapKit
 
-final class TransactionViewController: UIViewController, UITextViewDelegate {
-    var delegate: TransactionViewControllerDelegate?
-    var presenter: TransactionPresenter?
+final class TransactionViewController: UIViewController {
+    private let presenter: TransactionPresenter
     
-    private var headView: UIView = {
+    private let headView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.shared.IncomeColor
         return view
     }()
     
-    private var surfaceView: UIView = {
+    private let surfaceView: UIView = {
         var view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 15
@@ -26,7 +25,7 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         return view
     }()
     
-    private var segmentedControl: UISegmentedControl = {
+    private let segmentedControl: UISegmentedControl = {
         var sControl = UISegmentedControl()
         sControl.insertSegment(withTitle: "Income", at: 0, animated: true)
         sControl.insertSegment(withTitle: "Expenses", at: 1, animated: true)
@@ -34,18 +33,18 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         return sControl
     }()
     
-    private var transNameLabel: UILabel = {
+    private let transNameLabel: UILabel = {
         var label = UILabel()
         label.text = "Name"
         label.textColor = .black
-        label.font = UIFont(name: "Futura", size: 18)
+        label.font = UIFont.defaultFont(18)
         return label
     }()
     
-    private var transNameTextField: UITextField = {
+    private let transNameTextField: UITextField = {
         var field = UITextField()
-        field.font = UIFont(name: "Futura", size: 18)
-        field.backgroundColor = UIColor(hex: "#eeeeef")
+        field.font = UIFont.defaultFont(18)
+        field.backgroundColor = UIColor.shared.LightGray
         field.layer.cornerRadius = 10
         field.layer.cornerCurve = .continuous
         field.textColor = .black
@@ -53,38 +52,38 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         return field
     }()
     
-    private var descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         var label = UILabel()
         label.text = "Description"
         label.textColor = .black
-        label.font = UIFont(name: "Futura", size: 18)
+        label.font = UIFont.defaultFont(18)
         return label
     }()
     
-    private var descriptionTextField: UITextView = {
+    private let descriptionTextField: UITextView = {
         var description = UITextView()
-        description.backgroundColor = UIColor(hex: "#eeeeef")
+        description.backgroundColor = UIColor.shared.LightGray
         description.textColor = .black
         description.layer.cornerRadius = 10
         description.layer.cornerCurve = .continuous
-        description.font = UIFont(name: "Futura", size: 18)
+        description.font = UIFont.defaultFont(18)
         description.returnKeyType = .done
         return description
     }()
     
-    private var amountLabel: UILabel = {
+    private let amountLabel: UILabel = {
         var label = UILabel()
         label.text = "How much ?"
         label.textColor = .white
-        label.font = UIFont(name: "Futura-Bold", size: 25)
+        label.font = UIFont.defaultBoldFont(25)
         return label
     }()
     
-    private var amountTextField: UITextField = {
+    private let amountTextField: UITextField = {
         var field = UITextField()
-        field.font = UIFont(name: "Futura-Bold", size: 40)
+        field.font = UIFont.defaultBoldFont(40)
         field.backgroundColor = .clear
-        field.placeholder = "0.0"
+        field.placeholder = "0"
         field.textColor = .white
         field.layer.cornerRadius = 16
         field.keyboardType = .numberPad
@@ -92,18 +91,18 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         return field
     }()
     
-    private var calendarLabel: UILabel = {
+    private let calendarLabel: UILabel = {
         var label = UILabel()
         label.text = "Transaction date"
         label.textColor = .black
-        label.font = UIFont(name: "Futura", size: 18)
+        label.font = UIFont.defaultFont(18)
         return label
     }()
     
-    private var saveButton: UIButton = {
+    private let saveButton: UIButton = {
         var button = UIButton()
         var label = UILabel()
-        label.font = UIFont(name: "Futura-Bold", size: 22)
+        label.font = UIFont.defaultBoldFont(22)
         label.textColor = .white
         button.titleLabel?.font = label.font
         button.setTitle("Save", for: .normal)
@@ -136,21 +135,23 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         
         setupView()
         setupSegmentedControl()
-        setupDelegate()
         setupSaveButton()
         
         transNameTextField.delegate = self
         descriptionTextField.delegate = self
     }
     
-    deinit{
-        print("transaction VC was deinited")
+    init(presenter: TransactionPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
     }
     
-    //Connection with the presenter using delegation pattern
-    private func setupDelegate() {
-        presenter = TransactionPresenter(delegate: self)  // Assign to the property
-        self.delegate = presenter
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit{
+        print("transaction VC was deinited")
     }
     
     private func setupSaveButton() {
@@ -180,7 +181,7 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
             date: date
         )
         
-        self.delegate?.didReceiveTransactionData(transactionData: transactionModel)
+        presenter.didReceiveTransactionData(transactionData: transactionModel)
         NotificationCenter.default.post(name: Notification.Name("UpdateAfterTransaction"), object: nil)
         self.dismiss(animated: true)
     }
@@ -191,35 +192,29 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func segmentedControlChosen() {
-        if segmentedControl.selectedSegmentIndex == 0 {
-            headView.backgroundColor = UIColor.shared.IncomeColor
-        } else {
-            headView.backgroundColor = UIColor.shared.ExpenseColor
-        }
-        segmentedControl.selectedSegmentTintColor = segmentedControl.selectedSegmentIndex == 0 ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
-        datePicker.tintColor = segmentedControl.selectedSegmentTintColor
-        saveButton.backgroundColor = segmentedControl.selectedSegmentTintColor
+        presenter.segmentedControlChosen(index: segmentedControl.selectedSegmentIndex)
     }
     
     private func setupView() {
-        view.backgroundColor = UIColor(hex: "#eeeeef")
+        view.backgroundColor = UIColor.shared.LightGray
         
         view.addSubview(headView)
         headView.snp.makeConstraints { make in
-            make.top.left.right.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         headView.addSubview(amountLabel)
         amountLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
         }
         
         headView.addSubview(amountTextField)
         amountTextField.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(amountLabel.snp.bottom).offset(15)
         }
+        
         //Left view mode of the amount text field
         let leftView = UIView()
         leftView.backgroundColor = .clear
@@ -229,14 +224,14 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         dollarLabel.textColor = .white
         leftView.addSubview(dollarLabel)
         dollarLabel.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         amountTextField.leftView = leftView
         amountTextField.leftViewMode = .always
         
         headView.addSubview(surfaceView)
         surfaceView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(amountTextField.snp.bottom).offset(20)
             make.centerY.equalToSuperview()
         }
@@ -244,20 +239,20 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         surfaceView.addSubview(segmentedControl)
         segmentedControl.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(15)
-            make.left.right.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(10)
         }
         
         surfaceView.addSubview(transNameLabel)
         transNameLabel.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(20)
-            make.left.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
         }
         
         surfaceView.addSubview(transNameTextField)
         transNameTextField.snp.makeConstraints { make in
             make.top.equalTo(transNameLabel.snp.bottom).offset(10)
-            make.left.equalTo(segmentedControl.snp.left)
-            make.right.equalTo(segmentedControl.snp.right)
+            make.leading.equalTo(segmentedControl.snp.leading)
+            make.trailing.equalTo(segmentedControl.snp.trailing)
             make.height.equalTo(40)
         }
         
@@ -267,14 +262,14 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         
         surfaceView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
             make.top.equalTo(transNameTextField.snp.bottom).offset(20)
         }
         
         surfaceView.addSubview(descriptionTextField)
         descriptionTextField.snp.makeConstraints { make in
-            make.left.equalTo(segmentedControl.snp.left)
-            make.right.equalTo(segmentedControl.snp.right)
+            make.leading.equalTo(segmentedControl.snp.leading)
+            make.trailing.equalTo(segmentedControl.snp.trailing)
             make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
             make.height.equalTo(150)
         }
@@ -282,30 +277,39 @@ final class TransactionViewController: UIViewController, UITextViewDelegate {
         surfaceView.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
             make.top.equalTo(descriptionTextField.snp.bottom).offset(20)
-            make.right.equalTo(segmentedControl.snp.right)
+            make.trailing.equalTo(segmentedControl.snp.trailing)
         }
         
         surfaceView.addSubview(calendarLabel)
         calendarLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
             make.centerY.equalTo(datePicker.snp.centerY)
         }
         
         surfaceView.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
             make.top.equalTo(datePicker.snp.bottom).offset(30)
-            make.left.right.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(10)
             make.height.equalTo(55)
             make.bottom.equalTo(surfaceView.snp.bottom).offset(-20)
         }
     }
 }
 
-extension TransactionViewController: TransactionPresenterDelegate {
+extension TransactionViewController: TransactionViewProtocol {
+    func showError(with error: ErrorModel) {
+        AlertManager.transactionError(on: self, message: error.text)
+    }
     
+    func updateViewColors(with color: UIColor) {
+        headView.backgroundColor = color
+        segmentedControl.selectedSegmentTintColor = color
+        datePicker.tintColor = color
+        saveButton.backgroundColor = color
+    }
 }
 
-extension TransactionViewController: UITextFieldDelegate {
+extension TransactionViewController: UITextFieldDelegate, UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             // Dismiss the keyboard when return is tapped
