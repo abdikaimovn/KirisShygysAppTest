@@ -46,6 +46,10 @@ extension UIColor {
         UIColor(hex: "#f9f9f9")!
     }
     
+    var Gray: UIColor {
+        UIColor(hex: "#e0e0e0")!
+    }
+    
     var LightBrown: UIColor {
         UIColor(hex: "#ddd0bb")!
     }
