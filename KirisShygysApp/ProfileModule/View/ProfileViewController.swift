@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    private let profilePresenter: ProfilePresenter
+    private let presenter: ProfilePresenter
     
     private let loader = UIActivityIndicatorView()
     private let loaderView = UIView()
@@ -50,30 +50,20 @@ final class ProfileViewController: UIViewController {
         return btn
     }()
     
-    private lazy var transactionReport: UIView = {
-        var view = configureCustomButtonView(viewImage: "doc", viewTitle: "Transaction Report")
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reportTransactionTapped)))
-        return view
+    private lazy var menuTableView: UITableView = {
+        let tableView = CustomTableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
+        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: "MenuTableViewCell")
+        return tableView
     }()
     
-    private lazy var settingsView: UIView = {
-        var view = configureCustomButtonView(viewImage: "gear", viewTitle: "Settings")
-        return view
-    }()
-    
-    private lazy var logOutView: UIView = {
-        var view = configureCustomButtonView(viewImage: "rectangle.portrait.and.arrow.right", viewTitle: "Logout")
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logOutDidTapped)))
-        return view
-    }()
-    
-    private lazy var statisticsView: UIView = {
-        var view = configureCustomButtonView(viewImage: "chart.bar.xaxis", viewTitle: "Statistics")
-        return view
-    }()
-    
-    init(profilePresenter: ProfilePresenter) {
-        self.profilePresenter = profilePresenter
+    init(presenter: ProfilePresenter) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -85,19 +75,11 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        profilePresenter.viewDidLoaded()
+        presenter.viewDidLoaded()
     }
     
     deinit {
         print("Profile VC deinit")
-    }
-
-    @objc internal func logOutDidTapped() {
-        profilePresenter.logOutDidTapped()
-    }
-    
-    @objc private func reportTransactionTapped() {
-        self.profilePresenter.reportTransactionDidTapped()
     }
     
     private func createTransactionReportModule(with data: [TransactionModel]?) -> UIViewController {
@@ -107,66 +89,12 @@ final class ProfileViewController: UIViewController {
         return view
     }
     
-    private func configureCustomButtonView(viewImage: String, viewTitle: String) -> UIView {
-        let mainView: UIView = {
-            let view = UIView()
-            view.isUserInteractionEnabled = true
-            view.backgroundColor = UIColor.shared.LightGray
-            view.layer.cornerRadius = 10
-            return view
-        }()
-        
-        let subView: UIView = {
-            let view = UIView()
-            view.backgroundColor = .white
-            view.layer.cornerRadius = 15
-            view.layer.cornerCurve = .continuous
-            return view
-        }()
-        
-        let image: UIImageView = {
-            let image = UIImageView()
-            image.image = UIImage(systemName: viewImage)
-            image.tintColor = .black
-            image.contentMode = .scaleAspectFit
-            return image
-        }()
-        
-        let label: UILabel = {
-            let label = UILabel()
-            label.text = viewTitle
-            label.textColor = .black
-            label.font = UIFont.defaultFont(18)
-            return label
-        }()
-        
-        mainView.addSubview(subView)
-        subView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(10)
-            make.top.bottom.equalToSuperview().inset(10)
-            make.size.equalTo(45)
-        }
-        
-        subView.addSubview(image)
-        image.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview().inset(10)
-        }
-        
-        mainView.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.leading.equalTo(subView.snp.trailing).offset(20)
-            make.centerY.equalTo(image.snp.centerY)
-        }
-        
-        return mainView
-    }
-    
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(userImage)
         
         userImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(20)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             make.size.equalTo(60)
         }
@@ -190,31 +118,12 @@ final class ProfileViewController: UIViewController {
             make.size.equalTo(40)
         }
         
-        view.addSubview(transactionReport)
-        transactionReport.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
+        view.addSubview(menuTableView)
+        menuTableView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(userImage.snp.bottom).offset(30)
         }
-        
-        view.addSubview(settingsView)
-        settingsView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(transactionReport.snp.bottom).offset(10)
-        }
-        
-        view.addSubview(statisticsView)
-        statisticsView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(settingsView.snp.bottom).offset(10)
-        }
-        
-        view.addSubview(logOutView)
-        logOutView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
-            make.top.equalTo(statisticsView.snp.bottom).offset(10)
-        }
     }
-    
 }
 
 extension ProfileViewController: ProfileViewProtocol {
@@ -253,5 +162,45 @@ extension ProfileViewController: ProfileViewProtocol {
         if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
             sceneDelegate.checkAuthentication()
         }
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            presenter.reportTransactionDidTapped()
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            presenter.logOutDidTapped()
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
+        
+        switch indexPath.row {
+        case 0:
+            cell.configure(with: UIImage(systemName: "doc")!, and: "Transaction Report")
+        case 1:
+            cell.configure(with: UIImage(systemName: "gear")!, and: "Settings")
+        case 2:
+            cell.configure(with: UIImage(systemName: "chart.bar.xaxis")!, and: "Statistics")
+        case 3:
+            cell.configure(with: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, and: "Logout")
+        default:
+            return cell
+        }
+        
+        return cell
     }
 }
