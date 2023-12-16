@@ -86,3 +86,11 @@ extension AlertManager {
         self.showBasicAlert(on: vc, title: "Absence of Data", message: "You haven't made any transactions yet")
     }
 }
+
+//MARK: - Adding new transaction error
+extension AlertManager {
+    public static func transactionError(on vc: UIViewController, message: String) {
+        self.showBasicAlert(on: vc, title: "Transaction Error", message: message)
+    }
+}
+
