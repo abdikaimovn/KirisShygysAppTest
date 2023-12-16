@@ -13,7 +13,7 @@ final class AuthorizationViewController: UIViewController {
     private let loader = UIActivityIndicatorView()
     private let loaderView = UIView()
     
-    private var imageLogo: UIImageView = {
+    private let imageLogo: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.layer.cornerCurve = .continuous
@@ -23,7 +23,7 @@ final class AuthorizationViewController: UIViewController {
         return imageView
     }()
     
-    private var emailTextField: UITextField = {
+    private let emailTextField: UITextField = {
         var textField = UITextField()
         textField.backgroundColor = .white
         textField.borderStyle = .line
@@ -36,7 +36,7 @@ final class AuthorizationViewController: UIViewController {
         return textField
     }()
     
-    private var passwordTextField: UITextField = {
+    private let passwordTextField: UITextField = {
         var textField = UITextField()
         textField.backgroundColor = .white
         textField.borderStyle = .line
@@ -111,7 +111,7 @@ final class AuthorizationViewController: UIViewController {
         hidePasswordFieldButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
-    func setupView() {
+    private func setupView() {
         view.backgroundColor = .white
         
         view.addSubview(imageLogo)

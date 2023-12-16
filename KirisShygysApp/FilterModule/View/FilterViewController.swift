@@ -11,7 +11,7 @@ protocol FilterViewControllerDelegate: AnyObject {
     func didGetFilterSettings(filterData: FilterModel)
 }
 
-class FilterViewController: UIViewController {
+final class FilterViewController: UIViewController {
     weak var delegate: FilterViewControllerDelegate?
     private var filterModel: FilterModel? = FilterModel(filterBy: nil, sortBy: nil, period: nil)
     
@@ -84,7 +84,7 @@ class FilterViewController: UIViewController {
         return button
     }()
     
-    private var closeLine: UIView = {
+    private let closeLine: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.shared.Brown
         return view

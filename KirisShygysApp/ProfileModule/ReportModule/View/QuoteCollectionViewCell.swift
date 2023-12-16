@@ -7,7 +7,7 @@
 
 import UIKit
 
-class QuoteCollectionViewCell: UICollectionViewCell {
+final class QuoteCollectionViewCell: UICollectionViewCell {
     private let quotes = [
         QuoteModel(quote: "Money is not understood by many, even though many earn it and only a few master it.", author: "- Aiyaz Uddin"),
         QuoteModel(quote: "Like a well-nourished body, a healthy cash flow is essential for the vitality of your financial future.", author: "- Linsey Mill"),
@@ -21,27 +21,27 @@ class QuoteCollectionViewCell: UICollectionViewCell {
         QuoteModel(quote: "A person either disciplines his finances or his finances discipline him", author: "- Orrin Woodward")
     ]
     
-    private var monthQuoteLabel: UILabel = {
+    private let monthQuoteLabel: UILabel = {
         var label = UILabel()
         label.text = "Quote of the month"
-        label.textColor = UIColor(hex: "#F2F2F2")
-        label.font = UIFont(name: "HelveticaNeue", size: 20)
+        label.textColor = UIColor.shared.LightGray
+        label.font = UIFont.defaultFont(20)
         return label
     }()
     
-    private var quoteLabel: UILabel = {
+    private let quoteLabel: UILabel = {
         var label = UILabel()
         label.textColor = .white
-        label.font = UIFont(name: "HelveticaNeue-Italic", size: 30)
+        label.font = UIFont.defaultItalicFont(30)
         label.numberOfLines = 0
         return label
     }()
     
-    private var quoteAuthor: UILabel = {
+    private let quoteAuthor: UILabel = {
         var label = UILabel()
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        label.font = UIFont.defaultBoldFont(30)
         return label
     }()
     
@@ -67,13 +67,13 @@ class QuoteCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(quoteLabel)
         quoteLabel.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(30)
+            make.leading.trailing.equalToSuperview().inset(30)
             make.top.equalTo(monthQuoteLabel.snp.bottom).offset(50)
         }
         
         contentView.addSubview(quoteAuthor)
         quoteAuthor.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(30)
+            make.leading.trailing.equalToSuperview().inset(30)
             make.top.equalTo(quoteLabel.snp.bottom).offset(50)
         }
         

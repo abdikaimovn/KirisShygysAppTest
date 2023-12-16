@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 final class TransactionTableViewCell: UITableViewCell {
-    private var mainView: UIView = {
+    private let mainView: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 6
         view.layer.cornerCurve = .continuous
@@ -10,14 +10,14 @@ final class TransactionTableViewCell: UITableViewCell {
         return view
     }()
     
-    private var viewImage: UIView = {
+    private let viewImage: UIView = {
         var view = UIView()
         view.layer.cornerRadius = 6
         view.layer.cornerCurve = .continuous
         return view
     }()
     
-    private var image: UIImageView = {
+    private let image: UIImageView = {
         var image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.image = UIImage(systemName: "square.and.arrow.up")
@@ -26,7 +26,7 @@ final class TransactionTableViewCell: UITableViewCell {
         return image
     }()
     
-    private var transName: UILabel = {
+    private let transName: UILabel = {
         var label = UILabel()
         label.font = UIFont.defaultFont(16)
         label.textColor = .black
@@ -35,14 +35,14 @@ final class TransactionTableViewCell: UITableViewCell {
         return label
     }()
     
-    private var purchasedData: UILabel = {
+    private let purchasedData: UILabel = {
         var label = UILabel()
         label.font = UIFont.defaultFont(14)
         label.textColor = .black
         return label
     }()
     
-    private var priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont.defaultBoldFont(16)
         return label

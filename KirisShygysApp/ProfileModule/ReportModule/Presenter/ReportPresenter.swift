@@ -7,34 +7,30 @@
 
 import Foundation
 
-protocol ReportPresenterDelegate: AnyObject {
+protocol ReportViewProtocol: AnyObject {
     func didCalculateTransactionData(_ incomeInfo: ReportInfo, _ expenseInfo: ReportInfo)
 }
 
-class ReportPresenter {
-    weak var delegate: ReportPresenterDelegate?
-    
-    init(delegate: ReportPresenterDelegate? = nil) {
-        self.delegate = delegate
-    }
+final class ReportPresenter {
+    weak var view: ReportViewProtocol?
     
     func calculateData(transactionData: [TransactionModel]) {
-        var incomeSumma = 0
-        var expenseSumma = 0
-        var maxIncome = Int.min
-        var maxExpense = Int.min
-        var maxIncomeTitle = ""
-        var maxExpenseTitle = ""
+        var incomeSum = 0
+        var expenseSum = 0
+        var maxIncome = 0
+        var maxExpense = 0
+        var maxIncomeTitle = "Null"
+        var maxExpenseTitle = "Null"
         
         for transaction in transactionData {
             if transaction.transactionType == .income {
-                incomeSumma += transaction.transactionAmount
+                incomeSum += transaction.transactionAmount
                 if maxIncome < transaction.transactionAmount {
                     maxIncome = transaction.transactionAmount
                     maxIncomeTitle = transaction.transactionName
                 }
             } else {
-                expenseSumma += transaction.transactionAmount
+                expenseSum += transaction.transactionAmount
                 if maxExpense < transaction.transactionAmount {
                     maxExpense = transaction.transactionAmount
                     maxExpenseTitle = transaction.transactionName
@@ -42,10 +38,10 @@ class ReportPresenter {
             }
         }
         
-        var incomeInfo = ReportInfo(summa: incomeSumma, maxValue: maxIncome, maxValueTitle: maxIncomeTitle)
+        let incomeInfo = ReportInfo(summa: incomeSum, maxValue: maxIncome, maxValueTitle: maxIncomeTitle)
         
-        var expenseInfo = ReportInfo(summa: expenseSumma, maxValue: maxExpense, maxValueTitle: maxExpenseTitle)
+        let expenseInfo = ReportInfo(summa: expenseSum, maxValue: maxExpense, maxValueTitle: maxExpenseTitle)
         
-        self.delegate?.didCalculateTransactionData(incomeInfo, expenseInfo)
+        self.view?.didCalculateTransactionData(incomeInfo, expenseInfo)
     }
 }

@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol FullTransactionPresenterProtocol: AnyObject {
-    func setSectionsByDefault(_ transactionData: [TransactionModel])
-    func setFilteredSections(_ transactionData: [TransactionModel], _ filterModel: FilterModel)
-}
-
 protocol FullTransactionViewProtocol: AnyObject {
     func setupSectionsByDefault(_ groupedTransactions: [String: [TransactionModel]], _ sectionTitles: [SectionTitleModel])
     func setupFilteredSections(_ groupedSections: [String: [TransactionModel]], sectionTitles: [SectionTitleModel])
@@ -19,12 +14,8 @@ protocol FullTransactionViewProtocol: AnyObject {
     func hideLoader()
 }
 
-class FullTransactionPresenter {
+final class FullTransactionPresenter {
     weak var view: FullTransactionViewProtocol?
-    
-    init(view: FullTransactionViewProtocol? = nil) {
-        self.view = view
-    }
     
     private func applySortBy(sortBy: SortByEnum, transactionData: [TransactionModel]) -> [TransactionModel] {
         var sortedTransactionData = [TransactionModel]()
@@ -101,7 +92,18 @@ class FullTransactionPresenter {
     }
 }
 
-extension FullTransactionPresenter: FullTransactionPresenterProtocol {
+// Methods that uses the view of the presenter
+extension FullTransactionPresenter {
+    func identifySectionTitle(_ sectionTitle: String) -> String {
+        switch sectionTitle {
+        case Date.now.formatted().prefix(10):
+            return "Today"
+        case Date().yesterday.formatted().prefix(10):
+            return "Yesterday"
+        default:
+            return sectionTitle
+        }
+    }
     
     func setFilteredSections(_ transactionData: [TransactionModel], _ filterModel: FilterModel) {
         view?.showLoader()

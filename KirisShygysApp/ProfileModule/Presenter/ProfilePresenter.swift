@@ -10,7 +10,7 @@ protocol ProfileViewProtocol: AnyObject {
     func logOut()
 }
 
-class ProfilePresenter {
+final class ProfilePresenter {
     weak var view: ProfileViewProtocol?
     
     private let service: AuthServiceProfileProtocol

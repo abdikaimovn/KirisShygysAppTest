@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-class OnboardingCVCell: UICollectionViewCell {
-    private var imageView: UIImageView = {
+final class OnboardingCVCell: UICollectionViewCell {
+    private let imageView: UIImageView = {
         var imgView = UIImageView()
         return imgView
     }()
     
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         var title = UILabel()
         title.font = UIFont(name: "Helvetica", size: 32)
         title.textColor = .black
@@ -51,7 +51,7 @@ class OnboardingCVCell: UICollectionViewCell {
         addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
             make.width.equalTo(300)
             make.height.equalTo(300)
         }

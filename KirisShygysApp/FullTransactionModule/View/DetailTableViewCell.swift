@@ -8,7 +8,7 @@
 import UIKit
 
 final class DetailTableViewCell: UITableViewCell {
-    private var transactionKeyLabel: UILabel = {
+    private let transactionKeyLabel: UILabel = {
         var label = UILabel()
         label.textColor = .black
         label.numberOfLines = 1
@@ -16,7 +16,7 @@ final class DetailTableViewCell: UITableViewCell {
         return label
     }()
     
-    private var transactionValueLabel: UILabel = {
+    private let transactionValueLabel: UILabel = {
         var label = UILabel()
         label.textColor = .black
         label.font = UIFont.defaultFont(16)
@@ -41,18 +41,19 @@ final class DetailTableViewCell: UITableViewCell {
     
     private func setupCell() {
         contentView.backgroundColor = .clear
+        
         contentView.addSubview(transactionKeyLabel)
         transactionKeyLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
-            make.left.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().inset(10)
         }
         
         transactionKeyLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         contentView.addSubview(transactionValueLabel)
         transactionValueLabel.snp.makeConstraints { make in
-            make.left.equalTo(transactionKeyLabel.snp.right).offset(10)
-            make.right.equalToSuperview().inset(10)
+            make.leading.equalTo(transactionKeyLabel.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview().inset(10)
         }
         

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
     private let onboardingData: [OnboardingModel] = [
         OnboardingModel(title: "Gain total control\nof your money",
                         description: "Become your own money manager\nand make every cent count",
@@ -33,7 +33,7 @@ class OnboardingViewController: UIViewController {
         return cView
     }()
     
-    private var pageControl: UIPageControl = {
+    private let pageControl: UIPageControl = {
         var pageControl = UIPageControl()
         pageControl.numberOfPages = 2
         pageControl.currentPage = 0
