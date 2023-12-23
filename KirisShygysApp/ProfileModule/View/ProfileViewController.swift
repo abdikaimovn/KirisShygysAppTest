@@ -82,9 +82,16 @@ final class ProfileViewController: UIViewController {
         print("Profile VC deinit")
     }
     
-    private func createTransactionReportModule(with data: [TransactionModel]?) -> UIViewController {
+    private func createTransactionReportModule(with data: [TransactionModel]) -> UIViewController {
         let presenter = ReportPresenter()
-        let view = ReportViewController(transactionData: data!, presenter: presenter)
+        let view = ReportViewController(transactionData: data, presenter: presenter)
+        presenter.view = view
+        return view
+    }
+    
+    private func createStatisticsModule() -> UIViewController {
+        let presenter = StatisticsPresenter()
+        let view = StatisticsViewController(presenter: presenter)
         presenter.view = view
         return view
     }
@@ -127,20 +134,36 @@ final class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: ProfileViewProtocol {
-    func showReportError() {
-        AlertManager.absenceTransactionData(on: self)
+    func showUnknownError(with model: ErrorModel) {
+        AlertManager.showUnknownError(on: self, message: model.text)
     }
     
-    func showError(with model: ErrorModel) {
-        
+    func showAbsenseDataError() {
+        AlertManager.showAbsenceTransactionData(on: self)
+    }
+    
+    func showReportError(with model: ErrorModel) {
+        AlertManager.showReportError(on: self, with: model)
+    }
+    
+    func showTransactionReport(with transactionData: [TransactionModel]) {
+        self.navigationController?.pushViewController(createTransactionReportModule(with: transactionData), animated: true)
+    }
+    
+    func showStatistics() {
+        self.navigationController?.pushViewController(createStatisticsModule(), animated: true)
+    }
+    
+    func showStatisticsError() {
+        AlertManager.showAbsenceTransactionData(on: self)
+    }
+    
+    func showLogoutError(with model: ErrorModel) {
+        AlertManager.showLogOutErrorAlert(on: self, with: model.error)
     }
     
     func setUsername(_ name: String) {
         self.userName.text = name
-    }
-    
-    func didReceiveUserTransactionReport(_ transactionData: [TransactionModel]?) {
-        self.navigationController?.pushViewController(createTransactionReportModule(with: transactionData), animated: true)
     }
     
     func showLoader() {
@@ -173,7 +196,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             break
         case 2:
-            break
+            presenter.statisticsDidTapped()
         case 3:
             presenter.logOutDidTapped()
         default:

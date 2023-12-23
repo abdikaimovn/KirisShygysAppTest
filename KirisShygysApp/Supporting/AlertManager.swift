@@ -47,7 +47,7 @@ extension AlertManager {
 // MARK: - Authorization Errors
 extension AlertManager {
     public static func showAuthorizationErrorAlert(on vc: UIViewController) {
-        self.showBasicAlert(on: vc, title: "Unknown Authorization Error", message: nil)
+        self.showBasicAlert(on: vc, title: "Unknown Authorization Error", message: "Check your network connection")
     }
     
     public static func showAuthorizationErrorAlert(on vc: UIViewController, with error: Error){
@@ -80,10 +80,16 @@ extension AlertManager {
     }
 }
 
-//MARK: - Absence of transaction data
+//MARK: - Transaction Report Page Alerts
 extension AlertManager {
-    public static func absenceTransactionData(on vc: UIViewController) {
+    public static func showAbsenceTransactionData(on vc: UIViewController) {
         self.showBasicAlert(on: vc, title: "Absence of Data", message: "You haven't made any transactions yet")
+    }
+}
+
+extension AlertManager {
+    public static func showReportError(on vc: UIViewController, with error: ErrorModel) {
+        self.showBasicAlert(on: vc, title: "Transaction Report Error", message: error.text)
     }
 }
 
@@ -94,3 +100,9 @@ extension AlertManager {
     }
 }
 
+//MARK: - Unknown error
+extension AlertManager {
+    public static func showUnknownError(on vc: UIViewController, message: String) {
+        self.showBasicAlert(on: vc, title: "Unknown Error", message: message)
+    }
+}

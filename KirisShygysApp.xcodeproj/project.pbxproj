@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6F1EC75D2B0A16FD0036CD9C /* FullTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */; };
+		6F2000152B346F13004C8BD8 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */; };
+		6F2000192B34737B004C8BD8 /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */; };
 		6F3D94B42B06721F00BCA624 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D94B32B06721F00BCA624 /* FilterViewController.swift */; };
 		6F430CF32AD0538500CC712A /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF22AD0538500CC712A /* RegistrationModel.swift */; };
 		6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */; };
@@ -50,6 +52,7 @@
 		6FD28D002B239AF400816281 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD28CFF2B239AF400816281 /* ErrorModel.swift */; };
 		6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2CC4E2AFCFA6900580DDB /* HomePresenter.swift */; };
 		6FD2CC512AFD027500580DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CC502AFD027400580DDB /* GoogleService-Info.plist */; };
+		6FD8BC762B36BBE50073B18D /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD8BC752B36BBE50073B18D /* DGCharts */; };
 		6FE3898E2B0345E900E8844D /* FullTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */; };
 		6FE462B02B092BE000DDB235 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE462AF2B092BE000DDB235 /* FilterModel.swift */; };
 		6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */; };
@@ -65,13 +68,15 @@
 
 /* Begin PBXFileReference section */
 		6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionPresenter.swift; sourceTree = "<group>"; };
+		6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPresenter.swift; sourceTree = "<group>"; };
 		6F3D94B32B06721F00BCA624 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		6F430CF22AD0538500CC712A /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		6F430CF42AD05C5200CC712A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		6F57F2782AFFBB2E008712AE /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		6F57F27C2AFFC781008712AE /* TransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPresenter.swift; sourceTree = "<group>"; };
 		6F57F27E2B0011F9008712AE /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
-		6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KirisShygysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = KirisShygysApp.app; path = "/Users/nurik/Desktop/KirisShygysApp/build/Debug-iphoneos/KirisShygysApp.app"; sourceTree = "<absolute>"; };
 		6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6F658BC02ACEA9A3004ECACB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +131,7 @@
 				6F658BDB2ACEBAF6004ECACB /* FirebaseFirestore in Frameworks */,
 				6F658BD32ACEB105004ECACB /* SnapKit in Frameworks */,
 				6F658BDD2ACEBAF6004ECACB /* FirebaseStorage in Frameworks */,
+				6FD8BC762B36BBE50073B18D /* DGCharts in Frameworks */,
 				6F658BD72ACEBAF6004ECACB /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +139,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F20000B2B3465D1004C8BD8 /* StatisticsModule */ = {
+			isa = PBXGroup;
+			children = (
+				6F2000112B346EEA004C8BD8 /* Model */,
+				6F2000122B346EEF004C8BD8 /* View */,
+				6F2000132B346EF4004C8BD8 /* Presenter */,
+			);
+			path = StatisticsModule;
+			sourceTree = "<group>";
+		};
+		6F2000112B346EEA004C8BD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6F2000122B346EEF004C8BD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F2000132B346EF4004C8BD8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		6F3D94AF2B0671C400BCA624 /* FilterModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,16 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				6F658BBB2ACEA9A3004ECACB /* KirisShygysApp */,
-				6F658BBA2ACEA9A3004ECACB /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		6F658BBA2ACEA9A3004ECACB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		6F658BBB2ACEA9A3004ECACB /* KirisShygysApp */ = {
@@ -357,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				6F7CD2742B1663D6005BFAFF /* ReportModule */,
+				6F20000B2B3465D1004C8BD8 /* StatisticsModule */,
 				6FD28CFE2B239AC300816281 /* Model */,
 				6FAB99A22AF7EA9000CFD105 /* View */,
 				6F7CD2712B1639CE005BFAFF /* Presenter */,
@@ -540,6 +571,7 @@
 				6F658BD82ACEBAF6004ECACB /* FirebaseDatabase */,
 				6F658BDA2ACEBAF6004ECACB /* FirebaseFirestore */,
 				6F658BDC2ACEBAF6004ECACB /* FirebaseStorage */,
+				6FD8BC752B36BBE50073B18D /* DGCharts */,
 			);
 			productName = KirisShygysApp;
 			productReference = 6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */;
@@ -572,8 +604,9 @@
 			packageReferences = (
 				6F658BD12ACEB105004ECACB /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6F658BD52ACEBAF6004ECACB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6FD8BC742B36BBE50073B18D /* XCRemoteSwiftPackageReference "Charts" */,
 			);
-			productRefGroup = 6F658BBA2ACEA9A3004ECACB /* Products */;
+			productRefGroup = 6F658BB02ACEA9A3004ECACB;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -619,9 +652,11 @@
 				6F7CD2732B163A2A005BFAFF /* ProfilePresenter.swift in Sources */,
 				6F430CF32AD0538500CC712A /* RegistrationModel.swift in Sources */,
 				6FF3A2CD2AD4222500D51E3A /* AuthorizationModel.swift in Sources */,
+				6F2000152B346F13004C8BD8 /* StatisticsViewController.swift in Sources */,
 				6FBEB0B82B17B15F00BD1D50 /* QuoteCollectionViewCell.swift in Sources */,
 				6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */,
 				6FCF29512AF189F000CEA307 /* TransactionTableViewCell.swift in Sources */,
+				6F2000192B34737B004C8BD8 /* StatisticsPresenter.swift in Sources */,
 				6FE3898E2B0345E900E8844D /* FullTransactionViewController.swift in Sources */,
 				6FE462B02B092BE000DDB235 /* FilterModel.swift in Sources */,
 				6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */,
@@ -885,6 +920,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		6FD8BC742B36BBE50073B18D /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -912,6 +955,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F658BD52ACEBAF6004ECACB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		6FD8BC752B36BBE50073B18D /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD8BC742B36BBE50073B18D /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -3,12 +3,14 @@ import FirebaseFirestore
 
 protocol HomeViewProtocol: AnyObject {
     func setUsername(username: String)
-    func updateTransactionsData(data: [TransactionModel])
+    func updateTransactionsData(with: [TransactionModel])
     func showLoader()
     func hideLoader()
     func pushAllTransactionsView()
     func showAbsenseDataAlert()
     func updateCardViewValues(cardViewModel: CardViewModel)
+    func showUnknownError(with model: ErrorModel)
+    func showUpdatingError(with error: Error)
 }
 
 final class HomePresenter {
@@ -25,10 +27,19 @@ final class HomePresenter {
     
     func updateView() {
         view?.showLoader()
-        userManager.fetchTransactionData {[weak self] transactionData in
+        userManager.fetchTransactionData {[weak self] result in
             self?.view?.hideLoader()
-            if let transactionData = transactionData {
-                self?.view?.updateTransactionsData(data: transactionData)
+            
+            switch result {
+            case .success(let transactionData):
+                self?.view?.updateTransactionsData(with: transactionData)
+            case .failure(let error):
+                switch error {
+                case .gettingDocumentError(let error):
+                    self?.view?.showUpdatingError(with: error)
+                case .userNotFoundError:
+                    self?.view?.showUpdatingError(with: error)
+                }
             }
         }
     }
@@ -36,14 +47,23 @@ final class HomePresenter {
     func viewDidLoaded() {
         view?.showLoader()
         
-        userManager.getCurrentUserName {[weak self] username in
-            self?.view?.setUsername(username: username ?? "Couldn't receive username")
+        userManager.fetchCurrentUsername { [weak self] result in
+            switch result {
+            case .success(let username):
+                self?.view?.setUsername(username: username)
+            case .failure(let error):
+                self?.view?.showUnknownError(with: ErrorModel(error: error))
+            }
         }
         
-        userManager.fetchTransactionData {[weak self] transactionData in
+        userManager.fetchTransactionData {[weak self] result in
             self?.view?.hideLoader()
-            if let transactionData = transactionData {
-                self?.view?.updateTransactionsData(data: transactionData)
+            
+            switch result {
+            case .success(let transactionData):
+                self?.view?.updateTransactionsData(with: transactionData)
+            case .failure(let error):
+                self?.view?.showUpdatingError(with: error)
             }
         }
     }
