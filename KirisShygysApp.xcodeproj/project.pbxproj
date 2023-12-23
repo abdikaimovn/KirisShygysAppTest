@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1764D32B37243E00E5FA4E /* KirisShygysAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1764D22B37243E00E5FA4E /* KirisShygysAppTests.swift */; };
 		6F1EC75D2B0A16FD0036CD9C /* FullTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */; };
 		6F2000152B346F13004C8BD8 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */; };
 		6F2000192B34737B004C8BD8 /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */; };
@@ -66,7 +67,20 @@
 		6FF560A82B2B629100CDC0F6 /* FullTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF560A72B2B629100CDC0F6 /* FullTransactionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6F1764D42B37243E00E5FA4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F658BB12ACEA9A3004ECACB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F658BB82ACEA9A3004ECACB;
+			remoteInfo = KirisShygysApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6F1764CB2B37217500E5FA4E /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KirisShygysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F1764D02B37243E00E5FA4E /* KirisShygysAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KirisShygysAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F1764D22B37243E00E5FA4E /* KirisShygysAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KirisShygysAppTests.swift; sourceTree = "<group>"; };
 		6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionPresenter.swift; sourceTree = "<group>"; };
 		6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPresenter.swift; sourceTree = "<group>"; };
@@ -76,7 +90,6 @@
 		6F57F2782AFFBB2E008712AE /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		6F57F27C2AFFC781008712AE /* TransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPresenter.swift; sourceTree = "<group>"; };
 		6F57F27E2B0011F9008712AE /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
-		6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = KirisShygysApp.app; path = "/Users/nurik/Desktop/KirisShygysApp/build/Debug-iphoneos/KirisShygysApp.app"; sourceTree = "<absolute>"; };
 		6F658BBC2ACEA9A3004ECACB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F658BBE2ACEA9A3004ECACB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6F658BC02ACEA9A3004ECACB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +136,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6F1764CD2B37243E00E5FA4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F658BB62ACEA9A3004ECACB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,6 +159,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F1764D12B37243E00E5FA4E /* KirisShygysAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				6F1764D22B37243E00E5FA4E /* KirisShygysAppTests.swift */,
+			);
+			path = KirisShygysAppTests;
+			sourceTree = "<group>";
+		};
 		6F20000B2B3465D1004C8BD8 /* StatisticsModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +315,9 @@
 			isa = PBXGroup;
 			children = (
 				6F658BBB2ACEA9A3004ECACB /* KirisShygysApp */,
+				6F1764CB2B37217500E5FA4E /* KirisShygysApp.app */,
+				6F1764D02B37243E00E5FA4E /* KirisShygysAppTests.xctest */,
+				6F1764D12B37243E00E5FA4E /* KirisShygysAppTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -552,6 +583,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6F1764CF2B37243E00E5FA4E /* KirisShygysAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F1764D82B37243E00E5FA4E /* Build configuration list for PBXNativeTarget "KirisShygysAppTests" */;
+			buildPhases = (
+				6F1764CC2B37243E00E5FA4E /* Sources */,
+				6F1764CD2B37243E00E5FA4E /* Frameworks */,
+				6F1764CE2B37243E00E5FA4E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F1764D52B37243E00E5FA4E /* PBXTargetDependency */,
+			);
+			name = KirisShygysAppTests;
+			productName = KirisShygysAppTests;
+			productReference = 6F1764D02B37243E00E5FA4E /* KirisShygysAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6F658BB82ACEA9A3004ECACB /* KirisShygysApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F658BCD2ACEA9A4004ECACB /* Build configuration list for PBXNativeTarget "KirisShygysApp" */;
@@ -574,7 +623,7 @@
 				6FD8BC752B36BBE50073B18D /* DGCharts */,
 			);
 			productName = KirisShygysApp;
-			productReference = 6F658BB92ACEA9A3004ECACB /* KirisShygysApp.app */;
+			productReference = 6F1764CB2B37217500E5FA4E /* KirisShygysApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -584,9 +633,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					6F1764CF2B37243E00E5FA4E = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 6F658BB82ACEA9A3004ECACB;
+					};
 					6F658BB82ACEA9A3004ECACB = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -611,11 +664,19 @@
 			projectRoot = "";
 			targets = (
 				6F658BB82ACEA9A3004ECACB /* KirisShygysApp */,
+				6F1764CF2B37243E00E5FA4E /* KirisShygysAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6F1764CE2B37243E00E5FA4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F658BB72ACEA9A3004ECACB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,6 +690,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6F1764CC2B37243E00E5FA4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F1764D32B37243E00E5FA4E /* KirisShygysAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F658BB52ACEA9A3004ECACB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -686,6 +755,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6F1764D52B37243E00E5FA4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F658BB82ACEA9A3004ECACB /* KirisShygysApp */;
+			targetProxy = 6F1764D42B37243E00E5FA4E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		6F658BC72ACEA9A4004ECACB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -698,6 +775,57 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6F1764D62B37243E00E5FA4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FDQK3FFVD6;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nuriks.KirisShygysAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KirisShygysApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KirisShygysApp";
+			};
+			name = Debug;
+		};
+		6F1764D72B37243E00E5FA4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FDQK3FFVD6;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nuriks.KirisShygysAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KirisShygysApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KirisShygysApp";
+			};
+			name = Release;
+		};
 		6F658BCB2ACEA9A4004ECACB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -883,6 +1011,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6F1764D82B37243E00E5FA4E /* Build configuration list for PBXNativeTarget "KirisShygysAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F1764D62B37243E00E5FA4E /* Debug */,
+				6F1764D72B37243E00E5FA4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6F658BB42ACEA9A3004ECACB /* Build configuration list for PBXProject "KirisShygysApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
