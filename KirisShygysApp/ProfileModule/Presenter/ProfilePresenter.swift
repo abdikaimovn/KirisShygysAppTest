@@ -3,15 +3,15 @@ import Foundation
 protocol ProfileViewProtocol: AnyObject {
     func setUsername(_ name: String)
     func showTransactionReport(with transactionData: [TransactionModel])
+    func showStatistics(with transactionData: [TransactionModel])
+    func logOut()
     func showLoader()
     func hideLoader()
     func showLogoutError(with model: ErrorModel)
-    func showAbsenseDataError()
     func showReportError(with model: ErrorModel)
-    func showStatistics()
     func showUnknownError(with model: ErrorModel)
+    func showAbsenseDataError()
     func showStatisticsError()
-    func logOut()
 }
 
 final class ProfilePresenter {
@@ -63,8 +63,25 @@ final class ProfilePresenter {
     
     func statisticsDidTapped() {
         view?.showLoader()
-        view?.showStatistics()
-        view?.hideLoader()
+        userManager.fetchTransactionData { [weak self] result in
+            self?.view?.hideLoader()
+            
+            switch result {
+            case .success(let transactionData):
+                if !transactionData.isEmpty {
+                    self?.view?.showStatistics(with: transactionData)
+                } else {
+                    self?.view?.showAbsenseDataError()
+                }
+            case .failure(let error):
+                switch error {
+                case .gettingDocumentError(let error):
+                    self?.view?.showReportError(with: ErrorModel(error: error))
+                case .userNotFoundError:
+                    self?.view?.showReportError(with: ErrorModel(error: error))
+                }
+            }
+        }
     }
     
     func logOutDidTapped() {
