@@ -2,11 +2,15 @@ import Foundation
 
 protocol ProfileViewProtocol: AnyObject {
     func setUsername(_ name: String)
-    func didReceiveUserTransactionReport(_ transactionData: [TransactionModel]?)
+    func showTransactionReport(with transactionData: [TransactionModel])
     func showLoader()
     func hideLoader()
-    func showError(with model: ErrorModel)
-    func showReportError()
+    func showLogoutError(with model: ErrorModel)
+    func showAbsenseDataError()
+    func showReportError(with model: ErrorModel)
+    func showStatistics()
+    func showUnknownError(with model: ErrorModel)
+    func showStatisticsError()
     func logOut()
 }
 
@@ -23,22 +27,44 @@ final class ProfilePresenter {
     
     func viewDidLoaded() {
         view?.showLoader()
-        userManager.getCurrentUserName { [weak self] username in
+        userManager.fetchCurrentUsername { [weak self] result in
             self?.view?.hideLoader()
-            self?.view?.setUsername(username ?? "Couldn't receive username")
+            
+            switch result {
+            case .success(let username):
+                self?.view?.setUsername(username)
+            case .failure(let error):
+                self?.view?.showUnknownError(with: ErrorModel(error: error))
+            }
         }
     }
     
     func reportTransactionDidTapped() {
         view?.showLoader()
-        userManager.fetchLastMonthTransactionData { [weak self] transactionData in
+        userManager.fetchLastMonthTransactionData { [weak self] result in
             self?.view?.hideLoader()
-            if let safeTransactionData = transactionData, !safeTransactionData.isEmpty {
-                self?.view?.didReceiveUserTransactionReport(safeTransactionData)
-            } else {
-                self?.view?.showReportError()
+            switch result {
+            case .success(let transactionData):
+                if !transactionData.isEmpty {
+                    self?.view?.showTransactionReport(with: transactionData)
+                } else {
+                    self?.view?.showAbsenseDataError()
+                }
+            case .failure(let error):
+                switch error {
+                case .gettingDocumentError(let error):
+                    self?.view?.showReportError(with: ErrorModel(error: error))
+                case .userNotFoundError:
+                    self?.view?.showReportError(with: ErrorModel(error: error))
+                }
             }
         }
+    }
+    
+    func statisticsDidTapped() {
+        view?.showLoader()
+        view?.showStatistics()
+        view?.hideLoader()
     }
     
     func logOutDidTapped() {
@@ -48,7 +74,7 @@ final class ProfilePresenter {
             self?.view?.hideLoader()
             if let error = error {
                 let model = ErrorModel(error: error)
-                self?.view?.showError(with: model)
+                self?.view?.showLogoutError(with: model)
                 return
             }
             

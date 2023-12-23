@@ -342,6 +342,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension HomeViewController: HomeViewProtocol {
+    func showUnknownError(with model: ErrorModel) {
+        AlertManager.showUnknownError(on: self, message: model.text)
+    }
+    
+    func showUpdatingError(with error: Error) {
+        AlertManager.showFetchingUserErrorAlert(on: self, with: error)
+    }
+    
     func updateCardViewValues(cardViewModel: CardViewModel) {
         incomeLabel.text = "$ \(cardViewModel.incomes)"
         expenseLabel.text = "$ \(cardViewModel.expenses)"
@@ -353,15 +361,15 @@ extension HomeViewController: HomeViewProtocol {
     }
     
     func showAbsenseDataAlert() {
-        AlertManager.absenceTransactionData(on: self)
+        AlertManager.showAbsenceTransactionData(on: self)
     }
     
     func setUsername(username: String) {
         self.userNameLabel.text = username
     }
     
-    func updateTransactionsData(data: [TransactionModel]) {
-        self.transactionData = data
+    func updateTransactionsData(with: [TransactionModel]) {
+        self.transactionData = with
         self.transactionsTableView.reloadData()
         self.setupCardValues()
     }

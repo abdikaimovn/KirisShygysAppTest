@@ -27,7 +27,7 @@ final class TransactionViewController: UIViewController {
     
     private let segmentedControl: UISegmentedControl = {
         var sControl = UISegmentedControl()
-        sControl.insertSegment(withTitle: "Income", at: 0, animated: true)
+        sControl.insertSegment(withTitle: "Incomes", at: 0, animated: true)
         sControl.insertSegment(withTitle: "Expenses", at: 1, animated: true)
         sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
         return sControl
