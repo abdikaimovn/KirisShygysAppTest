@@ -17,6 +17,7 @@ protocol UserInfoProtocol {
 protocol UserProfileProtocol {
     func fetchCurrentUsername(completion: @escaping (Result<String, Error>) -> Void)
     func fetchLastMonthTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
+    func fetchTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
 }
 
 enum FetchingTransactionsError: Error {

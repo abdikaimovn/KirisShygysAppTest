@@ -8,12 +8,15 @@
 import Foundation
 
 protocol StatisticsViewProtocol: AnyObject {
+    func showLoader()
+    func hideLoader()
     
 }
 
 final class StatisticsPresenter {
     weak var view: StatisticsViewProtocol?
     
-    
-    
+    func setupInitialChart(with data: [TransactionModel]) {
+        
+    }
 }

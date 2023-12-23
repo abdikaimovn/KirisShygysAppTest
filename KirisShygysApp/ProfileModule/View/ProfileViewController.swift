@@ -89,9 +89,9 @@ final class ProfileViewController: UIViewController {
         return view
     }
     
-    private func createStatisticsModule() -> UIViewController {
+    private func createStatisticsModule(with data: [TransactionModel]) -> UIViewController {
         let presenter = StatisticsPresenter()
-        let view = StatisticsViewController(presenter: presenter)
+        let view = StatisticsViewController(transactionData: data, presenter: presenter)
         presenter.view = view
         return view
     }
@@ -150,8 +150,8 @@ extension ProfileViewController: ProfileViewProtocol {
         self.navigationController?.pushViewController(createTransactionReportModule(with: transactionData), animated: true)
     }
     
-    func showStatistics() {
-        self.navigationController?.pushViewController(createStatisticsModule(), animated: true)
+    func showStatistics(with transactionData: [TransactionModel]) {
+        self.navigationController?.pushViewController(createStatisticsModule(with: transactionData), animated: true)
     }
     
     func showStatisticsError() {
