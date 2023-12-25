@@ -18,6 +18,11 @@ protocol AuthorizationViewProtocol: AnyObject {
 
 final class AuthorizationPresenter {
     weak var view: AuthorizationViewProtocol?
+    private let authorizationService: AuthorizationServiceProtocol
+    
+    init(authorizationService: AuthorizationServiceProtocol) {
+        self.authorizationService = authorizationService
+    }
     
     func signInButtonPressed(with data: AuthorizationModel) {
         if !Validator.isValidEmail(for: data.email) {
@@ -32,15 +37,15 @@ final class AuthorizationPresenter {
         }
         
         view?.showLoader()
-        AuthService.shared.signIn(with: data) { error in
-            self.view?.hideLoader()
+        authorizationService.signIn(with: data) {[weak self] result in
+            self?.view?.hideLoader()
             
-            if let error = error {
-                self.view?.showAuthorizationError(with: error)
-                return
+            switch result {
+            case .success():
+                self?.view?.checkAuthentication()
+            case .failure(let error):
+                self?.view?.showAuthorizationError(with: error)
             }
-            
-            self.view?.checkAuthentication()
         }
     }
     

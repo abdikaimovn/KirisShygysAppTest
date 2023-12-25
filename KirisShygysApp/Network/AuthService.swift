@@ -9,28 +9,35 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-protocol AuthServiceProfileProtocol {
-    func signOut(completion: @escaping (Error?) -> ())
-    func signIn(with user: AuthorizationModel, completion: @escaping (Error?) -> ())
-    func registerUser(with user: RegistrationModel, completion: @escaping (Bool, Error?) -> ())
+protocol ProfileServiceProtocol {
+    func signOut(completion: @escaping (Result<(), Error>) -> ())
 }
 
-final class AuthService: AuthServiceProfileProtocol {
+protocol RegistrationServiceProtocol: AnyObject {
+    func registerUser(with user: RegistrationModel, completion: @escaping (Result<Bool, Error>) -> ())
+}
+
+protocol AuthorizationServiceProtocol: AnyObject {
+    func signIn(with user: AuthorizationModel, completion: @escaping (Result<(), Error>) -> ())
+}
+
+final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, AuthorizationServiceProtocol {
     static let shared = AuthService()
     
-    public func registerUser(with user: RegistrationModel, completion: @escaping (Bool, Error?) -> ()) {
+    public func registerUser(with user: RegistrationModel, completion: @escaping (Result<Bool, Error>) -> ()) {
+        
         let username = user.name
         let email = user.email
         let password = user.password
         
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
-                completion(false, error)
+                completion(.failure(error))
                 return
             }
             
             guard let resultUser = result?.user else {
-                completion(false, nil)
+                completion(.failure(NSError()))
                 return
             }
             
@@ -42,35 +49,34 @@ final class AuthService: AuthServiceProfileProtocol {
                     "email": email
                 ]) { error in
                     if let error = error {
-                        completion(false, error)
+                        completion(.failure(error))
                         return
                     }
                     
-                    completion(true, nil)
+                    completion(.success(true))
                 }
         }
     }
     
-    public func signIn(with user: AuthorizationModel, completion: @escaping (Error?) -> ()) {
+    public func signIn(with user: AuthorizationModel, completion: @escaping (Result<(), Error>) -> ()) {
         let email = user.email
         let password = user.password
         
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
-                completion(error)
-                return
+                completion(.failure(error))
             } else {
-                completion(nil)
+                completion(.success(()))
             }
         }
     }
     
-    public func signOut(completion: @escaping (Error?) -> ()) {
+    public func signOut(completion: @escaping (Result<(), Error>) -> ()) {
         do {
             try Auth.auth().signOut()
-            completion(nil)
+            completion(.success(()))
         } catch let error {
-            completion(error)
+            completion(.failure(error))
         }
     }
 }

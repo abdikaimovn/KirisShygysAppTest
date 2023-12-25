@@ -67,7 +67,7 @@ final class TabViewController: UITabBarController {
     }
     
     private func createProfileModule() -> UIViewController {
-        let presenter = ProfilePresenter(service: AuthService.shared, userManager: UserDataManager.shared)
+        let presenter = ProfilePresenter(profileAuthService: AuthService.shared, userManager: UserDataManager.shared)
         let view = ProfileViewController(presenter: presenter)
         presenter.view = view
         
