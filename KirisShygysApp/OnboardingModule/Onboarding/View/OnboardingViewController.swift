@@ -75,7 +75,8 @@ final class OnboardingViewController: UIViewController {
         backBarButtonItem.tintColor = .black
         navigationItem.backBarButtonItem = backBarButtonItem
         
-        let authPresenter = AuthorizationPresenter()
+        let authorizationService = AuthService.shared
+        let authPresenter = AuthorizationPresenter(authorizationService: authorizationService)
         let authView = AuthorizationViewController(presenter: authPresenter)
         authPresenter.view = authView
         
@@ -87,7 +88,8 @@ final class OnboardingViewController: UIViewController {
         backBarButtonItem.tintColor = .black
         navigationItem.backBarButtonItem = backBarButtonItem
         
-        let registrationPresenter = RegistrationPresenter()
+        let registrationService = AuthService.shared
+        let registrationPresenter = RegistrationPresenter(service: registrationService)
         let registrationView = RegistrationViewController(presenter: registrationPresenter)
         registrationPresenter.view = registrationView
         

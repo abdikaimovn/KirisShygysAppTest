@@ -12,6 +12,11 @@ protocol RegistrationViewProtocol: AnyObject {
 
 final class RegistrationPresenter {
     weak var view: RegistrationViewProtocol?
+    private let registrationService: RegistrationServiceProtocol
+    
+    init(service: RegistrationServiceProtocol) {
+        self.registrationService = service
+    }
     
     func signUpPressed(with data: RegistrationModel) {
         
@@ -34,18 +39,14 @@ final class RegistrationPresenter {
         }
         
         view?.showLoader()
-        AuthService.shared.registerUser(with: data) { wasRegistered, error in
-            self.view?.hideLoader()
+        registrationService.registerUser(with: data) {[weak self] result in
+            self?.view?.hideLoader()
             
-            if let error = error {
-                self.view?.showRegistrationError(with: error)
-                return
-            }
-            
-            if wasRegistered {
-                self.view?.checkAuthentication(answer: true)
-            } else {
-                self.view?.checkAuthentication(answer: false)
+            switch result {
+            case .success(let success):
+                self?.view?.checkAuthentication(answer: success)
+            case .failure(let error):
+                self?.view?.showRegistrationError(with: error)
             }
         }
 

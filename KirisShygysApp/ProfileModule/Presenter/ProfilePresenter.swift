@@ -17,11 +17,11 @@ protocol ProfileViewProtocol: AnyObject {
 final class ProfilePresenter {
     weak var view: ProfileViewProtocol?
     
-    private let service: AuthServiceProfileProtocol
+    private let profileAuthService: ProfileServiceProtocol
     private let userManager: UserProfileProtocol
     
-    init(service: AuthServiceProfileProtocol, userManager: UserProfileProtocol) {
-        self.service = service
+    init(profileAuthService: ProfileServiceProtocol, userManager: UserProfileProtocol) {
+        self.profileAuthService = profileAuthService
         self.userManager = userManager
     }
     
@@ -87,15 +87,16 @@ final class ProfilePresenter {
     func logOutDidTapped() {
         view?.showLoader()
         
-        service.signOut { [weak self] error in
+        profileAuthService.signOut { [weak self] result in
             self?.view?.hideLoader()
-            if let error = error {
+            
+            switch result {
+            case .success():
+                self?.view?.logOut()
+            case .failure(let error):
                 let model = ErrorModel(error: error)
                 self?.view?.showLogoutError(with: model)
-                return
             }
-            
-            self?.view?.logOut()
         }
     }
     
