@@ -44,6 +44,8 @@ final class HomePresenter {
         }
     }
     
+    
+    
     func viewDidLoaded() {
         view?.showLoader()
         
@@ -67,6 +69,7 @@ final class HomePresenter {
             }
         }
     }
+
     
     func showAllTrasactionsTapped(data: [TransactionModel]) {
         if data.isEmpty {
