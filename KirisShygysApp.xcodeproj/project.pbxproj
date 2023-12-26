@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F1764D32B37243E00E5FA4E /* KirisShygysAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1764D22B37243E00E5FA4E /* KirisShygysAppTests.swift */; };
 		6F1EC75D2B0A16FD0036CD9C /* FullTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */; };
 		6F2000152B346F13004C8BD8 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */; };
 		6F2000192B34737B004C8BD8 /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */; };
@@ -27,6 +26,7 @@
 		6F658BD92ACEBAF6004ECACB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BD82ACEBAF6004ECACB /* FirebaseDatabase */; };
 		6F658BDB2ACEBAF6004ECACB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDA2ACEBAF6004ECACB /* FirebaseFirestore */; };
 		6F658BDD2ACEBAF6004ECACB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F658BDC2ACEBAF6004ECACB /* FirebaseStorage */; };
+		6F659C832B39C61C00B39C52 /* HomeModuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F659C822B39C61C00B39C52 /* HomeModuleTest.swift */; };
 		6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* AuthService.swift */; };
 		6F7CD26D2B16091E005BFAFF /* DetailTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD26C2B16091E005BFAFF /* DetailTransactionView.swift */; };
 		6F7CD2732B163A2A005BFAFF /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD2722B163A2A005BFAFF /* ProfilePresenter.swift */; };
@@ -80,7 +80,6 @@
 /* Begin PBXFileReference section */
 		6F1764CB2B37217500E5FA4E /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KirisShygysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1764D02B37243E00E5FA4E /* KirisShygysAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KirisShygysAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F1764D22B37243E00E5FA4E /* KirisShygysAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KirisShygysAppTests.swift; sourceTree = "<group>"; };
 		6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionPresenter.swift; sourceTree = "<group>"; };
 		6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPresenter.swift; sourceTree = "<group>"; };
@@ -96,6 +95,7 @@
 		6F658BC52ACEA9A4004ECACB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F658BC82ACEA9A4004ECACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F658BCA2ACEA9A4004ECACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F659C822B39C61C00B39C52 /* HomeModuleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModuleTest.swift; sourceTree = "<group>"; };
 		6F7342D12AD85DB3000EA57D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6F7CD26C2B16091E005BFAFF /* DetailTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionView.swift; sourceTree = "<group>"; };
 		6F7CD2722B163A2A005BFAFF /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 		6F1764D12B37243E00E5FA4E /* KirisShygysAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				6F1764D22B37243E00E5FA4E /* KirisShygysAppTests.swift */,
+				6F659C822B39C61C00B39C52 /* HomeModuleTest.swift */,
 			);
 			path = KirisShygysAppTests;
 			sourceTree = "<group>";
@@ -694,7 +694,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F1764D32B37243E00E5FA4E /* KirisShygysAppTests.swift in Sources */,
+				6F659C832B39C61C00B39C52 /* HomeModuleTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
