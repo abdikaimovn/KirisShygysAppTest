@@ -202,7 +202,7 @@ extension AuthorizationViewController: AuthorizationViewProtocol {
     }
     
     func showAuthorizationError(with error: Error) {
-        AlertManager.showAuthorizationErrorAlert(on: self)
+        AlertManager.showAuthorizationErrorAlert(on: self, with: error)
     }
     
     func checkAuthentication() {
