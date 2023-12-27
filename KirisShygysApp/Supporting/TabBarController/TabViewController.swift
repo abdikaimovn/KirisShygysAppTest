@@ -31,7 +31,7 @@ final class TabViewController: UITabBarController {
         let image = UIImage(systemName: "plus.circle.fill")?.withTintColor(UIColor.shared.Brown, renderingMode: .alwaysOriginal)
         let resizedImage = image?.resized(to: CGSize(width: buttonSize, height: buttonSize))
         
-        let plusButton = UIButton(type: .custom)
+        let plusButton = ExtendedTapAreaButton(type: .custom)
         plusButton.setImage(resizedImage, for: .normal)
         plusButton.backgroundColor = .clear
         let tabBarHeight = tabBar.bounds.height

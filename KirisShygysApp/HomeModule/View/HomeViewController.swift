@@ -145,13 +145,13 @@ final class HomeViewController: UIViewController {
         return label
     }()
     
-    private lazy var seeAllButton: UILabel = {
-        var btn = UILabel()
-        btn.text = "See All"
-        btn.font = UIFont.defaultFont(17)
-        btn.textColor = .black
-        btn.isUserInteractionEnabled = true
-        btn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showAllTransactions)))
+    private lazy var seeAllButton: UIButton = {
+        var btn = ExtendedTapAreaButton()
+        btn.setTitle("See All", for: .normal)
+        btn.titleLabel?.font =  UIFont.defaultFont(17)
+        btn.setTitleColor(.black, for: .normal)
+        btn.backgroundColor = .clear
+        btn.addTarget(self, action: #selector(showAllTransactions), for: .touchUpInside)
         return btn
     }()
     
@@ -312,7 +312,7 @@ final class HomeViewController: UIViewController {
         view.addSubview(seeAllButton)
         seeAllButton.snp.makeConstraints { make in
             make.trailing.equalTo(card.snp.trailing)
-            make.top.equalTo(transactionsLabel.snp.top)
+            make.centerY.equalTo(transactionsLabel.snp.centerY)
         }
         
         view.addSubview(transactionsTableView)
@@ -389,4 +389,3 @@ extension HomeViewController: HomeViewProtocol {
         loaderView.removeFromSuperview()
     }
 }
-
