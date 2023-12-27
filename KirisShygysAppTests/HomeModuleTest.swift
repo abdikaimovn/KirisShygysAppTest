@@ -10,7 +10,7 @@ import XCTest
 
 final class HomeModuleTest: XCTestCase {
     private var homePresenter: HomePresenter!
-    private var mockHomeView: HomeViewProtocol!
+    private var mockHomeView: MockHomeView!
     private var userManager: UserInfoProtocol!
     
     override func setUpWithError() throws {
@@ -24,7 +24,6 @@ final class HomeModuleTest: XCTestCase {
         userManager = nil
         homePresenter = nil
         mockHomeView = nil
-        homePresenter.view = nil
         super.tearDown()
     }
     
