@@ -25,7 +25,6 @@ final class StatisticsViewController: UIViewController {
     private lazy var chart: BarChartView = {
         var chart = BarChartView()
         chart.backgroundColor = .white
-        chart.gridBackgroundColor = .clear
         chart.layer.cornerRadius = 20
         chart.layer.cornerCurve = .continuous
         chart.delegate = self
@@ -33,15 +32,15 @@ final class StatisticsViewController: UIViewController {
         return chart
     }()
     
-    private let chosenPeriod: UISegmentedControl = {
-        var sControl = UISegmentedControl()
-        sControl.insertSegment(withTitle: "Week", at: 0, animated: true)
-        sControl.insertSegment(withTitle: "Month", at: 1, animated: true)
-        sControl.insertSegment(withTitle: "Year", at: 2, animated: true)
-        sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
-        sControl.selectedSegmentIndex = 0
-        return sControl
-    }()
+//    private let chosenPeriod: UISegmentedControl = {
+//        var sControl = UISegmentedControl()
+//        sControl.insertSegment(withTitle: "Week", at: 0, animated: true)
+//        sControl.insertSegment(withTitle: "Month", at: 1, animated: true)
+//        sControl.insertSegment(withTitle: "Year", at: 2, animated: true)
+//        sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
+//        sControl.selectedSegmentIndex = 0
+//        return sControl
+//    }()
     
     init(transactionData: [TransactionModel], presenter: StatisticsPresenter) {
         self.presenter = presenter
@@ -93,34 +92,39 @@ final class StatisticsViewController: UIViewController {
         chart.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(10)
             make.top.equalTo(transactionType.snp.bottom).offset(20)
+            make.height.equalTo(300)
         }
-        
-        view.addSubview(chosenPeriod)
-        chosenPeriod.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(chart.snp.bottom).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
-        }
+    
     }
     
     func setChartData() {
         // Dummy data (replace this with your actual data)
-        let entries: [BarChartDataEntry] = [
-            BarChartDataEntry(x: 1.0, y: 1101.0, data: "Mon"),
-            BarChartDataEntry(x: 2.0, y: 1100.0, data: "Mon"),
-            BarChartDataEntry(x: 3.0, y: 1100.0, data: "Mon"),
-            BarChartDataEntry(x: 4.0, y: 1100.0, data: "Tue"),
-            BarChartDataEntry(x: 5.0, y: 1100.0, data: "Mon")
-        ]
+        var entries: [BarChartDataEntry] = []
+        var xValues = [String]()
+        
+        for i in 0...30 {
+            entries.append(BarChartDataEntry(x: Double(i), y: Double.random(in: 100...350)))
+            xValues.append("\(i + 1)")
+        }
         
         let dataSet = BarChartDataSet(entries: entries)
+        
         dataSet.setColor(UIColor.shared.IncomeColor)
         let data = BarChartData(dataSet: dataSet)
+        chart.xAxis.labelRotationAngle = -45
+        chart.gridBackgroundColor = .cyan
+        chart.layer.cornerRadius = 15
         
+        
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(values: xValues)
+        chart.xAxis.labelCount = xValues.count / 2
         // Optional: Customize the appearance of the chart
         chart.data = data
+        chart.legend.enabled = false
+        
         chart.xAxis.labelPosition = .bottom
     }
+
 }
 
 extension StatisticsViewController: StatisticsViewProtocol {
