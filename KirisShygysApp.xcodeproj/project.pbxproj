@@ -57,7 +57,6 @@
 		6FD8BC762B36BBE50073B18D /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD8BC752B36BBE50073B18D /* DGCharts */; };
 		6FE3898E2B0345E900E8844D /* FullTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */; };
 		6FE462B02B092BE000DDB235 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE462AF2B092BE000DDB235 /* FilterModel.swift */; };
-		6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */; };
 		6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */; };
 		6FEE5D812AF3E7DE00DAE263 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE5D802AF3E7DE00DAE263 /* TransactionViewController.swift */; };
 		6FF3A2CD2AD4222500D51E3A /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2CC2AD4222500D51E3A /* AuthorizationModel.swift */; };
@@ -126,7 +125,6 @@
 		6FD2CC502AFD027400580DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6FE3898D2B0345E900E8844D /* FullTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionViewController.swift; sourceTree = "<group>"; };
 		6FE462AF2B092BE000DDB235 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
-		6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		6FEE5D802AF3E7DE00DAE263 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		6FF3A2CC2AD4222500D51E3A /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
@@ -500,7 +498,6 @@
 			isa = PBXGroup;
 			children = (
 				6FCF294E2AF131BF00CEA307 /* TabViewController.swift */,
-				6FEE5D782AF3B6C400DAE263 /* CustomButton.swift */,
 				6FEE5D7A2AF3B78400DAE263 /* CustomTabBar.swift */,
 			);
 			path = TabBarController;
@@ -714,7 +711,6 @@
 				6F7CD27B2B166805005BFAFF /* StoryCollectionViewCell.swift in Sources */,
 				6FB40F802AE7BCD6009B7863 /* AlertManager.swift in Sources */,
 				6F96EA0B2B2DE35B00448EEB /* CustomTableView.swift in Sources */,
-				6FEE5D792AF3B6C400DAE263 /* CustomButton.swift in Sources */,
 				6FF560A82B2B629100CDC0F6 /* FullTransactionTableViewCell.swift in Sources */,
 				6F86B3322ACECC560092BC00 /* OnboardingModel.swift in Sources */,
 				6F658BC12ACEA9A3004ECACB /* HomeViewController.swift in Sources */,

@@ -34,7 +34,6 @@ final class HomeViewController: UIViewController {
     
     private let userNameLabel: UILabel = {
         var label = UILabel()
-        label.text = "Loading..."
         label.font = UIFont.defaultBoldFont(25)
         label.textColor = .darkGray
         return label
@@ -59,8 +58,9 @@ final class HomeViewController: UIViewController {
     
     private let totalBalance: UILabel = {
         var label = UILabel()
-        label.font = UIFont.defaultBoldFont(35)
+        label.font = UIFont.defaultBoldFont(32)
         label.textColor = .white
+        label.numberOfLines = 0
         return label
     }()
     
@@ -90,7 +90,8 @@ final class HomeViewController: UIViewController {
     
     private let incomeLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont.defaultFont(22)
+        label.font = UIFont.defaultFont(18)
+        label.numberOfLines = 0
         label.textColor = .white
         return label
     }()
@@ -121,8 +122,9 @@ final class HomeViewController: UIViewController {
     
     private let expenseLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont.defaultFont(22)
+        label.font = UIFont.defaultFont(18)
         label.textColor = .white
+        label.numberOfLines = 0
         return label
     }()
     
@@ -166,7 +168,6 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
         presenter.viewDidLoaded()
         setupCardValues()
@@ -239,7 +240,7 @@ final class HomeViewController: UIViewController {
         
         card.addSubview(totalBalanceLabel)
         totalBalanceLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(15)
+            make.leading.equalToSuperview().inset(15)
             make.top.equalToSuperview().inset(15)
         }
         
@@ -249,59 +250,56 @@ final class HomeViewController: UIViewController {
             make.leading.equalTo(totalBalanceLabel.snp.leading)
         }
         
-        card.addSubview(incomeView)
-        incomeView.snp.makeConstraints { make in
-            make.leading.equalTo(totalBalance.snp.leading)
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+
+        card.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview().inset(15)
             make.top.equalTo(totalBalance.snp.bottom).offset(40)
-            make.bottom.equalToSuperview().inset(15)
         }
-        
+        // Income View
+        stackView.addArrangedSubview(incomeView)
+
         incomeView.addSubview(incomeImage)
         incomeImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(5)
-            make.top.equalToSuperview().inset(5)
+            make.top.leading.equalToSuperview().inset(5)
             make.size.equalTo(20)
         }
-        
+
         incomeView.addSubview(income)
         income.snp.makeConstraints { make in
             make.leading.equalTo(incomeImage.snp.trailing).offset(5)
             make.centerY.equalTo(incomeImage.snp.centerY)
         }
-        
+
         incomeView.addSubview(incomeLabel)
         incomeLabel.snp.makeConstraints { make in
             make.leading.equalTo(incomeImage.snp.leading).offset(2)
             make.top.equalTo(incomeImage.snp.bottom).offset(5)
             make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview().inset(10)
         }
-        
-        card.addSubview(expenseView)
-        expenseView.snp.makeConstraints { make in
-            make.top.equalTo(totalBalance.snp.bottom).offset(40)
-            make.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(15)
-        }
-        
+
+        // Expense View
+        stackView.addArrangedSubview(expenseView)
+
         expenseView.addSubview(expenseImage)
         expenseImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(5)
             make.top.equalToSuperview().inset(5)
             make.size.equalTo(20)
         }
-        
+
         expenseView.addSubview(expense)
         expense.snp.makeConstraints { make in
             make.leading.equalTo(expenseImage.snp.trailing).offset(5)
             make.centerY.equalTo(expenseImage.snp.centerY)
-            make.trailing.equalToSuperview()
         }
-        
+
         expenseView.addSubview(expenseLabel)
         expenseLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
-            make.trailing.greaterThanOrEqualToSuperview()
             make.leading.equalTo(expenseImage.snp.leading).offset(2)
             make.top.equalTo(expenseImage.snp.bottom).offset(5)
         }
@@ -320,8 +318,8 @@ final class HomeViewController: UIViewController {
         
         view.addSubview(transactionsTableView)
         transactionsTableView.snp.makeConstraints { make in
-            make.top.equalTo(transactionsLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(transactionsLabel.snp.bottom).offset(20)
             make.height.equalTo(280)
         }
     }

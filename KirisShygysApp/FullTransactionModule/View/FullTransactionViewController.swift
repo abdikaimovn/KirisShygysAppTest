@@ -151,7 +151,7 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
         transactionInfoView!.frame = view.bounds
         view.addSubview(transactionInfoView!)
         
-        closeTransactionInfoButton = UIButton()
+        closeTransactionInfoButton = ExtendedTapAreaButton()
         closeTransactionInfoButton!.setImage(UIImage(systemName: "xmark"), for: .normal)
         closeTransactionInfoButton!.tintColor = .white
         

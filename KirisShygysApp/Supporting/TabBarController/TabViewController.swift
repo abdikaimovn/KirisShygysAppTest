@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class TabViewController: UITabBarController {
     
@@ -34,12 +35,13 @@ final class TabViewController: UITabBarController {
         let plusButton = ExtendedTapAreaButton(type: .custom)
         plusButton.setImage(resizedImage, for: .normal)
         plusButton.backgroundColor = .clear
-        let tabBarHeight = tabBar.bounds.height
-        let tabBarWidth = tabBar.bounds.width
         
-        plusButton.frame = CGRect(x: (tabBarWidth - buttonSize) / 2, y: tabBarHeight - buttonSize - 60, width: buttonSize, height: buttonSize)
         plusButton.addTarget(self, action: #selector(addTransactionPressed), for: .touchUpInside)
         tabBar.addSubview(plusButton)
+        plusButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(tabBar.snp.top).inset(5)
+        }
     }
     
     @objc private func addTransactionPressed() {
