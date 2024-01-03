@@ -20,7 +20,7 @@ final class ReportViewController: UIViewController {
         var pageControl = UIPageControl()
         pageControl.numberOfPages = 3
         pageControl.currentPage = 0
-        pageControl.pageIndicatorTintColor = UIColor.shared.LightGray
+        pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .white
         return pageControl
     }()
@@ -102,7 +102,7 @@ final class ReportViewController: UIViewController {
     }
     
     private func updatePageControlAndViewColor() {
-        pageControl.pageIndicatorTintColor = UIColor.shared.LightGray
+        pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .white
         
         if pageControl.currentPage == 0 {
@@ -131,10 +131,15 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
-        pageControl.currentPage = Int(scrollView.contentOffset.x / width)
-        updatePageControlAndViewColor()
+        let currentPage = Int((scrollView.contentOffset.x + width / 2) / width)
+        
+        // Check if the current page is different from the previous one
+        if pageControl.currentPage != currentPage {
+            pageControl.currentPage = currentPage
+            updatePageControlAndViewColor()
+        }
     }
 
 }
