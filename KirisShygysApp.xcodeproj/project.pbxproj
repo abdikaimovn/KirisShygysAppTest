@@ -31,7 +31,6 @@
 		6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7342D12AD85DB3000EA57D /* AuthService.swift */; };
 		6F7CD26D2B16091E005BFAFF /* DetailTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD26C2B16091E005BFAFF /* DetailTransactionView.swift */; };
 		6F7CD2732B163A2A005BFAFF /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD2722B163A2A005BFAFF /* ProfilePresenter.swift */; };
-		6F7CD2792B166425005BFAFF /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD2782B166425005BFAFF /* ReportViewController.swift */; };
 		6F7CD27B2B166805005BFAFF /* StoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD27A2B166805005BFAFF /* StoryCollectionViewCell.swift */; };
 		6F7CD27D2B1677BC005BFAFF /* ReportPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD27C2B1677BC005BFAFF /* ReportPresenter.swift */; };
 		6F7CD27F2B167A29005BFAFF /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD27E2B167A29005BFAFF /* ReportModel.swift */; };
@@ -39,6 +38,8 @@
 		6F86B3342ACED2FE0092BC00 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */; };
 		6F86B3372ACED6F90092BC00 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */; };
 		6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */; };
+		6F8D050B2B446C8B00BD4D94 /* MoneyFlowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D050A2B446C8B00BD4D94 /* MoneyFlowTableViewCell.swift */; };
+		6F8D050E2B44762200BD4D94 /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D050D2B44762200BD4D94 /* StatisticsModel.swift */; };
 		6F8D467C2B04E35B00F012AC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D467B2B04E35B00F012AC /* Date+Extension.swift */; };
 		6F96EA092B2DD3AD00448EEB /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F96EA082B2DD3AD00448EEB /* MenuTableViewCell.swift */; };
 		6F96EA0B2B2DE35B00448EEB /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F96EA0A2B2DE35B00448EEB /* CustomTableView.swift */; };
@@ -65,6 +66,8 @@
 		6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3A2D22AD424B800D51E3A /* RegistrationPresenter.swift */; };
 		6FF560A62B2B5C1C00CDC0F6 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF560A52B2B5C1C00CDC0F6 /* CardViewModel.swift */; };
 		6FF560A82B2B629100CDC0F6 /* FullTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF560A72B2B629100CDC0F6 /* FullTransactionTableViewCell.swift */; };
+		6FF857402B42CF2600E6324B /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7CD2782B166425005BFAFF /* ReportViewController.swift */; };
+		6FF857422B42CFCE00E6324B /* KirisShygysAppTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = 6F1764D02B37243E00E5FA4E /* KirisShygysAppTests.xctest */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,8 @@
 		6F86B3332ACED2FE0092BC00 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		6F86B3382ACEE2900092BC00 /* OnboardingCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCVCell.swift; sourceTree = "<group>"; };
+		6F8D050A2B446C8B00BD4D94 /* MoneyFlowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyFlowTableViewCell.swift; sourceTree = "<group>"; };
+		6F8D050D2B44762200BD4D94 /* StatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsModel.swift; sourceTree = "<group>"; };
 		6F8D467B2B04E35B00F012AC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		6F96EA082B2DD3AD00448EEB /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		6F96EA0A2B2DE35B00448EEB /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
@@ -170,24 +175,18 @@
 		6F20000B2B3465D1004C8BD8 /* StatisticsModule */ = {
 			isa = PBXGroup;
 			children = (
-				6F2000112B346EEA004C8BD8 /* Model */,
+				6F8D050C2B44760100BD4D94 /* Model */,
 				6F2000122B346EEF004C8BD8 /* View */,
 				6F2000132B346EF4004C8BD8 /* Presenter */,
 			);
 			path = StatisticsModule;
 			sourceTree = "<group>";
 		};
-		6F2000112B346EEA004C8BD8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		6F2000122B346EEF004C8BD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */,
+				6F8D050A2B446C8B00BD4D94 /* MoneyFlowTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -413,6 +412,14 @@
 				6F30CB202B3C89C500B03C53 /* ExtendedTapAreaButton.swift */,
 			);
 			path = Supporting;
+			sourceTree = "<group>";
+		};
+		6F8D050C2B44760100BD4D94 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F8D050D2B44762200BD4D94 /* StatisticsModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6FAB99A02AF7EA2E00CFD105 /* ProfileModule */ = {
@@ -674,6 +681,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FF857422B42CFCE00E6324B /* KirisShygysAppTests.xctest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,8 +742,9 @@
 				6F658BBD2ACEA9A3004ECACB /* AppDelegate.swift in Sources */,
 				6FD2CC4F2AFCFA6900580DDB /* HomePresenter.swift in Sources */,
 				6FAB99A52AF7EABA00CFD105 /* ProfileViewController.swift in Sources */,
+				6FF857402B42CF2600E6324B /* ReportViewController.swift in Sources */,
 				6F30CB212B3C89C500B03C53 /* ExtendedTapAreaButton.swift in Sources */,
-				6F7CD2792B166425005BFAFF /* ReportViewController.swift in Sources */,
+				6F8D050B2B446C8B00BD4D94 /* MoneyFlowTableViewCell.swift in Sources */,
 				6FEE5D7B2AF3B78400DAE263 /* CustomTabBar.swift in Sources */,
 				6F7CD26D2B16091E005BFAFF /* DetailTransactionView.swift in Sources */,
 				6F86B3392ACEE2900092BC00 /* OnboardingCVCell.swift in Sources */,
@@ -749,6 +758,7 @@
 				6FADAA6B2B2043A70001CCC6 /* UIFont+Extension.swift in Sources */,
 				6FF560A62B2B5C1C00CDC0F6 /* CardViewModel.swift in Sources */,
 				6F7342D22AD85DB3000EA57D /* AuthService.swift in Sources */,
+				6F8D050E2B44762200BD4D94 /* StatisticsModel.swift in Sources */,
 				6F86B3372ACED6F90092BC00 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

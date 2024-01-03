@@ -58,6 +58,27 @@ final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, Au
         }
     }
     
+    public func changeUsername(with newUsername: String, completion: @escaping (Result<(), Error>) -> ()) {
+        guard let currentUser = Auth.auth().currentUser else {
+            completion(.failure(NSError(domain: "AuthService", code: 1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])))
+            return
+        }
+        
+        let newUsername = newUsername
+        
+        // Update the username in Firestore
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(currentUser.uid)
+            .updateData(["username": newUsername]) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+    }
+    
     public func signIn(with user: AuthorizationModel, completion: @escaping (Result<(), Error>) -> ()) {
         let email = user.email
         let password = user.password
