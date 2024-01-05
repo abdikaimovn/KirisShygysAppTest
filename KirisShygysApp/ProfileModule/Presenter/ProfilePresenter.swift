@@ -63,7 +63,7 @@ final class ProfilePresenter {
     
     func statisticsDidTapped() {
         view?.showLoader()
-        userManager.fetchTransactionData { [weak self] result in
+        userManager.fetchLastMonthTransactionData { [weak self] result in
             self?.view?.hideLoader()
             
             switch result {
