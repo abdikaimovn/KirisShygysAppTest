@@ -157,6 +157,13 @@ final class HomeViewController: UIViewController {
         return btn
     }()
     
+    //creates background view for transactionsTableView to handle its height properly on different devices
+    private let backgroundViewOfTableView: UIView = {
+        let backView = UIView()
+        backView.backgroundColor = .clear
+        return backView
+    }()
+    
     init(presenter: HomePresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -169,6 +176,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
         presenter.viewDidLoaded()
         setupCardValues()
         
@@ -183,6 +191,11 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupTransactionsTableView()
     }
     
     @objc private func updateView() {
@@ -316,11 +329,22 @@ final class HomeViewController: UIViewController {
             make.centerY.equalTo(transactionsLabel.snp.centerY)
         }
         
-        view.addSubview(transactionsTableView)
+        view.addSubview(backgroundViewOfTableView)
+        backgroundViewOfTableView.snp.makeConstraints { make in
+            make.top.equalTo(transactionsLabel.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
+    
+    }
+    
+    private func setupTransactionsTableView() {
+        let tableViewHeight = Int(backgroundViewOfTableView.frame.height / 70) * 70
+        backgroundViewOfTableView.addSubview(transactionsTableView)
         transactionsTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(transactionsLabel.snp.bottom).offset(20)
-            make.height.equalTo(280)
+            make.top.equalToSuperview()
+            make.height.equalTo(tableViewHeight)
         }
     }
     
