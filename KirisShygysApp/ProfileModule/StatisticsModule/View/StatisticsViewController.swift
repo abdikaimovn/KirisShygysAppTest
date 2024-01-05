@@ -12,11 +12,7 @@ import SnapKit
 final class StatisticsViewController: UIViewController {
     private let presenter: StatisticsPresenter
     private let transactionData: [TransactionModel]
-    private let flowModel = [
-        FlowModel(value: 15000, flowImage: .income),
-        FlowModel(value: 2000, flowImage: .expense),
-        FlowModel(value: 13000, flowImage: .total)
-    ]
+    private var flowModel = [FlowModel]()
     
     private let transactionType: UISegmentedControl = {
         var sControl = UISegmentedControl()
@@ -32,20 +28,21 @@ final class StatisticsViewController: UIViewController {
         chart.backgroundColor = .white
         chart.layer.cornerRadius = 20
         chart.layer.cornerCurve = .continuous
-        chart.delegate = self
         chart.isUserInteractionEnabled = false
-        chart.drawValueAboveBarEnabled = false
+        chart.legend.enabled = false
+        chart.xAxis.drawGridLinesEnabled = false
+        chart.leftAxis.drawLabelsEnabled = false
+        chart.xAxis.labelPosition = .bottom
+        chart.animate(yAxisDuration: 1.0)
+        chart.rightAxis.drawGridLinesEnabled = false
+        chart.rightAxis.drawLabelsEnabled = false
         return chart
     }()
     
-    private let chosenPeriod: UISegmentedControl = {
-        var sControl = UISegmentedControl()
-        sControl.insertSegment(withTitle: "Week", at: 0, animated: true)
-        sControl.insertSegment(withTitle: "Month", at: 1, animated: true)
-        sControl.insertSegment(withTitle: "Year", at: 2, animated: true)
-        sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
-        sControl.selectedSegmentIndex = 0
-        return sControl
+    private let chartsScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.showsHorizontalScrollIndicator = true
+        return scroll
     }()
     
     private lazy var moneyFlowTableView: UITableView = {
@@ -78,7 +75,7 @@ final class StatisticsViewController: UIViewController {
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
         
-        self.title = "Statistics"
+        self.title = "Statistics for last month"
         
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -92,6 +89,8 @@ final class StatisticsViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        
+        
         setChartData()
     }
     
@@ -134,20 +133,20 @@ final class StatisticsViewController: UIViewController {
         
         controlsBackView.addSubview(transactionType)
         transactionType.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(10)
+            make.top.bottom.leading.trailing.equalToSuperview().inset(10)
         }
         
-        controlsBackView.addSubview(chosenPeriod)
-        chosenPeriod.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(10)
-            make.top.equalTo(transactionType.snp.bottom).offset(10)
-            make.bottom.equalToSuperview().inset(10)
-        }
-        
-        chartBackView.addSubview(chart)
-        chart.snp.makeConstraints { make in
+        chartBackView.addSubview(chartsScrollView)
+        chartsScrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
             make.height.equalTo(300)
+        }
+        
+        chartsScrollView.addSubview(chart)
+        chart.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalTo(chartBackView.snp.width).multipliedBy(2)
+            make.height.equalToSuperview()
         }
         
         moneyInfoBackView.addSubview(moneyFlowTableView)
@@ -155,59 +154,39 @@ final class StatisticsViewController: UIViewController {
             make.edges.equalToSuperview().inset(10)
             make.height.equalTo(105)
         }
+        
+        transactionType.addTarget(self, action: #selector(segmentedControlDidChanged), for: .valueChanged)
     }
     
     func setChartData() {
-        // Dummy data (replace this with your actual data)
-        var entries: [BarChartDataEntry] = []
-        var xValues = [String]()
-        xValues.append("1 week")
-        xValues.append("2 weeks")
-        xValues.append("3 weeks")
-        xValues.append("4 weeks")
-        
-        for i in 0..<xValues.count {
-            entries.append(BarChartDataEntry(x: Double(i), y: Double.random(in: 100...350)))
-        }
-        
-        let dataSet = BarChartDataSet(entries: entries)
-        
-        dataSet.setColor(UIColor.shared.IncomeColor)
-        let data = BarChartData(dataSet: dataSet)
-        chart.animate(yAxisDuration: 1.0)
-        chart.layer.cornerRadius = 15
-        chart.xAxis.valueFormatter = IndexAxisValueFormatter(values: xValues)
-        chart.xAxis.labelCount = xValues.count
-        
-        // Optional: Customize the appearance of the chart
-        chart.data = data
-        chart.legend.enabled = false
-        
-        chart.xAxis.labelPosition = .bottom
+        presenter.setChart(with: transactionData, and: transactionType.selectedSegmentIndex)
+        presenter.setMoneyFlow(with: transactionData)
     }
     
-    
+    @objc func segmentedControlDidChanged() {
+        presenter.setChart(with: transactionData, and: transactionType.selectedSegmentIndex)
+    }
 }
 
 extension StatisticsViewController: StatisticsViewProtocol {
-    func showLoader() {
-        
+    func setupMoneyFlow(with moneyFlowModel: [FlowModel]) {
+        self.flowModel = moneyFlowModel
     }
     
-    func hideLoader() {
-        
+    func updateView(with color: UIColor) {
+        transactionType.selectedSegmentTintColor = color
     }
     
-    
-}
-
-extension StatisticsViewController: ChartViewDelegate {
-    
+    func setupChart(with model: ChartModel) {
+        chart.data = BarChartData(dataSet: model.chartData)
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(values: model.xAxisTitles)
+        chart.xAxis.labelCount = model.xAxisTitles.count
+    }
 }
 
 extension StatisticsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        flowModel.count
+        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
