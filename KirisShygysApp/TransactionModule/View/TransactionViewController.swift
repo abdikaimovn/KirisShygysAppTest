@@ -206,7 +206,7 @@ final class TransactionViewController: UIViewController {
         headView.addSubview(amountLabel)
         amountLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(15)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
         }
         
         headView.addSubview(amountTextField)
@@ -233,18 +233,17 @@ final class TransactionViewController: UIViewController {
         surfaceView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(amountTextField.snp.bottom).offset(20)
-            make.centerY.equalToSuperview()
         }
         
         surfaceView.addSubview(segmentedControl)
         segmentedControl.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(15)
+            make.top.equalToSuperview().inset(10)
             make.leading.trailing.equalToSuperview().inset(10)
         }
         
         surfaceView.addSubview(transNameLabel)
         transNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(20)
+            make.top.equalTo(segmentedControl.snp.bottom).offset(15)
             make.leading.equalToSuperview().inset(15)
         }
         
@@ -263,7 +262,7 @@ final class TransactionViewController: UIViewController {
         surfaceView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(15)
-            make.top.equalTo(transNameTextField.snp.bottom).offset(20)
+            make.top.equalTo(transNameTextField.snp.bottom).offset(15)
         }
         
         surfaceView.addSubview(descriptionTextField)
@@ -276,7 +275,7 @@ final class TransactionViewController: UIViewController {
         
         surfaceView.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalTo(descriptionTextField.snp.bottom).offset(20)
+            make.top.equalTo(descriptionTextField.snp.bottom).offset(15)
             make.trailing.equalTo(segmentedControl.snp.trailing)
         }
         
@@ -288,9 +287,9 @@ final class TransactionViewController: UIViewController {
         
         surfaceView.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
-            make.top.equalTo(datePicker.snp.bottom).offset(30)
+            make.top.equalTo(datePicker.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(10)
-            make.height.equalTo(55)
+            make.height.equalTo(50)
             make.bottom.equalTo(surfaceView.snp.bottom).offset(-20)
         }
     }
