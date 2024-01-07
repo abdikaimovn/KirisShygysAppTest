@@ -393,8 +393,8 @@ extension HomeViewController: HomeViewProtocol {
         self.userNameLabel.text = username
     }
     
-    func updateTransactionsData(with: [TransactionModel]) {
-        self.transactionData = with
+    func updateTransactionsData(with data: [TransactionModel]) {
+        self.transactionData = data
         self.transactionsTableView.reloadData()
         self.setupCardValues()
     }

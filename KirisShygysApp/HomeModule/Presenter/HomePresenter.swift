@@ -3,7 +3,7 @@ import FirebaseFirestore
 
 protocol HomeViewProtocol: AnyObject {
     func setUsername(username: String)
-    func updateTransactionsData(with: [TransactionModel])
+    func updateTransactionsData(with data: [TransactionModel])
     func showLoader()
     func hideLoader()
     func pushAllTransactionsView()
