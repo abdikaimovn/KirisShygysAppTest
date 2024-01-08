@@ -6,16 +6,60 @@
 //
 
 import Foundation
+import Firebase
 
 protocol FullTransactionViewProtocol: AnyObject {
     func setupSectionsByDefault(_ groupedTransactions: [String: [TransactionModel]], _ sectionTitles: [SectionTitleModel])
     func setupFilteredSections(_ groupedSections: [String: [TransactionModel]], sectionTitles: [SectionTitleModel])
     func showLoader()
     func hideLoader()
+    func showError(with model: ErrorModel)
 }
 
 final class FullTransactionPresenter {
     weak var view: FullTransactionViewProtocol?
+    
+    func deleteTransaction(with model: TransactionModel) {
+        let db = Firestore.firestore()
+        
+        let collectionName: String
+        switch model.transactionType {
+        case .income:
+            collectionName = "Incomes"
+        case .expense:
+            collectionName = "Expenses"
+        }
+        
+        guard let transactionId = model.id else {
+            view?.showError(with: ErrorModel(error: NSError()))
+            return
+        }
+        
+        print(transactionId)
+        // Удаление транзакции из коллекции "Incomes" или "Expenses"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection(collectionName)
+            .document(transactionId)
+            .delete { [weak self] error in
+                if let error = error {
+                    self?.view?.showError(with: ErrorModel(error: error))
+                    return
+                }
+            }
+        
+        // Удаление транзакции из коллекции "Transactions"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection("Transactions")
+            .document(transactionId)
+            .delete { [weak self] error in
+                if let error = error {
+                    self?.view?.showError(with: ErrorModel(error: error))
+                    return
+                }
+            }
+    }
     
     private func applySortBy(sortBy: SortByEnum, transactionData: [TransactionModel]) -> [TransactionModel] {
         var sortedTransactionData = [TransactionModel]()
@@ -29,7 +73,7 @@ final class FullTransactionPresenter {
         
         return sortedTransactionData
     }
-
+    
     private func applyTransactionsByPeriod(period: PeriodEnum?, transactionData: [TransactionModel]) -> [TransactionModel] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -69,7 +113,7 @@ final class FullTransactionPresenter {
         
         return filteredTransactions
     }
-
+    
     private func applyFilterBy(filterBy: TransactionType, transactionData: [TransactionModel]) -> [TransactionModel] {
         var filteredTransactionData = [TransactionModel]()
         

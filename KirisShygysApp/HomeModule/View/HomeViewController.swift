@@ -180,10 +180,21 @@ final class HomeViewController: UIViewController {
         presenter.viewDidLoaded()
         setupCardValues()
         
+        setupNotificationCenter()
+    }
+    
+    private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateView),
             name: Notification.Name("UpdateAfterTransaction"),
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateView),
+            name: Notification.Name("UpdateAfterDeletingTransaction"),
             object: nil
         )
     }

@@ -33,18 +33,6 @@ struct TransactionModel {
         self.transactionDescription = description
         self.transactionDate = date
     }
-
-    // Преобразование модели в словарь для сохранения в Firebase
-    func toDictionary() -> [String: Any] {
-        return [
-            "id": id!,
-            "amount": transactionAmount,
-            "type": transactionType.rawValue,
-            "name": transactionName,
-            "description": transactionDescription,
-            "date": transactionDate
-        ]
-    }
 }
 
 enum TransactionType: String {
