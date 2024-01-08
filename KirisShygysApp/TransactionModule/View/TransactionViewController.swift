@@ -93,7 +93,7 @@ final class TransactionViewController: UIViewController {
     
     private let calendarLabel: UILabel = {
         var label = UILabel()
-        label.text = "Transaction date"
+        label.text = "Date"
         label.textColor = .black
         label.font = UIFont.defaultFont(18)
         return label

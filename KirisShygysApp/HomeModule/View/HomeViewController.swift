@@ -180,10 +180,21 @@ final class HomeViewController: UIViewController {
         presenter.viewDidLoaded()
         setupCardValues()
         
+        setupNotificationCenter()
+    }
+    
+    private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateView),
             name: Notification.Name("UpdateAfterTransaction"),
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateView),
+            name: Notification.Name("UpdateAfterDeletingTransaction"),
             object: nil
         )
     }
@@ -393,8 +404,8 @@ extension HomeViewController: HomeViewProtocol {
         self.userNameLabel.text = username
     }
     
-    func updateTransactionsData(with: [TransactionModel]) {
-        self.transactionData = with
+    func updateTransactionsData(with data: [TransactionModel]) {
+        self.transactionData = data
         self.transactionsTableView.reloadData()
         self.setupCardValues()
     }
