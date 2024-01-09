@@ -14,7 +14,7 @@ protocol ProfileServiceProtocol {
 }
 
 protocol RegistrationServiceProtocol: AnyObject {
-    func registerUser(with user: RegistrationModel, completion: @escaping (Result<Bool, Error>) -> ())
+    func registerUser(with user: RegistrationModel, completion: @escaping (Result<(), Error>) -> ())
 }
 
 protocol AuthorizationServiceProtocol: AnyObject {
@@ -24,7 +24,7 @@ protocol AuthorizationServiceProtocol: AnyObject {
 final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, AuthorizationServiceProtocol {
     static let shared = AuthService()
     
-    public func registerUser(with user: RegistrationModel, completion: @escaping (Result<Bool, Error>) -> ()) {
+    public func registerUser(with user: RegistrationModel, completion: @escaping (Result<(), Error>) -> ()) {
         
         let username = user.name
         let email = user.email
@@ -37,12 +37,12 @@ final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, Au
             }
             
             guard let resultUser = result?.user else {
-                completion(.failure(NSError()))
+                completion(.failure(NSError(domain: "AuthService", code: 1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])))
                 return
             }
             
             let db = Firestore.firestore()
-            db.collection("users")
+            db.collection(DocumentTypeName.users.rawValue)
                 .document(resultUser.uid)
                 .setData([
                     "username": username,
@@ -53,7 +53,7 @@ final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, Au
                         return
                     }
                     
-                    completion(.success(true))
+                    completion(.success(()))
                 }
         }
     }
@@ -68,7 +68,7 @@ final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, Au
         
         // Update the username in Firestore
         let db = Firestore.firestore()
-        db.collection("users")
+        db.collection(DocumentTypeName.users.rawValue)
             .document(currentUser.uid)
             .updateData(["username": newUsername]) { error in
                 if let error = error {

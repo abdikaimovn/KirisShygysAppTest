@@ -1,7 +1,7 @@
 import Foundation
 
 protocol RegistrationViewProtocol: AnyObject {
-    func checkAuthentication(answer: Bool)
+    func checkAuthentication()
     func showRegistrationError(with error: Error)
     func showInvalidEmailError() 
     func showInvalidUsernameError()
@@ -43,8 +43,8 @@ final class RegistrationPresenter {
             self?.view?.hideLoader()
             
             switch result {
-            case .success(let success):
-                self?.view?.checkAuthentication(answer: success)
+            case .success():
+                self?.view?.checkAuthentication()
             case .failure(let error):
                 self?.view?.showRegistrationError(with: error)
             }

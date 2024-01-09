@@ -29,12 +29,16 @@ final class ProfilePresenter {
         view?.showLoader()
         userManager.fetchCurrentUsername { [weak self] result in
             self?.view?.hideLoader()
-            
             switch result {
             case .success(let username):
                 self?.view?.setUsername(username)
-            case .failure(let error):
-                self?.view?.showUnknownError(with: ErrorModel(error: error))
+            case .failure(let failure):
+                switch failure {
+                case .userNotFound:
+                    self?.view?.setUsername("Error")
+                case .customError(let error):
+                    self?.view?.showUnknownError(with: ErrorModel(error: error))
+                }
             }
         }
     }

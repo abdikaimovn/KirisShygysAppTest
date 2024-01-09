@@ -56,7 +56,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
-        textField.isSecureTextEntry = true 
+        textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         textField.textColor = .black
         textField.font = UIFont.defaultFont(16)
@@ -190,7 +190,7 @@ final class RegistrationViewController: UIViewController {
     
 }
 
-// Presenter's methods 
+// Presenter's methods
 extension RegistrationViewController: RegistrationViewProtocol {
     func showLoader() {
         view.addSubview(loaderView)
@@ -237,13 +237,9 @@ extension RegistrationViewController: RegistrationViewProtocol {
         AlertManager.showRegistrationErrorAlert(on: self, with: error)
     }
     
-    func checkAuthentication(answer: Bool) {
-        if answer {
-            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-                sceneDelegate.checkAuthentication()
-            }
-        } else {
-            AlertManager.showRegistrationErrorAlert(on: self)
+    func checkAuthentication() {
+        if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+            sceneDelegate.checkAuthentication()
         }
     }
 }

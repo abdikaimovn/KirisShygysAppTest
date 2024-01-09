@@ -44,8 +44,6 @@ final class HomePresenter {
         }
     }
     
-    
-    
     func viewDidLoaded() {
         view?.showLoader()
         
@@ -53,8 +51,13 @@ final class HomePresenter {
             switch result {
             case .success(let username):
                 self?.view?.setUsername(username: username)
-            case .failure(let error):
-                self?.view?.showUnknownError(with: ErrorModel(error: error))
+            case .failure(let failure):
+                switch failure {
+                case .userNotFound:
+                    self?.view?.setUsername(username: "Error")
+                case .customError(let error):
+                    self?.view?.showUnknownError(with: ErrorModel(error: error))
+                }
             }
         }
         
@@ -70,7 +73,6 @@ final class HomePresenter {
         }
     }
 
-    
     func showAllTrasactionsTapped(data: [TransactionModel]) {
         if data.isEmpty {
             view?.showAbsenseDataAlert()

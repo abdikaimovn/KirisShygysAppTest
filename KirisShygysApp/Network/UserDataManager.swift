@@ -10,41 +10,32 @@ import Firebase
 import FirebaseFirestore
 
 protocol UserInfoProtocol {
-    func fetchCurrentUsername(completion: @escaping (Result<String, Error>) -> Void)
+    func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void)
     func fetchTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
 }
 
 protocol UserProfileProtocol {
-    func fetchCurrentUsername(completion: @escaping (Result<String, Error>) -> Void)
+    func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void)
     func fetchLastMonthTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
     func fetchTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
 }
 
-enum FetchingTransactionsError: Error {
-    case gettingDocumentError(Error)
-    case userNotFoundError
-}
-
 final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
     static let shared = UserDataManager()
-    private let transactions = "Transactions"
-    private let incomes = "Incomes"
-    private let expenses = "Expenses"
-    private let username = "username"
     
-    func fetchCurrentUsername(completion: @escaping (Result<String, Error>) -> Void) {
+    func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void) {
         guard let currentUserUID = Auth.auth().currentUser?.uid else {
-            completion(.success("Username is not found"))
+            completion(.failure(.userNotFound))
             return
         }
         
-        let ref = Firestore.firestore().collection("users").document(currentUserUID)
+        let ref = Firestore.firestore().collection(DocumentTypeName.users.rawValue).document(currentUserUID)
         ref.getDocument { snapshot, error in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(.customError(error)))
             }
             
-            if let snapshot = snapshot, let userData = snapshot.data(), let name = userData[self.username] as? String {
+            if let snapshot = snapshot, let userData = snapshot.data(), let name = userData[DocumentTypeName.username.rawValue] as? String {
                 completion(.success(name))
             }
         }
@@ -60,12 +51,12 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
             return
         }
         
-        // Example query to retrieve data from the "Incomes" collection
-        db.collection("users").document(currentUserUID).collection(transactions).order(by: "date").getDocuments { [weak self] (querySnapshot, error) in
+        db.collection(DocumentTypeName.users.rawValue).document(currentUserUID).collection(DocumentTypeName.transactions.rawValue).getDocuments { [weak self] (querySnapshot, error) in
             guard self != nil else { return }
             
             if let error = error {
                 completion(.failure(.gettingDocumentError(error)))
+                return
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
@@ -103,7 +94,7 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         
-        db.collection("users").document(currentUserUID).collection(transactions)
+        db.collection(DocumentTypeName.users.rawValue).document(currentUserUID).collection(DocumentTypeName.transactions.rawValue)
             .getDocuments { [weak self] (querySnapshot, error) in
                 guard self != nil else { return }
                 
