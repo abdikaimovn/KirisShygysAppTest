@@ -13,7 +13,7 @@ protocol FilterViewControllerDelegate: AnyObject {
 
 final class FilterViewController: UIViewController {
     weak var delegate: FilterViewControllerDelegate?
-    private var filterModel: FilterModel? = FilterModel(filterBy: nil, sortBy: nil, period: nil)
+    private var filterModel = FilterModel(filterBy: nil, sortBy: nil, period: nil)
     
     init(delegate: FilterViewControllerDelegate?) {
         self.delegate = delegate
@@ -90,6 +90,14 @@ final class FilterViewController: UIViewController {
         return view
     }()
     
+    private let verticalStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.spacing = 10
+        return stack
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -119,7 +127,7 @@ final class FilterViewController: UIViewController {
     }
     
     @objc private func applyButtonTapped() {
-        delegate!.didGetFilterSettings(filterData: self.filterModel!)
+        delegate!.didGetFilterSettings(filterData: self.filterModel)
         self.dismiss(animated: true)
     }
     
@@ -129,7 +137,7 @@ final class FilterViewController: UIViewController {
         view.addSubview(closeLine)
         closeLine.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             make.height.equalTo(3)
             make.width.equalTo(30)
         }
@@ -146,60 +154,38 @@ final class FilterViewController: UIViewController {
         let periodStack = generateStackView()
         
         view.addSubview(filterTransactionLabel)
+        filterTransactionLabel.setContentHuggingPriority(.required, for: .vertical)
         filterTransactionLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(20)
-            make.top.equalTo(closeLine.snp.bottom).offset(20)
+            make.top.equalTo(closeLine.snp.bottom).offset(10)
         }
         
         view.addSubview(resetButton)
         resetButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20)
-            make.leading.equalTo(filterTransactionLabel.snp.trailing).offset(20)
+            make.leading.greaterThanOrEqualTo(filterTransactionLabel.snp.trailing).offset(20)
             make.centerY.equalTo(filterTransactionLabel.snp.centerY)
         }
-
-        view.addSubview(filterByLabel)
-        filterByLabel.snp.makeConstraints { make in
-            make.top.equalTo(filterTransactionLabel.snp.bottom).offset(30)
-            make.leading.equalTo(filterTransactionLabel.snp.leading)
+        
+        view.addSubview(verticalStack)
+        verticalStack.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(resetButton.snp.bottom).offset(20)
         }
         
-        view.addSubview(filterByStack)
-        filterByStack.snp.makeConstraints { make in
-            make.top.equalTo(filterByLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
-        }
-    
+        verticalStack.addArrangedSubview(filterByLabel)
+        verticalStack.addArrangedSubview(filterByStack)
         filterByStack.addArrangedSubview(filterByExpenseButton)
         filterByStack.addArrangedSubview(filterByIncomeButton)
         
-        view.addSubview(sortByLabel)
-        sortByLabel.snp.makeConstraints { make in
-            make.top.equalTo(filterByStack.snp.bottom).offset(30)
-            make.leading.equalTo(filterTransactionLabel.snp.leading)
-        }
         
-        view.addSubview(sortByStack)
-        sortByStack.snp.makeConstraints { make in
-            make.top.equalTo(sortByLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
-        }
-
+        verticalStack.addArrangedSubview(sortByLabel)
+        verticalStack.addArrangedSubview(sortByStack)
         sortByStack.addArrangedSubview(sortByNewestButton)
         sortByStack.addArrangedSubview(sortByOldestButton)
         
-        view.addSubview(periodLabel)
-        periodLabel.snp.makeConstraints { make in
-            make.top.equalTo(sortByStack.snp.bottom).offset(30)
-            make.leading.equalTo(filterTransactionLabel.snp.leading)
-        }
-        
-        view.addSubview(periodStack)
-        periodStack.snp.makeConstraints { make in
-            make.top.equalTo(periodLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
-        }
-        
+        verticalStack.addArrangedSubview(periodLabel)
+        verticalStack.addArrangedSubview(periodStack)
         periodStack.addArrangedSubview(weekPeriodButton)
         periodStack.addArrangedSubview(monthPeriodButton)
         periodStack.addArrangedSubview(halfyearPeriodButton)
@@ -208,9 +194,9 @@ final class FilterViewController: UIViewController {
         view.addSubview(applyButton)
         applyButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(periodStack.snp.bottom).offset(20)
+            make.top.equalTo(verticalStack.snp.bottom).offset(20)
             make.height.equalTo(50)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
     }
     
@@ -274,41 +260,41 @@ extension FilterViewController {
     
     @objc private func expenseButtonTapped() {
         updateButtons(filterByExpenseButton, [filterByIncomeButton])
-        self.filterModel?.filterBy = .expense
+        self.filterModel.filterBy = .expense
     }
     
     @objc private func incomeButtonTapped() {
         updateButtons(filterByIncomeButton, [filterByExpenseButton])
-        self.filterModel?.filterBy = .income
+        self.filterModel.filterBy = .income
     }
     
     @objc private func sortByNewestButtonTapped() {
         updateButtons(sortByNewestButton, [sortByOldestButton])
-        self.filterModel?.sortBy = .newest
+        self.filterModel.sortBy = .newest
     }
     
     @objc private func sortByOldestButtonTapped() {
         updateButtons(sortByOldestButton, [sortByNewestButton])
-        self.filterModel?.sortBy = .oldest
+        self.filterModel.sortBy = .oldest
     }
     
     @objc private func weekPeriodButtonTapped() {
         updateButtons(weekPeriodButton, [monthPeriodButton, halfyearPeriodButton, yearPeriodButton])
-        self.filterModel?.period = .week
+        self.filterModel.period = .week
     }
     
     @objc private func monthPeriodButtonTapped() {
         updateButtons(monthPeriodButton, [weekPeriodButton, halfyearPeriodButton, yearPeriodButton])
-        self.filterModel?.period = .month
+        self.filterModel.period = .month
     }
     
     @objc private func halfyearPeriodButtonTapped() {
         updateButtons(halfyearPeriodButton, [monthPeriodButton, weekPeriodButton, yearPeriodButton])
-        self.filterModel?.period = .halfyear
+        self.filterModel.period = .halfyear
     }
     
     @objc private func yearPeriodButtonTapped() {
         updateButtons(yearPeriodButton, [monthPeriodButton, halfyearPeriodButton, weekPeriodButton])
-        self.filterModel?.period = .year
+        self.filterModel.period = .year
     }
 }

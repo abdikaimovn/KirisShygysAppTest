@@ -152,28 +152,21 @@ extension FullTransactionViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Capture the indexPath before calling the presenter method
             let sectionTitle = sectionTitles[indexPath.section].sectionTitleDate
-
-            // Get the specific transaction within the selected section
             let transactionToDelete = groupedTransactions[sectionTitle]?[indexPath.row]
 
-            // Call the presenter method
             if let transactionToDelete = transactionToDelete {
                 presenter.deleteTransaction(with: transactionToDelete)
             }
-
-            // Now use the captured indexPath for deletion
+            
             transactionData.remove(at: indexPath.row)
             groupedTransactions[sectionTitle]?.remove(at: indexPath.row)
 
-            // If there are no more transactions in the section, remove the section title
             if let index = sectionTitles.firstIndex(where: { $0.sectionTitleDate == sectionTitle }),
                groupedTransactions[sectionTitle]?.isEmpty ?? true {
                 sectionTitles.remove(at: index)
             }
 
-            // Reload the table view
             tableView.reloadData()
 
             NotificationCenter.default.post(name: Notification.Name("UpdateAfterDeletingTransaction"), object: nil)
