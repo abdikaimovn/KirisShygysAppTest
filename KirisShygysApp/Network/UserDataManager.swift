@@ -20,7 +20,11 @@ protocol UserProfileProtocol {
     func fetchTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
 }
 
-final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
+protocol TransactionPresenterService {
+    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(),Error>) -> Void)
+}
+
+final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionPresenterService {
     static let shared = UserDataManager()
     
     func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void) {
@@ -125,5 +129,56 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
                     completion(.success(lastMonthTransactions))
                 }
             }
+    }
+    
+    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(),Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        let collectionName: String
+        switch transactionData.transactionType {
+        case .income:
+            collectionName = "Incomes"
+        case .expense:
+            collectionName = "Expenses"
+        }
+        
+        // Creating an unique identifier for a transaction
+        let transactionId = UUID().uuidString
+        
+        // Создайте словарь для данных транзакции
+        let transactionDataDict: [String: Any] = [
+            "id": transactionId,
+            "name": transactionData.transactionName,
+            "type": collectionName,
+            "description": transactionData.transactionDescription,
+            "amount": transactionData.transactionAmount,
+            "date": transactionData.transactionDate
+        ]
+        
+        // Добаление транзакции в коллекцию "Incomes" или "Expenses"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection(collectionName)
+            .document(transactionId)
+            .setData(transactionDataDict) { error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+            }
+        
+        // Добавления транзакции в коллекцию "Transactions"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection("Transactions")
+            .document(transactionId)
+            .setData(transactionDataDict) { error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+            }
+        
+        completion(.success(()))
     }
 }
