@@ -16,20 +16,20 @@ final class FullTransactionViewController: UIViewController {
     private let filterTransactionLabel: UILabel = {
         var label = UILabel()
         label.text = "Filter Transactions"
-        label.font = UIFont.defaultBoldFont(18)
+        label.font = UIFont.defaultFont(18)
         label.textColor = .black
         return label
     }()
     
-    private lazy var filterImage: UIImageView = {
-        var image = UIImageView()
-        image.image = UIImage(systemName: "slider.vertical.3")
-        image.tintColor = UIColor.shared.Brown
-        image.backgroundColor = .clear
-        image.contentMode = .scaleAspectFit
-        image.isUserInteractionEnabled = true
-        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterGestureRecognizer)))
-        return image
+    private lazy var filterButton: UIButton = {
+        let button = ExtendedTapAreaButton(type: .custom)
+        button.setImage(UIImage(systemName: "slider.vertical.3"), for: .normal)
+        button.backgroundColor = UIColor.shared.LightGray
+        button.layer.cornerRadius = 10
+        button.layer.cornerCurve = .continuous
+        button.tintColor = UIColor.shared.Brown
+        button.addTarget(self, action: #selector(filterButtonAction), for: .touchUpInside)
+        return button
     }()
     
     private lazy var tableView: UITableView = {
@@ -71,7 +71,7 @@ final class FullTransactionViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    @objc func filterGestureRecognizer() {
+    @objc func filterButtonAction() {
         let transactionFilterVC = FilterViewController(delegate: self)
         if let sheet = transactionFilterVC.sheetPresentationController {
             sheet.detents = [.medium()]
@@ -93,18 +93,18 @@ final class FullTransactionViewController: UIViewController {
             make.leading.equalToSuperview().inset(20)
         }
         
-        view.addSubview(filterImage)
-        filterImage.snp.makeConstraints { make in
+        view.addSubview(filterButton)
+        filterButton.snp.makeConstraints { make in
             make.centerY.equalTo(filterTransactionLabel.snp.centerY)
             make.trailing.equalToSuperview().inset(20)
-            make.size.equalTo(30)
+            make.size.equalTo(50)
         }
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
-            make.top.equalTo(filterImage.snp.bottom).offset(10)
+            make.top.equalTo(filterButton.snp.bottom).offset(10)
         }
     }
     
