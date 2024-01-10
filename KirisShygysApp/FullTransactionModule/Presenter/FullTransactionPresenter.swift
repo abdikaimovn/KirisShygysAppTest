@@ -18,47 +18,21 @@ protocol FullTransactionViewProtocol: AnyObject {
 
 final class FullTransactionPresenter {
     weak var view: FullTransactionViewProtocol?
+    private let networkService: FullTransactionPresenterService
     
-    func deleteTransaction(with model: TransactionModel) {
-        let db = Firestore.firestore()
-        
-        let collectionName: String
-        switch model.transactionType {
-        case .income:
-            collectionName = "Incomes"
-        case .expense:
-            collectionName = "Expenses"
-        }
-        
-        guard let transactionId = model.id else {
-            view?.showError(with: ErrorModel(error: NSError()))
-            return
-        }
-        
-        print(transactionId)
-        // Удаление транзакции из коллекции "Incomes" или "Expenses"
-        db.collection("users")
-            .document(Auth.auth().currentUser!.uid)
-            .collection(collectionName)
-            .document(transactionId)
-            .delete { [weak self] error in
-                if let error = error {
-                    self?.view?.showError(with: ErrorModel(error: error))
-                    return
-                }
+    init(service: FullTransactionPresenterService) {
+        networkService = service
+    }
+    
+    func deleteTransaction(with transactionData: TransactionModel) {
+        networkService.deleteTransaction(transactionData: transactionData) { result in
+            switch result {
+            case .success():
+                return
+            case .failure(let error):
+                self.view?.showError(with: ErrorModel(error: error))
             }
-        
-        // Удаление транзакции из коллекции "Transactions"
-        db.collection("users")
-            .document(Auth.auth().currentUser!.uid)
-            .collection("Transactions")
-            .document(transactionId)
-            .delete { [weak self] error in
-                if let error = error {
-                    self?.view?.showError(with: ErrorModel(error: error))
-                    return
-                }
-            }
+        }
     }
     
     private func applySortBy(sortBy: SortByEnum, transactionData: [TransactionModel]) -> [TransactionModel] {
