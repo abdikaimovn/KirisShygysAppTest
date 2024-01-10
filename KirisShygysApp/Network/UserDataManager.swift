@@ -10,41 +10,36 @@ import Firebase
 import FirebaseFirestore
 
 protocol UserInfoProtocol {
-    func fetchCurrentUsername(completion: @escaping (Result<String, Error>) -> Void)
+    func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void)
     func fetchTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
 }
 
 protocol UserProfileProtocol {
-    func fetchCurrentUsername(completion: @escaping (Result<String, Error>) -> Void)
+    func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void)
     func fetchLastMonthTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
     func fetchTransactionData(completion: @escaping (Result<[TransactionModel], FetchingTransactionsError>) -> Void)
 }
 
-enum FetchingTransactionsError: Error {
-    case gettingDocumentError(Error)
-    case userNotFoundError
+protocol TransactionPresenterService {
+    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(),Error>) -> Void)
 }
 
-final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
+final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionPresenterService {
     static let shared = UserDataManager()
-    private let transactions = "Transactions"
-    private let incomes = "Incomes"
-    private let expenses = "Expenses"
-    private let username = "username"
     
-    func fetchCurrentUsername(completion: @escaping (Result<String, Error>) -> Void) {
+    func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void) {
         guard let currentUserUID = Auth.auth().currentUser?.uid else {
-            completion(.success("Username is not found"))
+            completion(.failure(.userNotFound))
             return
         }
         
-        let ref = Firestore.firestore().collection("users").document(currentUserUID)
+        let ref = Firestore.firestore().collection(DocumentTypeName.users.rawValue).document(currentUserUID)
         ref.getDocument { snapshot, error in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(.customError(error)))
             }
             
-            if let snapshot = snapshot, let userData = snapshot.data(), let name = userData[self.username] as? String {
+            if let snapshot = snapshot, let userData = snapshot.data(), let name = userData[DocumentTypeName.username.rawValue] as? String {
                 completion(.success(name))
             }
         }
@@ -60,12 +55,12 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
             return
         }
         
-        // Example query to retrieve data from the "Incomes" collection
-        db.collection("users").document(currentUserUID).collection(transactions).order(by: "date").getDocuments { [weak self] (querySnapshot, error) in
+        db.collection(DocumentTypeName.users.rawValue).document(currentUserUID).collection(DocumentTypeName.transactions.rawValue).getDocuments { [weak self] (querySnapshot, error) in
             guard self != nil else { return }
             
             if let error = error {
                 completion(.failure(.gettingDocumentError(error)))
+                return
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
@@ -103,7 +98,7 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy, HH:mm"
         
-        db.collection("users").document(currentUserUID).collection(transactions)
+        db.collection(DocumentTypeName.users.rawValue).document(currentUserUID).collection(DocumentTypeName.transactions.rawValue)
             .getDocuments { [weak self] (querySnapshot, error) in
                 guard self != nil else { return }
                 
@@ -134,5 +129,56 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol {
                     completion(.success(lastMonthTransactions))
                 }
             }
+    }
+    
+    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(),Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        let collectionName: String
+        switch transactionData.transactionType {
+        case .income:
+            collectionName = "Incomes"
+        case .expense:
+            collectionName = "Expenses"
+        }
+        
+        // Creating an unique identifier for a transaction
+        let transactionId = UUID().uuidString
+        
+        // Создайте словарь для данных транзакции
+        let transactionDataDict: [String: Any] = [
+            "id": transactionId,
+            "name": transactionData.transactionName,
+            "type": collectionName,
+            "description": transactionData.transactionDescription,
+            "amount": transactionData.transactionAmount,
+            "date": transactionData.transactionDate
+        ]
+        
+        // Добаление транзакции в коллекцию "Incomes" или "Expenses"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection(collectionName)
+            .document(transactionId)
+            .setData(transactionDataDict) { error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+            }
+        
+        // Добавления транзакции в коллекцию "Transactions"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection("Transactions")
+            .document(transactionId)
+            .setData(transactionDataDict) { error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+            }
+        
+        completion(.success(()))
     }
 }

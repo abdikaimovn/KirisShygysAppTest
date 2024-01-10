@@ -45,7 +45,7 @@ final class TabViewController: UITabBarController {
     }
     
     @objc private func addTransactionPressed() {
-        let transactionPresenter = TransactionPresenter()
+        let transactionPresenter = TransactionPresenter(service: UserDataManager.shared)
         let transactionViewController = TransactionViewController(presenter: transactionPresenter)
         transactionPresenter.view = transactionViewController
         self.present(transactionViewController, animated: true)
