@@ -220,7 +220,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func createFullTransactionViewController() -> UIViewController {
-        let presenter = FullTransactionPresenter()
+        let presenter = FullTransactionPresenter(service: UserDataManager.shared)
         let view = FullTransactionViewController(transactionData: self.transactionData!, presenter: presenter)
         presenter.view = view
         return view

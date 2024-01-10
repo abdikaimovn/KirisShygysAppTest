@@ -28,7 +28,7 @@ protocol FullTransactionPresenterService {
     func deleteTransaction(transactionData: TransactionModel, completion: @escaping (Result<(), ErrorModel>) -> Void)
 }
 
-final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionPresenterService {
+final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionPresenterService, FullTransactionPresenterService {
     static let shared = UserDataManager()
     
     func fetchCurrentUsername(completion: @escaping (Result<String, FetchingUsernameError>) -> Void) {

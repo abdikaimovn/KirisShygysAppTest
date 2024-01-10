@@ -45,6 +45,16 @@ final class StatisticsViewController: UIViewController {
         return scroll
     }()
     
+    private lazy var absenseDataView: UIView = {
+        let absenseDataView = AbsenceDataView()
+        return absenseDataView
+    }()
+    
+    private lazy var chartBackView: UIView = {
+        let view = createBackgroundView()
+        return view
+    }()
+    
     private lazy var moneyFlowTableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
@@ -124,7 +134,6 @@ final class StatisticsViewController: UIViewController {
         }
         
         let controlsBackView = createBackgroundView()
-        let chartBackView = createBackgroundView()
         let moneyInfoBackView = createBackgroundView()
         
         stackView.addArrangedSubview(controlsBackView)
@@ -169,11 +178,22 @@ final class StatisticsViewController: UIViewController {
 }
 
 extension StatisticsViewController: StatisticsViewProtocol {
+    func showAbsenceDataView(withColor color: UIColor) {
+        absenseDataView = AbsenceDataView(withColor: color)
+        absenseDataView.layer.cornerRadius = chartBackView.layer.cornerRadius
+        transactionType.selectedSegmentTintColor = color
+        chartBackView.addSubview(absenseDataView)
+        absenseDataView.snp.makeConstraints { make in
+            make.size.equalToSuperview()
+        }
+    }
+    
     func setupMoneyFlow(with moneyFlowModel: [FlowModel]) {
         self.flowModel = moneyFlowModel
     }
     
     func updateView(with color: UIColor) {
+        absenseDataView.removeFromSuperview()
         transactionType.selectedSegmentTintColor = color
     }
     
