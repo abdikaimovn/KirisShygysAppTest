@@ -13,6 +13,7 @@ protocol StatisticsViewProtocol: AnyObject {
     func setupChart(with model: ChartModel)
     func updateView(with color: UIColor)
     func setupMoneyFlow(with moneyFlowModel: [FlowModel])
+    func showAbsenceDataView(withColor color: UIColor)
 }
 
 final class StatisticsPresenter {
@@ -20,13 +21,14 @@ final class StatisticsPresenter {
     
     func setChart(with transactionData: [TransactionModel], and index: Int) {
         let type: TransactionType = index == 0 ? .income : .expense
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         let endDate = Date()
         let startDate = Calendar.current.date(byAdding: .month, value: -1, to: endDate)!
         
         var groupedTransactions = [String: Int]()
+        var countOfTransactionType = 0
         for i in transactionData {
             if type == i.transactionType {
                 let transactionDate = String(i.transactionDate.prefix(10))
@@ -36,8 +38,14 @@ final class StatisticsPresenter {
                 } else {
                     groupedTransactions[transactionDate] = i.transactionAmount
                 }
+                countOfTransactionType += 1
             }
-            
+        }
+        
+        guard countOfTransactionType != 0 else {
+            let color = type == .income ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
+            view?.showAbsenceDataView(withColor: color)
+            return
         }
         
         var lastMonthDates = [String]()
