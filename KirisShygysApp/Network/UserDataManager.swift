@@ -21,7 +21,11 @@ protocol UserProfileProtocol {
 }
 
 protocol TransactionPresenterService {
-    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(),Error>) -> Void)
+    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(), ErrorModel>) -> Void)
+}
+
+protocol FullTransactionPresenterService {
+    func deleteTransaction(transactionData: TransactionModel, completion: @escaping (Result<(), ErrorModel>) -> Void)
 }
 
 final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionPresenterService {
@@ -131,7 +135,7 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionP
             }
     }
     
-    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(),Error>) -> Void) {
+    func insertNewTransaction(transactionData: TransactionModel, completion: @escaping (Result<(), ErrorModel>) -> Void) {
         let db = Firestore.firestore()
         
         let collectionName: String
@@ -162,7 +166,7 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionP
             .document(transactionId)
             .setData(transactionDataDict) { error in
                 if let error = error {
-                    completion(.failure(error))
+                    completion(.failure(ErrorModel(error: error)))
                     return
                 }
             }
@@ -174,7 +178,49 @@ final class UserDataManager: UserProfileProtocol, UserInfoProtocol, TransactionP
             .document(transactionId)
             .setData(transactionDataDict) { error in
                 if let error = error {
-                    completion(.failure(error))
+                    completion(.failure(ErrorModel(error: error)))
+                    return
+                }
+            }
+        
+        completion(.success(()))
+    }
+    
+    func deleteTransaction(transactionData: TransactionModel, completion: @escaping (Result<(), ErrorModel>) -> Void) {
+        let db = Firestore.firestore()
+        
+        let collectionName: String
+        switch transactionData.transactionType {
+        case .income:
+            collectionName = "Incomes"
+        case .expense:
+            collectionName = "Expenses"
+        }
+        
+        guard let transactionId = transactionData.id else {
+            return
+        }
+        
+        // Удаление транзакции из коллекции "Incomes" или "Expenses"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection(collectionName)
+            .document(transactionId)
+            .delete { error in
+                if let error = error {
+                    completion(.failure(ErrorModel(error: error)))
+                    return
+                }
+            }
+        
+        // Удаление транзакции из коллекции "Transactions"
+        db.collection("users")
+            .document(Auth.auth().currentUser!.uid)
+            .collection("Transactions")
+            .document(transactionId)
+            .delete { error in
+                if let error = error {
+                    completion(.failure(ErrorModel(error: error)))
                     return
                 }
             }

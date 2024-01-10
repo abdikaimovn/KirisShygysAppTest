@@ -28,7 +28,7 @@ final class TransactionPresenter {
             case .success():
                 return
             case .failure(let error):
-                self.view?.showError(with: ErrorModel(error: error))
+                self.view?.showError(with: error)
             }
         }
     }

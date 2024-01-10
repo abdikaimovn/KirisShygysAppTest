@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ErrorModel {
+struct ErrorModel: Error{
     let error: Error
     
     var text: String {
