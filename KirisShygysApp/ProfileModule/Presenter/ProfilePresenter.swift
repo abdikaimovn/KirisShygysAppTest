@@ -4,6 +4,7 @@ protocol ProfileViewProtocol: AnyObject {
     func setUsername(_ name: String)
     func showTransactionReport(with transactionData: [TransactionModel])
     func showStatistics(with transactionData: [TransactionModel])
+    func showSettings()
     func logOut()
     func showLoader()
     func hideLoader()
@@ -86,6 +87,10 @@ final class ProfilePresenter {
                 }
             }
         }
+    }
+    
+    func settingsDidTapped() {
+        view?.showSettings()
     }
     
     func logOutDidTapped() {

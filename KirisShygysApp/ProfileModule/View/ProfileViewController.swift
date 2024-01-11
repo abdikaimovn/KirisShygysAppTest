@@ -96,6 +96,13 @@ final class ProfileViewController: UIViewController {
         return view
     }
     
+    private func createSettingsModule() -> UIViewController{
+        let presenter = SettingsPresenter()
+        let view = SettingsViewController(presenter: presenter)
+        presenter.view = view
+        return view
+    }
+    
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(userImage)
@@ -134,6 +141,10 @@ final class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: ProfileViewProtocol {
+    func showSettings() {
+        self.navigationController?.pushViewController(createSettingsModule(), animated: true)
+    }
+    
     func showUnknownError(with model: ErrorModel) {
         AlertManager.showUnknownError(on: self, message: model.text)
     }
@@ -194,7 +205,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             presenter.reportTransactionDidTapped()
         case 1:
-            break
+            presenter.settingsDidTapped()
         case 2:
             presenter.statisticsDidTapped()
         case 3:
