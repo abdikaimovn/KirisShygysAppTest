@@ -59,12 +59,14 @@ final class OnboardingCVCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.leading.trailing.greaterThanOrEqualToSuperview().inset(10)
             make.top.equalTo(imageView.snp.bottom).offset(30)
         }
         
         addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.leading.trailing.greaterThanOrEqualToSuperview().inset(10)
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
         }
     }

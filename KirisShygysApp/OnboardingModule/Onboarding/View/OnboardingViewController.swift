@@ -10,11 +10,11 @@ import SnapKit
 
 final class OnboardingViewController: UIViewController {
     private let onboardingData: [OnboardingModel] = [
-        OnboardingModel(title: "Gain total control\nof your money",
-                        description: "Become your own money manager\nand make every cent count",
+        OnboardingModel(title: NSLocalizedString("onboarding_firstPage_title", comment: ""),
+                        description: NSLocalizedString("onboarding_firstPage_description", comment: ""),
                         image: UIImage(named: "onbng1")!),
-        OnboardingModel(title: "Know where your\nmoney goes",
-                        description: "Track your transaction easily,\nwith a financial report ",
+        OnboardingModel(title: NSLocalizedString("onboarding_secondPage_title", comment: ""),
+                        description:NSLocalizedString("onboarding_secondPage_description", comment: ""),
                         image: UIImage(named: "onbng2")!)
     ]
     
@@ -44,7 +44,7 @@ final class OnboardingViewController: UIViewController {
     
     private lazy var signUpButton: UIButton = {
         var button = UIButton()
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle(NSLocalizedString("sign_up_button_title", comment: ""), for: .normal)
         button.backgroundColor = UIColor.shared.Brown
         button.titleLabel?.font = UIFont.defaultBoldFont(20)
         button.layer.cornerRadius = 15
@@ -57,7 +57,7 @@ final class OnboardingViewController: UIViewController {
         var button = UIButton()
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
-        button.setTitle("Sign In", for: .normal)
+        button.setTitle(NSLocalizedString("sign_in_button_title", comment: ""), for: .normal)
         button.backgroundColor = UIColor.shared.Brown
         button.titleLabel?.font = UIFont.defaultBoldFont(20)
         button.addTarget(self, action: #selector(signIn), for: .touchUpInside)

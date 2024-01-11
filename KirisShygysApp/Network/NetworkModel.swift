@@ -30,3 +30,16 @@ enum RegistrationError: Error {
     case lackOfInternet
     case unknownError
 }
+
+enum SignInError: String {
+    case invalidCredential = "invalidCredential_error"
+    case networkError = "network_error"
+    case unknownError = "unknown_error"
+}
+
+struct ErrorModelInfo: Error {
+    let title: String?
+    let error: Error
+    let text: String
+    let localizedDescription: String
+}

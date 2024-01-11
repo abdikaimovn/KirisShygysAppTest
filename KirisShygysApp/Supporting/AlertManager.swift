@@ -50,8 +50,8 @@ extension AlertManager {
         self.showBasicAlert(on: vc, title: "Unknown Authorization Error", message: "Check your network connection")
     }
     
-    public static func showAuthorizationErrorAlert(on vc: UIViewController, with error: Error){
-        self.showBasicAlert(on: vc, title: "Unknown Authorization Error", message: "\(error.localizedDescription)")
+    public static func showAuthorizationErrorAlert(on vc: UIViewController, with error: ErrorModelInfo){
+        self.showBasicAlert(on: vc, title: "Unknown Authorization Error", message: error.localizedDescription)
     }
 }
 
