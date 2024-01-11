@@ -5,7 +5,6 @@
 //  Created by Нурдаулет on 12.10.2023.
 //
 
-import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
@@ -18,7 +17,7 @@ protocol RegistrationServiceProtocol: AnyObject {
 }
 
 protocol AuthorizationServiceProtocol: AnyObject {
-    func signIn(with user: AuthorizationModel, completion: @escaping (Result<(), Error>) -> ())
+    func signIn(with user: AuthorizationModel, completion: @escaping (Result<(), ErrorModelInfo>) -> ())
 }
 
 final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, AuthorizationServiceProtocol {
@@ -79,13 +78,35 @@ final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, Au
             }
     }
     
-    public func signIn(with user: AuthorizationModel, completion: @escaping (Result<(), Error>) -> ()) {
+    public func signIn(with user: AuthorizationModel, completion: @escaping (Result<(), ErrorModelInfo>) -> ()) {
         let email = user.email
         let password = user.password
         
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
-                completion(.failure(error))
+                let errorCode = AuthErrorCode(_nsError: error as NSError)
+                switch errorCode.code {
+                case .invalidCredential:
+                    completion(.failure(ErrorModelInfo(
+                        title: "Authorization Error", error: error,
+                        text: error.localizedDescription,
+                        localizedDescription: NSLocalizedString(SignInError.invalidCredential.rawValue,
+                                                                comment: ""))))
+                case .networkError:
+                    completion(.failure(ErrorModelInfo(
+                        title: "Authorization Error",
+                        error: error,
+                        text: error.localizedDescription,
+                        localizedDescription: NSLocalizedString(SignInError.networkError.rawValue,
+                                                                comment: ""))))
+                default:
+                    completion(.failure(ErrorModelInfo(
+                        title: "Authorization Error",
+                        error: error,
+                        text: error.localizedDescription,
+                        localizedDescription: NSLocalizedString(SignInError.unknownError.rawValue,
+                                                                comment: ""))))
+                }
             } else {
                 completion(.success(()))
             }

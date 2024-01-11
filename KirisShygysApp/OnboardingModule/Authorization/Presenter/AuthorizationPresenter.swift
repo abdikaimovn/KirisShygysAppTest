@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AuthorizationViewProtocol: AnyObject {
-    func showAuthorizationError(with error: Error)
+    func showAuthorizationError(with error: ErrorModelInfo)
     func checkAuthentication()
     func showLoader()
     func hideLoader()

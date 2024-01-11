@@ -26,7 +26,7 @@ final class HomeViewController: UIViewController {
     
     private let welcomeLabel: UILabel = {
         var label = UILabel()
-        label.text = "Welcome Back,"
+        label.text = NSLocalizedString("Welcome back", comment: "")
         label.font = UIFont.defaultFont(16)
         label.textColor = .darkGray
         return label
