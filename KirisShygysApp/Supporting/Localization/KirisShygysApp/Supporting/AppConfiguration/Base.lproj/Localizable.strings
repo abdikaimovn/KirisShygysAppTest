@@ -6,24 +6,34 @@
   
 */
 
-//Onboarding page
+//MARK: Onboarding page
 "onboarding_firstPage_title" = "Gain total control of your money";
-"onboarding_firstPage_description" = "Become your own money manager \nand make every cent count";
-"sign_in_button_title" = "Sign In";
-"sign_up_button_title" = "Sign Up";
+"onboarding_firstPage_description" = "Become your own money manager and make every cent count";
 "onboarding_secondPage_title" = "Know where your money goes";
-"onboarding_secondPage_description" = "Track your transaction easily, \nwith a financial report";
+"onboarding_secondPage_description" = "Track your transaction easily, with a financial report";
 
-//Authorization page
+//MARK: Text field placeholders
+"name_textField_placeholder" = "Name";
 "email_textField_placeholder" = "Email";
 "password_textField_placeholder" = "Password";
+
+//MARK: Buttons
+"sign_in_button_title" = "Sign In";
+"sign_up_button_title" = "Sign Up";
+"alert_button_title_dismiss" = "Dismiss";
+
+//MARK: Authorization page
+
+
+//MARK: Registration page
+
+
+//MARK: ERRORS
+"authorization_error_title" = "Authorization Error";
+"registration_error_title" = "Registration Error";
+"credentialAlreadyInUse_error" = "The credentials are already in use";
 "invalidCredential_error" = "The supplied auth credential is malformed or has expired.";
 "network_error" = "The network connection was interrupted";
 "unknown_error" = "Something went wrong";
-"authorization_error" = "Authorization Error";
-
-
-
-
 
 

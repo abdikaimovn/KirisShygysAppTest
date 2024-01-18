@@ -25,13 +25,13 @@ enum DocumentTypeName: String {
     case username = "username"
 }
 
-enum RegistrationError: Error {
-    case userAlreadyExists
-    case lackOfInternet
-    case unknownError
+enum RegistrationError: String {
+    case userAlreadyExists = "userAlreadyExists_error"
+    case networkError = "network_error"
+    case unknownError = "unknown_error"
 }
 
-enum SignInError: String {
+enum AuthorizationError: String {
     case invalidCredential = "invalidCredential_error"
     case networkError = "network_error"
     case unknownError = "unknown_error"
@@ -39,7 +39,7 @@ enum SignInError: String {
 
 struct ErrorModelInfo: Error {
     let title: String?
-    let error: Error
-    let text: String
+    let error: Error?
+    let text: String?
     let localizedDescription: String
 }
