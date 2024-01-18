@@ -37,14 +37,14 @@ final class AuthorizationPresenter {
         }
         
         view?.showLoader()
-        authorizationService.signIn(with: data) {[weak self] result in
+        authorizationService.authorizeUser(with: data) {[weak self] result in
             self?.view?.hideLoader()
             
             switch result {
             case .success():
                 self?.view?.checkAuthentication()
-            case .failure(let error):
-                self?.view?.showAuthorizationError(with: error)
+            case .failure(let errorModel):
+                self?.view?.showAuthorizationError(with: errorModel)
             }
         }
     }

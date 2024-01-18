@@ -30,7 +30,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
-        textField.placeholder = "Name"
+        textField.placeholder = NSLocalizedString("name_textField_placeholder", comment: "")
         textField.textColor = .black
         textField.font = UIFont.defaultFont(16)
         return textField
@@ -43,7 +43,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
-        textField.placeholder = "Email"
+        textField.placeholder = NSLocalizedString("email_textField_placeholder", comment: "")
         textField.textColor = .black
         textField.font = UIFont.defaultFont(16)
         return textField
@@ -57,7 +57,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
         textField.isSecureTextEntry = true
-        textField.placeholder = "Password"
+        textField.placeholder = NSLocalizedString("password_textField_placeholder", comment: "")
         textField.textColor = .black
         textField.font = UIFont.defaultFont(16)
         return textField
@@ -76,7 +76,7 @@ final class RegistrationViewController: UIViewController {
     private lazy var signUpButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor.shared.Brown
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle(NSLocalizedString("sign_up_button_title", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.defaultBoldFont(20)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
@@ -233,7 +233,7 @@ extension RegistrationViewController: RegistrationViewProtocol {
         AlertManager.showInvalidPasswordAlert(on: self)
     }
     
-    func showRegistrationError(with error: Error) {
+    func showRegistrationError(with error: ErrorModelInfo) {
         AlertManager.showRegistrationErrorAlert(on: self, with: error)
     }
     

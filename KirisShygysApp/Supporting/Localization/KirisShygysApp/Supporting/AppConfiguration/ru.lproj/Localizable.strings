@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   KirisShygysApp
 
@@ -6,19 +6,32 @@
   
 */
 
-// Onboarding page
+//MARK: Onboarding page
 "onboarding_firstPage_title" = "Полный контроль над своими финансами";
 "onboarding_firstPage_description" = "Станьте своим собственным финансовым менеджером и считайте каждый цент";
 "onboarding_secondPage_title" = "Знайте, куда уходят ваши деньги";
-"onboarding_secondPage_description" = "Легко отслеживайте свои транзакции с финансовым отчетом";
+"onboarding_secondPage_description" = "Легко отслеживайте ваши транзакции с помощью финансового отчета";
+
+//MARK: Text field placeholders
+"name_textField_placeholder" = "Имя";
+"email_textField_placeholder" = "Эл. почта";
+"password_textField_placeholder" = "Пароль";
+
+//MARK: Buttons
 "sign_in_button_title" = "Войти";
 "sign_up_button_title" = "Зарегистрироваться";
+"alert_button_title_dismiss" = "Отменить";
 
-// Authorization page
-"email_textField_placeholder" = "Электронная почта";
-"password_textField_placeholder" = "Пароль";
-"invalidCredential_error" = "Предоставленные учетные данные не корректны.";
-"network_error" = "Соединение с сетью было прервано";
+//MARK: Authorization page
+
+
+//MARK: Registration page
+
+
+//MARK: Errors
+"authorization_error_title" = "Ошибка авторизации";
+"registration_error_title" = "Ошибка регистрации";
+"credentialAlreadyInUse_error" = "Учетные данные уже используются";
+"invalidCredential_error" = "Предоставленные учетные данные недействительны или устарели";
+"network_error" = "Прервано сетевое подключение";
 "unknown_error" = "Что-то пошло не так";
-"authorization_error" = "Ошибка Авторизаций";
-

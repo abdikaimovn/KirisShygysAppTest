@@ -2,7 +2,7 @@ import Foundation
 
 protocol RegistrationViewProtocol: AnyObject {
     func checkAuthentication()
-    func showRegistrationError(with error: Error)
+    func showRegistrationError(with error: ErrorModelInfo)
     func showInvalidEmailError() 
     func showInvalidUsernameError()
     func showInvalidPasswordError()
