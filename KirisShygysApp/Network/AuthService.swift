@@ -85,6 +85,7 @@ final class AuthService: ProfileServiceProtocol, RegistrationServiceProtocol, Au
         }
     }
     
+    //So far this function doesn't work and not in use anywhere
     public func changeUsername(with newUsername: String, completion: @escaping (Result<(), Error>) -> ()) {
         guard let currentUser = Auth.auth().currentUser else {
             completion(.failure(NSError(domain: "AuthService", code: 1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])))

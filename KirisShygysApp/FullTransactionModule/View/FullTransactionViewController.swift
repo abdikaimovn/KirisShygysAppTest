@@ -15,7 +15,7 @@ final class FullTransactionViewController: UIViewController {
     
     private let filterTransactionLabel: UILabel = {
         var label = UILabel()
-        label.text = "Filter Transactions"
+        label.text = NSLocalizedString("filterTransactions_label", comment: "")
         label.font = UIFont.defaultFont(18)
         label.textColor = .black
         return label
@@ -67,7 +67,7 @@ final class FullTransactionViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = UIColor.shared.Brown
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backBarButtonItem
-        self.title = "Transaction Report"
+        
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
@@ -83,9 +83,9 @@ final class FullTransactionViewController: UIViewController {
         print("Transaction REPORT View Controler deinited")
     }
     
-    
     private func setupView() {
         view.backgroundColor = .white
+        title = NSLocalizedString("history_label", comment: "")
         
         view.addSubview(filterTransactionLabel)
         filterTransactionLabel.snp.makeConstraints { make in

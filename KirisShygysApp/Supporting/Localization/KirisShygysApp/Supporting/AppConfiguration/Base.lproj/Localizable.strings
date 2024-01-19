@@ -6,29 +6,26 @@
   
 */
 
-//MARK: Onboarding page
+//MARK: - Onboarding page
 "onboarding_firstPage_title" = "Gain total control of your money";
 "onboarding_firstPage_description" = "Become your own money manager and make every cent count";
 "onboarding_secondPage_title" = "Know where your money goes";
 "onboarding_secondPage_description" = "Track your transaction easily, with a financial report";
 
-//MARK: Text field placeholders
+//MARK: - Text field placeholders
 "name_textField_placeholder" = "Name";
 "email_textField_placeholder" = "Email";
 "password_textField_placeholder" = "Password";
 
-//MARK: Buttons
-"sign_in_button_title" = "Sign In";
-"sign_up_button_title" = "Sign Up";
-"alert_button_title_dismiss" = "Dismiss";
+//MARK: - Buttons
+"signIn_button_title" = "Sign In";
+"signUp_button_title" = "Sign Up";
+"alert_dismissButton_title" = "Dismiss";
+"apply_button_title" = "Apply";
+"save_button_title" = "Save";
+"reset_button_title" = "Reset";
 
-//MARK: Authorization page
-
-
-//MARK: Registration page
-
-
-//MARK: ERRORS
+//MARK: - ERRORS
 "authorization_error_title" = "Authorization Error";
 "registration_error_title" = "Registration Error";
 "credentialAlreadyInUse_error" = "The credentials are already in use";
@@ -36,4 +33,68 @@
 "network_error" = "The network connection was interrupted";
 "unknown_error" = "Something went wrong";
 
+//MARK: - Home page
+"welcome_label" = "Welcome back";
+"totalBalance_label" = "Total balance";
+"incomes_label" = "Incomes";
+"expenses_label" = "Expenses";
+"transactions_label" = "Transactions";
+"history_label" = "History";
 
+//MARK: - Full transactions page
+"filterTransactions_label" = "Filter transactions";
+
+//MARK: - Filter page
+"filterBy_label" = "Filter By";
+"sortBy_label" = "Sort_By";
+"period_label" = "Period";
+
+"newest_button_title" = "Newest";
+"oldest_button_title" = "Oldest";
+"week_button_title" = "Week";
+"month_button_title" = "Month";
+"halfYear_button_title" = "6 months";
+"year_button_title" = "Year";
+
+//MARK: - Transaction page
+"amount_label" = "How much ?";
+"name_label" = "Name";
+"description_label" = "Description";
+"date_label" = "Date";
+
+//MARK: - Transaciton Info page
+//(BILL - Чек)
+"transactionType_label" = "Type:";
+"transactionName_label" = "Name:";
+"transacitonAmount_label" = "Amount:";
+"transacitonDate_label" = "Date:";
+"transactionDescription_label" = "Description:";
+
+//MARK: - Profile page
+"username_label" = "Username";
+"transactionReport_label" = "Transaction Report";
+"settings_label" = "Settings";
+"statisctics_label" = "Statistics";
+"logout_label" = "Logout";
+
+//MARK: - Transaction Report page
+"transactionReportTitle_label" = "Report";
+"thisMonthTitle_label" = "This Month";
+"spend_label" = "You Spent 💸";
+"earn_label" = "You Earned 💰";
+"biggestSpending_label" = "And your biggest spending is from";
+"biggentEarning_label" = "Your biggest earning is from";
+"quoteTitle_label" = "Quote of the month";
+
+//MARK: - Settings page
+"language_label" = "Language";
+"currency_label" = "Currency";
+"personalInfo_label" = "Personal information";
+
+//MARK: - Statistics page
+"statisticsTitle_label" = "Statistics for last month";
+
+//MARK: - Currencies
+"dollar" = "$";
+"tenge" = "₸";
+"ruble" = "₽";

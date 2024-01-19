@@ -27,15 +27,15 @@ final class TransactionViewController: UIViewController {
     
     private let segmentedControl: UISegmentedControl = {
         var sControl = UISegmentedControl()
-        sControl.insertSegment(withTitle: "Incomes", at: 0, animated: true)
-        sControl.insertSegment(withTitle: "Expenses", at: 1, animated: true)
+        sControl.insertSegment(withTitle: NSLocalizedString("incomes_label", comment: ""), at: 0, animated: true)
+        sControl.insertSegment(withTitle: NSLocalizedString("expenses_label", comment: ""), at: 1, animated: true)
         sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
         return sControl
     }()
     
     private let transNameLabel: UILabel = {
         var label = UILabel()
-        label.text = "Name"
+        label.text = NSLocalizedString("transactionName_label", comment: "")
         label.textColor = .black
         label.font = UIFont.defaultFont(18)
         return label
@@ -54,7 +54,7 @@ final class TransactionViewController: UIViewController {
     
     private let descriptionLabel: UILabel = {
         var label = UILabel()
-        label.text = "Description"
+        label.text = NSLocalizedString("descriptionLabel", comment: "")
         label.textColor = .black
         label.font = UIFont.defaultFont(18)
         return label
@@ -73,7 +73,7 @@ final class TransactionViewController: UIViewController {
     
     private let amountLabel: UILabel = {
         var label = UILabel()
-        label.text = "How much ?"
+        label.text = NSLocalizedString("amountLabel_title", comment: "")
         label.textColor = .white
         label.font = UIFont.defaultBoldFont(25)
         return label
@@ -93,7 +93,7 @@ final class TransactionViewController: UIViewController {
     
     private let calendarLabel: UILabel = {
         var label = UILabel()
-        label.text = "Date"
+        label.text = NSLocalizedString("date_label", comment: "")
         label.textColor = .black
         label.font = UIFont.defaultFont(18)
         return label
