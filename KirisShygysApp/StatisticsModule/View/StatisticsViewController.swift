@@ -16,8 +16,8 @@ final class StatisticsViewController: UIViewController {
     
     private let transactionType: UISegmentedControl = {
         var sControl = UISegmentedControl()
-        sControl.insertSegment(withTitle: "Incomes", at: 0, animated: true)
-        sControl.insertSegment(withTitle: "Expenses", at: 1, animated: true)
+        sControl.insertSegment(withTitle: "incomes_label".localized, at: 0, animated: true)
+        sControl.insertSegment(withTitle: "expenses_label".localized, at: 1, animated: true)
         sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
         sControl.selectedSegmentIndex = 0
         return sControl
@@ -85,8 +85,6 @@ final class StatisticsViewController: UIViewController {
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
         
-        self.title = "Statistics for last month"
-        
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
@@ -99,8 +97,6 @@ final class StatisticsViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        
-        
         setChartData()
     }
     
@@ -120,7 +116,8 @@ final class StatisticsViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = UIColor.shared.LightGray
-         
+        title = "statisticsTitle_label".localized
+        
         let stackView = UIStackView()
         stackView.backgroundColor = .clear
         stackView.axis = .vertical

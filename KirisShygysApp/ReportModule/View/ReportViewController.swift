@@ -12,8 +12,16 @@ final class ReportViewController: UIViewController {
     private let transactionData: [TransactionModel]!
     
     private var reportData = [
-        ReportModel(transactionType: "You Spend 💸", amount: "$ 0", biggestTransactionLabel: "and your biggest spending is from", biggestTransactionName: "None", biggestTransactionAmount: "$ 0"),
-        ReportModel(transactionType: "You Earned 💰", amount: "$ 0", biggestTransactionLabel: "your biggest Income is from", biggestTransactionName: "None", biggestTransactionAmount: "$ 0")
+        ReportModel(transactionType: "spend_label".localized, 
+                    amount: "\("currency".localized) 0",
+                    biggestTransactionLabel: "biggestSpending_label".localized,
+                    biggestTransactionName: "none_label".localized,
+                    biggestTransactionAmount: "\("currency".localized) 0"),
+        ReportModel(transactionType: "earn_label".localized,
+                    amount: "\("currency".localized) 0",
+                    biggestTransactionLabel: "biggentEarning_label".localized,
+                    biggestTransactionName: "none_label".localized,
+                    biggestTransactionAmount: "\("currency".localized) 0")
     ]
     
     private let pageControl: UIPageControl = {
@@ -63,20 +71,14 @@ final class ReportViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Customize the back button
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = .white
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backBarButtonItem
 
-        // Customize the title color
         if let navigationBar = self.navigationController?.navigationBar {
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
 
-        // Set the title
-        self.title = "Report"
-
-        // Show the navigation bar
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
@@ -88,6 +90,8 @@ final class ReportViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = UIColor.shared.ExpenseColor
         view.addSubview(pageControl)
+        title = "transactionReportTitle_label".localized
+        
         pageControl.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(5)
             make.leading.trailing.equalToSuperview().inset(20)

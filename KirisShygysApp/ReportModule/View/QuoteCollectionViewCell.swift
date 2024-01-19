@@ -23,7 +23,7 @@ final class QuoteCollectionViewCell: UICollectionViewCell {
     
     private let monthQuoteLabel: UILabel = {
         var label = UILabel()
-        label.text = "Quote of the month"
+        label.text = "quoteTitle_label".localized
         label.textColor = UIColor.shared.LightGray
         label.font = UIFont.defaultFont(20)
         return label

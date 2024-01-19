@@ -15,7 +15,7 @@ final class FullTransactionViewController: UIViewController {
     
     private let filterTransactionLabel: UILabel = {
         var label = UILabel()
-        label.text = NSLocalizedString("filterTransactions_label", comment: "")
+        label.text = "filterTransactions_label".localized
         label.font = UIFont.defaultFont(18)
         label.textColor = .black
         return label
@@ -85,7 +85,7 @@ final class FullTransactionViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        title = NSLocalizedString("history_label", comment: "")
+        title = "history_label".localized
         
         view.addSubview(filterTransactionLabel)
         filterTransactionLabel.snp.makeConstraints { make in

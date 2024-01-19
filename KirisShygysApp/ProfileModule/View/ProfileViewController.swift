@@ -27,7 +27,7 @@ final class ProfileViewController: UIViewController {
    
     private let userNameLabel: UILabel = {
         var label = UILabel()
-        label.text = "Username"
+        label.text = "username_label".localized
         label.textColor = .black
         label.font = UIFont.defaultFont(16)
         return label
@@ -35,7 +35,6 @@ final class ProfileViewController: UIViewController {
     
     private let userName: UILabel = {
         var label = UILabel()
-        label.text = "Loading..."
         label.textColor = .black
         label.font = UIFont.defaultBoldFont(22)
         return label
@@ -224,13 +223,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.configure(with: UIImage(systemName: "doc")!, and: "Transaction Report")
+            cell.configure(with: UIImage(systemName: "doc")!, 
+                           and: "transactionReport_label".localized)
         case 1:
-            cell.configure(with: UIImage(systemName: "gear")!, and: "Settings")
+            cell.configure(with: UIImage(systemName: "gear")!, 
+                           and: "settings_label".localized)
         case 2:
-            cell.configure(with: UIImage(systemName: "chart.bar.xaxis")!, and: "Statistics")
+            cell.configure(with: UIImage(systemName: "chart.bar.xaxis")!, 
+                           and: "statisctics_label".localized)
         case 3:
-            cell.configure(with: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, and: "Logout")
+            cell.configure(with: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, 
+                           and: "logout_label".localized)
         default:
             return cell
         }

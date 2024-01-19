@@ -10,7 +10,7 @@ import UIKit
 final class StoryCollectionViewCell: UICollectionViewCell {
     private let thisMonthLabel: UILabel = {
         var label = UILabel()
-        label.text = "This Month"
+        label.text = "thisMonthTitle_label".localized
         label.textColor = UIColor.shared.LightGray
         label.font = UIFont.defaultFont(20)
         return label

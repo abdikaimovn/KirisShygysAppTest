@@ -74,18 +74,18 @@ final class MoneyFlowTableViewCell: UITableViewCell {
         switch model.flowImage {
         case .income:
             self.flowImage.image = UIImage(systemName: model.flowImage.rawValue)
-            self.flowLabel.text = "Incomes"
-            self.flowValue.text = "$ \(model.value)"
+            self.flowLabel.text = "incomes_label".localized
+            self.flowValue.text = "\("currency".localized) \(model.value)"
             self.flowValue.textColor = UIColor.shared.IncomeColor
         case .expense:
             self.flowImage.image = UIImage(systemName: model.flowImage.rawValue)
-            self.flowLabel.text = "Expenses"
-            self.flowValue.text = "$ \(model.value)"
+            self.flowLabel.text = "expenses_label".localized
+            self.flowValue.text = "\("currency".localized) \(model.value)"
             self.flowValue.textColor = UIColor.shared.ExpenseColor
         case .total:
             self.flowImage.image = UIImage(systemName: model.flowImage.rawValue)
-            self.flowLabel.text = "Total"
-            self.flowValue.text = "$ \(model.value)"
+            self.flowLabel.text = "total_label".localized
+            self.flowValue.text = "\("currency".localized) \(model.value)"
         }
     }
 }

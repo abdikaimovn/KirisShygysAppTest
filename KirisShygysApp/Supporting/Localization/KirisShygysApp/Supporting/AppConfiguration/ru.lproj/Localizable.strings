@@ -6,71 +6,104 @@
   
 */
 
-//MARK: Onboarding page
-"onboarding_firstPage_title" = "Полный контроль над своими финансами";
+//MARK: - Страница ввода
+"onboarding_firstPage_title" = "Полный контроль над вашими финансами";
 "onboarding_firstPage_description" = "Станьте своим собственным финансовым менеджером и считайте каждый цент";
 "onboarding_secondPage_title" = "Знайте, куда уходят ваши деньги";
 "onboarding_secondPage_description" = "Легко отслеживайте ваши транзакции с помощью финансового отчета";
 
-
-//MARK: Text field placeholders
+//MARK: - Плейсхолдеры для текстовых полей
 "name_textField_placeholder" = "Имя";
 "email_textField_placeholder" = "Эл. почта";
 "password_textField_placeholder" = "Пароль";
 
-//MARK: Buttons
-"sign_in_button_title" = "Войти";
-"sign_up_button_title" = "Регистрация";
-"alert_button_title_dismiss" = "Закрыть";
+//MARK: - Кнопки
+"signIn_button_title" = "Войти";
+"signUp_button_title" = "Регистрация";
+"alert_dismissButton_title" = "Закрыть";
 "apply_button_title" = "Применить";
 "save_button_title" = "Сохранить";
-"reset_button_label" = "Сбросить";
+"reset_button_title" = "Сброс";
 
-//MARK: Errors
+//MARK: - ОШИБКИ
 "authorization_error_title" = "Ошибка авторизации";
 "registration_error_title" = "Ошибка регистрации";
 "credentialAlreadyInUse_error" = "Учетные данные уже используются";
 "invalidCredential_error" = "Предоставленные учетные данные недействительны или устарели";
 "network_error" = "Прервано сетевое подключение";
-"unknown_error" = "Что-то пошло не так";
+"unknown_error" = "Произошла неизвестная ошибка";
+"noTransaction" = "Вы не совершали никаких транзакций в текущем месяце";
 
-//MARK: Home page
-"welcome_label" = "С возвращением";
-"totalBalance_label" = "Общий баланс";
+//MARK: - Домашняя страница
+"welcome_label" = "С Возвращением";
+"totalBalance_label" = "Баланс";
 "incomes_label" = "Доходы";
 "expenses_label" = "Расходы";
+"total_label" = "Итого";
 "transactions_label" = "Транзакции";
 "history_label" = "История";
 
-//MARK: Full transactions page
-"filterTransactions_label" = "Фильтр";
-"filterBy_label" = "Фильтровать по";
-"sortBy_label" = "Сортировать по";
-"newest_label" = "Самые новые";
-"oldest_label" = "Самые старые";
-"period_label" = "Период";
-"week_label" = "Неделя";
-"month_label" = "Месяц";
-"halfYear_label" = "Пол года";
-"year_label" = "Год";
+//MARK: - Дни
+"today_label" = "Сегодня";
+"yesterday_label" = "Вчера";
 
-//MARK: Transaction page
-"amountLabel_title" = "Сумма";
-"transactionName_label" = "Название";
-"descriptionLabel" = "Описание";
+//MARK: - Полная страница транзакций
+"filterTransactions_label" = "Фильтр";
+
+//MARK: - Страница фильтрации
+"filterBy_label" = "Фильтровать";
+"sortBy_label" = "Сортировать";
+"period_label" = "Период";
+
+"newest_button_title" = "Новые";
+"oldest_button_title" = "Старые";
+"week_button_title" = "Неделя";
+"month_button_title" = "Месяц";
+"halfYear_button_title" = "Пол года";
+"year_button_title" = "Год";
+
+//MARK: - Страница транзакции
+"amount_label" = "Сумма";
+"name_label" = "Название";
+"description_label" = "Описание";
 "date_label" = "Дата";
 
-//MARK: Transaciton info page
-"transactionInfoTitle_label" = "Информация о транзакции";
+//MARK: - Страница информации о транзакции
+//(BILL - Чек)
 "transactionType_label" = "Тип:";
-"transactionName_label" = "Имя:";
-"transactionAmount_label" = "Сумма:";
-"transactionDate_label" = "Дата:";
+"transactionName_label" = "Название:";
+"transacitonAmount_label" = "Сумма:";
+"transacitonDate_label" = "Дата:";
 "transactionDescription_label" = "Описание:";
+"emptyDescription" = "Описание транзакции не указано";
 
-//MARK: Profile page
+//MARK: - Страница профиля
 "username_label" = "Имя пользователя";
 "transactionReport_label" = "Отчет о транзакциях";
 "settings_label" = "Настройки";
 "statisctics_label" = "Статистика";
 "logout_label" = "Выйти";
+
+//MARK: - Страница отчета о транзакциях
+"transactionReportTitle_label" = "Отчет";
+"thisMonthTitle_label" = "За последний месяц";
+"spend_label" = "Вы потратили 💸";
+"earn_label" = "Вы заработали 💰";
+"biggestSpending_label" = "Ваша самая крупная трата";
+"biggentEarning_label" = "Ваш самый крупный заработок";
+"quoteTitle_label" = "Цитата месяца";
+"none_label" = "Пусто";
+
+//MARK: - Страница настроек
+"language_label" = "Язык";
+"currency_label" = "Валюта";
+"personalInfo_label" = "Личная информация";
+
+//MARK: - Страница статистики
+"statisticsTitle_label" = "Статистика за последний месяц";
+
+//MARK: - Валюты
+"currency" = "₽";
+"dollar" = "$";
+"tenge" = "₸";
+"ruble" = "₽";

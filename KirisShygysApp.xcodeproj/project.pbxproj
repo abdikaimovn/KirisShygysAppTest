@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F071F062B5AB77100AB98D4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F071F052B5AB77100AB98D4 /* String+Extension.swift */; };
 		6F1EC75D2B0A16FD0036CD9C /* FullTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */; };
 		6F2000152B346F13004C8BD8 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000142B346F13004C8BD8 /* StatisticsViewController.swift */; };
 		6F2000192B34737B004C8BD8 /* StatisticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2000182B34737B004C8BD8 /* StatisticsPresenter.swift */; };
@@ -86,6 +87,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F071F052B5AB77100AB98D4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		6F1764CB2B37217500E5FA4E /* KirisShygysApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KirisShygysApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1764D02B37243E00E5FA4E /* KirisShygysAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KirisShygysAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1EC75C2B0A16FD0036CD9C /* FullTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransactionPresenter.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				6FADAA6A2B2043A70001CCC6 /* UIFont+Extension.swift */,
 				6F96EA0A2B2DE35B00448EEB /* CustomTableView.swift */,
 				6F30CB202B3C89C500B03C53 /* ExtendedTapAreaButton.swift */,
+				6F071F052B5AB77100AB98D4 /* String+Extension.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				6F430CF52AD05C5200CC712A /* RegistrationViewController.swift in Sources */,
 				6FCF29512AF189F000CEA307 /* TransactionTableViewCell.swift in Sources */,
 				6F2000192B34737B004C8BD8 /* StatisticsPresenter.swift in Sources */,
+				6F071F062B5AB77100AB98D4 /* String+Extension.swift in Sources */,
 				6FE3898E2B0345E900E8844D /* FullTransactionViewController.swift in Sources */,
 				6FE462B02B092BE000DDB235 /* FilterModel.swift in Sources */,
 				6FF3A2D32AD424B800D51E3A /* RegistrationPresenter.swift in Sources */,
