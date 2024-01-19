@@ -12,6 +12,7 @@
 "onboarding_secondPage_title" = "Знайте, куда уходят ваши деньги";
 "onboarding_secondPage_description" = "Легко отслеживайте ваши транзакции с помощью финансового отчета";
 
+
 //MARK: Text field placeholders
 "name_textField_placeholder" = "Имя";
 "email_textField_placeholder" = "Эл. почта";
@@ -19,14 +20,11 @@
 
 //MARK: Buttons
 "sign_in_button_title" = "Войти";
-"sign_up_button_title" = "Зарегистрироваться";
-"alert_button_title_dismiss" = "Отменить";
-
-//MARK: Authorization page
-
-
-//MARK: Registration page
-
+"sign_up_button_title" = "Регистрация";
+"alert_button_title_dismiss" = "Закрыть";
+"apply_button_title" = "Применить";
+"save_button_title" = "Сохранить";
+"reset_button_label" = "Сбросить";
 
 //MARK: Errors
 "authorization_error_title" = "Ошибка авторизации";
@@ -35,3 +33,44 @@
 "invalidCredential_error" = "Предоставленные учетные данные недействительны или устарели";
 "network_error" = "Прервано сетевое подключение";
 "unknown_error" = "Что-то пошло не так";
+
+//MARK: Home page
+"welcome_label" = "С возвращением";
+"totalBalance_label" = "Общий баланс";
+"incomes_label" = "Доходы";
+"expenses_label" = "Расходы";
+"transactions_label" = "Транзакции";
+"history_label" = "История";
+
+//MARK: Full transactions page
+"filterTransactions_label" = "Фильтр";
+"filterBy_label" = "Фильтровать по";
+"sortBy_label" = "Сортировать по";
+"newest_label" = "Самые новые";
+"oldest_label" = "Самые старые";
+"period_label" = "Период";
+"week_label" = "Неделя";
+"month_label" = "Месяц";
+"halfYear_label" = "Пол года";
+"year_label" = "Год";
+
+//MARK: Transaction page
+"amountLabel_title" = "Сумма";
+"transactionName_label" = "Название";
+"descriptionLabel" = "Описание";
+"date_label" = "Дата";
+
+//MARK: Transaciton info page
+"transactionInfoTitle_label" = "Информация о транзакции";
+"transactionType_label" = "Тип:";
+"transactionName_label" = "Имя:";
+"transactionAmount_label" = "Сумма:";
+"transactionDate_label" = "Дата:";
+"transactionDescription_label" = "Описание:";
+
+//MARK: Profile page
+"username_label" = "Имя пользователя";
+"transactionReport_label" = "Отчет о транзакциях";
+"settings_label" = "Настройки";
+"statisctics_label" = "Статистика";
+"logout_label" = "Выйти";

@@ -26,7 +26,7 @@ final class HomeViewController: UIViewController {
     
     private let welcomeLabel: UILabel = {
         var label = UILabel()
-        label.text = NSLocalizedString("Welcome back", comment: "")
+        label.text = NSLocalizedString("welcome_label", comment: "")
         label.font = UIFont.defaultFont(16)
         label.textColor = .darkGray
         return label
@@ -50,7 +50,7 @@ final class HomeViewController: UIViewController {
     
     private let totalBalanceLabel: UILabel = {
         var label = UILabel()
-        label.text = "Total Balance:"
+        label.text = NSLocalizedString("totalBalance_label", comment: "")
         label.font = UIFont.defaultFont(20)
         label.textColor = .white
         return label
@@ -75,7 +75,7 @@ final class HomeViewController: UIViewController {
     
     private let income: UILabel = {
         var label = UILabel()
-        label.text = "Income"
+        label.text = NSLocalizedString("incomes_label", comment: "")
         label.textColor = .white
         label.font = UIFont.defaultFont(18)
         return label
@@ -107,7 +107,7 @@ final class HomeViewController: UIViewController {
     
     private let expense: UILabel = {
         var label = UILabel()
-        label.text = "Expenses"
+        label.text = NSLocalizedString("expenses_label", comment: "")
         label.font = UIFont.defaultFont(18)
         label.textColor = .white
         return label
@@ -141,7 +141,7 @@ final class HomeViewController: UIViewController {
     
     private let transactionsLabel: UILabel = {
         var label = UILabel()
-        label.text = "Transactions"
+        label.text = NSLocalizedString("transactions_label", comment: "")
         label.font = UIFont.defaultBoldFont(18)
         label.textColor = .black
         return label
@@ -149,7 +149,7 @@ final class HomeViewController: UIViewController {
     
     private lazy var seeAllButton: UIButton = {
         var btn = ExtendedTapAreaButton()
-        btn.setTitle("See All", for: .normal)
+        btn.setTitle(NSLocalizedString("history_label", comment: ""), for: .normal)
         btn.titleLabel?.font =  UIFont.defaultFont(17)
         btn.setTitleColor(.black, for: .normal)
         btn.backgroundColor = .clear

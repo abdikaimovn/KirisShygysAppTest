@@ -42,14 +42,6 @@ final class DetailTransactionView: UIView {
         return view
     }()
     
-    private let titleLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Transaction Info"
-        label.font = UIFont.defaultBoldFont(25)
-        label.textColor = .black
-        return label
-    }()
-    
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = .clear
@@ -70,15 +62,9 @@ final class DetailTransactionView: UIView {
         
         infoView.addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(15)
+            make.centerX.equalToSuperview()
             make.size.equalTo(50)
-            make.top.equalToSuperview().inset(15)
-        }
-        
-        infoView.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(logoImage.snp.centerY)
-            make.leading.equalTo(logoImage.snp.trailing).offset(15)
+            make.top.equalToSuperview().offset(15)
         }
         
         infoView.addSubview(tableView)
@@ -101,16 +87,16 @@ extension DetailTransactionView: UITableViewDataSource{
         
         switch indexPath.row {
         case 0:
-            cell.configure(transactionKey: "Type:", transactionValue: transactionInfo.transactionType.rawValue)
+            cell.configure(transactionKey: NSLocalizedString("transactionType_label", comment: ""), transactionValue: transactionInfo.transactionType.rawValue)
         case 1:
-            cell.configure(transactionKey: "Name:", transactionValue: transactionInfo.transactionName)
+            cell.configure(transactionKey: NSLocalizedString("transactionName_label", comment: ""),  transactionValue: transactionInfo.transactionName)
         case 2:
-            cell.configure(transactionKey: "Amount:", transactionValue: "$ \(transactionInfo.transactionAmount)")
+            cell.configure(transactionKey: NSLocalizedString("transactionAmount_label", comment: ""), transactionValue: "$ \(transactionInfo.transactionAmount)")
         case 3:
-            cell.configure(transactionKey: "Date:", transactionValue: transactionInfo.transactionDate)
+            cell.configure(transactionKey: NSLocalizedString("transactionDate_label", comment: ""),  transactionValue: transactionInfo.transactionDate)
         case 4:
             let description = transactionInfo.transactionDescription
-            cell.configure(transactionKey: "Description:", transactionValue: description)
+            cell.configure(transactionKey: NSLocalizedString("transactionDescription_label", comment: ""), transactionValue: description)
         default:
             break
         }
