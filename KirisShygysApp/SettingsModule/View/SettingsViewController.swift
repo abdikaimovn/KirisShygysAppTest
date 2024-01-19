@@ -41,8 +41,6 @@ final class SettingsViewController: UIViewController {
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
         
-        self.title = "Settings"
-        
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
@@ -59,6 +57,8 @@ final class SettingsViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
+        title = "settings_label".localized
+        
         view.addSubview(menuTableView)
         menuTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
@@ -76,16 +76,18 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
         switch indexPath.row {
         case 0:
-            cell.configure(with: UIImage(systemName: "textformat")!, and: "Language")
+            cell.configure(with: UIImage(systemName: "textformat")!,
+                           and: "language_label".localized)
             return cell
         case 1:
-            cell.configure(with: UIImage(systemName: "tengesign")!, and: "Currency")
+            cell.configure(with: UIImage(systemName: "tengesign")!, 
+                           and: "currency_label".localized)
             return cell
         case 2:
-            cell.configure(with: UIImage(systemName: "person.text.rectangle")!, and: "Personal Information")
+            cell.configure(with: UIImage(systemName: "person.text.rectangle")!, 
+                           and: "personalInfo_label".localized)
             return cell
         default:
-            cell.configure(with: UIImage(systemName: "textformat")!, and: "Language")
             return cell
         }
     }

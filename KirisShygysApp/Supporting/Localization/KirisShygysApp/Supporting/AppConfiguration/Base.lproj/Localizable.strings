@@ -32,14 +32,20 @@
 "invalidCredential_error" = "The supplied auth credential is malformed or has expired.";
 "network_error" = "The network connection was interrupted";
 "unknown_error" = "Something went wrong";
+"noTransaction" = "You have not made any transactions in the current month";
 
 //MARK: - Home page
 "welcome_label" = "Welcome back";
 "totalBalance_label" = "Total balance";
 "incomes_label" = "Incomes";
 "expenses_label" = "Expenses";
+"total_label" = "Total";
 "transactions_label" = "Transactions";
 "history_label" = "History";
+
+//MARK: - Days
+"today_label" = "Today";
+"yesterday_label" = "Yesterday";
 
 //MARK: - Full transactions page
 "filterTransactions_label" = "Filter transactions";
@@ -69,6 +75,7 @@
 "transacitonAmount_label" = "Amount:";
 "transacitonDate_label" = "Date:";
 "transactionDescription_label" = "Description:";
+"emptyDescription" = "Transaction description not specified";
 
 //MARK: - Profile page
 "username_label" = "Username";
@@ -85,6 +92,7 @@
 "biggestSpending_label" = "And your biggest spending is from";
 "biggentEarning_label" = "Your biggest earning is from";
 "quoteTitle_label" = "Quote of the month";
+"none_label" = "None";
 
 //MARK: - Settings page
 "language_label" = "Language";
@@ -95,6 +103,7 @@
 "statisticsTitle_label" = "Statistics for last month";
 
 //MARK: - Currencies
+"currency" = "$";
 "dollar" = "$";
 "tenge" = "₸";
 "ruble" = "₽";

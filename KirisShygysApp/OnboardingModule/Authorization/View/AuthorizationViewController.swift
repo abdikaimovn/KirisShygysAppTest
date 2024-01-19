@@ -30,7 +30,7 @@ final class AuthorizationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1.0
         textField.layer.masksToBounds = true
-        textField.placeholder = NSLocalizedString("email_textField_placeholder", comment: "")
+        textField.placeholder = "email_textField_placeholder".localized
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
@@ -44,7 +44,7 @@ final class AuthorizationViewController: UIViewController {
         textField.layer.borderWidth = 1.0
         textField.isSecureTextEntry = true
         textField.layer.masksToBounds = true
-        textField.placeholder = NSLocalizedString("password_textField_placeholder", comment: "")
+        textField.placeholder = "password_textField_placeholder".localized
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         return textField
@@ -63,7 +63,7 @@ final class AuthorizationViewController: UIViewController {
     private lazy var signInButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor.shared.Brown
-        button.setTitle(NSLocalizedString("sign_in_button_title", comment: ""), for: .normal)
+        button.setTitle("signIn_button_title".localized, for: .normal)
         button.layer.cornerRadius = 12
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.clipsToBounds = true

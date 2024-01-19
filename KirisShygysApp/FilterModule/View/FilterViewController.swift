@@ -25,48 +25,48 @@ final class FilterViewController: UIViewController {
     }
     
     private lazy var filterByExpenseButton: UIButton = {
-        var button = generateButton(NSLocalizedString("expenses_label", comment: ""))
+        var button = generateButton("expenses_label".localized)
         return button
     }()
     
     private lazy var filterByIncomeButton: UIButton = {
-        var button = generateButton(NSLocalizedString("incomes_label", comment: ""))
+        var button = generateButton("incomes_label".localized)
         return button
     }()
     
     private lazy var sortByNewestButton: UIButton = {
-        var button = generateButton(NSLocalizedString("newest_label", comment: ""))
+        var button = generateButton("newest_button_title".localized)
         return button
     }()
     
     private lazy var sortByOldestButton: UIButton = {
-        var button = generateButton(NSLocalizedString("oldest_label", comment: ""))
+        var button = generateButton("oldest_button_title".localized)
         return button
     }()
     
     private lazy var weekPeriodButton: UIButton = {
-        var button = generateButton(NSLocalizedString("week_label", comment: ""))
+        var button = generateButton("week_button_title".localized)
         return button
     }()
     
     private lazy var monthPeriodButton: UIButton = {
-        var button = generateButton(NSLocalizedString("month_label", comment: ""))
+        var button = generateButton("month_button_title".localized)
         return button
     }()
     
     private lazy var halfyearPeriodButton: UIButton = {
-        var button = generateButton(NSLocalizedString("halfYear_label", comment: ""))
+        var button = generateButton("halfYear_button_title".localized)
         return button
     }()
     
     private lazy var yearPeriodButton: UIButton = {
-        var button = generateButton(NSLocalizedString("year_label", comment: ""))
+        var button = generateButton("year_button_title".localized)
         return button
     }()
     
     private lazy var resetButton: UIButton = {
         var button = UIButton()
-        button.setTitle(NSLocalizedString("reset_button_label", comment: ""), for: .normal)
+        button.setTitle("reset_button_title".localized, for: .normal)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.defaultFont(18)
         button.layer.cornerCurve = .continuous
@@ -77,7 +77,7 @@ final class FilterViewController: UIViewController {
     }()
     
     private lazy var applyButton: UIButton = {
-        var button = generateButton(NSLocalizedString("apply_button_title", comment: ""))
+        var button = generateButton("apply_button_title".localized)
         button.backgroundColor = UIColor.shared.Brown
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.defaultBoldFont(18)
@@ -142,11 +142,11 @@ final class FilterViewController: UIViewController {
             make.width.equalTo(30)
         }
         
-        let filterTransactionLabel = generateTitleLabel(NSLocalizedString("filterTransactions_label", comment: ""))
+        let filterTransactionLabel = generateTitleLabel("filterTransactions_label".localized)
         //Filter titles
-        let filterByLabel = generateTitleLabel(NSLocalizedString("filterBy_label", comment: ""))
-        let sortByLabel = generateTitleLabel(NSLocalizedString("sortBy_label", comment: ""))
-        let periodLabel = generateTitleLabel(NSLocalizedString("period_label", comment: ""))
+        let filterByLabel = generateTitleLabel("filterBy_label".localized)
+        let sortByLabel = generateTitleLabel("sortBy_label".localized)
+        let periodLabel = generateTitleLabel("period_label".localized)
         
         //Filter horizontal stack those will contain buttons to identify
         let filterByStack = generateStackView()

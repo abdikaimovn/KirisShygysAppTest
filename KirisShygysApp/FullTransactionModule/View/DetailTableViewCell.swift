@@ -35,8 +35,8 @@ final class DetailTableViewCell: UITableViewCell {
     }
     
     func configure(transactionKey: String, transactionValue: String) {
-        self.transactionKeyLabel.text = transactionKey
-        self.transactionValueLabel.text = transactionValue.isEmpty ? "Transaction description not specified" : transactionValue
+        transactionKeyLabel.text = transactionKey
+        transactionValueLabel.text = transactionValue.isEmpty ? "emptyDescription".localized : transactionValue
     }
     
     private func setupCell() {

@@ -115,9 +115,9 @@ extension FullTransactionPresenter {
     func identifySectionTitle(_ sectionTitle: String) -> String {
         switch sectionTitle {
         case Date.now.formatted().prefix(10):
-            return "Today"
+            return "today_label".localized
         case Date().yesterday.formatted().prefix(10):
-            return "Yesterday"
+            return "yesterday_label".localized
         default:
             return sectionTitle
         }

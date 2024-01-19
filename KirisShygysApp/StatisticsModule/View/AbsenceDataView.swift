@@ -20,7 +20,7 @@ class AbsenceDataView: UIView {
     private let noDataLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.defaultFont(14)
-        label.text = "You haven't made any transaction yet."
+        label.text = "noTransaction".localized
         label.numberOfLines = 0
         label.textColor = .black
         return label

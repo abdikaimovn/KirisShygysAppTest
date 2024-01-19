@@ -87,16 +87,16 @@ extension DetailTransactionView: UITableViewDataSource{
         
         switch indexPath.row {
         case 0:
-            cell.configure(transactionKey: NSLocalizedString("transactionType_label", comment: ""), transactionValue: transactionInfo.transactionType.rawValue)
+            cell.configure(transactionKey: "transactionType_label".localized, transactionValue: transactionInfo.transactionType.rawValue)
         case 1:
-            cell.configure(transactionKey: NSLocalizedString("transactionName_label", comment: ""),  transactionValue: transactionInfo.transactionName)
+            cell.configure(transactionKey: "transactionName_label".localized,  transactionValue: transactionInfo.transactionName)
         case 2:
-            cell.configure(transactionKey: NSLocalizedString("transactionAmount_label", comment: ""), transactionValue: "$ \(transactionInfo.transactionAmount)")
+            cell.configure(transactionKey: "transactionAmount_label".localized, transactionValue: "$ \(transactionInfo.transactionAmount)")
         case 3:
-            cell.configure(transactionKey: NSLocalizedString("transactionDate_label", comment: ""),  transactionValue: transactionInfo.transactionDate)
+            cell.configure(transactionKey: "transactionDate_label".localized,  transactionValue: transactionInfo.transactionDate)
         case 4:
             let description = transactionInfo.transactionDescription
-            cell.configure(transactionKey: NSLocalizedString("transactionDescription_label", comment: ""), transactionValue: description)
+            cell.configure(transactionKey: "transactionDescription_label".localized, transactionValue: description)
         default:
             break
         }
