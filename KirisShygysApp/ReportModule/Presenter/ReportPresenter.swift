@@ -19,8 +19,8 @@ final class ReportPresenter {
         var expenseSum = 0
         var maxIncome = 0
         var maxExpense = 0
-        var maxIncomeTitle = "Null"
-        var maxExpenseTitle = "Null"
+        var maxIncomeTitle = "none_label".localized
+        var maxExpenseTitle = "none_label".localized
         
         for transaction in transactionData {
             if transaction.transactionType == .income {
@@ -38,9 +38,12 @@ final class ReportPresenter {
             }
         }
         
-        let incomeInfo = ReportInfo(summa: incomeSum, maxValue: maxIncome, maxValueTitle: maxIncomeTitle)
+        let isEmptyIncomeAmount = incomeSum == 0
+        let isEmptyExpenseAmount = expenseSum == 0
+
+        let incomeInfo = ReportInfo(summa: incomeSum, maxValue: maxIncome, maxValueTitle: maxIncomeTitle, isEmptyAmount: isEmptyIncomeAmount)
         
-        let expenseInfo = ReportInfo(summa: expenseSum, maxValue: maxExpense, maxValueTitle: maxExpenseTitle)
+        let expenseInfo = ReportInfo(summa: expenseSum, maxValue: maxExpense, maxValueTitle: maxExpenseTitle, isEmptyAmount: isEmptyExpenseAmount)
         
         self.view?.didCalculateTransactionData(incomeInfo, expenseInfo)
     }

@@ -16,7 +16,7 @@ final class FullTransactionViewController: UIViewController {
     private let filterTransactionLabel: UILabel = {
         var label = UILabel()
         label.text = "filterTransactions_label".localized
-        label.font = UIFont.defaultFont(18)
+        label.font = UIFont.defaultFont(16)
         label.textColor = .black
         return label
     }()
@@ -90,14 +90,14 @@ final class FullTransactionViewController: UIViewController {
         view.addSubview(filterTransactionLabel)
         filterTransactionLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
-            make.leading.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(40)
         }
         
         view.addSubview(filterButton)
         filterButton.snp.makeConstraints { make in
             make.centerY.equalTo(filterTransactionLabel.snp.centerY)
             make.trailing.equalToSuperview().inset(20)
-            make.size.equalTo(50)
+            make.size.equalTo(40)
         }
         
         view.addSubview(tableView)

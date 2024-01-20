@@ -21,6 +21,7 @@ class AbsenceDataView: UIView {
         let label = UILabel()
         label.font = UIFont.defaultFont(14)
         label.text = "noTransaction".localized
+        label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = .black
         return label
@@ -52,6 +53,7 @@ class AbsenceDataView: UIView {
         addSubview(noDataLabel)
         noDataLabel.snp.makeConstraints { make in
             make.centerX.equalTo(imageView.snp.centerX)
+            make.leading.trailing.equalToSuperview().inset(30)
             make.top.equalTo(imageView.snp.bottom).offset(10)
         }
     }

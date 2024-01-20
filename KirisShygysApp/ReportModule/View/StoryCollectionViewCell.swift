@@ -86,6 +86,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
     
     private func setupView() {
         contentView.addSubview(thisMonthLabel)
+        thisMonthLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         thisMonthLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().inset(20)
@@ -96,15 +97,18 @@ final class StoryCollectionViewCell: UICollectionViewCell {
             make.centerX.equalToSuperview()
             make.top.equalTo(thisMonthLabel.snp.bottom).offset(60)
         }
+        transactionType.setContentCompressionResistancePriority(.required, for: .vertical)
         
         contentView.addSubview(amountLabel)
         amountLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(transactionType.snp.bottom).offset(10)
         }
+        amountLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         
         contentView.addSubview(containerView)
         containerView.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(amountLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(30)
         }
@@ -116,6 +120,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         }
         
         containerView.addSubview(biggestTransactionView)
+        biggestTransactionView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         biggestTransactionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(biggestTransactionLabel.snp.bottom).offset(20)
@@ -134,9 +139,12 @@ final class StoryCollectionViewCell: UICollectionViewCell {
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(20)
         }
+        biggestTransactionAmount.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     
     public func configure(reportModel: ReportModel) {
+        //hide container if there is an empty amount of money
+        containerView.isHidden = reportModel.isEmptyAmount
         self.transactionType.text = reportModel.transactionType
         self.amountLabel.text = reportModel.amount
         self.biggestTransactionLabel.text = reportModel.biggestTransactionLabel

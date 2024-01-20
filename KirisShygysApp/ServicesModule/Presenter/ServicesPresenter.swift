@@ -1,7 +1,6 @@
 import Foundation
 
-protocol ProfileViewProtocol: AnyObject {
-    func setUsername(_ name: String)
+protocol ServicesViewProtocol: AnyObject {
     func showTransactionReport(with transactionData: [TransactionModel])
     func showStatistics(with transactionData: [TransactionModel])
     func showSettings()
@@ -11,12 +10,12 @@ protocol ProfileViewProtocol: AnyObject {
     func showLogoutError(with model: ErrorModel)
     func showReportError(with model: ErrorModel)
     func showUnknownError(with model: ErrorModel)
-    func showAbsenseDataError()
-    func showStatisticsError()
+    func showReportAbsenceDataAlert(with model: ErrorModelInfo)
+    func showStatisticsAbsenceDataAlert(with model: ErrorModelInfo)
 }
 
-final class ProfilePresenter {
-    weak var view: ProfileViewProtocol?
+final class ServicesPresenter {
+    weak var view: ServicesViewProtocol?
     
     private let profileAuthService: ProfileServiceProtocol
     private let userManager: UserProfileProtocol
@@ -24,24 +23,6 @@ final class ProfilePresenter {
     init(profileAuthService: ProfileServiceProtocol, userManager: UserProfileProtocol) {
         self.profileAuthService = profileAuthService
         self.userManager = userManager
-    }
-    
-    func viewDidLoaded() {
-        view?.showLoader()
-        userManager.fetchCurrentUsername { [weak self] result in
-            self?.view?.hideLoader()
-            switch result {
-            case .success(let username):
-                self?.view?.setUsername(username)
-            case .failure(let failure):
-                switch failure {
-                case .userNotFound:
-                    self?.view?.setUsername("Error")
-                case .customError(let error):
-                    self?.view?.showUnknownError(with: ErrorModel(error: error))
-                }
-            }
-        }
     }
     
     func reportTransactionDidTapped() {
@@ -53,7 +34,11 @@ final class ProfilePresenter {
                 if !transactionData.isEmpty {
                     self?.view?.showTransactionReport(with: transactionData)
                 } else {
-                    self?.view?.showAbsenseDataError()
+                    self?.view?.showReportAbsenceDataAlert(with:
+                                                        ErrorModelInfo(title: nil,
+                                                                       error: nil,
+                                                                       text: nil,
+                                                                       localizedDescription: "reportLackDataAlert_message".localized))
                 }
             case .failure(let error):
                 switch error {
@@ -76,7 +61,11 @@ final class ProfilePresenter {
                 if !transactionData.isEmpty {
                     self?.view?.showStatistics(with: transactionData)
                 } else {
-                    self?.view?.showAbsenseDataError()
+                    self?.view?.showStatisticsAbsenceDataAlert(with: 
+                                                        ErrorModelInfo(title: nil,
+                                                                       error: nil,
+                                                                       text: nil,
+                                                                       localizedDescription: "statisticsLackDataAlert_message".localized))
                 }
             case .failure(let error):
                 switch error {

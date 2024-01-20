@@ -13,6 +13,7 @@ struct ReportModel {
     var biggestTransactionLabel: String
     var biggestTransactionName: String
     var biggestTransactionAmount: String
+    var isEmptyAmount: Bool = true
 }
 
 struct QuoteModel {
@@ -24,4 +25,5 @@ struct ReportInfo {
     var summa: Int
     var maxValue: Int
     var maxValueTitle: String
+    var isEmptyAmount: Bool
 }

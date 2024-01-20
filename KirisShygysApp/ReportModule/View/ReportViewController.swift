@@ -11,8 +11,9 @@ final class ReportViewController: UIViewController {
     private let presenter: ReportPresenter
     private let transactionData: [TransactionModel]!
     
+    //Part of UI data
     private var reportData = [
-        ReportModel(transactionType: "spend_label".localized, 
+        ReportModel(transactionType: "spend_label".localized,
                     amount: "\("currency".localized) 0",
                     biggestTransactionLabel: "biggestSpending_label".localized,
                     biggestTransactionName: "none_label".localized,
@@ -150,12 +151,14 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension ReportViewController: ReportViewProtocol {
     func didCalculateTransactionData(_ incomeInfo: ReportInfo, _ expenseInfo: ReportInfo) {
-        reportData[0].amount = "$ \(expenseInfo.summa)"
-        reportData[0].biggestTransactionAmount = "$ \(expenseInfo.maxValue)"
+        reportData[0].amount = "\("currency".localized) \(expenseInfo.summa)"
+        reportData[0].biggestTransactionAmount = "\("currency".localized) \(expenseInfo.maxValue)"
         reportData[0].biggestTransactionName = expenseInfo.maxValueTitle
+        reportData[0].isEmptyAmount = expenseInfo.isEmptyAmount
         
-        reportData[1].amount = "$ \(incomeInfo.summa)"
-        reportData[1].biggestTransactionAmount = "$ \(incomeInfo.maxValue)"
+        reportData[1].amount = "\("currency".localized) \(incomeInfo.summa)"
+        reportData[1].biggestTransactionAmount = "\("currency".localized) \(incomeInfo.maxValue)"
         reportData[1].biggestTransactionName = incomeInfo.maxValueTitle
+        reportData[1].isEmptyAmount = incomeInfo.isEmptyAmount
     }
 }

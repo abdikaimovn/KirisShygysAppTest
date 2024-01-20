@@ -7,7 +7,7 @@ protocol HomeViewProtocol: AnyObject {
     func showLoader()
     func hideLoader()
     func pushAllTransactionsView()
-    func showAbsenseDataAlert()
+    func showAbsenseDataAlert(with model: ErrorModelInfo)
     func updateCardViewValues(cardViewModel: CardViewModel)
     func showUnknownError(with model: ErrorModel)
     func showUpdatingError(with error: Error)
@@ -75,7 +75,11 @@ final class HomePresenter {
 
     func showAllTrasactionsTapped(data: [TransactionModel]) {
         if data.isEmpty {
-            view?.showAbsenseDataAlert()
+            view?.showAbsenseDataAlert(with:
+                                        ErrorModelInfo(title: nil,
+                                                       error: nil,
+                                                       text: nil,
+                                                       localizedDescription: "historyLackDataAlert_message".localized))
         } else {
             view?.pushAllTransactionsView()
         }

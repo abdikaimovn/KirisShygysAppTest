@@ -58,7 +58,7 @@ final class FullTransactionTableViewCell: UITableViewCell {
     
     func configure(transactionData: TransactionModel) {
         self.transName.text = transactionData.transactionName
-        self.priceLabel.text = "$ \(transactionData.transactionAmount)"
+        self.priceLabel.text = "\("currency".localized) \(transactionData.transactionAmount)"
         self.priceLabel.textColor = transactionData.transactionType == .income ? UIColor.shared.IncomeColor : UIColor.shared.ExpenseColor
     
         viewImage.backgroundColor = priceLabel.textColor
