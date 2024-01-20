@@ -24,8 +24,10 @@ final class TabViewController: UITabBarController {
         tabBar.backgroundColor = UIColor.shared.LightGray
         
         viewControllers = [
-            createVC(for: createHomeModule(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "house")!),
-            createVC(for: createProfileModule(), title: NSLocalizedString("", comment: ""), icon: UIImage(systemName: "person.crop.circle")!)
+            createVC(for: createHomeModule(),
+                     icon: UIImage(systemName: "house")!),
+            createVC(for: createProfileModule(),
+                     icon: UIImage(systemName: "square.stack.3d.up")!)
         ]
         
         let buttonSize: CGFloat = 60
@@ -51,12 +53,9 @@ final class TabViewController: UITabBarController {
         self.present(transactionViewController, animated: true)
     }
     
-    private func createVC(for rootViewController: UIViewController, title: String, icon: UIImage) -> UIViewController{
+    private func createVC(for rootViewController: UIViewController, icon: UIImage) -> UIViewController{
         let navViewController = rootViewController
-        navViewController.tabBarItem.title = title
         navViewController.tabBarItem.image = icon
-        let titleFont = UIFont.systemFont(ofSize: 20, weight: .bold)
-        rootViewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: titleFont]
         return navViewController
     }
     
@@ -69,8 +68,8 @@ final class TabViewController: UITabBarController {
     }
     
     private func createProfileModule() -> UIViewController {
-        let presenter = ProfilePresenter(profileAuthService: AuthService.shared, userManager: UserDataManager.shared)
-        let view = ProfileViewController(presenter: presenter)
+        let presenter = ServicesPresenter(profileAuthService: AuthService.shared, userManager: UserDataManager.shared)
+        let view = ServicesViewController(presenter: presenter)
         presenter.view = view
         
         return view

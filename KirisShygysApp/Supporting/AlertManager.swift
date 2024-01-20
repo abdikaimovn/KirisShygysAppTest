@@ -12,7 +12,7 @@ final class AlertManager {
     private static func showBasicAlert(on vc: UIViewController, title: String, message: String?) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("alert_button_title_dismiss", comment: ""), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("alert_dismissButton_title", comment: ""), style: .default, handler: nil))
             vc.present(alert, animated: true)
         }
     }
@@ -76,10 +76,10 @@ extension AlertManager {
     }
 }
 
-//MARK: - Transaction Report Page Alerts
+//MARK: - Absence data Alert
 extension AlertManager {
-    public static func showAbsenceTransactionData(on vc: UIViewController) {
-        self.showBasicAlert(on: vc, title: "Absence of Data", message: "You haven't made any transactions yet")
+    public static func showAbsenceTransactionData(on vc: UIViewController, with model: ErrorModelInfo) {
+        self.showBasicAlert(on: vc, title: "lackDataAlert_title".localized, message: model.localizedDescription)
     }
 }
 

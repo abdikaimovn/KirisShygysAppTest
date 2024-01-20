@@ -32,7 +32,7 @@
 "invalidCredential_error" = "Предоставленные учетные данные недействительны или устарели";
 "network_error" = "Прервано сетевое подключение";
 "unknown_error" = "Произошла неизвестная ошибка";
-"noTransaction" = "Вы не совершали никаких транзакций в текущем месяце";
+"noTransaction" = "Вы не совершали никаких транзакций за последний месяц";
 
 //MARK: - Домашняя страница
 "welcome_label" = "С Возвращением";
@@ -72,13 +72,13 @@
 //(BILL - Чек)
 "transactionType_label" = "Тип:";
 "transactionName_label" = "Название:";
-"transacitonAmount_label" = "Сумма:";
-"transacitonDate_label" = "Дата:";
+"transactionAmount_label" = "Сумма:";
+"transactionDate_label" = "Дата:";
 "transactionDescription_label" = "Описание:";
 "emptyDescription" = "Описание транзакции не указано";
 
 //MARK: - Страница профиля
-"username_label" = "Имя пользователя";
+"menu_label" = "Меню";
 "transactionReport_label" = "Отчет о транзакциях";
 "settings_label" = "Настройки";
 "statisctics_label" = "Статистика";
@@ -92,7 +92,6 @@
 "biggestSpending_label" = "Ваша самая крупная трата";
 "biggentEarning_label" = "Ваш самый крупный заработок";
 "quoteTitle_label" = "Цитата месяца";
-"none_label" = "Пусто";
 
 //MARK: - Страница настроек
 "language_label" = "Язык";
@@ -103,7 +102,19 @@
 "statisticsTitle_label" = "Статистика за последний месяц";
 
 //MARK: - Валюты
-"currency" = "₽";
+"currency" = "₸";
 "dollar" = "$";
 "tenge" = "₸";
 "ruble" = "₽";
+
+//MARK: - Alerts
+"lackDataAlert_title" = "Отсутствие данных";
+
+//Страница истории предупреждает
+"historyLackDataAlert_message" = "Недостаточно данных для отображения вашей истории. Добавьте любую транзакцию для доступа";
+
+//Предупреждения отчета о транзакциях
+"reportLackDataAlert_message" = "Недостаточно данных для отображения вашего отчета. Добавьте любую транзакцию для доступа";
+
+//Страница статистики предупреждает
+"statisticsLackDataAlert_message" = "Недостаточно данных для отображения вашей статистики. Добавьте любую транзакцию для доступа";

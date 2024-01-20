@@ -85,13 +85,15 @@ extension DetailTransactionView: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
         cell.selectionStyle = .none
         
+        let transactionType = transactionInfo.transactionType == .expense ? "expenses_label".localized : "incomes_label".localized
+        
         switch indexPath.row {
         case 0:
-            cell.configure(transactionKey: "transactionType_label".localized, transactionValue: transactionInfo.transactionType.rawValue)
+            cell.configure(transactionKey: "transactionType_label".localized, transactionValue: transactionType)
         case 1:
             cell.configure(transactionKey: "transactionName_label".localized,  transactionValue: transactionInfo.transactionName)
         case 2:
-            cell.configure(transactionKey: "transactionAmount_label".localized, transactionValue: "$ \(transactionInfo.transactionAmount)")
+            cell.configure(transactionKey: "transactionAmount_label".localized, transactionValue: "\("currency".localized) \(transactionInfo.transactionAmount)")
         case 3:
             cell.configure(transactionKey: "transactionDate_label".localized,  transactionValue: transactionInfo.transactionDate)
         case 4:

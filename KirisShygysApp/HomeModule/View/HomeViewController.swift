@@ -396,8 +396,8 @@ extension HomeViewController: HomeViewProtocol {
         self.navigationController?.pushViewController(createFullTransactionViewController(), animated: true)
     }
     
-    func showAbsenseDataAlert() {
-        AlertManager.showAbsenceTransactionData(on: self)
+    func showAbsenseDataAlert(with model: ErrorModelInfo) {
+        AlertManager.showAbsenceTransactionData(on: self, with: model)
     }
     
     func setUsername(username: String) {

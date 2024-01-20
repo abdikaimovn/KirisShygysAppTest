@@ -7,46 +7,18 @@
 
 import UIKit
 
-final class ProfileViewController: UIViewController {
-    private let presenter: ProfilePresenter
+final class ServicesViewController: UIViewController {
+    private let presenter: ServicesPresenter
     
     private let loader = UIActivityIndicatorView()
     private let loaderView = UIView()
-    
-    private let userImage: UIImageView = {
-        var image = UIImageView()
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 20
-        image.layer.cornerCurve = .continuous
-        image.image = UIImage(systemName: "person.crop.circle")
-        image.contentMode = .scaleAspectFit
-        image.backgroundColor = UIColor.shared.LightGray
-        image.tintColor = UIColor.shared.Brown
-        return image
-    }()
-   
-    private let userNameLabel: UILabel = {
+
+    private let menuLabel: UILabel = {
         var label = UILabel()
-        label.text = "username_label".localized
+        label.text = "menu_label".localized
         label.textColor = .black
-        label.font = UIFont.defaultFont(16)
+        label.font = UIFont.defaultBoldFont(30)
         return label
-    }()
-    
-    private let userName: UILabel = {
-        var label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.defaultBoldFont(22)
-        return label
-    }()
-    
-    private let editButton: UIButton = {
-        var btn = UIButton()
-        btn.tintColor = .black
-        btn.setImage(UIImage(systemName: "pencil"), for: .normal)
-        btn.contentMode = .scaleAspectFit
-        btn.backgroundColor = .clear
-        return btn
     }()
     
     private lazy var menuTableView: UITableView = {
@@ -61,7 +33,7 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    init(presenter: ProfilePresenter) {
+    init(presenter: ServicesPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,7 +46,6 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        presenter.viewDidLoaded()
     }
     
     deinit {
@@ -104,52 +75,32 @@ final class ProfileViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        view.addSubview(userImage)
-        
-        userImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
-            make.size.equalTo(60)
-        }
-        
-        view.addSubview(userNameLabel)
-        userNameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(userImage.snp.trailing).offset(20)
-            make.top.equalTo(userImage.snp.top).offset(5)
-        }
-        
-        view.addSubview(userName)
-        userName.snp.makeConstraints { make in
-            make.leading.equalTo(userImage.snp.trailing).offset(20)
-            make.bottom.equalTo(userImage.snp.bottom).offset(-5)
-        }
-        
-        view.addSubview(editButton)
-        editButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-15)
-            make.centerY.equalTo(userImage.snp.centerY)
-            make.size.equalTo(40)
+    
+        view.addSubview(menuLabel)
+        menuLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
         view.addSubview(menuTableView)
         menuTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(userImage.snp.bottom).offset(30)
+            make.top.equalTo(menuLabel.snp.bottom).offset(10)
         }
     }
 }
 
-extension ProfileViewController: ProfileViewProtocol {
+extension ServicesViewController: ServicesViewProtocol {
+    func showReportAbsenceDataAlert(with model: ErrorModelInfo) {
+        AlertManager.showAbsenceTransactionData(on: self, with: model)
+    }
+    
     func showSettings() {
         self.navigationController?.pushViewController(createSettingsModule(), animated: true)
     }
     
     func showUnknownError(with model: ErrorModel) {
         AlertManager.showUnknownError(on: self, message: model.text)
-    }
-    
-    func showAbsenseDataError() {
-        AlertManager.showAbsenceTransactionData(on: self)
     }
     
     func showReportError(with model: ErrorModel) {
@@ -164,16 +115,12 @@ extension ProfileViewController: ProfileViewProtocol {
         self.navigationController?.pushViewController(createStatisticsModule(with: transactionData), animated: true)
     }
     
-    func showStatisticsError() {
-        AlertManager.showAbsenceTransactionData(on: self)
+    func showStatisticsAbsenceDataAlert(with model: ErrorModelInfo) {
+        AlertManager.showAbsenceTransactionData(on: self, with: model)
     }
     
     func showLogoutError(with model: ErrorModel) {
         AlertManager.showLogOutErrorAlert(on: self, with: model.error)
-    }
-    
-    func setUsername(_ name: String) {
-        self.userName.text = name
     }
     
     func showLoader() {
@@ -198,7 +145,7 @@ extension ProfileViewController: ProfileViewProtocol {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+extension ServicesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:

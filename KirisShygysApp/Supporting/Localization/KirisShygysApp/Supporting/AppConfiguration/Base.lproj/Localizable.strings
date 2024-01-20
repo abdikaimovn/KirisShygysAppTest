@@ -72,13 +72,13 @@
 //(BILL - Чек)
 "transactionType_label" = "Type:";
 "transactionName_label" = "Name:";
-"transacitonAmount_label" = "Amount:";
-"transacitonDate_label" = "Date:";
+"transactionAmount_label" = "Amount:";
+"transactionDate_label" = "Date:";
 "transactionDescription_label" = "Description:";
 "emptyDescription" = "Transaction description not specified";
 
-//MARK: - Profile page
-"username_label" = "Username";
+//MARK: - Services page
+"menu_label" = "Menu";
 "transactionReport_label" = "Transaction Report";
 "settings_label" = "Settings";
 "statisctics_label" = "Statistics";
@@ -92,7 +92,6 @@
 "biggestSpending_label" = "And your biggest spending is from";
 "biggentEarning_label" = "Your biggest earning is from";
 "quoteTitle_label" = "Quote of the month";
-"none_label" = "None";
 
 //MARK: - Settings page
 "language_label" = "Language";
@@ -107,3 +106,17 @@
 "dollar" = "$";
 "tenge" = "₸";
 "ruble" = "₽";
+
+//MARK: - Alerts
+"lackDataAlert_title" = "Lack of Data";
+
+//History page alerts
+"historyLackDataAlert_message" = "Lack of data to display your history. Add any transaction for access";
+
+//Transaction report alerts
+"reportLackDataAlert_message" = "Lack of data to display your report. Add any transaction for access";
+
+//Statistics page alerts
+"statisticsLackDataAlert_message" = "Lack of data to display your statistics. Add any transaction for access";
+
+

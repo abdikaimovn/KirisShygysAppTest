@@ -27,15 +27,15 @@ final class TransactionViewController: UIViewController {
     
     private let segmentedControl: UISegmentedControl = {
         var sControl = UISegmentedControl()
-        sControl.insertSegment(withTitle: NSLocalizedString("incomes_label", comment: ""), at: 0, animated: true)
-        sControl.insertSegment(withTitle: NSLocalizedString("expenses_label", comment: ""), at: 1, animated: true)
+        sControl.insertSegment(withTitle: "incomes_label".localized, at: 0, animated: true)
+        sControl.insertSegment(withTitle: "expenses_label".localized, at: 1, animated: true)
         sControl.selectedSegmentTintColor = UIColor.shared.IncomeColor
         return sControl
     }()
     
     private let transNameLabel: UILabel = {
         var label = UILabel()
-        label.text = NSLocalizedString("transactionName_label", comment: "")
+        label.text = "name_label".localized
         label.textColor = .black
         label.font = UIFont.defaultFont(18)
         return label
@@ -54,7 +54,7 @@ final class TransactionViewController: UIViewController {
     
     private let descriptionLabel: UILabel = {
         var label = UILabel()
-        label.text = NSLocalizedString("descriptionLabel", comment: "")
+        label.text = "description_label".localized
         label.textColor = .black
         label.font = UIFont.defaultFont(18)
         return label
@@ -73,7 +73,7 @@ final class TransactionViewController: UIViewController {
     
     private let amountLabel: UILabel = {
         var label = UILabel()
-        label.text = NSLocalizedString("amountLabel_title", comment: "")
+        label.text = "amount_label".localized
         label.textColor = .white
         label.font = UIFont.defaultBoldFont(25)
         return label
@@ -93,7 +93,7 @@ final class TransactionViewController: UIViewController {
     
     private let calendarLabel: UILabel = {
         var label = UILabel()
-        label.text = NSLocalizedString("date_label", comment: "")
+        label.text = "date_label".localized
         label.textColor = .black
         label.font = UIFont.defaultFont(18)
         return label
@@ -105,7 +105,7 @@ final class TransactionViewController: UIViewController {
         label.font = UIFont.defaultBoldFont(22)
         label.textColor = .white
         button.titleLabel?.font = label.font
-        button.setTitle("Save", for: .normal)
+        button.setTitle("save_button_title".localized, for: .normal)
         button.backgroundColor = UIColor.shared.IncomeColor
         button.layer.cornerRadius = 10
         button.layer.cornerCurve = .continuous
@@ -205,13 +205,13 @@ final class TransactionViewController: UIViewController {
         
         headView.addSubview(amountLabel)
         amountLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(25)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(20)
         }
         
         headView.addSubview(amountTextField)
         amountTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(15)
+            make.leading.trailing.equalToSuperview().inset(25)
             make.top.equalTo(amountLabel.snp.bottom).offset(15)
         }
         
@@ -219,7 +219,7 @@ final class TransactionViewController: UIViewController {
         let leftView = UIView()
         leftView.backgroundColor = .clear
         let dollarLabel = UILabel()
-        dollarLabel.text = "$ "
+        dollarLabel.text = "\("currency".localized) "
         dollarLabel.font = amountTextField.font
         dollarLabel.textColor = .white
         leftView.addSubview(dollarLabel)

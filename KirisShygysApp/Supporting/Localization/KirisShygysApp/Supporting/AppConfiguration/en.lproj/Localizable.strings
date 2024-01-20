@@ -72,8 +72,8 @@
 //(BILL - Чек)
 "transactionType_label" = "Type:";
 "transactionName_label" = "Name:";
-"transacitonAmount_label" = "Amount:";
-"transacitonDate_label" = "Date:";
+"transactionAmount_label" = "Amount:";
+"transactionDate_label" = "Date:";
 "transactionDescription_label" = "Description:";
 "emptyDescription" = "Transaction description not specified";
 
@@ -107,3 +107,7 @@
 "dollar" = "$";
 "tenge" = "₸";
 "ruble" = "₽";
+
+//MARK: - TabBar's
+"menu_label" = "menu";
+"home_label" = "home";
