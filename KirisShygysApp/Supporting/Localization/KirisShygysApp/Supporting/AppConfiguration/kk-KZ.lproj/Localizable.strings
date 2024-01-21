@@ -1,9 +1,122 @@
-/* 
-  Localizable.strings
-  KirisShygysApp
+/*
+Localizable.strings
+KirisShygysApp
 
-  Created by Нурдаулет on 11.01.2024.
-  
+Created by Nýrdaýlet on 11.01.2024.
+
 */
 
 //LATYN
+
+//MARK: - Onboarding page
+"onboarding_firstPage_title" = "Aqshańyzdy tolyq baqylaýǵa alyńyz";
+"onboarding_firstPage_description" = "Ózińizdiń qarjy menedjerińiz bolyńyz jáne ár tıyndy eskerińiz";
+"onboarding_secondPage_title" = "Aqshańyzdyń qaıda ketkenin bilińiz";
+"onboarding_secondPage_description" = "Qarjylyq esep arqyly aýdarymdaryńyzdy ońaı baqylańyz";
+
+//MARK: - Text field placeholders
+"name_textField_placeholder" = "Aty";
+"email_textField_placeholder" = "Elektrondyq poshta";
+"password_textField_placeholder" = "Qupıa sóz";
+
+//MARK: - Buttons
+"signIn_button_title" = "Kirý";
+"signUp_button_title" = "Tirkelý";
+"alert_dismissButton_title" = "Ok";
+"apply_button_title" = "Iske asyrý";
+"save_button_title" = "Saqtaý";
+"reset_button_title" = "Qalpyna keltirý";
+
+//MARK: - ERRORS
+"authorization_error_title" = "Avtorızasıa qatesi";
+"registration_error_title" = "Tirkelý qatesi";
+"credentialAlreadyInUse_error" = "Tirkelgi derekteri qazirdiń ózinde qoldanysta";
+"invalidCredential_error" = "Aýtentıfıkasıa úshin berilgen tirkelgi derekteri durys emes nemese jaramdylyq merzimi ótken";
+"network_error" = "Jelilik baılanys úzildi";
+"unknown_error" = "Belgisiz qate paıda boldy";
+"noTransaction" = "Siz aǵymdaǵy aıda eshqandaı aýdarym jasaǵan joqsyz";
+
+//MARK: - Home page
+"welcome_label" = "Qaıta oralýyńyzben";
+"totalBalance_label" = "Balans";
+"incomes_label" = "Kirister";
+"expenses_label" = "Shyǵyndar";
+"total_label" = "Barlyǵy";
+"transactions_label" = "Aýdarymdar";
+"history_label" = "Tarıh";
+
+//MARK: - Days
+"today_label" = "Búgin";
+"yesterday_label" = "Keshe";
+
+//MARK: - Full transactions page
+"filterTransactions_label" = "Súzgi";
+
+//MARK: - Filter page
+"filterBy_label" = "Súzý";
+"sortBy_label" = "Suryptaý";
+"period_label" = "Kezeń";
+
+"newest_button_title" = "Eń jańa";
+"oldest_button_title" = "Eń kóne";
+"week_button_title" = "Apta";
+"month_button_title" = "Aı";
+"halfYear_button_title" = "Jarty jyl";
+"year_button_title" = "Jyl";
+
+//MARK: - Transaction page
+"amount_label" = "Sýmma";
+"name_label" = "Aty";
+"description_label" = "Sıpattama";
+"date_label" = "Kúni";
+
+//MARK: - Transaciton Info page
+//(BILL - Chek)
+"transactionType_label" = "Túri:";
+"transactionName_label" = "Ataýy:";
+"transactionAmount_label" = "Sýmma:";
+"transactionDate_label" = "Kúni:";
+"transactionDescription_label" = "Sıpattama:";
+"emptyDescription" = "Aýdarym sıpattamasy kórsetilmegen";
+
+//MARK: - Services page
+"menu_label" = "Mázir";
+"transactionReport_label" = "Aýdarym týraly esep";
+"settings_label" = "Parametrler";
+"statistics_label" = "Statıstıka";
+"logout_label" = "Shyǵý";
+
+//MARK: - Transaction Report page
+"transactionReportTitle_label" = "Esep";
+"thisMonthTitle_label" = "Sońǵy aıda";
+"spend_label" = "Sizdiń shyǵyńdaryńyz 💸 ";
+"earn_label" = "Sizdiń tabystaryńyz 💰 ";
+"biggestSpending_label" = "Jáne sizdiń eń úlken shyǵynyńyz";
+"biggentEarning_label" = "Sizdiń eń úlken tabysyńyz";
+"quoteTitle_label" = "Aıdyń dáıeksózi";
+
+//MARK: - Settings page
+"language_label" = "Til";
+"currency_label" = "Valúta";
+"personalInfo_label" = "Jeke aqparat";
+
+//MARK: - Statistics page
+"statisticsTitle_label" = "Sońǵy aıdaǵy statısıka";
+
+//MARK: - Currencies
+"currency" = "₸";
+"dollar" = "$";
+"tenge" = "₸";
+"ruble" = "₽";
+
+//MARK: - Alerts
+"lackDataAlert_title" = "Derekterdiń bolmaýy";
+
+//History page alerts
+"historyLackDataAlert_message" = "Sizdiń tarıhyńyzdy kórsetý úshin derekter jetkiliksiz. Kirý úshin kez kelgen aýdarym qosyńyz";
+
+//Transaction report alerts
+"reportLackDataAlert_message" = "Esepti kórsetý úshin derekter jetkiliksiz. Kirý úshin kez kelgen aýdarym qosyńyz";
+
+//Statistics page alerts
+"statisticsLackDataAlert_message" = "Statısıkany kórsetý úshin derekter jetkiliksiz. Kirý úshin kez kelgen aýdarym qosyńyz";
