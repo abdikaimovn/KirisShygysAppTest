@@ -6,26 +6,26 @@
   
 */
 
-//MARK: - Страница ввода
+//MARK: - Onboarding page
 "onboarding_firstPage_title" = "Полный контроль над вашими финансами";
 "onboarding_firstPage_description" = "Станьте своим собственным финансовым менеджером и считайте каждый цент";
 "onboarding_secondPage_title" = "Знайте, куда уходят ваши деньги";
 "onboarding_secondPage_description" = "Легко отслеживайте ваши транзакции с помощью финансового отчета";
 
-//MARK: - Плейсхолдеры для текстовых полей
+//MARK: - Text field placeholders
 "name_textField_placeholder" = "Имя";
 "email_textField_placeholder" = "Эл. почта";
 "password_textField_placeholder" = "Пароль";
 
-//MARK: - Кнопки
+//MARK: - Buttons
 "signIn_button_title" = "Войти";
 "signUp_button_title" = "Регистрация";
-"alert_dismissButton_title" = "Закрыть";
+"alert_dismissButton_title" = "Ок";
 "apply_button_title" = "Применить";
 "save_button_title" = "Сохранить";
 "reset_button_title" = "Сброс";
 
-//MARK: - ОШИБКИ
+//MARK: - ERRORS
 "authorization_error_title" = "Ошибка авторизации";
 "registration_error_title" = "Ошибка регистрации";
 "credentialAlreadyInUse_error" = "Учетные данные уже используются";
@@ -34,7 +34,7 @@
 "unknown_error" = "Произошла неизвестная ошибка";
 "noTransaction" = "Вы не совершали никаких транзакций за последний месяц";
 
-//MARK: - Домашняя страница
+//MARK: - Home page
 "welcome_label" = "С Возвращением";
 "totalBalance_label" = "Баланс";
 "incomes_label" = "Доходы";
@@ -43,14 +43,14 @@
 "transactions_label" = "Транзакции";
 "history_label" = "История";
 
-//MARK: - Дни
+//MARK: - Days
 "today_label" = "Сегодня";
 "yesterday_label" = "Вчера";
 
-//MARK: - Полная страница транзакций
+//MARK: - Full transactions page
 "filterTransactions_label" = "Фильтр";
 
-//MARK: - Страница фильтрации
+//MARK: - Filter page
 "filterBy_label" = "Фильтровать";
 "sortBy_label" = "Сортировать";
 "period_label" = "Период";
@@ -62,13 +62,13 @@
 "halfYear_button_title" = "Пол года";
 "year_button_title" = "Год";
 
-//MARK: - Страница транзакции
+//MARK: - Transaction page
 "amount_label" = "Сумма";
 "name_label" = "Название";
 "description_label" = "Описание";
 "date_label" = "Дата";
 
-//MARK: - Страница информации о транзакции
+//MARK: - Transaciton Info page
 //(BILL - Чек)
 "transactionType_label" = "Тип:";
 "transactionName_label" = "Название:";
@@ -77,14 +77,14 @@
 "transactionDescription_label" = "Описание:";
 "emptyDescription" = "Описание транзакции не указано";
 
-//MARK: - Страница профиля
+//MARK: - Services page
 "menu_label" = "Меню";
 "transactionReport_label" = "Отчет о транзакциях";
 "settings_label" = "Настройки";
 "statisctics_label" = "Статистика";
 "logout_label" = "Выйти";
 
-//MARK: - Страница отчета о транзакциях
+//MARK: - Transaction Report page
 "transactionReportTitle_label" = "Отчет";
 "thisMonthTitle_label" = "За последний месяц";
 "spend_label" = "Вы потратили 💸";
@@ -93,15 +93,15 @@
 "biggentEarning_label" = "Ваш самый крупный заработок";
 "quoteTitle_label" = "Цитата месяца";
 
-//MARK: - Страница настроек
+//MARK: - Settings page
 "language_label" = "Язык";
 "currency_label" = "Валюта";
 "personalInfo_label" = "Личная информация";
 
-//MARK: - Страница статистики
+//MARK: - Statistics page
 "statisticsTitle_label" = "Статистика за последний месяц";
 
-//MARK: - Валюты
+//MARK: - Currencies
 "currency" = "₸";
 "dollar" = "$";
 "tenge" = "₸";
@@ -110,11 +110,11 @@
 //MARK: - Alerts
 "lackDataAlert_title" = "Отсутствие данных";
 
-//Страница истории предупреждает
+//History page alerts
 "historyLackDataAlert_message" = "Недостаточно данных для отображения вашей истории. Добавьте любую транзакцию для доступа";
 
-//Предупреждения отчета о транзакциях
+//Transaction report alerts
 "reportLackDataAlert_message" = "Недостаточно данных для отображения вашего отчета. Добавьте любую транзакцию для доступа";
 
-//Страница статистики предупреждает
+//Statistics page alerts
 "statisticsLackDataAlert_message" = "Недостаточно данных для отображения вашей статистики. Добавьте любую транзакцию для доступа";

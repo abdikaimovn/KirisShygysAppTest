@@ -20,7 +20,7 @@
 //MARK: - Buttons
 "signIn_button_title" = "Sign In";
 "signUp_button_title" = "Sign Up";
-"alert_dismissButton_title" = "Dismiss";
+"alert_dismissButton_title" = "Ok";
 "apply_button_title" = "Apply";
 "save_button_title" = "Save";
 "reset_button_title" = "Reset";
@@ -31,7 +31,7 @@
 "credentialAlreadyInUse_error" = "The credentials are already in use";
 "invalidCredential_error" = "The supplied auth credential is malformed or has expired.";
 "network_error" = "The network connection was interrupted";
-"unknown_error" = "Something went wrong";
+"unknown_error" = "The unknown error has occured";
 "noTransaction" = "You have not made any transactions in the current month";
 
 //MARK: - Home page
@@ -81,7 +81,7 @@
 "menu_label" = "Menu";
 "transactionReport_label" = "Transaction Report";
 "settings_label" = "Settings";
-"statisctics_label" = "Statistics";
+"statistics_label" = "Statistics";
 "logout_label" = "Logout";
 
 //MARK: - Transaction Report page

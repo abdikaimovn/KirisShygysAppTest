@@ -177,7 +177,7 @@ extension ServicesViewController: UITableViewDelegate, UITableViewDataSource {
                            and: "settings_label".localized)
         case 2:
             cell.configure(with: UIImage(systemName: "chart.bar.xaxis")!, 
-                           and: "statisctics_label".localized)
+                           and: "statistics_label".localized)
         case 3:
             cell.configure(with: UIImage(systemName: "rectangle.portrait.and.arrow.right")!, 
                            and: "logout_label".localized)
