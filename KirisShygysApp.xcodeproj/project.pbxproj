@@ -384,6 +384,7 @@
 		6F658BBB2ACEA9A3004ECACB /* KirisShygysApp */ = {
 			isa = PBXGroup;
 			children = (
+				6FCF294D2AF1307B00CEA307 /* AppConfiguration */,
 				6F86B3352ACED6E10092BC00 /* Supporting */,
 				6F7342D02AD85D32000EA57D /* Network */,
 				6FEE5D772AF3B6A500DAE263 /* TabBarModule */,
@@ -468,7 +469,6 @@
 			isa = PBXGroup;
 			children = (
 				6F431BBD2B4FFFF600268B15 /* Localization */,
-				6FCF294D2AF1307B00CEA307 /* AppConfiguration */,
 				6F86B3362ACED6F90092BC00 /* UIColor+Extension.swift */,
 				6FB40F7F2AE7BCD6009B7863 /* AlertManager.swift */,
 				6F8D467B2B04E35B00F012AC /* Date+Extension.swift */,
@@ -1054,7 +1054,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FDQK3FFVD6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KirisShygysApp/Supporting/AppConfiguration/Info.plist;
+				INFOPLIST_FILE = KirisShygysApp/AppConfiguration/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "kiris shyǵys";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1086,7 +1086,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FDQK3FFVD6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KirisShygysApp/Supporting/AppConfiguration/Info.plist;
+				INFOPLIST_FILE = KirisShygysApp/AppConfiguration/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "kiris shyǵys";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

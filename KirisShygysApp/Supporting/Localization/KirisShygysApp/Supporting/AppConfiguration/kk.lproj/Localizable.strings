@@ -5,3 +5,119 @@
   Created by Нурдаулет on 11.01.2024.
   
 */
+
+//KIRILICA
+
+//MARK: - Onboarding page
+"onboarding_firstPage_title" = "Ақшаңызды толық бақылауға алыңыз";
+"onboarding_firstPage_description" = "Өзіңіздің қаржы менеджеріңіз болыңыз және әр тиынды ескеріңіз";
+"onboarding_secondPage_title" = "Ақшаңыздың қайда кеткенін біліңіз";
+"onboarding_secondPage_description" = "Қаржылық есеп арқылы аударымдарыңызды оңай бақылаңыз";
+
+//MARK: - Text field placeholders
+"name_textField_placeholder" = "Аты";
+"email_textField_placeholder" = "Электрондық пошта";
+"password_textField_placeholder" = "Құпия сөз";
+
+//MARK: - Buttons
+"signIn_button_title" = "Кіру";
+"signUp_button_title" = "Тіркелу";
+"alert_dismissButton_title" = "Ок";
+"apply_button_title" = "Іске асыру";
+"save_button_title" = "Сақтау";
+"reset_button_title" = "Қалпына келтіру";
+
+//MARK: - ERRORS
+"authorization_error_title" = "Авторизация қатесі";
+"registration_error_title" = "Тіркелу қатесі";
+"credentialAlreadyInUse_error" = "Тіркелгі деректері қазірдің өзінде қолданыста";
+"invalidCredential_error" = "Аутентификация үшін берілген тіркелгі деректері дұрыс емес немесе жарамдылық мерзімі өткен";
+"network_error" = "Желілік байланыс үзілді";
+"unknown_error" = "Белгісіз қате пайда болды";
+"noTransaction" = "Cіз ағымдағы айда ешқандай аударым жасаған жоқсыз";
+
+//MARK: - Home page
+"welcome_label" = "Қайта оралуыңызбен";
+"totalBalance_label" = "Баланс";
+"incomes_label" = "Кірістер";
+"expenses_label" = "Шығындар";
+"total_label" = "Барлығы";
+"transactions_label" = "Аударымдар";
+"history_label" = "Тарих";
+
+//MARK: - Days
+"today_label" = "Бүгін";
+"yesterday_label" = "Кеше";
+
+//MARK: - Full transactions page
+"filterTransactions_label" = "Сүзгі";
+
+//MARK: - Filter page
+"filterBy_label" = "Сүзу";
+"sortBy_label" = "Сұрыптау";
+"period_label" = "Кезең";
+
+"newest_button_title" = "Ең жаңа";
+"oldest_button_title" = "Ең көне";
+"week_button_title" = "Апта";
+"month_button_title" = "Ай";
+"halfYear_button_title" = "Жарты жыл";
+"year_button_title" = "Жыл";
+
+//MARK: - Transaction page
+"amount_label" = "Сумма";
+"name_label" = "Аты";
+"description_label" = "Сипаттама";
+"date_label" = "Күні";
+
+//MARK: - Transaciton Info page
+//(BILL - Чек)
+"transactionType_label" = "Түрі:";
+"transactionName_label" = "Атауы:";
+"transactionAmount_label" = "Сумма:";
+"transactionDate_label" = "Күні:";
+"transactionDescription_label" = "Сипаттама:";
+"emptyDescription" = "Аударым сипаттамасы көрсетілмеген";
+
+//MARK: - Services page
+"menu_label" = "Мәзір";
+"transactionReport_label" = "Аударым туралы есеп";
+"settings_label" = "Параметрлер";
+"statistics_label" = "Статистика";
+"logout_label" = "Шығу";
+
+//MARK: - Transaction Report page
+"transactionReportTitle_label" = "Есеп";
+"thisMonthTitle_label" = "Соңғы айда";
+"spend_label" = "Сіздің шығыңдарыңыз 💸";
+"earn_label" = "Сіздің табыстарыңыз 💰";
+"biggestSpending_label" = "Және сіздің ең үлкен шығыныңыз";
+"biggentEarning_label" = "Сіздің ең үлкен табысыңыз";
+"quoteTitle_label" = "Айдың дәйексөзі";
+
+//MARK: - Settings page
+"language_label" = "Тіл";
+"currency_label" = "Валюта";
+"personalInfo_label" = "Жеке ақпарат";
+
+//MARK: - Statistics page
+"statisticsTitle_label" = "Соңғы айдағы статистика";
+
+//MARK: - Currencies
+"currency" = "₸";
+"dollar" = "$";
+"tenge" = "₸";
+"ruble" = "₽";
+
+//MARK: - Alerts
+"lackDataAlert_title" = "Деректердің болмауы";
+
+//History page alerts
+"historyLackDataAlert_message" = "Сіздің тарихыңызды көрсету үшін деректер жеткіліксіз. Кіру үшін кез келген аударым қосыңыз";
+
+//Transaction report alerts
+"reportLackDataAlert_message" = "Eсепті көрсету үшін деректер жеткіліксіз. Кіру үшін кез келген аударым қосыңыз";
+
+//Statistics page alerts
+"statisticsLackDataAlert_message" = "Статистиканы көрсету үшін деректер жеткіліксіз. Кіру үшін кез келген аударым қосыңыз";
+

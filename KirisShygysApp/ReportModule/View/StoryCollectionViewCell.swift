@@ -13,6 +13,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         label.text = "thisMonthTitle_label".localized
         label.textColor = UIColor.shared.LightGray
         label.font = UIFont.defaultFont(20)
+        label.textAlignment = .center
         return label
     }()
     
@@ -20,6 +21,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         var label = UILabel()
         label.font = UIFont.defaultBoldFont(35)
         label.textColor = .white
+        label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
@@ -89,12 +91,14 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         thisMonthLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         thisMonthLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.leading.trailing.greaterThanOrEqualToSuperview().offset(20)
             make.top.equalToSuperview().inset(20)
         }
         
         contentView.addSubview(transactionType)
         transactionType.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.leading.trailing.greaterThanOrEqualToSuperview().offset(20)
             make.top.equalTo(thisMonthLabel.snp.bottom).offset(60)
         }
         transactionType.setContentCompressionResistancePriority(.required, for: .vertical)

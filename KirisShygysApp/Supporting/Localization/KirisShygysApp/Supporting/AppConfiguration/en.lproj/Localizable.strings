@@ -20,7 +20,7 @@
 //MARK: - Buttons
 "signIn_button_title" = "Sign In";
 "signUp_button_title" = "Sign Up";
-"alert_dismissButton_title" = "Dismiss";
+"alert_dismissButton_title" = "Ok";
 "apply_button_title" = "Apply";
 "save_button_title" = "Save";
 "reset_button_title" = "Reset";
@@ -52,7 +52,7 @@
 
 //MARK: - Filter page
 "filterBy_label" = "Filter By";
-"sortBy_label" = "Sort_By";
+"sortBy_label" = "Sort By";
 "period_label" = "Period";
 
 "newest_button_title" = "Newest";
@@ -77,11 +77,11 @@
 "transactionDescription_label" = "Description:";
 "emptyDescription" = "Transaction description not specified";
 
-//MARK: - Profile page
-"username_label" = "Username";
+//MARK: - Services page
+"menu_label" = "Menu";
 "transactionReport_label" = "Transaction Report";
 "settings_label" = "Settings";
-"statisctics_label" = "Statistics";
+"statistics_label" = "Statistics";
 "logout_label" = "Logout";
 
 //MARK: - Transaction Report page
@@ -92,7 +92,6 @@
 "biggestSpending_label" = "And your biggest spending is from";
 "biggentEarning_label" = "Your biggest earning is from";
 "quoteTitle_label" = "Quote of the month";
-"none_label" = "None";
 
 //MARK: - Settings page
 "language_label" = "Language";
@@ -108,6 +107,16 @@
 "tenge" = "₸";
 "ruble" = "₽";
 
-//MARK: - TabBar's
-"menu_label" = "menu";
-"home_label" = "home";
+//MARK: - Alerts
+"lackDataAlert_title" = "Lack of Data";
+
+//History page alerts
+"historyLackDataAlert_message" = "Lack of data to display your history. Add any transaction for access";
+
+//Transaction report alerts
+"reportLackDataAlert_message" = "Lack of data to display your report. Add any transaction for access";
+
+//Statistics page alerts
+"statisticsLackDataAlert_message" = "Lack of data to display your statistics. Add any transaction for access";
+
+
